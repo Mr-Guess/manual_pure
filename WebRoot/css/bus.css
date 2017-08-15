@@ -1,0 +1,62 @@
+.easyui-validatebox,.easyui-datetimebox,.easyui-datebox,.easyui-combotree,.easyui-combobox,.easyui-numberbox
+	{
+	width: 127px;
+	height: 22px;
+}
+
+table.detailTable {
+	font-size: 13px;
+	table-layout: fixed;
+	border: 1 solid #AED0EA;
+	border-collapse: collapse;
+	margin: 10px;
+}
+
+table.detailTable td {
+	border: 1 solid #dedede;
+}
+
+table.detailTable td.labelTd {
+	font-size: 13px;
+	background: #f3f7f9;
+}
+
+table.detailTable td.contentTd {
+	background: #FFFFFF;
+}
+
+table.detailTable td.contentTd .oneLineText {
+	min-height: 30px;
+	padding-top: 10px;
+	word-wrap: break-word;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#viewForm table.detailTable td.contentTd {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	min-height: 30px;
+	overflow: hidden;
+}
+
+.dialog-button {
+	text-align: center;
+}
+
+.labeltd {
+	text-align: right;
+	padding-right: 15px;
+}
+
+.btn1 {
+	BORDER: #65b5e4 1px solid;
+	PADDING-RIGHT: 6px;
+	PADDING-LEFT: 6px;
+	FONT-SIZE: 12px;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,
+		StartColorStr=#ffffff, EndColorStr=#d7ebf9);
+	CURSOR: hand;
+	COLOR: black;
+	PADDING-TOP: 3px;
+}

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="JobRemind">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_JOB_REMIND.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_JOB_REMIND.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_JOB_REMIND.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_JOB_REMIND.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_JOB_REMIND.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_JOB_REMIND.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="model"> TB_JOB_REMIND.MODEL like '%'+#model#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="name"> TB_JOB_REMIND.NAME like '%'+#name#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="time"> TB_JOB_REMIND.TIME like '%'+#time#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="owner"> TB_JOB_REMIND.OWNER like '%'+#owner#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="creator"> TB_JOB_REMIND.CREATOR like '%'+#creator#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.jobRemind.pojo.JobRemind">
+  		INSERT INTO TB_JOB_REMIND(
+				
+				MODEL,
+				NAME,
+				TIME,
+				OWNER,
+				CREATOR,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#model#,
+				#name#,
+				#time#,
+				#owner#,
+				#creator#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_JOB_REMIND SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.jobRemind.pojo.JobRemind" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_JOB_REMIND.MODEL AS model,
+			TB_JOB_REMIND.NAME AS name,
+			TB_JOB_REMIND.TIME AS time,
+			TB_JOB_REMIND.OWNER AS owner,
+			TB_JOB_REMIND.CREATOR AS creator,
+			
+			TB_JOB_REMIND.ID AS id,
+			TB_JOB_REMIND.STATUS AS status,
+			TB_JOB_REMIND.CREATED AS created,
+			TB_JOB_REMIND.CREATE_TIME AS createTime,
+			TB_JOB_REMIND.UPDATED AS updated,
+			TB_JOB_REMIND.UPDATE_TIME as updateTime
+		from
+		TB_JOB_REMIND
+  		where 
+ 	 		TB_JOB_REMIND.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.jobRemind.pojo.JobRemind">
+		UPDATE TB_JOB_REMIND 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="model"> MODEL=#model#</isNotEmpty>
+			<isNotEmpty prepend="," property="name"> NAME=#name#</isNotEmpty>
+			<isNotEmpty prepend="," property="time"> TIME=#time#</isNotEmpty>
+			<isNotEmpty prepend="," property="owner"> OWNER=#owner#</isNotEmpty>
+			<isNotEmpty prepend="," property="creator"> CREATOR=#creator#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.jobRemind.pojo.JobRemind" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_JOB_REMIND.MODEL AS model,
+			TB_JOB_REMIND.NAME AS name,
+			TB_JOB_REMIND.TIME AS time,
+			TB_JOB_REMIND.OWNER AS owner,
+			TB_JOB_REMIND.CREATOR AS creator,
+			
+			TB_JOB_REMIND.ID AS id,
+			TB_JOB_REMIND.STATUS AS status,
+			TB_JOB_REMIND.CREATED AS created,
+			TB_JOB_REMIND.CREATE_TIME AS createTime,
+			TB_JOB_REMIND.UPDATED AS updated,
+			TB_JOB_REMIND.UPDATE_TIME AS updateTime
+		FROM
+			TB_JOB_REMIND
+		WHERE
+			TB_JOB_REMIND.STATUS = '1'
+		<include refid="JobRemind.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_JOB_REMIND
+		WHERE
+			TB_JOB_REMIND.STATUS = '1' 
+		<include refid="JobRemind.mapWhereClause"/>
+	</select>
+</sqlMap>

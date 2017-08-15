@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
+   <!--系统监控模块模块-->  
+  <bean id="watchDao" class="com.ay.jfds.sys.dao.WatchDao" parent="baseDao"/>  
+  <bean id="watchService" class="com.ay.jfds.sys.service.WatchService"> 
+    <property name="dao" ref="watchDao"/> 
+  </bean> 
+  <!--被监控者信息模块-->  
+  <bean id="byWatchersInfoDao" class="com.ay.jfds.sys.dao.ByWatchersInfoDao" parent="baseDao"/>  
+  <bean id="byWatchersInfoService" class="com.ay.jfds.sys.service.ByWatchersInfoService"> 
+    <property name="dao" ref="byWatchersInfoDao"/> 
+  </bean>  
+</beans>

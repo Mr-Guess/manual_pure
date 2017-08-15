@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<!-- 用到的sqlmap文件全部都要在这个地方配置，这样才会加载-->
+<sqlMapConfig>
+  <settings useStatementNamespaces="true"/>
+  <!-- 	添加对varbinary数据类型 的支持 -->
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/MenuMapper.xml"/>
+  <!--   <sqlMap resource="com/ay/jfds/dev/sqlMapper/IconMapper.xml"/> -->
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/DepartmentMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/UserMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/MenuOptMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DataMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DataTypeMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysGroupMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/EntityMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/EntityFieldMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysUserGroupMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleDataMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleDeptMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleUserMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleGroupMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleMenuOptMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DevFormMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DevFormPropertyMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DevStatisticsMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysParameterMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/icon/sqlMapper/SysIconMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/WatchMapper.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/ByWatchersInfoMapper.xml"/>
+  <!--员工模块-->
+  <sqlMap resource="com/ay/humanResource/worker/sqlMapper/WorkerMapper.xml"/>
+  <!--工作汇报模块-->
+  <sqlMap resource="com/ay/report/reporting/sqlMapper/ReportingMapper.xml"/>
+  <!--批阅意见模块-->
+  <sqlMap resource="com/ay/report/reversion/sqlMapper/ReversionMapper.xml"/>
+  <!--消息提醒模块-->
+  <sqlMap resource="com/yk/businesses/jobRemind/sqlMapper/JobRemindMapper.xml"/>
+</sqlMapConfig>

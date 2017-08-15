@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<!-- 用到的sqlmap文件全部都要在这个地方配置，这样才会加载-->
+<sqlMapConfig>
+  <settings useStatementNamespaces="true"/>
+  <!-- 	添加对varbinary数据类型 的支持 -->
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/MenuMapper-mySQL.xml"/>
+  <!--   <sqlMap resource="com/ay/jfds/dev/sqlMapper/IconMapper.xml"/> -->
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/DepartmentMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/UserMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/MenuOptMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DataMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DataTypeMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysGroupMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/EntityMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/EntityFieldMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysUserGroupMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleDataMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleDeptMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleUserMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleGroupMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysRoleMenuOptMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DevFormMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DevFormPropertyMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/dev/sqlMapper/DevStatisticsMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/SysParameterMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/icon/sqlMapper/SysIconMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/WatchMapper-mySQL.xml"/>
+  <sqlMap resource="com/ay/jfds/sys/sqlMapper/ByWatchersInfoMapper-mySql.xml"/>
+  <!--员工模块-->
+  <sqlMap resource="com/ay/humanResource/worker/sqlMapper/WorkerMapper-mySql.xml"/>
+  <!--工作汇报模块-->
+  <sqlMap resource="com/ay/report/reporting/sqlMapper/ReportingMapper-mySql.xml"/>
+  <!--批阅意见模块-->
+  <sqlMap resource="com/ay/report/reversion/sqlMapper/ReversionMapper-mySql.xml"/>
+  <!--消息提醒模块-->
+  <sqlMap resource="com/yk/businesses/jobRemind/sqlMapper/JobRemindMapper-mySql.xml"/>
+</sqlMapConfig>

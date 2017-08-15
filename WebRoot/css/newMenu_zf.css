@@ -1,0 +1,26 @@
+/* 导航 */
+*{padding:0;margin:0}
+ul,ol,li {list-style:none}
+img{border:0}
+#nav{width:100%;height:30px;background:url(../images/nav_bg.png) repeat-x left center;margin-bottom:2px;z-index:99;padding-left:2%;}
+#nav li{position:relative;display:block;float:left;cursor:pointer; padding:1px 2px}
+#nav li a{position:relative; padding:1px 25px 2px 25px;display:block;height:28px;z-index:99;float:left;line-height:30px;text-decoration:none;font-size:12px;color:#fff; font-weight:bold;font-family:SimHei;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;}
+#nav li:hover{background:#def3fd;}
+#nav li li li:hover{ background:none}/*点击三级时没有颜色*/
+#nav li:hover>a{color:#4c4c4c;/*border:1px solid #629d2a;*/text-decoration:none; background:#def3fd;border:1px solid #def3fd;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;}/*点击二级时一级样式*/
+#nav ul{display:none; padding:0;}
+#nav li:hover ul{position:absolute;display:block;margin-left:-1px;top:35px;left:1px;z-index:9}
+#nav li ul li{padding:0;float:right;}
+#nav li ul li a{padding:5px 15px;line-height:20px;color:#4c4c4c;height:20px;border:none; background:url(../templets/template_2/top/main_ejsub.png) no-repeat right center}
+#nav li ul li a:hover{text-decoration:underline;color:#0f6d9e;padding:5px 15px;line-height:20px;height:20px; border:none;background:url(../templets/template_2/top/main_ejsub.png) no-repeat right center}
+#nav li ul{background:#def3fd;border:1px solid #0e5f98;border-top:none;width:550px}
+#nav li li:hover>a{text-decoration:none;color:#0f6d9e;padding:5px 15px;line-height:20px;border:none;background:url(../templets/template_2/top/main_ejsub.png) no-repeat right center/*background:#49a7d4*/}/*点击三级时二级样式*/
+/*3级*/
+#nav li:hover li ul{position:relative;top:1px;z-index:10;border:none;background:none; }
+#nav ul ul {width:390px; float:left; background:none}
+#nav ul ul li{float:left; background:none;width:180px;}
+#nav li li li a{padding:3px 15px;line-height:20px;color:#333;height:20px;width:auto; background:none;border:none; float:left}
+#nav li li li a:hover{padding:3px 15px;line-height:20px;color:#333;height:20px;width:auto; background:#66cbfb;border:none; float:left}
+#nav li:hover li li a{ color:#4b4b4b;/*border:1px solid #629d2a;*/padding:2px 11px; text-decoration:none; font-size:14px; font-weight:normal;float:left}
+#nav li li li:hover>a{ background:none}
+#nav li:hover li li a:hover{ color:#4b4b4b;padding:2px 11px;background:#66cbfb;font-size:14px;float:left}

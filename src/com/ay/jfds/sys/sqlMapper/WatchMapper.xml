@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper -->
+<sqlMap namespace="Watch">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="id"> SYS_WATCH.ID=#id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="status">
+				SYS_WATCH.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created">
+				SYS_WATCH.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime">
+				SYS_WATCH.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated">
+				SYS_WATCH.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime">
+				SYS_WATCH.UPDATE_TIME=#updateTime#</isNotEmpty>
+
+
+			<isNotEmpty prepend="and" property="watchers"> SYS_WATCH.WATCHERS
+				like '%'+#watchers#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="watchersShow">
+				SYS_WATCH.WATCHERS_SHOW like '%'+#watchersShow#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="modules"> SYS_WATCH.MODULES like
+				'%'+#modules#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="modulesShow"> SYS_WATCH.MODULES_SHOW
+				like '%'+#modulesShow#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="byWatchers"> SYS_WATCH.BY_WATCHERS
+				like '%'+#byWatchers#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="byWatchersShow">
+				SYS_WATCH.BY_WATCHERS_SHOW like '%'+#byWatchersShow#+'%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="watchType"> SYS_WATCH.WATCH_TYPE
+				like '%'+#watchType#+'%'</isNotEmpty>
+
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert -->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.pojo.Watch">
+		INSERT INTO SYS_WATCH(
+
+		WATCHERS,
+		WATCHERS_SHOW,
+		MODULES,
+		MODULES_SHOW,
+		BY_WATCHERS,
+		BY_WATCHERS_SHOW,
+		WATCH_TYPE,
+
+		ID,
+		STATUS,
+		CREATED,
+		CREATE_TIME,
+		UPDATED,
+		UPDATE_TIME) values(
+
+		#watchers#,
+		#watchersShow#,
+		#modules#,
+		#modulesShow#,
+		#byWatchers#,
+		#byWatchersShow#,
+		#watchType#,
+
+		#id#,
+		#status#,
+		#created#,
+		#createTime#,
+		#updated#,
+		#updateTime#)
+	</insert>
+	<!-- add method delete -->
+	<delete id="delete" parameterClass="java.lang.String">
+		DELETE FROM SYS_WATCH
+		WHERE
+		ID=#id#
+	</delete>
+	<!-- add method getById -->
+	<select id="getById" resultClass="com.ay.jfds.sys.pojo.Watch"
+		parameterClass="java.lang.String">
+		SELECT
+
+		SYS_WATCH.WATCHERS AS watchers,
+		SYS_WATCH.WATCHERS_SHOW AS watchersShow,
+		SYS_WATCH.MODULES AS modules,
+		SYS_WATCH.MODULES_SHOW AS modulesShow,
+		SYS_WATCH.BY_WATCHERS AS byWatchers,
+		SYS_WATCH.BY_WATCHERS_SHOW AS byWatchersShow,
+
+		SYS_WATCH.ID AS id,
+		SYS_WATCH.STATUS AS status,
+		SYS_WATCH.CREATED AS created,
+		SYS_WATCH.CREATE_TIME AS createTime,
+		SYS_WATCH.UPDATED AS updated,
+		SYS_WATCH.UPDATE_TIME as updateTime
+		from
+		SYS_WATCH
+		where
+		SYS_WATCH.ID=#id#
+	</select>
+	<!-- add method update -->
+	<update id="update" parameterClass="com.ay.jfds.sys.pojo.Watch">
+		UPDATE SYS_WATCH
+		<dynamic prepend="set">
+
+			<isNotEmpty prepend="," property="watchers"> WATCHERS=#watchers#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="watchersShow">
+				WATCHERS_SHOW=#watchersShow#</isNotEmpty>
+			<isNotEmpty prepend="," property="modules"> MODULES=#modules#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="modulesShow">
+				MODULES_SHOW=#modulesShow#</isNotEmpty>
+			<isNotEmpty prepend="," property="byWatchers"> BY_WATCHERS=#byWatchers#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="byWatchersShow">
+				BY_WATCHERS_SHOW=#byWatchersShow#</isNotEmpty>
+
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#
+			</isNotEmpty>
+		</dynamic>
+		WHERE
+		ID=#id#
+	</update>
+
+	<!-- add method find -->
+	<select id="find" resultClass="com.ay.jfds.sys.pojo.Watch"
+		parameterClass="java.util.Map">
+		SELECT
+
+		SYS_WATCH.WATCHERS AS watchers,
+		SYS_WATCH.WATCHERS_SHOW AS watchersShow,
+		SYS_WATCH.MODULES AS modules,
+		SYS_WATCH.MODULES_SHOW AS modulesShow,
+		SYS_WATCH.BY_WATCHERS AS byWatchers,
+		SYS_WATCH.BY_WATCHERS_SHOW AS byWatchersShow,
+
+		SYS_WATCH.ID AS id,
+		SYS_WATCH.STATUS AS status,
+		SYS_WATCH.CREATED AS created,
+		SYS_WATCH.CREATE_TIME AS createTime,
+		SYS_WATCH.UPDATED AS updated,
+		SYS_WATCH.UPDATE_TIME AS updateTime
+		FROM
+		SYS_WATCH
+		WHERE
+		SYS_WATCH.STATUS = '1'
+		<include refid="Watch.mapWhereClause" />
+	</select>
+
+	<!-- add method find -->
+	<select id="getAllTable" resultClass="com.ay.jfds.sys.pojo.Watch">
+		select menu_name as name,menu_Table_Name as tableName FROM dev_menu where
+		menu_kind like '%1%' and menu_table_name != '' and menu_table_name is
+		not null
+	</select>
+
+	<!-- add method find -->
+	<select id="getAllEntTable" resultClass="com.ay.jfds.sys.pojo.Watch">
+		select menu_name as name,menu_Table_Name as tableName FROM dev_menu where
+		menu_kind like '%2%' and menu_table_name != '' and menu_table_name is
+		not null
+	</select>
+
+	<!-- add method count -->
+	<select id="count" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		SELECT COUNT(*)
+		FROM
+		SYS_WATCH
+		WHERE
+		SYS_WATCH.STATUS = '1'
+		<include refid="Watch.mapWhereClause" />
+	</select>
+
+	<!-- add method count -->
+	<select id="isExistCount" resultClass="java.lang.Integer"
+		parameterClass="java.lang.String">
+		SELECT COUNT(*)
+		FROM
+		SYS_WATCH
+		WHERE
+		SYS_WATCH.STATUS = '1'
+		AND
+		SYS_WATCH.ID=#ID#
+	</select>
+</sqlMap>

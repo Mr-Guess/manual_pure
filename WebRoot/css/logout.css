@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+/* 
+  Function:for loginout.jsp
+  Author:YQ
+  Date:2012/9/11
+  Notes:only for IE>6   
+*/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: url(../images/bg_login.jpg);
+	width: 100%;
+	height: 100%;
+}
+
+#main {
+	height: 430px;
+	width: 1020px;
+	margin-top: 150px;
+}
+
+.m_top {
+	width: 100%;
+	height: 72px;
+	background: url(../images/logout_name.png) no-repeat;
+	margin-left: 100px;
+}
+
+.m_name {
+	background: url(../images/login_name2.png) no-repeat;
+	margin: 15px 0 0 30px;
+	width: 100%;
+	height: 53px;
+	_behavior: url("../iepngfix.htc");
+}
+
+.m_form {
+	width: 100%;
+	height: 340px;
+}
+
+.m_f_center {
+	background: url(../images/login_left.png) no-repeat;
+	width: 466px;
+	height: 362px;
+	float: left;
+	_behavior: url("../iepngfix.htc");
+}
+
+.m_f_right {
+	background: url(../images/login_right.png) no-repeat;
+	width: 267px;
+	height: 312px;
+	float: left;
+	padding-top: 50px;
+	color: #fff;
+	_behavior: url("../iepngfix.htc");
+}
+
+.m_footer {
+	background: #d2e1f0;
+	width: 100%;
+	text-align: center;
+	color: #000;
+	font-size: 14px;
+	height: 57px;
+	line-height: 27px;
+	clear: both;
+	padding-top: 10px;
+}
+
+.pd5 {
+	padding-bottom: 5px;
+}
+
+.fbold {
+	font-weight: bold;
+}
+
+/*================================ 以下是退出样式 O(∩_∩)O~ ======================================*/
+.out {
+	background: url(../images/out.png) no-repeat;
+	margin: 15px 0 0 30px;
+	width: 100%;
+	height: 53px;
+	_behavior: url("../iepngfix.htc");
+}
+
+.out_name {
+	background: url(../images/logout_txt.png) no-repeat;
+	margin-left: 235px;
+	width: 840px;
+	height: 152px;
+	margin-top: 200px;
+}
+
+#out_button {
+	height: 21px;
+	padding-top: 50px;
+	text-align: left;
+	padding-left: 400px;
+}

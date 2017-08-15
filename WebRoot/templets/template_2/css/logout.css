@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* 
+* Function:loginout.jsp
+* Date:18/06/2012
+* Author:YQ
+* Notes:The version of browers has not tested
+*/
+body {
+	background: #2F83D2;
+	margin: 0px;
+	padding: 0px;
+}
+
+#container {
+	background: url('images/img_logout.png') no-repeat;
+	height: 560px;
+	width: 929px;
+	left: 50%;
+	top: 50%;
+	position: absolute;
+	margin-top: -300px;
+	margin-left: -450px;
+}
+
+#out_button {
+	padding-top: 300px;
+	padding-left: 500px;
+}
+
+#divWrap {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	text-align: center;
+}
+
+#divMain {
+	background: url('images/img_logout.png') no-repeat;
+	height: 560px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 70px;
+	padding-top: 445px;
+	text-align: center;
+	width: 929px;
+}
+
+#divMain .divImg {
+	height: 26px;
+	width: 130px;
+}
+
+#divMain .divImg a:link img {
+	background: url('../templets/logout_images/btnLogout2.gif') no-repeat;
+}
+
+#divMain .divImg a:visited img {
+	background: url('../templets/logout_images/btnLogout2.gif') no-repeat;
+}
+
+#divMain .divImg a:hover img {
+	background: url('../templets/logout_images/btnLogout.gif') no-repeat;
+}
+
+#divMain .divImg a:active img {
+	background: url('../templets/logout_images/btnLogout2.gif') no-repeat;
+}

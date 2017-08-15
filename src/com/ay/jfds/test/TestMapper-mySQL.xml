@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"><!--sqlMapper --><sqlMap namespace="Test"><!-- 查询条件 --><sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="id"> tb_test.ID=#id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="status">
+				tb_test.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created">
+				tb_test.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime">
+				tb_test.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated">
+				tb_test.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime">
+				tb_test.UPDATE_TIME=#updateTime#</isNotEmpty>
+
+
+			<isNotEmpty prepend="and" property="name"> tb_test.NAME like
+				concat('%',#name#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="style"> tb_test.STYLE like
+				concat('%',#style#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="org"> tb_test.ORG like
+				concat('%',#org#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="orgTree"> tb_test.ORG_TREE like
+				concat('%',#orgTree#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="condition"> $condition$
+			</isNotEmpty>
+
+		</isParameterPresent>
+	</sql><!-- add method insert --><insert id="insert" parameterClass="com.ay.jfds.test.Test">
+		INSERT INTO tb_test(
+
+		NAME,
+		STYLE,
+		ORG,
+		ORG_TREE,
+
+		ID,
+		STATUS,
+		CREATED,
+		CREATE_TIME,
+		UPDATED,
+		UPDATE_TIME) values(
+
+		#name#,
+		#style#,
+		#org#,
+		#orgTree#,
+
+		#id#,
+		#status#,
+		#created#,
+		#createTime#,
+		#updated#,
+		#updateTime#)
+	</insert><!-- add method delete --><delete id="delete" parameterClass="java.lang.String">
+		UPDATE tb_test SET STATUS='0'
+		WHERE
+		ID=#id#
+	</delete><!-- add method getById --><select id="getById" resultClass="com.ay.jfds.test.Test" parameterClass="java.lang.String">
+		SELECT
+
+		tb_test.NAME AS name,
+		tb_test.STYLE AS style,
+		tb_test.ORG AS org,
+		tb_test.ORG_TREE AS orgTree,
+
+		tb_test.ID AS id,
+		tb_test.STATUS AS status,
+		tb_test.CREATED AS created,
+		tb_test.CREATE_TIME AS createTime,
+		tb_test.UPDATED AS updated,
+		tb_test.UPDATE_TIME as updateTime
+		from
+		tb_test
+		where
+		tb_test.ID=#id#
+	</select><!-- add method update --><update id="update" parameterClass="com.ay.jfds.test.Test">
+		UPDATE tb_test
+		<dynamic prepend="set">
+
+			<isNotEmpty prepend="," property="name"> NAME=#name#</isNotEmpty>
+			<isNotEmpty prepend="," property="style"> STYLE=#style#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="org"> ORG=#org#</isNotEmpty>
+			<isNotEmpty prepend="," property="orgTree"> ORG_TREE=#orgTree#
+			</isNotEmpty>
+
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#
+			</isNotEmpty>
+		</dynamic>
+		WHERE
+		ID=#id#
+	</update><!-- add method find --><select id="find" resultClass="com.ay.jfds.test.Test" parameterClass="java.util.Map">
+		SELECT
+
+		tb_test.NAME AS name,
+		tb_test.STYLE AS style,
+		tb_test.ORG AS org,
+		tb_test.ORG_TREE AS orgTree,
+
+		tb_test.ID AS id,
+		tb_test.STATUS AS status,
+		tb_test.CREATED AS created,
+		tb_test.CREATE_TIME AS createTime,
+		tb_test.UPDATED AS updated,
+		tb_test.UPDATE_TIME AS updateTime
+		FROM
+		tb_test
+		WHERE
+		tb_test.STATUS = '1'
+		<include refid="Test.mapWhereClause"/>
+	</select><!-- add method count --><select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		SELECT COUNT(*)
+		FROM
+		tb_test
+		WHERE
+		tb_test.STATUS = '1'
+		<include refid="Test.mapWhereClause"/>
+	</select></sqlMap>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"><!--add by iBatisTool dev_form --><sqlMap namespace="DevForm"><typeAlias alias="formDTO" type="com.ay.jfds.dev.dto.FormDTO"/><typeAlias alias="form" type="com.ay.jfds.dev.pojo.DevForm"/><!-- add Condition dev_form --><sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="id"> id=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="menuId"> menu_id=#menuId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="formName"> form_name like
+			 '%'||#formName#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="entityId"> entity_id=#entityId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="initType"> init_type=#initType#
+			</isNotEmpty>
+			<!--<isNotEmpty prepend="and" property="entityCode"> entity_code like 
+				'%$entityCode$%'</isNotEmpty> -->
+			<isNotEmpty prepend="and" property="status"> status=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> created=#created#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime">
+				create_time=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> updated=#updated#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime">
+				update_time=#updateTime#</isNotEmpty>
+		</isParameterPresent>
+	</sql><!-- add method insert --><insert id="insert" parameterClass="com.ay.jfds.dev.pojo.DevForm">
+		insert into dev_form(
+		ID,
+		menu_id,
+		FORM_NAME,
+		ENTITY_ID,
+		INIT_TYPE,
+		is_relation,
+		parent_code,
+		STATUS,
+		CREATED,
+		CREATE_TIME,
+		UPDATED,
+		UPDATE_TIME) values(
+		#id#,
+		#menuId#,
+		#formName#,
+		#entityId#,
+		#initType#,
+		#isRelation#,
+		#parentCode#,
+		#status#,
+		#created#,
+		#createTime#,
+		#updated#,
+		#updateTime#)
+	</insert><!-- add method delete --><delete id="delete" parameterClass="java.lang.String">
+		update dev_form set status='0'
+		where
+		id=#id#
+	</delete><!-- add method getById --><select id="getById" resultClass="com.ay.jfds.dev.pojo.DevForm" parameterClass="java.lang.String">
+		select
+		id,
+		menu_id as menuId,
+		form_name as formName,
+		entity_id as entityId,
+		init_type as initType,
+		is_relation as isRelation,
+		parent_code as parentCode,
+		status,
+		created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime
+		from
+		dev_form
+		where
+		id=#id#
+	</select><!-- add method update --><update id="update" parameterClass="com.ay.jfds.dev.pojo.DevForm">
+		update dev_form
+		<dynamic prepend="set">
+			<isNotEmpty prepend="," property="id"> id=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="menuId"> menu_id=#menuId#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="formName"> form_name=#formName#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="entityId"> entity_id=#entityId#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="initType"> init_type=#initType#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> status=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> created=#created#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> create_time=#createTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> updated=#updated#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> update_time=#updateTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="isRelation"> is_relation=#isRelation#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="parentCode"> parent_code=#parentCode#
+			</isNotEmpty>
+		</dynamic>
+		where
+		id=#id#
+	</update><!-- add method findAll --><select id="findAll" resultClass="com.ay.jfds.dev.pojo.DevForm" parameterClass="com.ay.jfds.dev.pojo.DevForm">
+		select
+		id,
+		menu_id as menuId,
+		form_name as formName,
+		entity_id as entityId,
+		init_type as initType,
+		is_relation as isRelation,
+		parent_code as parentCode,
+		status,
+		created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime
+		from
+		dev_form
+		where
+		status='1'
+	</select><!-- add method find --><select id="find" resultClass="com.ay.jfds.dev.pojo.DevForm" parameterClass="java.util.Map">
+		select
+		id,
+		menu_id as menuId,
+		form_name as formName,
+		entity_id as entityId,
+		init_type as initType,
+		is_relation as isRelation,
+		parent_code as parentCode,
+		status,
+		created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime
+		from
+		dev_form
+		where
+		status='1'
+		<include refid="DevForm.mapWhereClause"/>
+	</select><!-- add method count --><select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		select count(*)
+		from
+		dev_entity e,
+		dev_form f
+		where
+		f.status='1'
+		and
+		f.entity_id = e.id
+		<include refid="DevForm.mapWhereClause"/>
+	</select><select id="findAllDTO" resultClass="formDTO" parameterClass="java.util.Map">
+		select
+		f.id as id,
+		f.menu_id as menuId,
+		f.form_name as formName,
+		f.entity_id as entityId,
+		e.entity_code as entityCode,
+		f.init_type as initType,
+		f.status as status,
+		f.created as created,
+		f.create_time as createTime,
+		f.updated as updated,
+		f.update_time as updateTime,
+		f.is_relation as isRelation,
+		f.parent_code as parentCode
+		from
+		dev_entity e,
+		dev_form f
+		where
+		f.status = '1'
+		and
+		f.entity_id = e.id
+		<dynamic prepend="and">
+			<isNotEmpty prepend="" property="entityCode"> e.entity_code like
+			 '%'||#entityCode#||'%'</isNotEmpty>
+		</dynamic>
+		<include refid="DevForm.mapWhereClause"/>
+	</select><!-- 根据menuid清除form中的menuid --><update id="removeMenuId" parameterClass="java.lang.String">
+		update
+		dev_form
+		set
+		menu_id=''
+		where
+		menu_id = #menuId#
+	</update><select id="getFormByMenuId" parameterClass="java.lang.String" resultClass="form">
+
+	</select></sqlMap>

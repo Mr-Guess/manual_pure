@@ -1,0 +1,208 @@
+body {
+	margin: 0px;
+	overflow: hidden;
+	font-size: 12px;
+}
+
+.MenuGroupPanel {
+	display: none;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 0px;
+	width: 215px;
+}
+
+.MenuGroupCaption {
+	position: relative;
+	height: 32px;
+	font-size: 13px;
+	width: 232px;
+	border: 0px;
+	cursor: hand;
+	background-image: url(../leftmenu/left_menu.gif);
+	background-repeat: repeat-x;
+	text-align: center;
+	padding-top: 9px;
+	margin-top: 0px;
+	color: #fff;
+	float: inherit;
+	font-weight: bold;
+}
+
+.MenuGroupCaption2 {
+	position: relative;
+	height: 32px;
+	font-size: 13px;
+	width: 232px;
+	border: 0px;
+	cursor: hand;
+	background-image: url(../leftmenu/left_menuon.gif);
+	text-align: center;
+	padding-top: 9px;
+	margin-top: 0px;
+	color: #a55608;
+	float: inherit;
+	font-weight: bold;
+}
+
+.MenuGroupCaption3 {
+	position: relative;
+	height: 30px;
+	font-size: 13px;
+	width: 215px;
+	border-top: 1px solid #ffffff;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	cursor: hand;
+	background-image: url(../leftmenu/left_menuon.gif);
+	background-repeat: repeat-x;
+	text-align: center;
+	padding-top: 8px;
+	color: #fff;
+	float: inherit;
+	font-weight: bold;
+}
+
+/***以下每行排列一个**/
+.MenuGroupItem1 {
+	position: relative;
+	float: left;
+	width: 215px; /* 107 */
+	height: 100px;
+	font-size: 12px;
+	color: #2E27AE;
+	border: 0;
+	background: url("../leftmenu/menu_icon1_b.gif") no-repeat center top;
+	text-align: center;
+	padding-top: 6px;
+	padding-left: 17px;
+	padding-right: 17px;
+	background-color: #c9e2f8;
+	margin-top: 3px;
+	/*margin-left:60px;*/
+}
+
+.MenuGroupItem1_MSOVER {
+	position: relative;
+	float: left;
+	width: 215px; /* 107 */
+	height: 100px;
+	font-size: 12px;
+	color: #a56808;
+	cursor: hand;
+	border: 0;
+	background: url("../leftmenu/menu_icon2_b.gif") no-repeat center top;
+	text-align: center;
+	padding-top: 6px;
+	padding-left: 17px;
+	padding-right: 17px;
+	background-color: #c9e2f8;
+	margin-top: 3px;
+	/*margin-left:60px;*/
+}
+
+/***以下每行排列两个**/
+.MenuGroupItem2 {
+	position: relative;
+	float: left;
+	width: 87px;
+	height: 77px;
+	font-size: 12px;
+	color: #30498f;
+	border: 0;
+	background: url("../leftmenu/menu_icon1.gif") no-repeat center top;
+	text-align: center;
+	padding-top: 6px;
+	padding-left: 17px;
+	padding-right: 17px;
+	background-color: #c9e2f8;
+	margin-left: 20px;
+	margin-top: 3px;
+}
+
+.MenuGroupItem2_MSOVER {
+	position: relative;
+	float: left;
+	width: 87px;
+	height: 77px;
+	font-size: 12px;
+	color: #a56808;
+	cursor: hand;
+	border: 0;
+	background: url("../leftmenu/menu_icon2.gif") no-repeat center top;
+	text-align: center;
+	padding-top: 6px;
+	padding-left: 17px;
+	padding-right: 17px;
+	background-color: #c9e2f8;
+	margin-top: 3px;
+	margin-left: 20px;
+}
+
+/***以下每行排列三个**/
+.MenuGroupItem3 {
+	position: relative;
+	float: left;
+	width: 62px;
+	height: 62px;
+	font-size: 12px;
+	color: #2E27AE;
+	border: 0;
+	background: url("../leftmenu/menu_icon1_s.gif") no-repeat center top;
+	text-align: center;
+	padding-top: 1px;
+	background-color: #CFE6FB;
+	margin-top: 2px;
+	margin-left: 9px;
+}
+
+.MenuGroupItem3_MSOVER {
+	position: relative;
+	float: left;
+	width: 62px;
+	height: 62px;
+	font-size: 12px;
+	color: #a56808;
+	cursor: hand;
+	border: 0;
+	background: url("../leftmenu/menu_icon2_s.gif") no-repeat center top;
+	text-align: center;
+	padding-top: 1px;
+	background-color: #CFE6FB;
+	margin-top: 2px;
+	margin-left: 9px;
+}
+
+/***以下每行排列四个**/
+.MenuGroupItem4 {
+	position: relative;
+	float: left;
+	width: 62px;
+	height: 62px;
+	font-size: 12px;
+	color: #2E27AE;
+	border: 0;
+	background: url("../leftmenu/menu_icon1_s.gif") no-repeat center top;
+	text-align: center;
+	padding-top: 1px;
+	background-color: #CFE6FB;
+	margin-top: 2px;
+	margin-left: 9px;
+}
+
+.MenuGroupItem4_MSOVER {
+	position: relative;
+	float: left;
+	width: 62px;
+	height: 62px;
+	font-size: 12px;
+	color: #a56808;
+	cursor: hand;
+	border: 0;
+	background: url("../leftmenu/menu_icon2_s.gif") no-repeat center top;
+	text-align: center;
+	padding-top: 1px;
+	background-color: #CFE6FB;
+	margin-top: 2px;
+	margin-left: 9px;
+}

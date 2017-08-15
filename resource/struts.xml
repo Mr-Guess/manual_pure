@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!--include标签用于将Struts2应用模块化时引入其他配置文件-->
+	<include file="struts/struts-dev.xml"/>
+	<include file="struts/struts-sys.xml" />
+	<include file="struts/struts-login.xml" />
+    <!-- Add packages here -->
+	<include file="struts/struts-test.xml" />
+	<include file="struts/struts-ent.xml"></include>
+	<include file="struts/struts-hazards.xml"></include>
+	<include file="struts/struts-create.xml"></include>
+	<include file="struts/struts-emergency.xml"></include>
+	<include file="struts/struts-emergencyplan.xml"></include>
+	<include file="struts/struts-humanResource.xml"></include>
+	<include file="struts/struts-report.xml"></include>
+</struts>

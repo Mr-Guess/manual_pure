@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Reporting">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_REPORTING.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_REPORTING.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_REPORTING.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_REPORTING.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_REPORTING.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_REPORTING.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="title"> TB_REPORTING.TITLE like '%'+#title#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="reporter"> TB_REPORTING.REPORTER like '%'+#reporter#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="reportTime"> TB_REPORTING.REPORT_TIME like '%'+#reportTime#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="reportType"> TB_REPORTING.REPORT_TYPE like '%'+#reportType#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="context"> TB_REPORTING.CONTEXT like '%'+#context#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="checker"> TB_REPORTING.CHECKER like '%'+#checker#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="owner"> TB_REPORTING.OWNER like '%'+#owner#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="steps"> TB_REPORTING.STEPS like '%'+#steps#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="informre"> TB_REPORTING.INFORMRE like '%'+#informre#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.report.reporting.pojo.Reporting">
+  		INSERT INTO TB_REPORTING(
+				
+				TITLE,
+				REPORTER,
+				REPORT_TIME,
+				REPORT_TYPE,
+				CONTEXT,
+				CHECKER,
+				OWNER,
+				STEPS,
+				INFORMRE,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#title#,
+				#reporter#,
+				#reportTime#,
+				#reportType#,
+				#context#,
+				#checker#,
+				#owner#,
+				#steps#,
+				#informre#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_REPORTING SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.report.reporting.pojo.Reporting" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_REPORTING.TITLE AS title,
+			TB_REPORTING.REPORTER AS reporter,
+			TB_REPORTING.REPORT_TIME AS reportTime,
+			TB_REPORTING.REPORT_TYPE AS reportType,
+			TB_REPORTING.CONTEXT AS context,
+			TB_REPORTING.CHECKER AS checker,
+			TB_REPORTING.OWNER AS owner,
+			TB_REPORTING.STEPS AS steps,
+			TB_REPORTING.INFORMRE AS informre,
+			
+			TB_REPORTING.ID AS id,
+			TB_REPORTING.STATUS AS status,
+			TB_REPORTING.CREATED AS created,
+			TB_REPORTING.CREATE_TIME AS createTime,
+			TB_REPORTING.UPDATED AS updated,
+			TB_REPORTING.UPDATE_TIME as updateTime
+		from
+		TB_REPORTING
+  		where 
+ 	 		TB_REPORTING.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.report.reporting.pojo.Reporting">
+		UPDATE TB_REPORTING 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="title"> TITLE=#title#</isNotEmpty>
+			<isNotEmpty prepend="," property="reporter"> REPORTER=#reporter#</isNotEmpty>
+			<isNotEmpty prepend="," property="reportTime"> REPORT_TIME=#reportTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="reportType"> REPORT_TYPE=#reportType#</isNotEmpty>
+			<isNotEmpty prepend="," property="context"> CONTEXT=#context#</isNotEmpty>
+			<isNotEmpty prepend="," property="checker"> CHECKER=#checker#</isNotEmpty>
+			<isNotEmpty prepend="," property="owner"> OWNER=#owner#</isNotEmpty>
+			<isNotEmpty prepend="," property="steps"> STEPS=#steps#</isNotEmpty>
+			<isNotEmpty prepend="," property="informre"> INFORMRE=#informre#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.report.reporting.pojo.Reporting" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_REPORTING.TITLE AS title,
+			TB_REPORTING.REPORTER AS reporter,
+			TB_REPORTING.REPORT_TIME AS reportTime,
+			TB_REPORTING.REPORT_TYPE AS reportType,
+			TB_REPORTING.CONTEXT AS context,
+			TB_REPORTING.CHECKER AS checker,
+			TB_REPORTING.OWNER AS owner,
+			TB_REPORTING.STEPS AS steps,
+			TB_REPORTING.INFORMRE AS informre,
+			
+			TB_REPORTING.ID AS id,
+			TB_REPORTING.STATUS AS status,
+			TB_REPORTING.CREATED AS created,
+			TB_REPORTING.CREATE_TIME AS createTime,
+			TB_REPORTING.UPDATED AS updated,
+			TB_REPORTING.UPDATE_TIME AS updateTime
+		FROM
+			TB_REPORTING
+		WHERE
+			TB_REPORTING.STATUS = '1'
+		<include refid="Reporting.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_REPORTING
+		WHERE
+			TB_REPORTING.STATUS = '1' 
+		<include refid="Reporting.mapWhereClause"/>
+	</select>
+</sqlMap>

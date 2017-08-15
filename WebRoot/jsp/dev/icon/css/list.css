@@ -1,0 +1,130 @@
+@charset "utf-8";
+/* CSS Document */
+/* 
+* Function:All List Pages
+* Date:15/09/2010
+* Author:YQ
+* Note:The version of browers has not tested
+*/
+table {
+	font-family: Tahoma;
+	font-size: 14px;
+	border-collapse: collapse;
+}
+
+a:link {
+	color: #279bed;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #279bed;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ff6600;
+	text-decoration: underline
+}
+
+/* 列表标题 */
+.list_title {
+	background: url(../images/bg_listTitle.gif) repeat-x;
+	color: #fff;
+	font-weight: bold;
+	height: 28px;
+}
+
+.list_title td {
+	border: 1px solid #289ced;
+	border-collapse: collapse;
+}
+
+/* 列表行奇数 */
+.list_rows1 {
+	background: #fff;
+	height: 26px;
+	color: #333;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.list_rows1 td {
+	border: 1px solid #65b8f1;
+	border-collapse: collapse;
+	padding: 3px;
+	font-size: 12px;
+}
+
+/* 列表行偶数 */
+.list_rows0 {
+	background: #deecf6;
+	height: 26px;
+	color: #333;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.list_rows0 td {
+	border: 1px solid #65b8f1;
+	border-collapse: collapse;
+	padding: 3px;
+	font-size: 12px;
+}
+
+/* 列表悬停 */
+.list_alter {
+	background: #a3d4f4;
+	height: 26px;
+	color: #333;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.list_alter td {
+	border: 1px solid #65b8f1;
+	border-collapse: collapse;
+	padding: 3px;
+	font-size: 12px;
+}
+
+/* 列表分页 */
+.list_page {
+	/*background:url(bg_listPage.gif) repeat-x;*/
+	height: 30px;
+	color: #333;
+	text-align: right;
+	vertical-align: bottom;
+	font-size: 12px;
+	padding-right: 20px;
+}
+
+.list_page a:link {
+	color: #333;
+	text-decoration: none
+}
+
+.list_page a:visited {
+	color: #333;
+	text-decoration: none
+}
+
+.list_page a:hover {
+	color: #ff6600;
+	text-decoration: none
+}
+
+/* 按钮 */
+.list_button {
+	background: url(../images/bg_listButton.gif) no-repeat;
+	width: 64px;
+	height: 29px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-top: 7px;
+	cursor: hand;
+}

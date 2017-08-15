@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper -->
+<sqlMap namespace="TestCodeCreater">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="id">
+				TB_TEST_CODE_CREATER.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status">
+				TB_TEST_CODE_CREATER.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created">
+				TB_TEST_CODE_CREATER.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime">
+				TB_TEST_CODE_CREATER.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated">
+				TB_TEST_CODE_CREATER.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime">
+				TB_TEST_CODE_CREATER.UPDATE_TIME=#updateTime#</isNotEmpty>
+
+
+			<isNotEmpty prepend="and" property="showView">
+				TB_TEST_CODE_CREATER.SHOW_VIEW like '%'+#showView#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="showVideo">
+				TB_TEST_CODE_CREATER.SHOW_VIDEO like '%'+#showVideo#+'%'
+			</isNotEmpty>
+
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert -->
+	<insert id="insert" parameterClass="com.ay.jfds.testCodeCreater.pojo.TestCodeCreater">
+		INSERT INTO TB_TEST_CODE_CREATER(
+
+		SHOW_VIEW,
+		SHOW_VIDEO,
+
+		ID,
+		STATUS,
+		CREATED,
+		CREATE_TIME,
+		UPDATED,
+		UPDATE_TIME) values(
+
+		#showView#,
+		#showVideo#,
+
+		#id#,
+		#status#,
+		#created#,
+		#createTime#,
+		#updated#,
+		#updateTime#)
+	</insert>
+	<!-- add method delete -->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_TEST_CODE_CREATER
+		SET STATUS='0'
+		WHERE
+		ID=#id#
+	</delete>
+	<!-- add method getById -->
+	<select id="getById" resultClass="com.ay.jfds.testCodeCreater.pojo.TestCodeCreater"
+		parameterClass="java.lang.String">
+		SELECT
+
+		TB_TEST_CODE_CREATER.SHOW_VIEW AS showView,
+		TB_TEST_CODE_CREATER.SHOW_VIDEO AS showVideo,
+
+		TB_TEST_CODE_CREATER.ID AS id,
+		TB_TEST_CODE_CREATER.STATUS AS status,
+		TB_TEST_CODE_CREATER.CREATED AS created,
+		TB_TEST_CODE_CREATER.CREATE_TIME AS createTime,
+		TB_TEST_CODE_CREATER.UPDATED AS updated,
+		TB_TEST_CODE_CREATER.UPDATE_TIME as updateTime
+		from
+		TB_TEST_CODE_CREATER
+		where
+		TB_TEST_CODE_CREATER.ID=#id#
+	</select>
+	<!-- add method update -->
+	<update id="update" parameterClass="com.ay.jfds.testCodeCreater.pojo.TestCodeCreater">
+		UPDATE TB_TEST_CODE_CREATER
+		<dynamic prepend="set">
+
+			<isNotEmpty prepend="," property="showView"> SHOW_VIEW=#showView#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="showVideo"> SHOW_VIDEO=#showVideo#
+			</isNotEmpty>
+
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#
+			</isNotEmpty>
+		</dynamic>
+		WHERE
+		ID=#id#
+	</update>
+
+	<!-- add method find -->
+	<select id="find" resultClass="com.ay.jfds.testCodeCreater.pojo.TestCodeCreater"
+		parameterClass="java.util.Map">
+		SELECT
+
+		TB_TEST_CODE_CREATER.SHOW_VIEW AS showView,
+		TB_TEST_CODE_CREATER.SHOW_VIDEO AS showVideo,
+
+		TB_TEST_CODE_CREATER.ID AS id,
+		TB_TEST_CODE_CREATER.STATUS AS status,
+		TB_TEST_CODE_CREATER.CREATED AS created,
+		TB_TEST_CODE_CREATER.CREATE_TIME AS createTime,
+		TB_TEST_CODE_CREATER.UPDATED AS updated,
+		TB_TEST_CODE_CREATER.UPDATE_TIME AS updateTime
+		FROM
+		TB_TEST_CODE_CREATER
+		WHERE
+		TB_TEST_CODE_CREATER.STATUS = '1'
+		<include refid="TestCodeCreater.mapWhereClause" />
+	</select>
+	<!-- add method count -->
+	<select id="count" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		SELECT COUNT(*)
+		FROM
+		TB_TEST_CODE_CREATER
+		WHERE
+		TB_TEST_CODE_CREATER.STATUS = '1'
+		<include refid="TestCodeCreater.mapWhereClause" />
+	</select>
+</sqlMap>

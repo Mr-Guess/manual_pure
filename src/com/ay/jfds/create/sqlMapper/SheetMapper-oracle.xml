@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"><!--sqlMapper--><sqlMap namespace="Sheet"><!-- 查询条件 --><sql id="mapWhereClause">
+		<isParameterPresent>
+<!-- 			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty> -->
+
+<!-- 			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty> -->
+			<isNotEmpty prepend="and" property="id"> sys_sheet.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> sys_sheet.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> sys_sheet.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> sys_sheet.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> sys_sheet.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> sys_sheet.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="mobuleId"> sys_sheet.MOBULE_ID like '%'||#mobuleId#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="nameEn"> sys_sheet.NAME_EN like '%'||#nameEn#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="nameCh"> sys_sheet.NAME_CH like '%'||#nameCh#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="enable"> sys_sheet.ENABLE like '%'||#enable#||'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql><!-- add method insert--><insert id="insert" parameterClass="com.ay.jfds.create.pojo.Sheet">
+  		INSERT INTO sys_sheet(
+				
+				NAME_EN,
+				NAME_CH,
+				ENABLE,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME
+				) values(
+				
+				#nameEn#,
+				#nameCh#,
+				#enable#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#)
+	</insert><!-- add method delete--><delete id="delete" parameterClass="java.lang.String">
+		DELETE from sys_sheet
+  		WHERE 
+ 	 		ID=#id#</delete><!-- add method getById--><select id="getById" resultClass="com.ay.jfds.create.pojo.Sheet" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			sys_sheet.NAME_EN AS nameEn,
+			sys_sheet.NAME_CH AS nameCh,
+			sys_sheet.ENABLE AS enable,
+			
+			sys_sheet.ID AS id,
+			sys_sheet.STATUS AS status,
+			sys_sheet.CREATED AS created,
+			sys_sheet.CREATE_TIME AS createTime,
+			sys_sheet.UPDATED AS updated,
+			sys_sheet.UPDATE_TIME as updateTime
+		from
+		sys_sheet
+  		where 
+ 	 		sys_sheet.ID=#id#
+	</select><!-- add method update--><update id="update" parameterClass="com.ay.jfds.create.pojo.Sheet">
+		UPDATE sys_sheet 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="nameEn"> NAME_EN=#nameEn#</isNotEmpty>
+			<isNotEmpty prepend="," property="nameCh"> NAME_CH=#nameCh#</isNotEmpty>
+			<isNotEmpty prepend="," property="enable"> ENABLE=#enable#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update><!-- add method find--><select id="find" resultClass="com.ay.jfds.create.pojo.Sheet" parameterClass="java.util.Map">
+ 		SELECT
+			
+			sys_sheet.NAME_EN AS nameEn,
+			sys_sheet.NAME_CH AS nameCh,
+			sys_sheet.ENABLE AS enable,
+			
+			
+			sys_sheet.ID AS id,
+			sys_sheet.STATUS AS status,
+			sys_sheet.CREATED AS created,
+			sys_sheet.CREATE_TIME AS createTime,
+			sys_sheet.UPDATED AS updated,
+			sys_sheet.UPDATE_TIME AS updateTime
+		FROM
+			sys_sheet
+		WHERE
+			sys_sheet.STATUS = '1'
+		<include refid="Sheet.mapWhereClause"/>
+	</select><!-- 判断表是否已经存在 --><select id="isExits" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+		SELECT
+			count(*)
+		FROM
+			sys_sheet
+		WHERE
+			sys_sheet.STATUS = '1'
+			and sys_sheet.NAME_EN=#tbName#
+	</select><!-- add method count--><select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			sys_sheet 
+		WHERE
+			sys_sheet.STATUS = '1' 
+		<include refid="Sheet.mapWhereClause"/>
+	</select></sqlMap>

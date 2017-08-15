@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+                        " http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="departmentIndustry">
+
+	<typeAlias alias="dept" type="com.ay.jfds.sys.pojo.Department" />
+	<typeAlias alias="data" type="com.ay.jfds.dev.pojo.Data" />
+	<typeAlias alias="departmentIndustry" type="com.ay.jfds.sys.pojo.DepartmentIndustry" />
+
+	<resultMap class="java.util.HashMap" id="map-result">
+		<result property="addressId" column="addressId" />
+		<result property="industryName" column="industryName" />
+		<result property="industryCode" column="industryCode" />
+	</resultMap>
+
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="departmentId">
+				DEPARTMENT_ID =
+				#departmentId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentId">
+				parent_id = #parentId#
+			</isNotEmpty>
+		</isParameterPresent>
+	</sql>
+
+
+	<select id="findExistIndustry" parameterClass="java.lang.String"
+		resultClass="departmentIndustry">
+		SELECT
+		INDUSTRY_CODE AS industryCode,
+		INDUSTRY_NAME AS industryName
+		FROM
+		TB_DEPARTMENT_INDUSTRY
+		WHERE
+		DEPARTMENT_ID = #departmentId#
+		AND
+		status = 1
+	</select>
+
+	<select id="findNotExit" parameterClass="java.util.HashMap"
+		resultClass="data">
+		SELECT
+		id AS id,
+		parent_id AS parentId,
+		data_code AS dataCode,
+		data_name AS
+		dataName
+		FROM
+		dev_data
+		WHERE type_id = '564bb95106d04970ae494b32982360ea'
+		AND status = 1
+		<isNotEmpty prepend="and" property="industrParams">
+			<iterate open="(" close=")" conjunction="and" property="industrParams">
+				data_code NOT LIKE '%'+#industrParams[].industryCode#+'%'
+			</iterate>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="industrs">
+			<iterate open="(" close=")" conjunction="and" property="industrs">
+				data_code NOT LIKE '%'+#industrs[]#+'%'
+			</iterate>
+		</isNotEmpty>
+		<include refid="mapWhereClause" />
+
+	</select>
+
+	<insert id="insert" parameterClass="departmentIndustry">
+		INSERT INTO
+		TB_DEPARTMENT_INDUSTRY (
+		ID,
+		INDUSTRY_NAME,
+		INDUSTRY_CODE,
+		DEPARTMENT_ID,
+		STATUS,
+		CREATED,
+		CREATETIME,
+		UPDATED,
+		UPDATEDTIME
+		)
+		VALUES
+		(
+		#id#, #industryName#, #industryCode#, #departmentId#, #status#, #created#,
+		#createTime#, #updated#, #updateTime#
+		)
+
+	</insert>
+	<delete id="delete" parameterClass="java.lang.String">
+		DELETE TB_DEPARTMENT_INDUSTRY
+		WHERE
+		DEPARTMENT_ID = #id#
+	</delete>
+	<select id="getByid"></select>
+	<select id="find"></select>
+	<select id="findAll"></select>
+	<update id="update"></update>
+
+	<select id="findIndustryAndAddress" parameterClass="java.lang.String"
+		resultMap="map-result">
+		SELECT DISTINCT
+		sd.address_id AS addressId,
+		ti.INDUSTRY_NAME AS industryName,
+		ti.INDUSTRY_CODE AS industryCode
+		FROM
+		sys_dept sd,
+		TB_DEPARTMENT_INDUSTRY ti,
+		sys_user su
+		WHERE
+		1 = 1
+		AND sd.id = su.dept_id
+		AND sd.id = ti.department_id
+		AND su.id = #id#
+	</select>
+
+	<select id="findAddrMatch" parameterClass="java.lang.String"
+		resultClass="java.lang.String">
+		SELECT DISTINCT
+		ADDR_MATCH
+		FROM
+		TB_GRIDCONFIG,
+		TB_RESEAU_USER
+		WHERE
+		TB_GRIDCONFIG.ID = TB_RESEAU_USER.RESEAU_ID
+		AND TB_RESEAU_USER.USER_ID = #userId#
+	</select>
+
+</sqlMap>

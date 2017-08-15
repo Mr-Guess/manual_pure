@@ -1,0 +1,12 @@
+/applicationContext.xml
+/com/
+/ehcache/
+/generate/
+/init.properties
+/log4j.properties
+/spring/
+/sqlMapConfig-mySQL.xml
+/sqlMapConfig-oracle.xml
+/sqlMapConfig.xml
+/struts/
+/struts.xml

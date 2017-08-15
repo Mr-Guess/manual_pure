@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--add by iBatisTool dev_statistics -->
+<sqlMap namespace="devStatistics">
+	<!-- add Condition dev_statistics -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="id"> id=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="charttitle">
+				chartTitle=#charttitle#</isNotEmpty>
+			<isNotEmpty prepend="and" property="xtitle"> xTitle=#xtitle#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ytitle"> yTitle=#ytitle#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="charttype"> chartType=#charttype#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="transposed">
+				transposed=#transposed#</isNotEmpty>
+			<isNotEmpty prepend="and" property="sqlcommand">
+				sqlCommand=#sqlcommand#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> status=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime">
+				create_time=#createTime#</isNotEmpty>
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert -->
+	<insert id="insert" parameterClass="com.ay.jfds.dev.pojo.DevStatistics">
+		insert into dev_statistics(
+		ID,
+		CHARTTITLE,
+		XTITLE,
+		YTITLE,
+		CHARTTYPE,
+		TRANSPOSED,
+		SQLCOMMAND,
+		STATUS,
+		CREATE_TIME) values(
+		#id#,
+		#charttitle#,
+		#xtitle#,
+		#ytitle#,
+		#charttype#,
+		#transposed#,
+		#sqlcommand#,
+		#status#,
+		#createTime#)
+	</insert>
+	<!-- add method delete -->
+	<delete id="delete" parameterClass="java.lang.String">
+		update dev_statistics set
+		status='0'
+		where
+		id=#id#
+	</delete>
+	<!-- add method getById -->
+	<select id="getById" resultClass="com.ay.jfds.dev.pojo.DevStatistics"
+		parameterClass="java.lang.String">
+		select
+		id,
+		chartTitle,
+		xTitle,
+		yTitle,
+		chartType,
+		transposed,
+		sqlCommand,
+		status,
+		create_time as createTime
+		from
+		dev_statistics
+		where
+		id=#id#
+	</select>
+	<!-- add method update -->
+	<update id="update" parameterClass="com.ay.jfds.dev.pojo.DevStatistics">
+		update dev_statistics
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id"> id=#id#</isNotNull>
+			<isNotNull prepend="," property="charttitle"> chartTitle=#charttitle#
+			</isNotNull>
+			<isNotNull prepend="," property="xtitle"> xTitle=#xtitle#
+			</isNotNull>
+			<isNotNull prepend="," property="ytitle"> yTitle=#ytitle#
+			</isNotNull>
+			<isNotNull prepend="," property="charttype"> chartType=#charttype#
+			</isNotNull>
+			<isNotNull prepend="," property="transposed"> transposed=#transposed#
+			</isNotNull>
+			<isNotNull prepend="," property="sqlcommand"> sqlCommand=#sqlcommand#
+			</isNotNull>
+			<isNotNull prepend="," property="status"> status=#status#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime"> create_time=#createTime#
+			</isNotNull>
+		</dynamic>
+		where
+		id=#id#
+	</update>
+	<!-- add method findAll -->
+	<select id="findAll" resultClass="com.ay.jfds.dev.pojo.DevStatistics"
+		parameterClass="com.ay.jfds.dev.pojo.DevStatistics">
+		select
+		id,
+		chartTitle,
+		xTitle,
+		yTitle,
+		chartType,
+		transposed,
+		sqlCommand,
+		status,
+		create_time as createTime
+		from
+		dev_statistics
+		where
+		status='1'
+	</select>
+	<!-- add method find -->
+	<select id="find" resultClass="com.ay.jfds.dev.pojo.DevStatistics"
+		parameterClass="java.util.Map">
+		select
+		id,
+		chartTitle,
+		xTitle,
+		yTitle,
+		chartType,
+		transposed,
+		sqlCommand,
+		status,
+		create_time as createTime
+		from
+		dev_statistics
+		where
+		status='1'
+		<include refid="devStatistics.mapWhereClause" />
+	</select>
+	<!-- add method count -->
+	<select id="count" resultClass="java.lang.Integer"
+		parameterClass="java.util.Map">
+		select count(*)
+		from
+		dev_statistics
+		where
+		status='1'
+		<include refid="devStatistics.mapWhereClause" />
+	</select>
+</sqlMap>

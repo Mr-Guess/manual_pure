@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+  <constant name="struts.i18n.encoding" value="UTF-8"/>
+  <constant name="struts.objectFactory" value="spring"/>
+  <constant name="struts.multipart.saveDir" value="c:\temp"/>
+  <!--###################################开发工具所有的功能####################################### -->
+  <!-- 菜单管理 -->
+  <package extends="struts-default" name="menu" namespace="/menu">
+    <action class="com.ay.jfds.dev.action.MenuAction" name="menuAction"/>
+  </package>
+  <!-- 图片管理 -->
+<!--   <package extends="struts-default" name="icon" namespace="/icon"> -->
+<!--     <action class="com.ay.jfds.dev.action.IconAction" name="iconAction"> -->
+<!--       <result name="selected">/jsp/dev/icon/selected.jsp</result> -->
+<!--       <result name="list">/jsp/dev/icon/list.jsp</result> -->
+<!--     </action> -->
+<!--   </package> -->
+  <!-- 菜单权限管理 -->
+  <package extends="struts-default" name="menuOpt" namespace="/menuOpt">
+    <action class="com.ay.jfds.dev.action.MenuOptAction" name="menuOpt">
+      <result name="menuOptList">/jsp/dev/menuOpt/menuOptList.jsp</result>
+    </action>
+    <action name="upload" class="com.ay.jfds.dev.action.MenuOptAction" method="uploadFile">
+      <result name="upload">/jsp/dev/menuOpt/returnPage.jsp</result>
+    </action>
+  </package>
+  <!-- 元数据类型管理 -->
+  <package extends="struts-default" name="dataType" namespace="/dataType">
+    <action class="com.ay.jfds.dev.action.DataTypeAction" name="dataTypeAction">
+      <result name="dataTypeList">/jsp/dev/data/dataTypePage.jsp</result>
+    </action>
+  </package>
+  <!-- 元数据管理 -->
+  <package extends="struts-default" name="data" namespace="/data">
+    <action class="com.ay.jfds.dev.action.DataAction" name="dataAction">
+      <result name="dataList">/jsp/dev/data/dataPage.jsp</result>
+    </action>
+  </package>
+  <!--定义表结构 -->
+  <package extends="struts-default" name="entity" namespace="/entity">
+    <action class="com.ay.jfds.dev.action.EntityAction" name="entityAction"/>
+    <action class="com.ay.jfds.dev.action.EntityFieldAction" name="entityFieldAction"/>
+  </package>
+  <!--定义表单 -->
+  <package name="form" extends="struts-default" namespace="/form">
+    <action name="formAction" class="com.ay.jfds.dev.action.FormAction"/>
+    <action name="formPropertyAction" class="com.ay.jfds.dev.action.FormPropertyAction"/>
+  </package>
+  <!-- jFreeChart -->
+  <package extends="struts-default" name="jFreeChart" namespace="/jfreechart">
+    <result-types>
+      <result-type class="org.apache.struts2.dispatcher.ChartResult" default="false" name="chart"/>
+    </result-types>
+    <global-results>
+      <result name="exception">/common/exception.jsp</result>
+    </global-results>
+    <global-exception-mappings>
+      <exception-mapping exception="java.sql.SQLException" result="exception"/>
+    </global-exception-mappings>
+    <action class="com.ay.jfds.dev.action.JFreeChartAction" name="JFreeChartAction">
+      <result type="chart"> 
+        <param name="width">650</param>  
+        <param name="height">400</param> 
+      </result>
+    </action>
+  </package>
+  <!-- 统计 -->
+  <package extends="system-default" name="statistics" namespace="/statistics">
+    <action class="com.ay.jfds.dev.action.DevStatisticsAction" name="statisticsAction"/>
+  </package>
+  <!-- excel导入导出 -->
+  <package extends="system-default" name="excel" namespace="/excel">
+    <action class="com.ay.jfds.dev.action.ExcelAction" name="excel_exp" method="exp">
+      <result name="exp" type="stream"> 
+        <param name="contentType">application/vnd.ms-excel</param>  
+        <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+        <param name="bufferSize">1024</param>  
+        <param name="inputName">excelOutFile</param> 
+      </result>
+    </action>
+    <action class="com.ay.jfds.dev.action.ExcelAction" name="excel_imp" method="imp">
+      <result name="imp">/common/success.jsp</result>
+    </action>
+  </package>
+  <package extends="system-default" name="word" namespace="/word">
+    <action class="com.ay.jfds.dev.action.ExportWordAction" name="word_exp" method="exp">
+      <result name="exp" type="stream"> 
+        <param name="contentType">application/vnd.ms-word</param>  
+        <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+        <param name="bufferSize">1024</param>  
+        <param name="inputName">outFile</param> 
+      </result>
+    </action>
+  </package>
+  <!--视频监控信息模块-->
+  <package name="video" extends="struts-default" namespace="/video">
+    <action name="videoAction" class="com.ay.video.action.VideoAction">
+      <result name="showVideo">/jsp/video/showVideo.jsp</result>
+      <result name="playbackpage">/jsp/video/videoPlayBack.jsp</result>
+    </action>
+  </package>
+  <!-- 菜单按钮图标 -->
+  <package extends="struts-default" name="menuIcon" namespace="/">
+		<action class="com.ay.jfds.dev.action.MenuIconAction" name="menuIcon">
+			<result type="stream">
+				<param name="contentType">image/jpeg</param>  
+                <param name="inputName">inputStream</param>  
+			</result>
+		</action>
+		<action name="showIcon" class="com.ay.jfds.dev.action.MenuIconAction" method="show">
+		</action>
+	</package>
+</struts>

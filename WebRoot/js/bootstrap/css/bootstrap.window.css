@@ -1,0 +1,90 @@
+body {
+	background: url(../img/bdbg_03.jpg) repeat-x;
+}
+
+.list_sorry a {
+	color: #189DF1;
+}
+
+.modal {
+	border-color: #4D8190;
+	width: 500px;
+	margin-left: -230px;
+}
+
+.modal-header {
+	background: url(../img/titbg1_03.png) repeat-x;
+	padding: 4px 15px;
+	position: relative;
+}
+
+.modal-header h3 {
+	font-size: 16px;
+	color: #000;
+	letter-spacing: 7px;
+}
+
+.modal-header .close {
+	background: url(../img/close.png) no-repeat;
+	width: 48px;
+	height: 22px;
+}
+
+.modal-body {
+	
+}
+
+#msgBody {
+	color: #000000;
+	font-size: 17px;
+	text-align: center;
+	padding-bottom: 60px;
+}
+
+.close {
+	opacity: 1;
+	position: absolute;
+	top: -3px;
+	right: -1px;
+}
+
+.modal-footer {
+	padding: 4px 15px 0;
+	border: 0;
+	height: 36px;
+	padding: 4px 15px 0;
+}
+
+.nav>li>a:hover,.nav>li>a:focus {
+	background: url(../img/tabbg_03.png) repeat-x;
+}
+
+#viewWin {
+	padding: 0;
+	border: 1px solid #4d8190;
+}
+
+.table-bordered,.table-bordered th,.table-bordered td,.table th,.table td
+	{
+	border-color: #4D8190 !important;
+}
+
+.table_nemu_new {
+	background-color: #eaf8f9 !important;
+}
+
+.nav-tabs>li>a:hover,.nav-tabs>li>a:focus {
+	border: 0;
+}
+
+.nav-tabs>li>a {
+	line-height: 5px;
+	padding-bottom: 14px;
+	padding-top: 11px;
+	border-bottom: 0;
+	color: #1e4550
+}
+
+.nav-tabs>li>a:focus {
+	color: #000;
+}

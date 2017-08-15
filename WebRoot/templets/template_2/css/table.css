@@ -1,0 +1,178 @@
+body {
+	font-size: 12px;
+}
+
+img,img a {
+	border: 0;
+}
+
+TABLE {
+	font-size: 12px;
+	font-family: ËÎÌו;
+	border-collapse: collapse;
+	border: 0px solid #0079ca;
+	/*page-break-after: always;*/
+}
+
+TD {
+	BORDER: 1px solid #a9d8e7; /**white-space:nowrap;**/
+}
+
+.title {
+	text-align: center;
+	height: 40px;
+	BORDER: 1px solid #a9d8e7;
+	padding-right: 10px;
+	font-size: 25px;
+	font-weight: bold;
+	color: #fff;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#acdffa',
+		endColorStr='#097ab8', gradientType='0');
+}
+
+.td_title {
+	text-align: right;
+	height: 25px;
+	BORDER: 1px solid #a9d8e7;
+	padding-right: 10px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #1b7895;
+	background: #ebf6f9;
+	line-height: 25px;
+}
+
+.tdTitle {
+	border: 0px;
+	height: 50px;
+	background: url(../images/bg_companyInfoTableTop.gif) no-repeat;
+	width: 775px;
+	color: #063384;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: 100px;
+}
+
+.tdTable {
+	border: 0px;
+	width: 775px;
+	background: url(../images/bg_companyInfoTableTr.gif) repeat-y;
+}
+
+.tdBottom {
+	border: 0px;
+	height: 13px;
+	background: url(../images/bg_companyInfoTableBottom.gif) no-repeat;
+	width: 775px;
+}
+
+a.list_button2:link {
+	background: url(../images/bg_button1.gif) no-repeat;
+	width: 77px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+a.list_button2:hover {
+	background: url(../images/bg_button1.gif) no-repeat;
+	width: 77px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+a.list_button2:visited {
+	background: url(../images/bg_button1.gif) no-repeat;
+	width: 77px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+.b_hi {
+	height: 40px;
+}
+
+.s_box {
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#FFFFFF',
+		endColorStr='#e9f5f8', gradientType='0');
+	border-left: 1px solid #a9d8e7;
+	border-top: 1px solid #a9d8e7;
+	border-right: 1px solid #4d91a7;
+	border-bottom: 1px solid #4d91a7;
+	width: 98%;
+}
+
+.s_title {
+	color: #1b7895;
+	font-size: 14px;
+	width: 90px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.value_2 {
+	padding-left: 5px;
+}
+
+.btn_update {
+	background: url(images/btn_update.png) no-repeat;
+	border: 0;
+	width: 79px;
+	height: 35px;
+}
+
+.btn_save {
+	background: url(images/btn_save.png) no-repeat;
+	border: 0;
+	width: 79px;
+	height: 35px;
+}
+
+.btn_delete {
+	background: url(images/btn_delete.png) no-repeat;
+	border: 0;
+	width: 79px;
+	height: 35px;
+}
+
+.btn_ok {
+	background: url(images/btn_ok.png) no-repeat;
+	border: 0;
+	width: 79px;
+	height: 35px;
+}
+
+.btn_cancel {
+	background: url(images/btn_cancel.png) no-repeat;
+	border: 0;
+	width: 79px;
+	height: 35px;
+}
+
+.btn_reset {
+	background: url(images/btn_reset.png) no-repeat;
+	border: 0;
+	width: 79px;
+	height: 35px;
+}
+
+.btn_child {
+	background: url(images/btn_child.png) no-repeat;
+	border: 0;
+	width: 100px;
+	height: 35px;
+}

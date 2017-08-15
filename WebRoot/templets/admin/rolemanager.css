@@ -1,0 +1,78 @@
+/**树列表样式**/
+body {
+	margin: 0;
+	padding: 0;
+	background: #eeeff0;
+	font-size: 12px;
+}
+
+.outer {
+	width: 698px;
+	height: 806px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 10px;
+} /**控制窗口**/
+.innerTop {
+	background: url(../getTree/images/bg_popWincdjgTop.gif);
+	width: 558px;
+	height: 55px;
+}
+
+.innerContent { /**控制内容窗口背景**/
+	width: 686px;
+	border-left: solid 1px #b0bbcd;
+	border-right: solid 1px #b0bbcd;
+	border-bottom: solid 1px #b0bbcd;
+	padding-top: 10px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+.treeMenu {
+	background: #fff;
+	width: 300px;
+	height: 270px;
+	border: solid 1px #a6cfe2;
+	margin: 0 auto;
+	margin-top: 0px;
+	overflow: auto;
+	padding: 10px;
+}
+
+.btnSave {
+	text-align: center;
+	padding-top: 15px;
+}
+
+.innerBottom {
+	width: 558px;
+	height: 10px;
+}
+
+img,img a {
+	border: 0;
+}
+
+.tdTitle {
+	height: 35px;
+	line-height: 35px;
+	width: 540px;
+	color: #596d87;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+.topTitle {
+	background: url(../role_img/bg_qxTop.jpg) no-repeat;
+	margin-top: 30px;
+}
+
+.dtree {
+	background: #fff;
+	margin-top: 0;
+	width: 655px;
+	border: solid 1px #b0bbcd;
+	padding: 10px;
+}

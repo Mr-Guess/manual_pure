@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Worker">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_WORKER.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_WORKER.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_WORKER.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_WORKER.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_WORKER.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_WORKER.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="name"> TB_WORKER.NAME like '%'+#name#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="header"> TB_WORKER.HEADER like '%'+#header#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="email"> TB_WORKER.EMAIL like '%'+#email#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="mobile"> TB_WORKER.MOBILE like '%'+#mobile#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="dept"> TB_WORKER.DEPT like '%'+#dept#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="position"> TB_WORKER.POSITION like '%'+#position#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="ownerIntur"> TB_WORKER.OWNER_INTUR like '%'+#ownerIntur#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.humanResource.worker.pojo.Worker">
+  		INSERT INTO TB_WORKER(
+				
+				NAME,
+				HEADER,
+				EMAIL,
+				MOBILE,
+				DEPT,
+				POSITION,
+				OWNER_INTUR,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#name#,
+				#header#,
+				#email#,
+				#mobile#,
+				#dept#,
+				#position#,
+				#ownerIntur#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_WORKER SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.humanResource.worker.pojo.Worker" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_WORKER.NAME AS name,
+			TB_WORKER.HEADER AS header,
+			TB_WORKER.EMAIL AS email,
+			TB_WORKER.MOBILE AS mobile,
+			TB_WORKER.DEPT AS dept,
+			TB_WORKER.POSITION AS position,
+			TB_WORKER.OWNER_INTUR AS ownerIntur,
+			
+			TB_WORKER.ID AS id,
+			TB_WORKER.STATUS AS status,
+			TB_WORKER.CREATED AS created,
+			TB_WORKER.CREATE_TIME AS createTime,
+			TB_WORKER.UPDATED AS updated,
+			TB_WORKER.UPDATE_TIME as updateTime
+		from
+		TB_WORKER
+  		where 
+ 	 		TB_WORKER.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.humanResource.worker.pojo.Worker">
+		UPDATE TB_WORKER 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="name"> NAME=#name#</isNotEmpty>
+			<isNotEmpty prepend="," property="header"> HEADER=#header#</isNotEmpty>
+			<isNotEmpty prepend="," property="email"> EMAIL=#email#</isNotEmpty>
+			<isNotEmpty prepend="," property="mobile"> MOBILE=#mobile#</isNotEmpty>
+			<isNotEmpty prepend="," property="dept"> DEPT=#dept#</isNotEmpty>
+			<isNotEmpty prepend="," property="position"> POSITION=#position#</isNotEmpty>
+			<isNotEmpty prepend="," property="ownerIntur"> OWNER_INTUR=#ownerIntur#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.humanResource.worker.pojo.Worker" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_WORKER.NAME AS name,
+			TB_WORKER.HEADER AS header,
+			TB_WORKER.EMAIL AS email,
+			TB_WORKER.MOBILE AS mobile,
+			TB_WORKER.DEPT AS dept,
+			TB_WORKER.POSITION AS position,
+			TB_WORKER.OWNER_INTUR AS ownerIntur,
+			
+			TB_WORKER.ID AS id,
+			TB_WORKER.STATUS AS status,
+			TB_WORKER.CREATED AS created,
+			TB_WORKER.CREATE_TIME AS createTime,
+			TB_WORKER.UPDATED AS updated,
+			TB_WORKER.UPDATE_TIME AS updateTime
+		FROM
+			TB_WORKER
+		WHERE
+			TB_WORKER.STATUS = '1'
+		<include refid="Worker.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_WORKER
+		WHERE
+			TB_WORKER.STATUS = '1' 
+		<include refid="Worker.mapWhereClause"/>
+	</select>
+</sqlMap>

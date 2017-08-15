@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+                        " http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="menu">
+
+	<typeAlias alias="menu" type="com.ay.jfds.dev.pojo.Menu" />
+	<typeAlias alias="menuOpt" type="com.ay.jfds.dev.pojo.MenuOpt" />
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="menuName">
+				menu_name like
+				'%$menuName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="menuSwitch">
+				menu_switch =
+				#menuSwitch#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="menuKind">
+				menu_kind like
+				'%'+#menuKind#+'%'
+			</isNotEmpty>
+		</isParameterPresent>
+	</sql>
+
+	<insert id="insert" parameterClass="menu">
+		INSERT INTO dev_menu (
+		menu_id,
+		menu_name,
+		menu_jb,
+		menu_sjbh,
+		menu_path,
+		menu_url,
+		menu_order,
+		menu_switch,
+		menu_info,
+		menu_type,
+		menu_kind,
+		menu_module,
+		menu_Table_Name,
+		iconNo
+
+		)
+		VALUES
+		(
+		#menuId#, #menuName#, #menuJb#,
+		#menuSjbh#, #menuPath#, #menuUrl#, #menuOrder#,
+		#menuSwitch#, #menuInfo#, #menuType#, #menuKind#,
+		#menuModule#,#menuTableName#,#iconNo#
+		)
+	</insert>
+
+	<delete id="delete" parameterClass="java.lang.String">
+		delete from dev_menu
+		where
+		menu_id=#menuId#
+	</delete>
+
+	<select id="getById" parameterClass="java.lang.String"
+		resultClass="menu">
+		select menu_id as menuId,
+		menu_name as menuName,
+		menu_jb as
+		menuJb,
+		menu_sjbh as menuSjbh,
+		menu_path as menuPath,
+		menu_url as
+		menuUrl,
+		menu_order as menuOrder,
+		menu_switch
+		menuSwitch,
+		menu_info as menuInfo,
+		menu_type as menuType
+		, menu_kind as
+		menuKind ,menu_module as menuModule
+		,menu_Table_Name as menuTableName
+		,iconNo as iconNo
+		from dev_menu where menu_id=#menuId#
+	</select>
+	
+	<select id="findBykind" parameterClass="java.util.Map" resultClass="com.ay.jfds.dev.pojo.Menu">
+		select menu_id as menuId,
+		menu_name as menuName,
+		menu_jb as
+		menuJb,
+		menu_sjbh as menuSjbh,
+		menu_path as menuPath,
+		menu_url as
+		menuUrl,
+		menu_order as menuOrder,
+		menu_switch
+		menuSwitch,
+		menu_info as menuInfo,
+		menu_type as menuType
+		, menu_kind as
+		menuKind ,menu_module as menuModule
+		,menu_Table_Name as menuTableName
+		,iconNo as iconNo
+		from dev_menu 
+		<isNotEmpty prepend="where" property="kind"> menu_kind = #kind# </isNotEmpty>
+	</select>
+
+	<update id="update" parameterClass="menu">
+		UPDATE dev_menu
+		SET menu_name
+		= #menuName#, menu_url = #menuUrl#,menu_type = #menuType#,
+		menu_switch
+		= #menuSwitch#,
+		iconNo= #iconNo#,
+		menu_info = #menuInfo#,menu_kind =
+		#menuKind# , menu_module = #menuModule# ,menu_Table_Name =
+		#menuTableName#
+		WHERE menu_id = #menuId#
+	</update>
+
+	<select id="findAll" resultClass="menu">
+		select menu_id as menuId,
+		menu_name as menuName, menu_jb as menuJb, menu_sjbh as menuSjbh,
+		menu_path as menuPath, menu_url as menuUrl, menu_order as menuOrder,
+		menu_switch menuSwitch, menu_info as menuInfo,
+		menu_type as menuType
+		,
+		menu_kind as menuKind , menu_module as
+		menuModule ,menu_Table_Name as
+		menuTableName,
+		iconNo as iconNo
+		from dev_menu where menu_kind = 12 or
+		menu_kind = 1 order by menu_order
+	</select>
+
+	<select id="findFirstChild" resultClass="menu" parameterClass="java.util.Map">
+		select menu_id as menuId,
+		menu_name as menuName, menu_jb as menuJb,
+		menu_sjbh as menuSjbh,
+		menu_path as menuPath, menu_url as menuUrl,
+		menu_order as menuOrder,
+		menu_switch menuSwitch, menu_info as menuInfo,
+		menu_type as menuType
+		, menu_kind as menuKind , menu_module as
+		menuModule ,menu_Table_Name as menuTableName,iconNo as iconNo
+		from
+		dev_menu where (menu_kind = 12 or menu_kind = 1) and
+		menu_sjbh=#menuSjbh#
+		order by menu_order
+	</select>
+
+	<select id="findEntMenu" resultClass="menu">
+		select menu_id as menuId,
+		menu_name as menuName, menu_jb as menuJb, menu_sjbh as menuSjbh,
+		menu_path as menuPath, menu_url as menuUrl, menu_order as menuOrder,
+		menu_switch menuSwitch, menu_info as menuInfo,
+		menu_type as menuType
+		,
+		menu_kind as menuKind , menu_module as
+		menuModule ,menu_Table_Name as
+		menuTableName,iconNo as iconNo
+		from dev_menu where menu_kind like '%2%'
+		order by menu_order
+	</select>
+
+	<select id="find" resultClass="menu" parameterClass="java.util.Map">
+		select menu_id as menuId, menu_name as menuName, menu_jb as menuJb,
+		menu_sjbh as menuSjbh, menu_path as menuPath, menu_url as menuUrl,
+		menu_order as menuOrder, menu_switch menuSwitch,
+		menu_info as menuInfo,
+		menu_type as menuType
+		, menu_kind as menuKind ,
+		menu_module as
+		menuModule ,menu_Table_Name as menuTableName,iconNo as iconNo
+		from
+		dev_menu
+		where 1=1
+		<include refid="menu.mapWhereClause" />
+		order by menu_order
+	</select>
+
+	<select id="getMaxMenuId" resultClass="java.lang.Integer">
+		SELECT max(MENU_ID) FROM
+		dev_menu WHERE MENU_SWITCH='1'
+	</select>
+
+	<update id="updateOrder" parameterClass="menu">
+		update dev_menu
+		set
+		menu_jb=#menuJb#,menu_sjbh=#menuSjbh#,menu_path=#menuPath#,menu_order=#menuOrder#
+		where menu_id = #menuId#
+	</update>
+
+	<select id="getMenuOptByMenuId" resultClass="menuOpt"
+		parameterClass="java.lang.String">
+		select o.id,o.menu_id as menuId, o.opt_code as optCode,
+		o.opt_name as optName from dev_menu_opt o
+		where o.menu_id=#id# order by
+		opt_order asc
+	</select>
+
+	<select id="getMaxOrderBySjbh" parameterClass="java.lang.String"
+		resultClass="java.lang.Integer">
+		select max(menu_order) from dev_menu where menu_sjbh =
+		#sjbh#
+	</select>
+
+
+	<update id="clearFormMenu" parameterClass="java.lang.String">
+		update dev_form
+
+	</update>
+</sqlMap>
+

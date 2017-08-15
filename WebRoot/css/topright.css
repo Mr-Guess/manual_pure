@@ -1,0 +1,32 @@
+/* 控制 右上四个小菜单效果*/
+.dock {
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体";
+	position: relative;
+	height: 0px;
+	text-align: center;
+	margin-top: 0px;
+	color: #FFFFFF;
+}
+
+.dock-item {
+	display: block;
+	width: 40px;
+	color: #000000;
+	position: absolute;
+	top: 0px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.dock-item img {
+	border: none;
+	margin: 5px 10px 0px;
+	width: 100%;
+}
+
+.dock-item span {
+	display: none;
+	padding-left: 0px;
+	margin-top: -5px;
+	font-weight: bold;
+}

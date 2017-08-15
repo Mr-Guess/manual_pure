@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false" name="coreCache">
+
+	<diskStore path="java.io.tmpdir/ehcache/jfds/core" />
+
+	<defaultCache maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		overflowToDisk="true" maxEntriesLocalDisk="100000" />
+
+	<cache name="coreCache" maxBytesLocalHeap="10M" eternal="false" timeToIdleSeconds="600"
+		timeToLiveSeconds="600" overflowToDisk="false" />
+		
+	<cache name="dataCache"  maxBytesLocalHeap="10M" eternal="false" timeToIdleSeconds="600000"
+		timeToLiveSeconds="600" overflowToDisk="false" />
+</ehcache>

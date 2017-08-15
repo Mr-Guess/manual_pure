@@ -1,0 +1,173 @@
+@charset "utf-8";
+/* CSS Document */
+/* 
+* Function:All View Pages
+* Date:15/09/2010
+* Author:YQ
+* Notes:The version of browers has not tested
+	为了不影响原程序的改动，样式的命名皆参照原样式表(excel_sb.css)
+*/
+body {
+	background: #f00;
+}
+
+table {
+	font-size: 12px;
+	font-family: 宋体;
+	border-collapse: collapse;
+	border: 0px solid #0079ca;
+	word-break: break-all;
+	word-wrap: break-word;
+	/*page-break-after: always;*/
+}
+
+/* 表格标题 */
+.title_main {
+	background: #1396cc;
+	color: #fff;
+	padding: 8px;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5bccfc',
+		endColorstr='#1396cc');
+}
+
+/* 表格中标题TD **/
+.title {
+	text-align: right;
+	BORDER: 1px solid #467FAA;
+	padding-right: 5px;
+	padding-left: 5px;
+	height: 30px;
+	/*background:#9edffa;*/
+	color: #063384;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#e8f6fd',
+		endColorStr='#c5e8fa', gradientType='0');
+}
+
+.title_2 {
+	text-align: center;
+	BORDER: 1px solid #467FAA;
+	padding-right: 5px;
+	height: 30px;
+	/*background:#9edffa;*/
+	color: #063384;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#e8f6fd',
+		endColorStr='#c5e8fa', gradientType='0');
+}
+
+.T_LIST_TD_BOTTOM { /* 列表第一行 */
+	border: 1px solid #467FAA;
+	border-collapse: collapse;
+	height: 20px;
+	line-height: 21px;
+	text-align: left;
+	height: 20px;
+	padding-left: 5px;
+	background: #FFF;
+}
+
+.value_2 {
+	border-top: 1px solid #467FAA;
+	border-bottom: 1px solid #467FAA;
+	border-right: 1px solid #467FAA;
+	padding: 3px;
+	background: #fff;
+}
+
+.value_2_new {
+	border-top: 1px solid #467FAA;
+	border-bottom: 1px solid #467FAA;
+	border-right: 1px solid #467FAA;
+	border-left: 1px solid #467FAA;
+	padding: 3px;
+	background: #fff;
+}
+
+/* 两个或者四个文字的按钮（如：打印、打印预览、新增等） */
+.list_button2 {
+	background: url(/safety/images/bg_button2.gif) no-repeat;
+	width: 77px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+/* 六个文字的按钮（如：执行批量辨识等） */
+.list_button6 {
+	background: url(/safety/images/bg_button6.gif) no-repeat;
+	width: 98px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+/* 两个或者四个文字的按钮（如：打印、打印预览、新增等） */
+.list_button2_null {
+	background: url(/safety/images/bg_button2_null.gif) no-repeat;
+	width: 77px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+/* 六个文字的按钮（如：执行批量辨识等） */
+.list_button6_null {
+	background: url(/safety/images/bg_button6_null.gif) no-repeat;
+	width: 98px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+/* 按钮所在的table */
+.table_button {
+	border: 0px solid #fff;
+}
+
+.button {
+	border: 0px solid #fff;
+}
+
+.title_left {
+	text-align: left;
+	BORDER: 1px solid #467FAA;
+	padding-right: 5px;
+	height: 30px;
+	/*background:#9edffa;*/
+	color: #063384;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#e8f6fd',
+		endColorStr='#c5e8fa', gradientType='0');
+}
+
+.title_left span {
+	/****/
+	color: #000;
+	filter: DropShadow(Color = #ffffff, OffX = 1, OffY = 1, Positive = 1);
+	position: absolute;
+	margin-top: -7px;
+}
+
+.value_left {
+	BORDER-RIGHT: #96969a 1px solid;
+	BORDER-TOP: #96969a 1px solid;
+	FONT-SIZE: 12px;
+	BACKGROUND: #e8eaed;
+	BORDER-LEFT: #96969a 1px solid;
+	BORDER-BOTTOM: #96969a 1px solid;
+	background: #fff
+}

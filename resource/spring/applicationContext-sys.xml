@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
+  <!--###################################开发工具所有的功能####################################### -->  
+  <!-- 部门管理 -->  
+  <bean id="deptDao" class="com.ay.jfds.sys.dao.DepartmentDao" parent="baseDao"/>  
+  <bean id="deptService" class="com.ay.jfds.sys.service.DepartmentService"> 
+    <property name="dao" ref="deptDao"/> 
+  </bean>  
+  <bean id="userDao" class="com.ay.jfds.sys.dao.UserDao" parent="baseDao"/>  
+  <bean id="userService" class="com.ay.jfds.sys.service.UserService"> 
+    <property name="dao" ref="userDao"/> 
+  </bean>  
+  <bean id="treeService" class="com.ay.framework.common.TreeService"/>  
+  <!-- 用户组管理 -->  
+  <bean id="sysGroupDao" class="com.ay.jfds.sys.dao.SysGroupDao" parent="baseDao"/>  
+  <bean id="sysGroupService" class="com.ay.jfds.sys.service.SysGroupService"> 
+    <property name="dao" ref="sysGroupDao"/> 
+  </bean>  
+  <!-- 用户组成员关系 -->  
+  <bean id="sysUserGroupDao" class="com.ay.jfds.sys.dao.SysUserGroupDao" parent="baseDao"/>  
+  <bean id="sysUserGroupService" class="com.ay.jfds.sys.service.SysUserGroupService"> 
+    <property name="dao" ref="sysUserGroupDao"/> 
+  </bean>  
+  <!-- 角色权限管理 -->  
+  <bean id="sysRoleDao" class="com.ay.jfds.sys.dao.SysRoleDao" parent="baseDao"/>  
+  <bean id="sysRoleService" class="com.ay.jfds.sys.service.SysRoleService"> 
+    <property name="dao" ref="sysRoleDao"/> 
+  </bean>  
+  <!-- 角色部门关系 -->  
+  <bean id="sysRoleDeptDao" class="com.ay.jfds.sys.dao.SysRoleDeptDao" parent="baseDao"/>  
+  <bean id="sysRoleDeptService" class="com.ay.jfds.sys.service.SysRoleDeptService"> 
+    <property name="dao" ref="sysRoleDeptDao"/> 
+  </bean>  
+  <!-- 角色用户关系 -->  
+  <bean id="sysRoleUserDao" class="com.ay.jfds.sys.dao.SysRoleUserDao" parent="baseDao"/>  
+  <bean id="sysRoleUserService" class="com.ay.jfds.sys.service.SysRoleUserService"> 
+    <property name="dao" ref="sysRoleUserDao"/> 
+  </bean>  
+  <!-- 角色用户组关系 -->  
+  <bean id="sysRoleGroupDao" class="com.ay.jfds.sys.dao.SysRoleGroupDao" parent="baseDao"/>  
+  <bean id="sysRoleGroupService" class="com.ay.jfds.sys.service.SysRoleGroupService"> 
+    <property name="dao" ref="sysRoleGroupDao"/> 
+  </bean>  
+  <!-- 角色菜单权限关系 -->  
+  <bean id="sysRoleMenuOptDao" class="com.ay.jfds.sys.dao.SysRoleMenuOptDao" parent="baseDao"/>  
+  <bean id="sysRoleMenuOptService" class="com.ay.jfds.sys.service.SysRoleMenuOptService"> 
+    <property name="dao" ref="sysRoleMenuOptDao"/> 
+  </bean>  
+  <!-- 系统参数关系 -->  
+  <bean id="sysParameterDao" class="com.ay.jfds.sys.dao.SysParameterDao" parent="baseDao"/>  
+  <bean id="sysParameterService" class="com.ay.jfds.sys.service.SysParameterService"> 
+    <property name="dao" ref="sysParameterDao"/> 
+  </bean>  
+  <bean id="sysRoleDataDao" class="com.ay.jfds.sys.dao.SysRoleDataDao" parent="baseDao"/>  
+  <bean id="sysRoleDataService" class="com.ay.jfds.sys.service.SysRoleDataService"> 
+    <property name="dao" ref="sysRoleDataDao"/> 
+  </bean>  
+  <!-- 上传下载 -->  
+  <bean id="uploadFileDao" class="com.ay.jfds.sys.dao.UploadFileDao" parent="baseDao"/>  
+  <bean id="uploadFileService" class="com.ay.jfds.sys.service.UploadFileService"> 
+    <property name="dao" ref="uploadFileDao"/> 
+  </bean>  
+  <!--系统图标模块-->  
+  <bean id="sysIconDao" class="com.ay.jfds.icon.dao.SysIconDao" parent="baseDao"/>  
+  <bean id="sysIconService" class="com.ay.jfds.icon.service.SysIconService"> 
+    <property name="dao" ref="sysIconDao"/> 
+  </bean>  
+</beans>

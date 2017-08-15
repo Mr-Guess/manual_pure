@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="SysDeptAuthority">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_SYS_DEPT_AUTHORITY.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_SYS_DEPT_AUTHORITY.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_SYS_DEPT_AUTHORITY.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_SYS_DEPT_AUTHORITY.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_SYS_DEPT_AUTHORITY.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_SYS_DEPT_AUTHORITY.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="bmId"> TB_SYS_DEPT_AUTHORITY.BM_ID like '%'||#bmId#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="jghy"> TB_SYS_DEPT_AUTHORITY.JGHY like '%'||#jghy#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="dqm"> TB_SYS_DEPT_AUTHORITY.DQM like '%'||#dqm#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="qxdm"> TB_SYS_DEPT_AUTHORITY.QXDM like '%'||#qxdm#||'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.pojo.SysDeptAuthority">
+  		INSERT INTO TB_SYS_DEPT_AUTHORITY(
+				
+				BM_ID,
+				JGHY,
+				DQM,
+				QXDM,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#bmId#,
+				#jghy#,
+				#dqm#,
+				#qxdm#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_SYS_DEPT_AUTHORITY SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.sys.pojo.SysDeptAuthority" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_SYS_DEPT_AUTHORITY.BM_ID AS bmId,
+			TB_SYS_DEPT_AUTHORITY.JGHY AS jghy,
+			TB_SYS_DEPT_AUTHORITY.DQM AS dqm,
+			TB_SYS_DEPT_AUTHORITY.QXDM AS qxdm,
+			
+			TB_SYS_DEPT_AUTHORITY.ID AS id,
+			TB_SYS_DEPT_AUTHORITY.STATUS AS status,
+			TB_SYS_DEPT_AUTHORITY.CREATED AS created,
+			TB_SYS_DEPT_AUTHORITY.CREATE_TIME AS createTime,
+			TB_SYS_DEPT_AUTHORITY.UPDATED AS updated,
+			TB_SYS_DEPT_AUTHORITY.UPDATE_TIME as updateTime
+		from
+		TB_SYS_DEPT_AUTHORITY
+  		where 
+ 	 		TB_SYS_DEPT_AUTHORITY.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.sys.pojo.SysDeptAuthority">
+		UPDATE TB_SYS_DEPT_AUTHORITY 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="bmId"> BM_ID=#bmId#</isNotEmpty>
+			<isNotEmpty prepend="," property="jghy"> JGHY=#jghy#</isNotEmpty>
+			<isNotEmpty prepend="," property="dqm"> DQM=#dqm#</isNotEmpty>
+			<isNotEmpty prepend="," property="qxdm"> QXDM=#qxdm#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.sys.pojo.SysDeptAuthority" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_SYS_DEPT_AUTHORITY.BM_ID AS bmId,
+			TB_SYS_DEPT_AUTHORITY.JGHY AS jghy,
+			TB_SYS_DEPT_AUTHORITY.DQM AS dqm,
+			TB_SYS_DEPT_AUTHORITY.QXDM AS qxdm,
+			
+			TB_SYS_DEPT_AUTHORITY.ID AS id,
+			TB_SYS_DEPT_AUTHORITY.STATUS AS status,
+			TB_SYS_DEPT_AUTHORITY.CREATED AS created,
+			TB_SYS_DEPT_AUTHORITY.CREATE_TIME AS createTime,
+			TB_SYS_DEPT_AUTHORITY.UPDATED AS updated,
+			TB_SYS_DEPT_AUTHORITY.UPDATE_TIME AS updateTime
+		FROM
+			TB_SYS_DEPT_AUTHORITY
+		WHERE
+			TB_SYS_DEPT_AUTHORITY.STATUS = '1'
+		<include refid="SysDeptAuthority.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			TB_SYS_DEPT_AUTHORITY
+		WHERE
+			TB_SYS_DEPT_AUTHORITY.STATUS = '1' 
+		<include refid="SysDeptAuthority.mapWhereClause"/>
+	</select>
+</sqlMap>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="SysDeptAuthority">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="id"> sys_dept_authority.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> sys_dept_authority.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> sys_dept_authority.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> sys_dept_authority.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> sys_dept_authority.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> sys_dept_authority.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="bmId"> sys_dept_authority.BM_ID = #bmId#</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="bmParentId"> (EXISTS(SELECT 1 FROM (SELECT ID FROM SYS_DEPT WHERE deptUrl LIKE CONCAT((SELECT deptUrl FROM sys_dept WHERE ID = #bmParentId#),',',#bmParentId#,'%')) T WHERE T.ID = sys_dept_authority.BM_ID) OR sys_dept_authority.BM_ID = #bmParentId#)</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="jghy"> sys_dept_authority.JGHY like CONCAT('%',#jghy#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="dqm"> sys_dept_authority.DQM like CONCAT('%',#dqm#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="qxdm"> sys_dept_authority.QXDM like CONCAT('%',#qxdm#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="jdlx"> sys_dept_authority.JDLX = #jdlx#</isNotEmpty>
+			<isNotEmpty prepend="and" property="lsgx"> sys_dept_authority.LSGX = #lsgx#</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.pojo.SysDeptAuthority">
+  		INSERT INTO sys_dept_authority(
+				
+				BM_ID,
+				JGHY,
+				DQM,
+				QXDM,
+				JDLX,
+				LSGX,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#bmId#,
+				#jghy#,
+				#dqm#,
+				#qxdm#,
+				#jdlx#,
+				#lsgx#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE sys_dept_authority SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+ 	 		
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.sys.pojo.SysDeptAuthority" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			sys_dept_authority.BM_ID AS bmId,
+			sys_dept_authority.JGHY AS jghy,
+			sys_dept_authority.DQM AS dqm,
+			sys_dept_authority.QXDM AS qxdm,
+			sys_dept_authority.JDLX AS jdlx,
+			sys_dept_authority.LSGX AS lsgx,
+			
+			sys_dept_authority.ID AS id,
+			sys_dept_authority.STATUS AS status,
+			sys_dept_authority.CREATED AS created,
+			sys_dept_authority.CREATE_TIME AS createTime,
+			sys_dept_authority.UPDATED AS updated,
+			sys_dept_authority.UPDATE_TIME as updateTime
+		from
+		sys_dept_authority
+  		where 
+ 	 		sys_dept_authority.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.sys.pojo.SysDeptAuthority">
+		UPDATE sys_dept_authority 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="bmId"> BM_ID=#bmId#</isNotEmpty>
+			<isNotEmpty prepend="," property="jghy"> JGHY=#jghy#</isNotEmpty>
+			<isNotEmpty prepend="," property="dqm"> DQM=#dqm#</isNotEmpty>
+			<isNotEmpty prepend="," property="qxdm"> QXDM=#qxdm#</isNotEmpty>
+			<isNotEmpty prepend="," property="jdlx"> JDLX=#jdlx#</isNotEmpty>
+			<isNotEmpty prepend="," property="lsgx"> LSGX=#lsgx#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.sys.pojo.SysDeptAuthority" parameterClass="java.util.Map">
+ 		SELECT
+			
+			sys_dept_authority.BM_ID AS bmId,
+			sys_dept_authority.JGHY AS jghy,
+			sys_dept_authority.DQM AS dqm,
+			sys_dept_authority.QXDM AS qxdm,
+			sys_dept_authority.JDLX AS jdlx,
+			sys_dept_authority.LSGX AS lsgx,
+			
+			sys_dept_authority.ID AS id,
+			sys_dept_authority.STATUS AS status,
+			sys_dept_authority.CREATED AS created,
+			sys_dept_authority.CREATE_TIME AS createTime,
+			sys_dept_authority.UPDATED AS updated,
+			sys_dept_authority.UPDATE_TIME AS updateTime
+		FROM
+			sys_dept_authority
+		WHERE
+			sys_dept_authority.STATUS = '1'
+		<include refid="SysDeptAuthority.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			sys_dept_authority
+		WHERE
+			sys_dept_authority.STATUS = '1' 
+		<include refid="SysDeptAuthority.mapWhereClause"/>
+	</select>
+	
+			
+ 	<!-- 根据部门ID批量删除权限数据的方法 2014-11-04:周伟 start -->
+	<delete id="delAuthByDeptId" parameterClass="java.lang.String">
+		DELETE FROM sys_dept_authority
+  		WHERE 
+ 	 		BM_ID=#id#
+ 	 </delete>
+ 	 <!-- 根据部门ID批量删除权限数据的方法 2014-11-04:周伟 start -->
+ 	 
+ 	<!-- add method update-->
+	<update id="disabledChildNode" parameterClass="com.ay.jfds.sys.pojo.SysDeptAuthority">
+		UPDATE SYS_DEPT_AUTHORITY SET JDLX = 0 
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	 <parameterMap id="testParameterMap" class="map">
+	     <parameter property="BMID_IN" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>
+	 </parameterMap>
+	 
+	<procedure id="callGenerEntDept" parameterMap="testParameterMap" >       
+		{CALL FN_GENER_ENT_DEPT(?)}
+	</procedure>  
+	
+	
+	<!-- add method update-->
+	<update id="updateChildJdlx" parameterClass="com.ay.jfds.sys.pojo.SysDeptAuthority">
+		UPDATE sys_dept_authority SET JDLX = #jdlx# WHERE BM_ID IN (
+		SELECT
+			ID
+		FROM
+			sys_dept T
+		WHERE
+			T.deptUrl LIKE CONCAT(
+				(SELECT deptUrl FROM sys_dept WHERE ID = #bmId#),','
+				#bmId# ,'%')
+		) AND QXDM = #qxdm#
+	</update>
+	
+</sqlMap>

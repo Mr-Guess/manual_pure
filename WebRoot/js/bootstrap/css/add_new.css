@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*bootstrap.min.css*/
+.modal-header {
+	background: url(../img/tit_bg.png) repeat-x;
+	height: 31px;
+}
+
+.modal-header h3 {
+	float: left;
+	font-size: 16px;
+}
+
+.close {
+	background: url(../img/clos.png) no-repeat;
+	height: 20px;
+	padding: 0 5px 0 5px;
+	opacity: 1;
+	color: #3c5361;
+}
+
+.btn {
+	background: url(../img/btn.png) no-repeat;
+	width: 86px;
+	height: 32px;
+	line-height: 25px;
+}
+
+.btn2 {
+	background: url(../img/btn.png) no-repeat;
+	width: 86px;
+	height: 32px;
+	line-height: 25px;
+	border: none;
+}
+
+.modal-scrollable .nav-tabs {
+	height: 38px;
+}
+
+.modal-scrollable .nav-tabs>li>a:hover,.nav-tabs>li>a:focus {
+	border-color: #eee #eee #ddd
+}
+
+.nav-tabs>.active>a,.nav-tabs>.active>a:hover,.nav-tabs>.active>a:focus
+	{
+	color: #4a5863;
+	cursor: default;
+	background: url(../img/tab_li.png) -4px -4px no-repeat;
+	border: 1px solid #ccc;
+	border-bottom-color: transparent
+}
+
+.modal-scrollable .nav-pills>li>a {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.modal-scrollable .nav-pills>.active>a,.nav-pills>.active>a:hover,.nav-pills>.active>a:focus
+	{
+	color: #fff;
+	background-color: #4a5863
+}
+
+.modal-scrollable .nav-stacked>li {
+	float: none
+}
+
+.modal-scrollable .nav-stacked>li>a {
+	margin-right: 0
+}
+
+.modal-scrollable .nav-tabs.nav-stacked {
+	border-bottom: 0
+}
+
+body .nav li a {
+	color: #4a5863;
+	blr: expression(this.onFocus = this.blur ()); /* IE Opera */
+	outline: none; /* FF Opera */
+}

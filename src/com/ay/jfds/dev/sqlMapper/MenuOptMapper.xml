@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+                        " http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="menuOpt">
+
+	<typeAlias alias="menuOpt" type="com.ay.jfds.dev.pojo.MenuOpt" />
+
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="optName">
+				opt_name like '%$optName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="optCode">
+				opt_code like '%$optCode$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="optType">
+				opt_type = #optType#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="menuId">
+				menu_id = #menuId#
+			</isNotEmpty>
+		</isParameterPresent>
+	</sql>
+
+	<insert id="insert" parameterClass="menuOpt">
+		INSERT INTO dev_menu_opt
+		(id,
+		menu_id, opt_code, opt_name, opt_url, opt_type,opt_order, status,
+		created, create_time, updated, update_time, func_name, func_para,
+		func_content, open_type, display_type, design_page_url, form_id,
+		url_para)
+		VALUES (#id#, #menuId#, #optCode#, #optName#, #optUrl#,
+		#optType#,#optOrder#, #status#, #created#, #createTime#, #updated#,
+		#updateTime#, #funcName#, #funcPara#, #funcContent#, #openType#,
+		#displayType#, #designPageUrl#, #formId#, #urlPara#)
+	</insert>
+
+	<delete id="delete" parameterClass="java.lang.String">
+		update dev_menu_opt set
+		status='0'
+		where id=#id#
+	</delete>
+
+	<delete id="deleteByMenuId" parameterClass="java.lang.String">
+		delete from
+		dev_menu_opt
+		where menu_id=#menuId#
+	</delete>
+
+	<select id="getById" parameterClass="java.lang.String"
+		resultClass="menuOpt">
+		SELECT id,
+		menu_id as menuId,
+		opt_code as optCode,
+		opt_name as optName,
+		opt_url as optUrl,
+		opt_type as optType,
+		opt_order as optOrder,
+		status, created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime,
+		func_name as funcName,
+		func_para as funcPara,
+		func_content as funcContent,
+		open_type as openType,
+		display_type as displayType,
+		design_page_url as designPageUrl,
+		form_id as formId,
+		url_para as urlPara
+		from dev_menu_opt where id=#id# and status=1
+	</select>
+
+	<update id="update" parameterClass="menuOpt">
+		UPDATE dev_menu_opt
+		SET id = #id# ,
+		menu_id = #menuId#,
+		opt_code = #optCode#,
+		opt_name = #optName#,
+		opt_url = #optUrl#,
+		opt_type = #optType#,
+		opt_order = #optOrder#,
+		status = #status#,
+		created = #created#,
+		create_time = #createTime#,
+		updated = #updated#,
+		update_time = #updateTime#,
+		func_name =#funcName#,
+		func_para = #funcPara#,
+		func_content = #funcContent#,
+		open_type = #openType#,
+		display_type = #displayType#,
+		design_page_url = #designPageUrl#,
+		form_id = #formId#,
+		url_para = #urlPara#
+		WHERE id =
+		#id# and status=1
+	</update>
+
+	<select id="findAll" resultClass="menuOpt">
+		SELECT id,
+		menu_id as menuId,
+		opt_code as optCode,
+		opt_name as optName,
+		opt_url as optUrl,
+		opt_type as optType,
+		opt_order as optOrder,
+		status, created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime,
+		func_name as funcName,
+		func_para as funcPara,
+		func_content as funcContent,
+		open_type as openType,
+		display_type as displayType,
+		design_page_url as designPageUrl,
+		form_id as formId,
+		url_para as urlPara
+		from
+		dev_menu_opt where status=1 order by opt_order
+	</select>
+
+	<select id="find" resultClass="menuOpt" parameterClass="java.util.Map">
+		SELECT id,
+		menu_id as menuId,
+		opt_code as optCode,
+		opt_name as optName,
+		opt_url as optUrl,
+		opt_type as optType,
+		opt_order as optOrder,
+		status, created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime,
+		func_name as funcName,
+		func_para as funcPara,
+		func_content as funcContent,
+		open_type as openType,
+		display_type as displayType,
+		design_page_url as designPageUrl,
+		form_id as formId,
+		url_para as urlPara
+		from dev_menu_opt
+		where 1=1 and status=1
+		<include refid="menuOpt.mapWhereClause" />
+		order by opt_order
+	</select>
+
+</sqlMap>
+

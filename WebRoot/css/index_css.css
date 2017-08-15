@@ -1,0 +1,145 @@
+@charset "utf-8";
+/* CSS Document */
+/*  made:yushuang*/
+* {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+
+body {
+	margin: 0;
+	padding: 0px;
+	font-size: 16px;
+	color: #642002;
+	font-weight: bold;
+	overflow: hidden;
+	border: none;
+	background: #035ebb url(../images/weihai_index/bg_x.jpg) repeat-x;
+}
+
+#wap {
+	width: 1024px;
+	height: 100%;
+	overflow: hidden;
+	background: url() no-repeat;
+}
+
+#top {
+	height: 181px;
+	width: 100%;
+}
+
+.top_zc {
+	float: right;
+	margin: 80px 80px 0 0;
+	width: 119px;
+	height: 68px;
+	background: url(../images/weihai_index/zc.png) no-repeat;
+}
+
+.top_zc a {
+	line-height: 68px;
+	padding: 13px 28px;
+	color: #0094da;
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#main {
+	margin: 250px 0 0 0;
+}
+
+#main table tr td a {
+	border: none;
+	text-decoration: none;
+	cursor: pointer;
+	float: left;
+	line-height: 20px;
+}
+
+.jzmm {
+	margin-left: 5px;
+}
+
+.td_jz {
+	text-align: left;
+}
+
+.name {
+	height: 30px;
+	text-align: left;
+	float: left;
+}
+
+.qyd {
+	margin: 0 10px 0 40px;
+}
+
+#footer {
+	margin-top: 61px;
+	font-size: 12px;
+	color: #FFF;
+}
+/*=========================kongjian=================================*/
+.form_user {
+	height: 36px;
+	border: 0;
+	line-height: 30px; *+
+	line-height: 36px;
+	padding-left: 43px;
+	background: none;
+}
+
+.form_pwd {
+	background: url(../images/weihai_index/lock.png) no-repeat;
+	width: 254px;
+	height: 35px;
+	border: 0;
+	line-height: 30px;
+	padding-left: 45px; *+
+	line-height: 36px;
+}
+
+.btn {
+	background: url(../images/weihai_index/login_input_btn.png) no-repeat;
+	width: 76px;
+	height: 31px;
+	border: 0;
+	line-height: 30px;
+	padding-left: 35px;
+}
+
+.cb {
+	line-height: 20px;
+	width: 16px;
+	margin-left: 5px;
+	height: 16px;
+	float: left;
+}
+
+.h2 {
+	font-size: 14px;
+	color: #000;
+}
+
+#qyDiv {
+	background: url(../images/weihai_index/lan_qyd1.png) no-repeat;
+	height: 36px;
+	border: 0;
+	padding-left: 43px;
+	line-height: 35px;
+}
+
+#zfDiv {
+	background: url(../images/weihai_index/land.png) no-repeat;
+	width: 254px;
+	height: 36px;
+}
+
+.t_item {
+	width: 200px;
+	text-align: right;
+	padding-right: 20px;
+}

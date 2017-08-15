@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
+  <!--###################################开发工具所有的功能####################################### -->  
+  <!-- 菜单管理 -->  
+  <bean class="com.ay.jfds.dev.dao.MenuDao" id="menuDao" parent="baseDao"/>  
+  <bean class="com.ay.jfds.dev.service.MenuService" id="menuService"> 
+    <property name="dao" ref="menuDao"/>  
+    <property name="menuOptDao" ref="menuOptDao"/> 
+  </bean>  
+  <!-- 图片管理 -->  
+<!--   <bean class="com.ay.jfds.dev.dao.IconDao" id="iconDao" parent="baseDao"/>   -->
+<!--   <bean class="com.ay.jfds.dev.service.DevIconService" id="iconService">  -->
+<!--     <property name="dao" ref="iconDao"/>  -->
+<!--   </bean>   -->
+  <!-- 菜单权限管理 -->  
+  <bean class="com.ay.jfds.dev.dao.MenuOptDao" id="menuOptDao" parent="baseDao"/>  
+  <bean class="com.ay.jfds.dev.service.MenuOptService" id="menuOptService"> 
+    <property name="dao" ref="menuOptDao"/> 
+  </bean>  
+  <!-- 元数据管理 -->  
+  <bean class="com.ay.jfds.dev.dao.DataDao" id="dataDao" parent="baseDao"/>  
+  <bean class="com.ay.jfds.dev.service.DataService" id="dataService"> 
+    <property name="dao" ref="dataDao"/> 
+  </bean>  
+  <!-- 元数据类别管理 -->  
+  <bean class="com.ay.jfds.dev.dao.DataTypeDao" id="dataTypeDao" parent="baseDao"/>  
+  <bean class="com.ay.jfds.dev.service.DataTypeService" id="dataTypeService"> 
+    <property name="dao" ref="dataTypeDao"/> 
+  </bean>  
+  <bean class="com.ay.framework.common.TreeService" id="treeService"/>  
+  <!-- 定义表结构-->  
+  <bean class="com.ay.jfds.dev.dao.EntityDao" id="entityDao" parent="baseDao"/>  
+  <bean class="com.ay.jfds.dev.service.EntityService" id="entityService"> 
+    <property name="dao" ref="entityDao"/> 
+  </bean>  
+  <bean class="com.ay.jfds.dev.dao.EntityFieldDao" id="entityFieldDao" parent="baseDao"/>  
+  <bean class="com.ay.jfds.dev.service.EntityFieldService" id="entityFieldService"> 
+    <property name="dao" ref="entityFieldDao"/> 
+  </bean>  
+  <!-- 统计 -->  
+  <bean class="com.ay.jfds.dev.dao.DevStatisticsDao" id="devStatisticsDao" parent="baseDao"/>  
+  <bean class="com.ay.jfds.dev.service.DevStatisticsService" id="devStatisticsService"> 
+    <property name="dao" ref="devStatisticsDao"/> 
+  </bean>  
+  <!-- 定义表单 -->  
+  <bean id="formDao" class="com.ay.jfds.dev.dao.FormDao" parent="baseDao"/>  
+  <bean id="formService" class="com.ay.jfds.dev.service.FormService"> 
+    <property name="dao" ref="formDao"/> 
+  </bean>  
+  <!-- 导入导出数据处理 -->  
+  <bean id="dataHandlerDao" class="com.ay.jfds.dev.dao.DataHandlerDao" parent="baseDaoSupport"/>  
+  <bean class="com.ay.jfds.dev.dao.FormPropertyDao" id="formPropertyDao" parent="baseDao"/>  
+  <bean class="com.ay.jfds.dev.service.FormPropertyService" id="formPropertyService"> 
+    <property name="dao" ref="formPropertyDao"/> 
+  </bean>  
+</beans>

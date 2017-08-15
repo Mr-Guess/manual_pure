@@ -1,0 +1,222 @@
+﻿<Config>
+	<Assembly Size="17533812">
+		<Service Source="" />
+		<!--<Service Source="http://10.0.0.119/AYKJ/WCF/XmlWCF/Service1.svc"/> -->
+		<System
+			Source="Assembly/System/AYKJ.GISDevelop.Platform.dll;Assembly/System/AYKJ.GPS.dll;Assembly/System/AYKJ.PlotArcGIS.dll;Assembly/System/ColorPicker.dll;Assembly/System/ESRI.ArcGIS.Client.Behaviors.dll;Assembly/System/ESRI.ArcGIS.Client.Bing.dll;Assembly/System/ESRI.ArcGIS.Client.dll;Assembly/System/ESRI.ArcGIS.Client.Toolkit.DataSources.dll;Assembly/System/ESRI.ArcGIS.Client.Toolkit.dll;Assembly/System/ESRI.ArcGIS.Client.WebMap.dll;Assembly/System/ESRI.ArcGIS.Samples.dll;Assembly/System/FJ.Core.dll;Assembly/System/Microsoft.CSharp.dll;Assembly/System/Microsoft.Expression.Controls.dll;Assembly/System/Microsoft.Expression.Drawing.dll;Assembly/System/Microsoft.Expression.Effects.dll;Assembly/System/Microsoft.Expression.Interactions.dll;Assembly/System/Microsoft.Expression.Prototyping.Interactivity.dll;Assembly/System/Microsoft.Expression.Prototyping.SketchControls.dll;Assembly/System/mscorlib.dll;Assembly/System/PlotApiForArcGIS.dll;Assembly/System/SLVisifire.Charts.dll;Assembly/System/System.ComponentModel.DataAnnotations.dll;Assembly/System/System.Core.dll;Assembly/System/system.dll;Assembly/System/System.Json.dll;Assembly/System/System.Net.dll;Assembly/System/System.Runtime.Serialization.dll;Assembly/System/System.Runtime.Serialization.Json.dll;Assembly/System/System.ServiceModel.dll;Assembly/System/System.ServiceModel.Extensions.dll;Assembly/System/System.ServiceModel.PollingDuplex.dll;Assembly/System/System.ServiceModel.Web.dll;Assembly/System/System.Web.dll;Assembly/System/System.Windows.Browser.dll;Assembly/System/System.Windows.Controls.Data.dll;Assembly/System/System.Windows.Controls.Data.Input.dll;Assembly/System/System.Windows.Controls.DataVisualization.Toolkit.dll;Assembly/System/System.Windows.Controls.dll;Assembly/System/System.Windows.Controls.Input.dll;Assembly/System/System.Windows.Controls.Input.Toolkit.dll;Assembly/System/System.Windows.Controls.Toolkit.dll;Assembly/System/System.Windows.Controls.Toolkit.Internals.dll;Assembly/System/System.Windows.Data.dll;Assembly/System/System.Windows.dll;Assembly/System/System.Windows.Interactivity.dll;Assembly/System/System.Xml.Serialization.dll;" />
+		<Part
+			Source="Assembly/Parts/AYKJ.GISExtension.dll;Assembly/Parts/AYKJ.GISInterface.dll;Assembly/Parts/AYKJ.GISPlot.dll;" />
+		<Style
+			Source="Assembly/Style/00-Text-Style.xaml;Assembly/Style/01-Brush-Style.xaml;Assembly/Style/02-App-Style.xaml;Assembly/Style/03-TextBlock-Style.xaml;Assembly/Style/04-Button-Style.xaml;Assembly/Style/05-View-Style.xaml;Assembly/Style/ResourceDictionary.xaml;Assembly/Style/ResourcesStyle.xaml;" />
+	</Assembly>
+	<!--所要加载的插件，Type类型有三种，App代表纯GIS应用，展现在GIS菜单中；Interface代表纯接口，不展现在GIS菜单；AppInterface代表应用接口都有，展现在GIS菜单中 -->
+	<Menu>
+		<MenuItem Title="数据查询" MenuName="AYKJ.GISExtension" Describe="数据查询"
+			Type="AppInterface" />
+		<!-- <MenuItem Title="电子标绘" MenuName="AYKJ.GISPlot" Describe="电子标绘" Type="App" 
+			/> -->
+		<MenuItem Title="应用接口" MenuName="AYKJ.GISInterface" Describe="应用接口"
+			Type="Interface" />
+	</Menu>
+	<Extent>
+		<!--初始化地址 -->
+		<MapExtent XMin="118.552670" YMin="31.909644" XMax="118.919069"
+			YMax="32.122539" />
+		<!--几何服务 -->
+		<GeometryService Name="Geometry" Tpe="Tiled"
+			Url="http://10.0.0.119/ArcGIS/rest/services/Geometry/GeometryServer" />
+		<!--默认加载的浏览服务 Type：Tiled,Dynamic,Image,Feature Group：Image,Vector -->
+		<MapServices RMin="2.14576725194028E-05" RMax="0.0072733562554657">
+			<!-- <MapService Group="Vector" IsVisible="False" Name="福建区划" Type="Dynamic" 
+				Url="http://10.0.0.119/ArcGIS/rest/services/NJ_MAP/MapServer" RMin="2.14576725194028E-05" 
+				RMax="0.0219726566598685" /> <MapService Group="Vector" IsVisible="False" 
+				Name="福建影像" Type="Tiled" Url="http://10.0.0.119/ArcGIS/rest/services/NJ_MAP/MapServer" 
+				RMin="" RMax="" /> <MapService Group="Vector" IsVisible="False" Name="福建注记" 
+				Type="Tiled" Url="http://10.0.0.119/ArcGIS/rest/services/NJ_MAP/MapServer" 
+				RMin="" RMax="" /> <MapService Group="Vector" IsVisible="True" Name="福建矢量" 
+				Type="Tiled" Url="http://10.0.0.119/ArcGIS/rest/services/NJ_MAP/MapServer" 
+				RMin="" RMax="" /> -->
+			<MapService Group="Vector" IsVisible="True" Name="孝义矢量"
+				Type="Tiled" Url=" http://10.0.0.119/ArcGIS/rest/services/NJ_MAP/MapServer"
+				RMin="" RMax="" />
+		</MapServices>
+		<!--放大镜配置 -->
+		<MagnifyGlassMaps>
+			<MagnifyGlassMap Type="Tiled"
+				Url="http://10.0.0.119/ArcGIS/rest/services/NJ_MAP/MapServer" RMin=""
+				RMax="" />
+		</MagnifyGlassMaps>
+		<!--鹰眼的配置 -->
+		<OverviewMaps>
+			<OverviewMap Type="Tiled"
+				Url="http://10.0.0.119/ArcGIS/rest/services/NJ_MAP/MapServer" RMin=""
+				RMax="" />
+		</OverviewMaps>
+		<!--工具条配置(拉框放大|拉框缩小|漫游|前一视图|后一视图|全图|距离量测|面积量测|坐标显示|坐标定位|地图查询|放大镜|打印|输出|截图|书签|图层列表|图例|清除|全屏显示) -->
+		<Tool
+			Visible="拉框放大|拉框缩小|漫游|前一视图|后一视图|全图|距离量测|面积量测|坐标显示|地图查询|打印|输出|书签|图层列表|图例|清除|全屏显示" />
+		<!--以下均为扩展配置 -->
+		<!--GIS扩展分析服务 -->
+		<ExtensionServices>
+			<ExtensionService Name="网络分析"
+				Url=" http://10.0.0.119/ArcGIS/rest/services/NJ_NASERVER/NAServer/Route" />
+			<ExtensionService Name="网络服务区分析"
+				Url=" http://10.0.0.119/ArcGIS/rest/services/NJ_NASERVER/NAServer/Service%20Area" />
+			<ExtensionService Name="网络设施点分析"
+				Url=" http://10.0.0.119/ArcGIS/rest/services/NJ_NASERVER/NAServer/Closest%20Facility" />
+			<ExtensionService Name="路线查询"
+				Url=" http://10.0.0.119/ArcGIS/rest/services/NJ_MAP/MapServer/0" />
+			<ExtensionService Name="行政区域区县"
+				Url=" http://10.0.0.119/ArcGIS/rest/services/NJ_MAP/MapServer/63" />
+		</ExtensionServices>
+
+		<!--加载专题数据服务 Type=：OneTime,RealTime -->
+		<DataServices>
+			<DataService Name="专题数据" Type="OneTime"
+				Url="http://10.0.0.119/weihai_DataWCF/AykjData.svc" RealUrl=""
+				Scale="100000" />
+			<!--<DataService Name="专题数据2" Type="RealTime" Url="http://10.0.0.119/AYKJ/WCF/DataWCF/AykjData.svc" 
+				RealUrl="http://10.0.0.119/AYKJ/WCF/RealDataWCF/Service1.svc" Scale="100000"/> -->
+			<DataService Name="GPS数据" Type="RealTime"
+				Url="http://10.0.0.119/AYKJ/WCF/RealGPSWCF/myService.svc" />
+			<DataService Name="GPS数据" Type="OneTime"
+				Url="http://10.0.0.119/AYKJ/WCF/TrackWCF/Service1.svc" />
+			<Parameter Name="点位名称"
+				Value="物质仓库|应急机构|救援队伍|救援物资|救援装备|通信保障|运输保障|医疗救护|技术支持|避难场所|企业|危险场所|煤矿|非煤矿山|尾矿库" />
+			<Parameter Name="点位代码"
+				Value="gov_jy_wzck|yjgzwl|gov_jy_duiwu|gov_jy_wz|jyzb|gov_jg_tx|gov_jg_ys|gov_jg_yl|gov_jg_jszc|gov_jg_bncs|WXY_A|whpzdwxy|WXY_K|WXY_P|WXY_N" />
+			<Parameter Name="行政字段" Value="NAMEC" />
+		</DataServices>
+		<!--救援路线配置 -->
+		<RescueRoutes>
+			<RescueRoute Name="" Value="" />
+		</RescueRoutes>
+		<!--标绘专题图片路径 -->
+		<PlotImage
+			Source="Image/Plot/Thematic/交警.png;Image/Plot/Thematic/指挥中心.png;Image/Plot/Thematic/救护.png;Image/Plot/Thematic/消防.png;" />
+		<!--截图保存路径:20120729zc -->
+		<CapturPath>
+			<path Dir="E:\GisPlatformCaptureImg\" />
+		</CapturPath>
+		<!--点选查询配置:20120802zc -->
+		<PointNames>
+			<name n="传感器类型" />
+			<name n="传感器ID" />
+			<name n="单位代码" />
+			<name n="传感器备注" />
+		</PointNames>
+		<!--关键字查询的字段名配置:20120802zc -->
+		<KeySearchFields>
+			<fieldname value="WXYID" name="编号" />
+			<fieldname value="DWDM" name="代码" />
+			<fieldname value="REMARK" name="名称" />
+		</KeySearchFields>
+		<!--关键字查询的所有字段，对应数据库中专题数据表的字段:20120802zc -->
+		<KeyAllFields>
+			<fieldname value="WXYID" />
+			<fieldname value="WXYTYPE" />
+			<fieldname value="X" />
+			<fieldname value="Y" />
+			<fieldname value="DWDM" />
+			<fieldname value="REMARK" />
+			<fieldname value="NOTE" />
+			<fieldname value="ORDER" />
+		</KeyAllFields>
+		<!--演示视频地址（临时） -->
+		<ShowVideo>
+			<Url id="536903d9979d445593d35c882bc2ceda" VideoUrl="http://10.0.0.119/weihai_gis/swf/1.swf"
+				SimulateUrl="http://10.0.0.119/weihai_gis/clientbin/image/unload.jpg" />
+		</ShowVideo>
+
+		<ShowPages>
+			<!--事故 -->
+			<ShowPage Name="accident"
+				Url="http://localhost:8080/jfds/accidentRescue/accidentRescueAction!view" />
+			<!--锅炉 -->
+			<ShowPage Name="boiler"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+			<!--煤矿 -->
+			<ShowPage Name="colliery"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+			<!--危险场所 -->
+			<ShowPage Name="dangerousplace"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+			<!--金属非金属地下矿山 -->
+			<ShowPage Name="mines"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+			<!--压力管道 -->
+			<ShowPage Name="penstock"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+			<!--压力容器中 -->
+			<ShowPage Name="pressurevessel"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+			<!--库区 -->
+			<ShowPage Name="reservoirarea"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+			<!--尾矿库 -->
+			<ShowPage Name="tailingspond"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+			<!--贮罐区 -->
+			<ShowPage Name="tank"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+			<!--生产场所 -->
+			<ShowPage Name="workplace"
+				Url="http://localhost:8080/jfds/hazards/hazardsAction!view" />
+
+			<!--救援车辆 -->
+			<ShowPage Name="cars"
+				Url="http://localhost:8080/jfds/planResource/planResourceAction!view" />
+			<!--通讯保障 -->
+			<ShowPage Name="communication"
+				Url="http://10.0.0.119:8085/safety/ent/qy_form_all.jsp" />
+			<!--救援专家 -->
+			<ShowPage Name="expert"
+				Url="http://localhost:8080/jfds/planResource/planResourceAction!view" />
+			<!--物资仓库 -->
+			<ShowPage Name="gov_jy_wzck"
+				Url="http://10.0.0.119:8085/safety/ent/qy_form_all.jsp" />
+
+			<!--医疗保障 -->
+			<ShowPage Name="mdeical"
+				Url="http://10.0.0.119:8085/safety/ent/qy_form_all.jsp" />
+			<!--救援队伍 -->
+			<ShowPage Name="responseteam"
+				Url="http://localhost:8080/jfds/planResource/planResourceAction!view" />
+			<!--避难场所 -->
+			<ShowPage Name="shelter"
+				Url="http://localhost:8080/jfds/planResource/planResourceAction!view" />
+			<!--救援物资 -->
+			<ShowPage Name="supplies"
+				Url="http://10.0.0.119:8085/safety/ent/qy_form_all.jsp" />
+
+			<!--技术支持 -->
+			<ShowPage Name="technical"
+				Url="http://10.0.0.119:8085/safety/ent/qy_form_all.jsp" />
+			<!--运输保障 -->
+			<ShowPage Name="transport"
+				Url="http://10.0.0.119:8085/safety/ent/qy_form_all.jsp" />
+			<!--应急机构 -->
+			<ShowPage Name="yjgzwl"
+				Url="http://10.0.0.119:8085/safety/ent/qy_form_all.jsp" />
+
+			<!--企业 -->
+			<ShowPage Name="enterprise"
+				Url="http://localhost:8080/jfds/enterprise/enterpriseAction!getEnterpeiseById" />
+
+
+			<!--预案 -->
+			<ShowPage Name="yuan"
+				Url="http://10.0.0.119:8085/safety/ent/qy_form_all.jsp" />
+
+			<!--企业平面图 -->
+			<ShowPage Name="PMT"
+				Url="http://10.0.0.119:8085/safety/ent/qy_form_all.jsp" />
+
+			<!--企业图片 -->
+			<ShowPage Name="GIS_IMAGE"
+				Url="http://10.0.0.119:8085/ZoomImageDemo/User/UserHeadImage/"
+				DefaultUrl="http://h.hiphotos.baidu.com/album/w%3D2048/sign=f2b5a8eaa686c91708035539fd0571cf/0824ab18972bd40752859fef7a899e510fb30965.jpg" />
+		</ShowPages>
+
+	</Extent>
+</Config>

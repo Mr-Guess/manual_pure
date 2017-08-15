@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+/* 
+* Function:All View Pages
+* Date:15/09/2010
+* Author:YQ
+* Note:The version of browers has not tested
+*/
+.table {
+	font-family: Tahoma;
+	font-size: 12px;
+	border-collapse: collapse;
+	border: 1px solid #2e9eed;
+	width: 70%;
+}
+
+.table th {
+	background: #d0eafb;
+	color: #2969c6;
+	height: 35px;
+	padding: 5px;
+	text-align: right;
+	border: 1px solid #65b8f1;
+	width: 10%;
+}
+
+.table td {
+	background: #fff;
+	color: #757575;
+	padding: 5px;
+	text-align: left;
+	border: 1px solid #65b8f1;
+	width: 35%;
+}
+
+/* �����ı��� */
+.table td textarea {
+	border: 1px solid #c2c2c2;
+	width: 70%;
+	height: 100px;
+}
+
+/* �����ı��� */
+.table td input {
+	border: 1px solid #c2c2c2;
+	padding: 4px;
+	height: 25px;
+	width: 70%;
+}

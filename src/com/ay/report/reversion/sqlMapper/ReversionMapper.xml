@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Reversion">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_REVERSION.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_REVERSION.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_REVERSION.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_REVERSION.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_REVERSION.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_REVERSION.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="reType"> TB_REVERSION.RE_TYPE like '%'+#reType#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="context"> TB_REVERSION.CONTEXT like '%'+#context#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="rever"> TB_REVERSION.REVER like '%'+#rever#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="convertId"> TB_REVERSION.CONVERT_ID like '%'+#convertId#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.report.reversion.pojo.Reversion">
+  		INSERT INTO TB_REVERSION(
+				
+				RE_TYPE,
+				CONTEXT,
+				REVER,
+				CONVERT_ID,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#reType#,
+				#context#,
+				#rever#,
+				#convertId#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_REVERSION SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.report.reversion.pojo.Reversion" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_REVERSION.RE_TYPE AS reType,
+			TB_REVERSION.CONTEXT AS context,
+			TB_REVERSION.REVER AS rever,
+			TB_REVERSION.CONVERT_ID AS convertId,
+			
+			TB_REVERSION.ID AS id,
+			TB_REVERSION.STATUS AS status,
+			TB_REVERSION.CREATED AS created,
+			TB_REVERSION.CREATE_TIME AS createTime,
+			TB_REVERSION.UPDATED AS updated,
+			TB_REVERSION.UPDATE_TIME as updateTime
+		from
+		TB_REVERSION
+  		where 
+ 	 		TB_REVERSION.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.report.reversion.pojo.Reversion">
+		UPDATE TB_REVERSION 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="reType"> RE_TYPE=#reType#</isNotEmpty>
+			<isNotEmpty prepend="," property="context"> CONTEXT=#context#</isNotEmpty>
+			<isNotEmpty prepend="," property="rever"> REVER=#rever#</isNotEmpty>
+			<isNotEmpty prepend="," property="convertId"> CONVERT_ID=#convertId#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.report.reversion.pojo.Reversion" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_REVERSION.RE_TYPE AS reType,
+			TB_REVERSION.CONTEXT AS context,
+			TB_REVERSION.REVER AS rever,
+			TB_REVERSION.CONVERT_ID AS convertId,
+			
+			TB_REVERSION.ID AS id,
+			TB_REVERSION.STATUS AS status,
+			TB_REVERSION.CREATED AS created,
+			TB_REVERSION.CREATE_TIME AS createTime,
+			TB_REVERSION.UPDATED AS updated,
+			TB_REVERSION.UPDATE_TIME AS updateTime
+		FROM
+			TB_REVERSION
+		WHERE
+			TB_REVERSION.STATUS = '1'
+		<include refid="Reversion.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_REVERSION
+		WHERE
+			TB_REVERSION.STATUS = '1' 
+		<include refid="Reversion.mapWhereClause"/>
+	</select>
+</sqlMap>

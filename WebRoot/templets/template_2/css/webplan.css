@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0px;
+	background: #f1f6f9;
+}
+
+.divMain {
+	width: 100%;
+	text-align: center;
+}
+
+/*顶部标题显示*/
+#titleBar {
+	background: url(../menuconfig/bgBar.gif) repeat-x bottom right;
+	height: 33px;
+	margin-top: 30px;
+	width: 96%;
+}
+
+/*顶部左侧*/
+#titleBar .barLeft {
+	background: url(../menuconfig/titleBar.gif) no-repeat;
+	float: left;
+	margin: 0px;
+	height: 33px;
+	width: 190px;
+	padding-left: 10px;
+	padding-top: 12px;
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+/*列表框外壳容器层*/
+.con_list {
+	background-color: #f1f6f9;
+	border: 1px solid #0C63B2;
+	width: 96%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	padding-top: 10px;
+}

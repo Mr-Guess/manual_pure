@@ -1,0 +1,39 @@
+.easyui-validatebox,.easyui-datetimebox,.easyui-datebox,.easyui-combotree,.easyui-combobox,.easyui-numberbox
+	{
+	width: 127px;
+	height: 22px;
+}
+
+table.detailTable {
+	font-size: 13px;
+	table-layout: fixed;
+	border: 1 solid #AED0EA;
+	border-collapse: collapse;
+	margin: 10px;
+}
+
+table.detailTable td {
+	border: 1 solid #AED0EA;
+}
+
+table.detailTable td.labelTd {
+	font-size: 13px;
+	background: #EAF4FC;
+}
+
+table.detailTable td.contentTd {
+	background: #FFFFFF;
+}
+
+table.detailTable td.contentTd .oneLineText {
+	min-height: 30px;
+	padding-top: 10px;
+	word-wrap: break-word;
+	overflow: visible;
+}
+
+#viewForm table.detailTable td.contentTd {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	min-height: 30px;
+}

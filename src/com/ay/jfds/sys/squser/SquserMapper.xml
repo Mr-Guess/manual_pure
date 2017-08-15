@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Squser">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_SQUSER.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_SQUSER.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_SQUSER.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_SQUSER.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_SQUSER.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_SQUSER.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="cityCode"> TB_SQUSER.CITY_CODE like '%'+#cityCode#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="cityName"> TB_SQUSER.CITY_NAME like '%'+#cityName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaCode"> TB_SQUSER.AREA_CODE like '%'+#areaCode#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaName"> TB_SQUSER.AREA_NAME like '%'+#areaName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="streetCode"> TB_SQUSER.STREET_CODE like '%'+#streetCode#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="streetName"> TB_SQUSER.STREET_NAME like '%'+#streetName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="communityCode"> TB_SQUSER.COMMUNITY_CODE like '%'+#communityCode#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="communityName"> TB_SQUSER.COMMUNITY_NAME like '%'+#communityName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="sqfzr"> TB_SQUSER.SQFZR like '%'+#sqfzr#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="telphone"> TB_SQUSER.TELPHONE like '%'+#telphone#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="email"> TB_SQUSER.EMAIL like '%'+#email#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="telNo"> TB_SQUSER.TEL_NO like '%'+#telNo#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="parama"> TB_SQUSER.PARAMA like '%'+#parama#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="paramb"> TB_SQUSER.PARAMB like '%'+#paramb#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="paramc"> TB_SQUSER.PARAMC like '%'+#paramc#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="paramd"> TB_SQUSER.PARAMD like '%'+#paramd#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="parame"> TB_SQUSER.PARAME like '%'+#parame#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.squser.Squser">
+  		INSERT INTO TB_SQUSER(
+				
+				CITY_CODE,
+				CITY_NAME,
+				AREA_CODE,
+				AREA_NAME,
+				STREET_CODE,
+				STREET_NAME,
+				COMMUNITY_CODE,
+				COMMUNITY_NAME,
+				SQFZR,
+				TELPHONE,
+				EMAIL,
+				TEL_NO,
+				PARAMA,
+				PARAMB,
+				PARAMC,
+				PARAMD,
+				PARAME,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#cityCode#,
+				#cityName#,
+				#areaCode#,
+				#areaName#,
+				#streetCode#,
+				#streetName#,
+				#communityCode#,
+				#communityName#,
+				#sqfzr#,
+				#telphone#,
+				#email#,
+				#telNo#,
+				#parama#,
+				#paramb#,
+				#paramc#,
+				#paramd#,
+				#parame#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_SQUSER SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.sys.squser.Squser" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_SQUSER.CITY_CODE AS cityCode,
+			TB_SQUSER.CITY_NAME AS cityName,
+			TB_SQUSER.AREA_CODE AS areaCode,
+			TB_SQUSER.AREA_NAME AS areaName,
+			TB_SQUSER.STREET_CODE AS streetCode,
+			TB_SQUSER.STREET_NAME AS streetName,
+			TB_SQUSER.COMMUNITY_CODE AS communityCode,
+			TB_SQUSER.COMMUNITY_NAME AS communityName,
+			TB_SQUSER.SQFZR AS sqfzr,
+			TB_SQUSER.TELPHONE AS telphone,
+			TB_SQUSER.EMAIL AS email,
+			TB_SQUSER.TEL_NO AS telNo,
+			TB_SQUSER.PARAMA AS parama,
+			TB_SQUSER.PARAMB AS paramb,
+			TB_SQUSER.PARAMC AS paramc,
+			TB_SQUSER.PARAMD AS paramd,
+			TB_SQUSER.PARAME AS parame,
+			
+			TB_SQUSER.ID AS id,
+			TB_SQUSER.STATUS AS status,
+			TB_SQUSER.CREATED AS created,
+			TB_SQUSER.CREATE_TIME AS createTime,
+			TB_SQUSER.UPDATED AS updated,
+			TB_SQUSER.UPDATE_TIME as updateTime
+		from
+		TB_SQUSER
+  		where 
+ 	 		TB_SQUSER.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.sys.squser.Squser">
+		UPDATE TB_SQUSER 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="cityCode"> CITY_CODE=#cityCode#</isNotEmpty>
+			<isNotEmpty prepend="," property="cityName"> CITY_NAME=#cityName#</isNotEmpty>
+			<isNotEmpty prepend="," property="areaCode"> AREA_CODE=#areaCode#</isNotEmpty>
+			<isNotEmpty prepend="," property="areaName"> AREA_NAME=#areaName#</isNotEmpty>
+			<isNotEmpty prepend="," property="streetCode"> STREET_CODE=#streetCode#</isNotEmpty>
+			<isNotEmpty prepend="," property="streetName"> STREET_NAME=#streetName#</isNotEmpty>
+			<isNotEmpty prepend="," property="communityCode"> COMMUNITY_CODE=#communityCode#</isNotEmpty>
+			<isNotEmpty prepend="," property="communityName"> COMMUNITY_NAME=#communityName#</isNotEmpty>
+			<isNotEmpty prepend="," property="sqfzr"> SQFZR=#sqfzr#</isNotEmpty>
+			<isNotEmpty prepend="," property="telphone"> TELPHONE=#telphone#</isNotEmpty>
+			<isNotEmpty prepend="," property="email"> EMAIL=#email#</isNotEmpty>
+			<isNotEmpty prepend="," property="telNo"> TEL_NO=#telNo#</isNotEmpty>
+			<isNotEmpty prepend="," property="parama"> PARAMA=#parama#</isNotEmpty>
+			<isNotEmpty prepend="," property="paramb"> PARAMB=#paramb#</isNotEmpty>
+			<isNotEmpty prepend="," property="paramc"> PARAMC=#paramc#</isNotEmpty>
+			<isNotEmpty prepend="," property="paramd"> PARAMD=#paramd#</isNotEmpty>
+			<isNotEmpty prepend="," property="parame"> PARAME=#parame#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.sys.squser.Squser" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_SQUSER.CITY_CODE AS cityCode,
+			TB_SQUSER.CITY_NAME AS cityName,
+			TB_SQUSER.AREA_CODE AS areaCode,
+			TB_SQUSER.AREA_NAME AS areaName,
+			TB_SQUSER.STREET_CODE AS streetCode,
+			TB_SQUSER.STREET_NAME AS streetName,
+			TB_SQUSER.COMMUNITY_CODE AS communityCode,
+			TB_SQUSER.COMMUNITY_NAME AS communityName,
+			TB_SQUSER.SQFZR AS sqfzr,
+			TB_SQUSER.TELPHONE AS telphone,
+			TB_SQUSER.EMAIL AS email,
+			TB_SQUSER.TEL_NO AS telNo,
+			TB_SQUSER.PARAMA AS parama,
+			TB_SQUSER.PARAMB AS paramb,
+			TB_SQUSER.PARAMC AS paramc,
+			TB_SQUSER.PARAMD AS paramd,
+			TB_SQUSER.PARAME AS parame,
+			
+			TB_SQUSER.ID AS id,
+			TB_SQUSER.STATUS AS status,
+			TB_SQUSER.CREATED AS created,
+			TB_SQUSER.CREATE_TIME AS createTime,
+			TB_SQUSER.UPDATED AS updated,
+			TB_SQUSER.UPDATE_TIME AS updateTime
+		FROM
+			TB_SQUSER
+		WHERE
+			TB_SQUSER.STATUS = '1'
+		<include refid="Squser.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_SQUSER
+		WHERE
+			TB_SQUSER.STATUS = '1' 
+		<include refid="Squser.mapWhereClause"/>
+	</select>
+</sqlMap>

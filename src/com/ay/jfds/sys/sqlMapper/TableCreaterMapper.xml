@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="TableCreater">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="id"> sys_tableCreater.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> sys_tableCreater.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> sys_tableCreater.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> sys_tableCreater.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> sys_tableCreater.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> sys_tableCreater.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="moduleName"> sys_tableCreater.MODULE_NAME like '%'+#moduleName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="tableName"> sys_tableCreater.TABLE_NAME like '%'+#tableName#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.pojo.TableCreater">
+  		INSERT INTO sys_tableCreater(
+				
+				MODULE_NAME,
+				TABLE_NAME,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#moduleName#,
+				#tableName#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE sys_tableCreater SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.sys.pojo.TableCreater" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			sys_tableCreater.MODULE_NAME AS moduleName,
+			sys_tableCreater.TABLE_NAME AS tableName,
+			
+			sys_tableCreater.ID AS id,
+			sys_tableCreater.STATUS AS status,
+			sys_tableCreater.CREATED AS created,
+			sys_tableCreater.CREATE_TIME AS createTime,
+			sys_tableCreater.UPDATED AS updated,
+			sys_tableCreater.UPDATE_TIME as updateTime
+		from
+		sys_tableCreater
+  		where 
+ 	 		sys_tableCreater.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.sys.pojo.TableCreater">
+		UPDATE sys_tableCreater 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="moduleName"> MODULE_NAME=#moduleName#</isNotEmpty>
+			<isNotEmpty prepend="," property="tableName"> TABLE_NAME=#tableName#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.sys.pojo.TableCreater" parameterClass="java.util.Map">
+ 		SELECT
+			
+			sys_tableCreater.MODULE_NAME AS moduleName,
+			sys_tableCreater.TABLE_NAME AS tableName,
+			
+			sys_tableCreater.ID AS id,
+			sys_tableCreater.STATUS AS status,
+			sys_tableCreater.CREATED AS created,
+			sys_tableCreater.CREATE_TIME AS createTime,
+			sys_tableCreater.UPDATED AS updated,
+			sys_tableCreater.UPDATE_TIME AS updateTime
+		FROM
+			sys_tableCreater
+		WHERE
+			sys_tableCreater.STATUS = '1'
+		<include refid="TableCreater.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			sys_tableCreater
+		WHERE
+			sys_tableCreater.STATUS = '1' 
+		<include refid="TableCreater.mapWhereClause"/>
+	</select>
+</sqlMap>

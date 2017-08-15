@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" " http://ibatis.apache.org/dtd/sql-map-2.dtd"><sqlMap namespace="entity"><typeAlias alias="entity" type="com.ay.jfds.dev.pojo.Entity"/><typeAlias alias="entityField" type="com.ay.jfds.dev.pojo.EntityField"/><typeAlias alias="entityJson" type="com.ay.jfds.dev.dto.EntityJsonDTO"/><typeAlias alias="viewField" type="com.ay.jfds.dev.dto.ViewPropertyDTO"/><typeAlias alias="entityDTO" type="com.ay.jfds.dev.dto.EntityDTO"/><sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="entityType">
+				entity_type =
+				#entityType#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="entityName">
+				entity_name like
+				concat('%',#entityName#,'%')
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="entityCode">
+				entity_code like
+				concat('%',#entityCode#,'%')
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentId">
+				parent_id = #parentId#
+			</isNotEmpty>
+		</isParameterPresent>
+	</sql><insert id="insert" parameterClass="entity">
+		INSERT INTO dev_entity
+		( id,
+		entity_code,
+		entity_name,
+		entity_type,
+		view_sql,
+		parent_id,
+		status,
+		created,
+		create_time,
+		updated,
+		update_time
+		)
+		VALUES
+		(
+		#id#, #entityCode#, #entityName#, #entityType#, #viewSql#, #parentId#,
+		#status#, #created#, #createTime#, #updated#, #updateTime#
+		)
+	</insert><delete id="delete" parameterClass="java.lang.String">
+		UPDATE dev_entity
+		SET status=0
+		WHERE
+		id = #id#
+	</delete><select id="getById" parameterClass="java.lang.String" resultClass="entity">
+		SELECT
+		id as id,
+		entity_code as entityCode,
+		entity_name as entityName,
+		entity_type as entityType,
+		view_sql as viewSql,
+		parent_id as parentId,
+		status as status,
+		created as created,
+		create_time as createTime,
+		updated as updated,
+		update_time as updatedTime
+		FROM
+		dev_entity
+		WHERE
+		id = #id#
+	</select><update id="update" parameterClass="entity">
+		UPDATE
+		dev_entity
+		SET
+		id = #id#, entity_code = #entityCode#, entity_name = #entityName#,
+		entity_type= #entityType#,
+		view_sql = #viewSql#, status = #status#, created= #created#, create_time=
+		#createTime#, updated= #updated#, update_time= #updateTime#
+		WHERE
+		id = #id#
+	</update><select id="findAll" resultClass="entity">
+		SELECT
+		id as id,
+		entity_code as entityCode,
+		entity_name as entityName,
+		entity_type as entityType,
+		view_sql as viewSql,
+		parent_id as parentId,
+		status as status,
+		created as created,
+		create_time as createTime,
+		updated as updated,
+		update_time as updatedTime,
+		(select COUNT(*) from dev_form df where df.entity_id=dev_entity.id and
+		df.status = 1) as formCount
+		FROM
+		dev_entity
+		WHERE
+		status=1
+		and
+		entity_type = '0'
+
+	</select><select id="find" resultClass="entity" parameterClass="java.util.Map">
+		SELECT
+		id as id,
+		entity_code as entityCode,
+		entity_name as entityName,
+		entity_type as entityType,
+		view_sql as viewSql,
+		parent_id as parentId,
+		status as status,
+		created as created,
+		create_time as createTime,
+		updated as updated,
+		update_time as updatedTime,
+		(select COUNT(*) from dev_form df where df.entity_id=dev_entity.id and
+		df.status = 1) as formCount
+		FROM
+		dev_entity
+		WHERE
+		1 = 1
+		and
+		status=1
+		<include refid="entity.mapWhereClause"/>
+	</select><select id="getFieldByEntityId" parameterClass="java.lang.String" resultClass="entityField">
+		SELECT
+		id as id,
+		entity_id as entityId,
+		field_code as fieldCode,
+		field_name as fieldName,
+		entity_order as entityOrder,
+		default_value as defaultValue,
+		field_type as fieldType,
+		field_length as fieldLength,
+		is_pk as isPk,
+		is_null isNull,
+		status as status,
+		created as created,
+		create_time as createTime,
+		updated as updated,
+		update_time as updatedTime
+		FROM
+		dev_entity_field
+		WHERE
+		entity_id = #entityId#
+		and
+		status = 1
+	</select><delete id="deleteFieldByEntityId" parameterClass="java.lang.String">
+		update
+		dev_entity_field
+		set
+		status = 1
+		where
+		entity_id=#entityId#
+	</delete><select id="count" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select
+		count(id)
+		from
+		dev_entity
+		where
+		1=1
+		and
+		status = 1
+		<include refid="entity.mapWhereClause"/>
+	</select><!-- 判断表是否存在于dev_entity表中 --><select id="isEntityExist" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		select
+		count(*)
+		from
+		dev_entity
+		where
+		entity_code=#entityCode#
+		and
+		status=1
+	</select><!-- 判断表是否真实存在于数据库中 --><select id="isTrueExist" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		select count(*) from information_schema.tables
+		where
+		TABLE_NAME=#entityCode#
+	</select><select id="getEntityJson" resultClass="entityJson" parameterClass="java.util.Map">
+		select
+		id,
+		entity_code as entityCode,
+		entity_name as entityName
+		from
+		dev_entity
+		where
+		status = '1'
+		<include refid="entity.mapWhereClause"/>
+		order by entity_code
+	</select><statement id="statementSql" parameterClass="java.lang.String">
+		$sql$
+	</statement><select id="getChildrenEntity" parameterClass="java.lang.String">
+
+	</select><select id="getViewField" parameterClass="java.lang.String" resultClass="entityField">
+		SELECT
+		COLUMN_NAME as fieldCode,
+		row_number()over(order by ORDINAL_POSITION) as entityOrder,
+		COLUMN_DEFAULT as defaultValue,
+		DATA_TYPE as fieldType,
+		CHARACTER_MAXIMUM_LENGTH as fieldLength,
+		IS_NULLABLE as isNull
+		FROM
+		INFORMATION_SCHEMA.columns
+		WHERE
+		TABLE_NAME=#viewCode#
+		and
+		column_name not in('id', 'created', 'create_time', 'status', 'updated',
+		'update_time');
+	</select><select id="findEntityByCode" parameterClass="java.lang.String" resultClass="entity">
+		SELECT
+		id as id,
+		entity_code as entityCode,
+		entity_name as entityName,
+		entity_type as entityType,
+		view_sql as viewSql,
+		parent_id as parentId,
+		status as status,
+		created as created,
+		create_time as createTime,
+		updated as updated,
+		update_time as updatedTime,
+		(select COUNT(*) from dev_form df where df.entity_id=dev_entity.id and
+		df.status = 1) as formCount
+		FROM
+		dev_entity
+		WHERE
+		1 = 1
+		and
+		status=1
+		and
+		entity_code = #entityCode#
+	</select><select id="getEntityDTO" resultClass="entityDTO">
+		SELECT
+		id as id,
+		entity_code as entityCode,
+		entity_name as entityName,
+		entity_type as entityType,
+		parent_id as _parentId,
+		(select COUNT(*) from dev_form df where df.entity_id=dev_entity.id and
+		df.status = 1) as formCount
+		FROM
+		dev_entity
+		WHERE
+		1 = 1
+		and
+		status=1
+	</select><select id="getChildren" parameterClass="java.lang.String" resultClass="entity">
+		select
+		id as id,
+		entity_code as entityCode,
+		entity_name as entityName,
+		entity_type as entityType,
+		view_sql as viewSql,
+		parent_id as parentId,
+		status as status,
+		created as created,
+		create_time as createTime,
+		updated as updated,
+		update_time as updatedTime
+		from
+		dev_entity
+		where
+		parent_id = #parentId#
+	</select></sqlMap>

@@ -1,0 +1,80 @@
+body {
+	overflow: hidden;
+	margin-top: 0;
+}
+/*==============================搜索样式==========================================*/
+.panel-header {
+	margin-top: 0;
+}
+
+.toolbar {
+	margin-top: -15px;
+	text-align: left;
+}
+
+.toolbar tr td {
+	color: #2779aa;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.bei laomuji {
+	margin-top: -15px;
+}
+/*===============================================================================*/
+#tb {
+	line-height: 20px;
+	height: 35px;
+	padding: 20px;
+	font-size: 13px;
+	color: #000;
+}
+
+.table_nemu {
+	font-size: 13px;
+	border: 0;
+	background: #EAF4FC;
+	line-height: 28px;
+	width: 180px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.table_nemu_new {
+	font-size: 13px;
+	border: 0px;
+	background: #EAF4FC;
+	line-height: 28px;
+	padding-left: 50px;
+	text-align: left;
+	padding-right: 10px;
+}
+
+.table_con {
+	font-size: 13px;
+	border: 0;
+	background: #fff;
+	line-height: 28px;
+	padding-left: 15px;
+}
+
+.btn1 {
+	BORDER: #65b5e4 1px solid;
+	PADDING-RIGHT: 6px;
+	PADDING-LEFT: 6px;
+	FONT-SIZE: 12px;
+	FILTER: progid: DXImageTransform.Microsoft.Gradient( GradientType= 0,
+		StartColorStr= #ffffff, EndColorStr= #d7ebf9);
+	CURSOR: hand;
+	COLOR: black;
+	PADDING-TOP: 3px;
+}
+
+.btn2 {
+	CURSOR: hand;
+}
+
+/*======================此处是add样式=================================*/
+.search_add {
+	margin: 5px 0;
+}

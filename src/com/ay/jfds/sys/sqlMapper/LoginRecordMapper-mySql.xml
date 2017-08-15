@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="LoginRecord">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> tb_login_record.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> tb_login_record.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> tb_login_record.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> tb_login_record.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> tb_login_record.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> tb_login_record.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="userId"> tb_login_record.USER_ID like CONCAT('%',#userId#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="userName"> tb_login_record.USER_NAME like CONCAT('%',#userName#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="loginTime"> tb_login_record.LOGIN_TIME like CONCAT('%',#loginTime#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="loginTag"> tb_login_record.LOGIN_TAG like CONCAT('%',#loginTag#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="deptId"> tb_login_record.DEPT_ID like CONCAT('%',#deptId#,'%')</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.pojo.LoginRecord">
+  		INSERT INTO tb_login_record(
+				
+				USER_ID,
+				USER_NAME,
+				LOGIN_TIME,
+				LOGIN_TAG,
+				DEPT_ID,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#userId#,
+				#userName#,
+				#loginTime#,
+				#loginTag#,
+				#deptId#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE tb_login_record SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.sys.pojo.LoginRecord" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_login_record.USER_ID AS userId,
+			tb_login_record.USER_NAME AS userName,
+			tb_login_record.LOGIN_TIME AS loginTime,
+			tb_login_record.LOGIN_TAG AS loginTag,
+			tb_login_record.DEPT_ID AS deptId,
+			
+			tb_login_record.ID AS id,
+			tb_login_record.STATUS AS status,
+			tb_login_record.CREATED AS created,
+			tb_login_record.CREATE_TIME AS createTime,
+			tb_login_record.UPDATED AS updated,
+			tb_login_record.UPDATE_TIME as updateTime
+		from
+		tb_login_record
+  		where 
+ 	 		tb_login_record.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.sys.pojo.LoginRecord">
+		UPDATE tb_login_record 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="userId"> USER_ID=#userId#</isNotEmpty>
+			<isNotEmpty prepend="," property="userName"> USER_NAME=#userName#</isNotEmpty>
+			<isNotEmpty prepend="," property="loginTime"> LOGIN_TIME=#loginTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="loginTag"> LOGIN_TAG=#loginTag#</isNotEmpty>
+			<isNotEmpty prepend="," property="deptId"> DEPT_ID=#deptId#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.sys.pojo.LoginRecord" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_login_record.USER_ID AS userId,
+			tb_login_record.USER_NAME AS userName,
+			tb_login_record.LOGIN_TIME AS loginTime,
+			tb_login_record.LOGIN_TAG AS loginTag,
+			tb_login_record.DEPT_ID AS deptId,
+			
+			tb_login_record.ID AS id,
+			tb_login_record.STATUS AS status,
+			tb_login_record.CREATED AS created,
+			tb_login_record.CREATE_TIME AS createTime,
+			tb_login_record.UPDATED AS updated,
+			tb_login_record.UPDATE_TIME AS updateTime
+		FROM
+			tb_login_record
+		WHERE
+			tb_login_record.STATUS = '1'
+		<include refid="LoginRecord.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_login_record
+		WHERE
+			tb_login_record.STATUS = '1' 
+		<include refid="LoginRecord.mapWhereClause"/>
+	</select>
+	<select id="getcount" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_login_record
+		WHERE
+			tb_login_record.STATUS = '1' 
+		  	 and USER_ID=#userId# and tb_login_record.LOGIN_TIME like CONCAT('%',#time#,'%')
+	</select>
+	<select id="getBydeptId" resultClass="com.ay.jfds.sys.pojo.Qdjgtj" parameterClass="java.util.Map">
+ 		
+ 		select 
+ 			sys_dept.area, 
+ 			case when sys_dept.area!='' then FN_codeToText (sys_dept.area)
+ 			else '南京市' end  AS areaName,
+ 			 dept_name as deptName ,sys_dept.id as deptId,res1 
+ 		from 
+ 			sys_dept 
+ 		left join 
+			(select DEPT_ID,count(*)as res1 from tb_login_record where status='1' 
+			and LOGIN_TIME like CONCAT('%',#startTime#,'%') group by DEPT_ID)tb_lo
+			on sys_dept.id=tb_lo.DEPT_ID 
+		where 
+			status='1'  
+			<isNotEmpty prepend="and" property="deptId"> parent_id=#deptId#</isNotEmpty>
+			<isNotEmpty prepend="or" property="deptId"> sys_dept.id=#deptId#</isNotEmpty>
+			<isNotEmpty prepend="and" property="areaCode"> area=#areaCode#</isNotEmpty>
+			<isNotEmpty prepend="and" property="cityCode"> city=#cityCode#</isNotEmpty>
+			<!-- <isNotEmpty prepend="and" property="filterSql"> $filterSql$</isNotEmpty> -->
+			order by area,depttype,dept_order
+	</select>
+	<select id="getdeptTj" resultClass="com.ay.jfds.sys.pojo.Qdjgtj" parameterClass="java.util.Map">
+ 		select 
+ 			user_name as userName,dept_id as deptId,res1,sys_user.id as userId 
+ 		from 
+ 			sys_user 
+ 		left join 
+			(select USER_ID,count(*)as res1 from tb_login_record where status='1'
+			and LOGIN_TIME like CONCAT('%',#startTime#,'%') group by USER_ID)tb_lo
+			on sys_user.id=tb_lo.USER_ID 
+		where 
+			status='1' and user_type='1'
+			 and dept_id=#deptId# 
+	</select>
+	<select id="getByUserId" resultClass="com.ay.jfds.sys.pojo.LoginRecord" parameterClass="java.util.Map">
+ 		select 
+ 			tb_login_record.USER_ID AS userId,
+			tb_login_record.USER_NAME AS userName,
+			tb_login_record.LOGIN_TIME AS loginTime,
+			tb_login_record.LOGIN_TAG AS loginTag,
+			tb_login_record.DEPT_ID AS deptId,
+			
+			tb_login_record.ID AS id,
+			tb_login_record.STATUS AS status,
+			tb_login_record.CREATED AS created,
+			tb_login_record.CREATE_TIME AS createTime,
+			tb_login_record.UPDATED AS updated,
+			tb_login_record.UPDATE_TIME AS updateTime
+ 		from 
+ 			tb_login_record
+ 		where
+ 			status='1'
+ 			and
+ 		  	LOGIN_TIME like CONCAT('%',#startTime#,'%') and USER_ID=#userId#
+	</select>
+</sqlMap>

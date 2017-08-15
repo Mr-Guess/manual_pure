@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"><!--add by iBatisTool dev_form_property --><sqlMap namespace="DevFormProperty"><typeAlias alias="propertyDTO" type="com.ay.jfds.dev.dto.FormPropertyDTO"/><typeAlias alias="formFieldDTO" type="com.ay.jfds.dev.dto.FormFieldDTO"/><!-- add Condition dev_form_property --><sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="id"> id=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="formId"> form_id=#formId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="fieldId"> field_id=#fieldId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="viewName"> view_name=#viewName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="defaultValue">
+				default_value=#defaultValue#</isNotEmpty>
+			<isNotEmpty prepend="and" property="editType"> edit_type=#editType#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="required"> required=#required#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isView"> is_view=#isView#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="orderType"> order_type=#orderType#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="width"> width=#width#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="algin"> algin=#algin#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isSearch"> is_search=#isSearch#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="searchType">
+				search_type=#searchType#</isNotEmpty>
+			<isNotEmpty prepend="and" property="filterType">
+				filter_type=#filterType#</isNotEmpty>
+			<isNotEmpty prepend="and" property="filterValue">
+				filter_value=#filterValue#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> status=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> created=#created#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime">
+				create_time=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> updated=#updated#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime">
+				update_time=#updateTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="isRelation">
+				is_relation=#isRelation#</isNotEmpty>
+			<isNotEmpty prepend="and" property="related_code">
+				related_code=#relatedCode#</isNotEmpty>
+		</isParameterPresent>
+	</sql><!-- add method insert --><insert id="insert" parameterClass="com.ay.jfds.dev.pojo.DevFormProperty">
+		insert into dev_form_property(
+		ID,
+		FORM_ID,
+		FIELD_ID,
+		VIEW_NAME,
+		DEFAULT_VALUE,
+		EDIT_TYPE,
+		REQUIRED,
+		IS_VIEW,
+		ORDER_TYPE,
+		WIDTH,
+		ALGIN,
+		IS_SEARCH,
+		SEARCH_TYPE,
+		FILTER_TYPE,
+		FILTER_VALUE,
+		form_order,
+		is_relation,
+		related_code,
+		STATUS,
+		CREATED,
+		CREATE_TIME,
+		UPDATED,
+		UPDATE_TIME) values(
+		#id#,
+		#formId#,
+		#fieldId#,
+		#viewName#,
+		#defaultValue#,
+		#editType#,
+		#required#,
+		#isView#,
+		#orderType#,
+		#width#,
+		#algin#,
+		#isSearch#,
+		#searchType#,
+		#filterType#,
+		#filterValue#,
+		#formOrder#,
+		#isRelation#,
+		#relatedCode#,
+		#status#,
+		#created#,
+		#createTime#,
+		#updated#,
+		#updateTime#)
+	</insert><!-- add method delete --><delete id="delete" parameterClass="java.lang.String">
+		update dev_form_property set
+		status='0'
+		where
+		id=#id#
+	</delete><!-- add method getById --><select id="getById" resultClass="com.ay.jfds.dev.pojo.DevFormProperty" parameterClass="java.lang.String">
+		select
+		id,
+		form_id as formId,
+		field_id as fieldId,
+		view_name as viewName,
+		default_value as defaultValue,
+		edit_type as editType,
+		required,
+		is_view as isView,
+		order_type as orderType,
+		width,
+		algin,
+		is_search as isSearch,
+		search_type as searchType,
+		filter_type as filterType,
+		filter_value as filterValue,
+		form_order as formOrder,
+		is_relation as isRelation,
+		related_code as relatedCode,
+		status,
+		created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime
+		from
+		dev_form_property
+		where
+		id=#id#
+	</select><!-- add method update --><update id="update" parameterClass="com.ay.jfds.dev.pojo.DevFormProperty">
+		update dev_form_property
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id"> id=#id#</isNotNull>
+			<isNotNull prepend="," property="formId"> form_id=#formId#
+			</isNotNull>
+			<isNotNull prepend="," property="fieldId"> field_id=#fieldId#
+			</isNotNull>
+			<isNotNull prepend="," property="viewName"> view_name=#viewName#
+			</isNotNull>
+			<isNotNull prepend="," property="defaultValue">
+				default_value=#defaultValue#</isNotNull>
+			<isNotNull prepend="," property="editType"> edit_type=#editType#
+			</isNotNull>
+			<isNotNull prepend="," property="required"> required=#required#
+			</isNotNull>
+			<isNotNull prepend="," property="isView"> is_view=#isView#
+			</isNotNull>
+			<isNotNull prepend="," property="orderType"> order_type=#orderType#
+			</isNotNull>
+			<isNotNull prepend="," property="width"> width=#width#</isNotNull>
+			<isNotNull prepend="," property="algin"> algin=#algin#</isNotNull>
+			<isNotNull prepend="," property="isSearch"> is_search=#isSearch#
+			</isNotNull>
+			<isNotNull prepend="," property="searchType"> search_type=#searchType#
+			</isNotNull>
+			<isNotNull prepend="," property="filterType"> filter_type=#filterType#
+			</isNotNull>
+			<isNotNull prepend="," property="filterValue"> filter_value=#filterValue#
+			</isNotNull>
+			<isNotNull prepend="," property="formOrder"> form_order=#formOrder#
+			</isNotNull>
+			<isNotNull prepend="," property="status"> status=#status#
+			</isNotNull>
+			<isNotNull prepend="," property="created"> created=#created#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime"> create_time=#createTime#
+			</isNotNull>
+			<isNotNull prepend="," property="updated"> updated=#updated#
+			</isNotNull>
+			<isNotNull prepend="," property="updateTime"> update_time=#updateTime#
+			</isNotNull>
+			<isNotNull prepend="," property="isRelation"> is_relation=#isRelation#
+			</isNotNull>
+			<isNotNull prepend="," property="relatedCode"> related_code=#relatedCode#
+			</isNotNull>
+		</dynamic>
+		where
+		id=#id#
+	</update><!-- add method findAll --><select id="findAll" resultClass="com.ay.jfds.dev.pojo.DevFormProperty" parameterClass="java.util.Map">
+		select
+		id,
+		form_id as formId,
+		field_id as fieldId,
+		view_name as viewName,
+		default_value as defaultValue,
+		edit_type as editType,
+		required,
+		is_view as isView,
+		order_type as orderType,
+		width,
+		algin,
+		is_search as isSearch,
+		search_type as searchType,
+		filter_type as filterType,
+		filter_value as filterValue,
+		form_order as formOrder,
+		is_relation as isRelation,
+		related_code as relatedCode,
+		status,
+		created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime
+		from
+		dev_form_property
+		where
+		status='1'
+		<include refid="DevFormProperty.mapWhereClause"/>
+	</select><!-- add method find --><select id="find" resultClass="com.ay.jfds.dev.pojo.DevFormProperty" parameterClass="java.util.Map">
+		select
+		id,
+		form_id as formId,
+		field_id as fieldId,
+		view_name as viewName,
+		default_value as defaultValue,
+		edit_type as editType,
+		required,
+		is_view as isView,
+		order_type as orderType,
+		width,
+		algin,
+		is_search as isSearch,
+		search_type as searchType,
+		filter_type as filterType,
+		filter_value as filterValue,
+		form_order as formOrder,
+		is_relation as isRelation,
+		related_code as relatedCode,
+		status,
+		created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime
+		from
+		dev_form_property
+		where
+		status='1'
+		<include refid="DevFormProperty.mapWhereClause"/>
+	</select><select id="findAllDTO" resultClass="propertyDTO" parameterClass="java.util.Map">
+		select
+		df.id as id,
+		form_id as formId,
+		field_id as fieldId,
+		view_name as viewName,
+		df.default_value as defaultValue,
+		edit_type as editType,
+		required,
+		is_view as isView,
+		order_type as orderType,
+		width,
+		algin,
+		is_search as isSearch,
+		search_type as searchType,
+		filter_type as filterType,
+		filter_value as filterValue,
+		form_order as formOrder,
+		df.is_relation as isRelation,
+		df.related_code as relatedCode,
+		df.status as status,
+		df.created as created,
+		df.create_time as createTime,
+		df.updated as updated,
+		df.update_time as updateTime,
+		de.field_type as fieldType,
+		de.field_code as fieldCode
+		from
+		dev_form_property df,
+		dev_entity_field de
+		where
+		df.status='1'
+		and
+		de.status='1'
+		and
+		df.field_id = de.id
+		<include refid="DevFormProperty.mapWhereClause"/>
+	</select><!-- add method count --><select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		select count(*)
+		from
+		dev_form_property
+		where
+		status='1'
+		<include refid="DevFormProperty.mapWhereClause"/>
+	</select><update id="clear">
+		update dev_form_property
+		set
+		status = '0'
+		where
+		form_id not in
+		(select id from dev_form where status='1')
+	</update><select id="countDTO" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		select count(*)
+		from
+		dev_form_property df,
+		dev_entity_field de
+		where
+		df.status='1'
+		and
+		de.status='1'
+		and
+		df.field_id = de.id
+		<include refid="DevFormProperty.mapWhereClause"/>
+	</select><select id="getFormFieldByFormId" parameterClass="java.lang.String" resultClass="formFieldDTO">
+		select
+		f.id as formPropertyId,
+		f.form_id as formId,
+		f.field_id as fieldId,
+		f.view_name as viewName,
+		f.default_value as defaultValue,
+		f.edit_type as editType,
+		f.required as required,
+		f.is_view as isView,
+		f.order_type as orderType,
+		f.width as width,
+		f.algin as algin,
+		f.is_search as isSearch,
+		f.search_type as searchType,
+		f.filter_type as filterType,
+		f.filter_value as filterValue,
+		f.form_order as formOrder,
+		f.is_relation as isRelation,
+		f.related_code as relatedCode,
+		e.entity_id as entityId,
+		e.field_code as fieldCode,
+		e.field_name as fieldName,
+		e.entity_order as entityOrder,
+		e.field_type as fieldType,
+		e.field_length as fieldLength,
+		e.is_pk as isPk,
+		e.is_null as isNull,
+		e.data_type_id as dataTypeId,
+		e.control_type as controlType,
+		d.entity_code as entityCode
+		from
+		dev_form_property f,
+		dev_entity_field e,
+		dev_entity d
+		where
+		f.form_id = #formId#
+		and
+		f.field_id=e.id
+		and
+		d.id=e.entity_id
+	</select></sqlMap>

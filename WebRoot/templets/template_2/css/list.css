@@ -1,0 +1,359 @@
+@charset "utf-8";
+/* 
+* Function:All List Pages
+* Date:31/05/2012
+* Author:YQ
+* Notes:The version of browers has not tested
+*/
+body {
+	text-align: center;
+	background-color: #ffffff;
+}
+
+img,img a {
+	border: 0;
+}
+
+A:link {
+	color: #000080;
+	text-decoration: none
+}
+
+A:visited {
+	color: #000080;
+	text-decoration: none;
+}
+
+A:hover {
+	color: #ff6600;
+	text-decoration: none
+}
+
+table {
+	font-size: 9pt;
+	line-height: 26px;
+	vertical-align: center;
+	text-decoration: none;
+	border: 0px none #FFFFFF;
+}
+
+.T_LIST_TD_TD {
+	border: 0px solid #ffffff;
+	border-collapse: collapse;
+}
+
+.T_LIST_TD_TOP { /* 列表标题 */
+	border: 1px solid #a9d8e7;
+	border-collapse: collapse;
+	height: 27px;
+	font-weight: bold;
+	font-size: 13px;
+	text-align: center;
+	color: #fff;
+	white-space: nowrap;
+	background-image: url(images/list_title.png);
+	background-repeat: repeat-x;
+	background-position: left top;
+	padding-top: 2px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	background-attachment: scroll;
+}
+
+.list_td_odd { /* 列表奇数行 */
+	border: 1px solid #a9d8e7;
+	border-collapse: collapse;
+	height: 24px;
+	line-height: 24px;
+	text-align: left;
+	padding-left: 5px;
+	background: #FFF;
+}
+
+.list_td_even { /* 列表偶数行 */
+	border: 1px solid #a9d8e7;
+	border-collapse: collapse;
+	height: 24px;
+	line-height: 24px;
+	text-align: left;
+	padding-left: 5px;
+	background: #e8f5f9;
+}
+
+.T_LIST_TD_BOTTOM_2 { /* 原列表奇数行 */
+	border: 1px solid #a9d8e7;
+	border-collapse: collapse;
+	height: 24px;
+	line-height: 24px;
+	text-align: left;
+	padding-left: 5px;
+	background: #FFF;
+}
+
+.T_LIST_TD_BOTTOM_9 { /* 原列表偶数行 */
+	border: 1px solid #a9d8e7;
+	border-collapse: collapse;
+	height: 24px;
+	line-height: 24px;
+	text-align: left;
+	padding-left: 5px;
+	background: #e8f5f9;
+}
+
+.T_LIST_TD_BOTTOM_3 {
+	border: 1px solid #95AAC5;
+	background: #E5F4FF;
+	line-height: 21px;
+	text-align: left;
+	height: 20px;
+	padding-left: 5px;
+}
+
+.T_LIST_TABLE {
+	font-size: 12px;
+	border-collapse: collapse;
+	/*border: 1px solid #a9d8e7;*/
+	border-left: 1px solid #a9d8e7;
+	border-top: 1px solid #a9d8e7;
+	border-right: 1px solid #4d91a7;
+	border-bottom: 1px solid #4d91a7;
+	width: 98%;
+}
+
+/* 查询按钮 */
+a.btn_blue:link {
+	width: 60px;
+	height: 22px;
+	background-image: url(images/button_1.gif);
+	padding-top: 5px;
+	text-align: center;
+	color: #fff;
+}
+
+a.btn_blue:hover {
+	width: 60px;
+	height: 22px;
+	background-image: url(images/button_2.gif);
+	padding-top: 5px;
+	text-align: center;
+	color: #f0ff05;
+}
+
+a.btn_blue:visited {
+	width: 60px;
+	height: 22px;
+	background-image: url(images/button_1.gif);
+	padding-top: 5px;
+	text-align: center;
+	color: #fff;
+}
+
+.title {
+	background: url(menuconfig/bgBar.gif) repeat-x bottom right;
+	height: 33px;
+	margin-top: 30px;
+	width: 96%;
+}
+
+.list_search_title {
+	background: url(images/bg_searchTop.gif) no-repeat left top;
+	height: 20px;
+	padding-left: 20px;
+	color: #fff;
+	font-weight: bold;
+	width: 191px;
+	padding-top: 5px;
+	*/
+
+	/*	background:url(../images/bg_searchTop.gif) no-repeat;
+	float:left;
+	margin:0px;
+	height:20px;
+	width:190px;
+	padding-left:10px;
+	padding-top:12px;
+	color:#fff;
+	font-size:13px;
+	font-weight:bold;*/
+	/*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#88d9f3',endColorstr='#2fb0e3');*/
+}
+
+/* 列表查询 */
+.list_div_search {
+	text-align: left;
+	width: 98%;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+.list_div_searTable {
+	width: 98%;
+	padding: 0px;
+	border: 2px solid #05b1e6;
+	margin: 0;
+	border-top: 3px solid #05b1e6;
+	background: #eef8fb;
+}
+
+.list_div_searTable td {
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	font-size: 13px;
+	color: #0e65a9;
+	font-weight: bold;
+}
+
+.list_search_td {
+	text-align: right;
+	padding-right: 10px;
+	color: #000080;
+	width: 10%;
+}
+
+/* 列表上方红色统计文字 (如：共有2家企业) */
+.list_redWord {
+	float: right;
+	margin-bottom: 10px;
+	padding-right: 8px;
+	margin-top: 3px;
+	font-size: 14px;
+	color: red;
+}
+
+/* 列表上方下载报表的文字样式 */
+.list_downloadWord {
+	float: right;
+	margin-right: 8px;
+	margin-bottom: 10px;
+	padding-right: 8px;
+	margin-top: 3px;
+	font-size: 14px;
+	color: blue;
+}
+
+div.button_left {
+	text-align: left;
+	float: left;
+	margin-left: 10px;
+	padding-top: 10px;
+	margin-bottom: 5px;
+}
+/* 两个或者四个文字的按钮（如：打印、打印预览、新增等） */
+a.list_button2:link {
+	background: url(images/bg_button1.gif) no-repeat;
+	width: 77px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+a.list_button2:hover {
+	background: url(images/bg_button1.gif) no-repeat;
+	width: 77px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+a.list_button2:visited {
+	background: url(images/bg_button1.gif) no-repeat;
+	width: 77px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+/* 六个文字的按钮（如：执行批量辨识等） */
+a.list_button6:link {
+	background: url(/safety/images/bg_button6.gif) no-repeat;
+	width: 98px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+/* 六个文字的按钮（如：执行批量辨识等） */
+a.list_button6:hover {
+	background: url(/safety/images/bg_button6.gif) no-repeat;
+	width: 98px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+/* 六个文字的按钮（如：执行批量辨识等） */
+a.list_button6:visited {
+	background: url(/safety/images/bg_button6.gif) no-repeat;
+	width: 98px;
+	height: 27px;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 27px;
+	text-decoration: none;
+}
+
+.rb {
+	FONT-WEIGHT: bold;
+	color: #ff0000
+}
+
+.navPoint {
+	font-family: Webdings;
+	font-size: 15px;
+	border: solid 1px #cde;
+	width: 20px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.navPoint {
+	COLOR: #ff3366;
+	CURSOR: hand;
+	FONT-FAMILY: Webdings;
+	FONT-SIZE: 9pt
+}
+
+P {
+	FONT-SIZE: 9pt
+}
+
+.btn_blue {
+	width: 60px;
+	height: 22px;
+	background-image: url(../images/icon/btn/button_2.gif);
+	padding-top: 5px;
+	text-align: center;
+	color: #fff;
+}
+
+.funcbutton { /* 列表功能按钮区 */
+	background: #e2f0f4;
+	height: 25px;
+	width: 98%;
+	border-bottom: 2px solid #d8dadb;
+	padding: 3px;
+	padding-left: 5px;
+	text-align: left;
+}

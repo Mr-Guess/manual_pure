@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="LoginRecord">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_LOGIN_RECORD.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_LOGIN_RECORD.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_LOGIN_RECORD.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_LOGIN_RECORD.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_LOGIN_RECORD.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_LOGIN_RECORD.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="userId"> TB_LOGIN_RECORD.USER_ID like '%'+#userId#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="userName"> TB_LOGIN_RECORD.USER_NAME like '%'+#userName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="loginTime"> TB_LOGIN_RECORD.LOGIN_TIME like '%'+#loginTime#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="loginTag"> TB_LOGIN_RECORD.LOGIN_TAG like '%'+#loginTag#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="deptId"> TB_LOGIN_RECORD.DEPT_ID like '%'+#deptId#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.pojo.LoginRecord">
+  		INSERT INTO TB_LOGIN_RECORD(
+				
+				USER_ID,
+				USER_NAME,
+				LOGIN_TIME,
+				LOGIN_TAG,
+				DEPT_ID,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#userId#,
+				#userName#,
+				#loginTime#,
+				#loginTag#,
+				#deptId#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_LOGIN_RECORD SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.sys.pojo.LoginRecord" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_LOGIN_RECORD.USER_ID AS userId,
+			TB_LOGIN_RECORD.USER_NAME AS userName,
+			TB_LOGIN_RECORD.LOGIN_TIME AS loginTime,
+			TB_LOGIN_RECORD.LOGIN_TAG AS loginTag,
+			TB_LOGIN_RECORD.DEPT_ID AS deptId,
+			
+			TB_LOGIN_RECORD.ID AS id,
+			TB_LOGIN_RECORD.STATUS AS status,
+			TB_LOGIN_RECORD.CREATED AS created,
+			TB_LOGIN_RECORD.CREATE_TIME AS createTime,
+			TB_LOGIN_RECORD.UPDATED AS updated,
+			TB_LOGIN_RECORD.UPDATE_TIME as updateTime
+		from
+		TB_LOGIN_RECORD
+  		where 
+ 	 		TB_LOGIN_RECORD.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.sys.pojo.LoginRecord">
+		UPDATE TB_LOGIN_RECORD 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="userId"> USER_ID=#userId#</isNotEmpty>
+			<isNotEmpty prepend="," property="userName"> USER_NAME=#userName#</isNotEmpty>
+			<isNotEmpty prepend="," property="loginTime"> LOGIN_TIME=#loginTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="loginTag"> LOGIN_TAG=#loginTag#</isNotEmpty>
+			<isNotEmpty prepend="," property="deptId"> DEPT_ID=#deptId#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.sys.pojo.LoginRecord" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_LOGIN_RECORD.USER_ID AS userId,
+			TB_LOGIN_RECORD.USER_NAME AS userName,
+			TB_LOGIN_RECORD.LOGIN_TIME AS loginTime,
+			TB_LOGIN_RECORD.LOGIN_TAG AS loginTag,
+			TB_LOGIN_RECORD.DEPT_ID AS deptId,
+			
+			TB_LOGIN_RECORD.ID AS id,
+			TB_LOGIN_RECORD.STATUS AS status,
+			TB_LOGIN_RECORD.CREATED AS created,
+			TB_LOGIN_RECORD.CREATE_TIME AS createTime,
+			TB_LOGIN_RECORD.UPDATED AS updated,
+			TB_LOGIN_RECORD.UPDATE_TIME AS updateTime
+		FROM
+			TB_LOGIN_RECORD
+		WHERE
+			TB_LOGIN_RECORD.STATUS = '1'
+		<include refid="LoginRecord.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_LOGIN_RECORD
+		WHERE
+			TB_LOGIN_RECORD.STATUS = '1' 
+		<include refid="LoginRecord.mapWhereClause"/>
+	</select>
+</sqlMap>

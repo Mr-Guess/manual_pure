@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="SysGridSystem">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> sys_grid_system.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> sys_grid_system.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> sys_grid_system.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> sys_grid_system.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> sys_grid_system.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> sys_grid_system.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="zyfzr"> sys_grid_system.ZYFZR like CONCAT('%',#zyfzr#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="zyfzrAqzz"> sys_grid_system.ZYFZR_AQZZ like CONCAT('%',#zyfzrAqzz#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="fgfzr"> sys_grid_system.FGFZR like CONCAT('%',#fgfzr#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="fgfzrAqzz"> sys_grid_system.FGFZR_AQZZ like CONCAT('%',#fgfzrAqzz#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="dzgdld"> sys_grid_system.DZGDLD like CONCAT('%',#dzgdld#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="dzgdldAqzz"> sys_grid_system.DZGDLD_AQZZ like CONCAT('%',#dzgdldAqzz#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="bmgdld"> sys_grid_system.BMGDLD like CONCAT('%',#bmgdld#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="bmgdldAqzz"> sys_grid_system.BMGDLD_AQZZ like CONCAT('%',#bmgdldAqzz#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="sdjgzr"> sys_grid_system.SDJGZR like CONCAT('%',#sdjgzr#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="mbzrs"> sys_grid_system.MBZRS like CONCAT('%',#mbzrs#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="bmid"> sys_grid_system.BMID = #bmid#</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.pojo.SysGridSystem">
+  		INSERT INTO sys_grid_system(
+				
+				ZYFZR,
+				ZYFZR_AQZZ,
+				FGFZR,
+				FGFZR_AQZZ,
+				DZGDLD,
+				DZGDLD_AQZZ,
+				BMGDLD,
+				BMGDLD_AQZZ,
+				SDJGZR,
+				MBZRS,
+				BMID,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#zyfzr#,
+				#zyfzrAqzz#,
+				#fgfzr#,
+				#fgfzrAqzz#,
+				#dzgdld#,
+				#dzgdldAqzz#,
+				#bmgdld#,
+				#bmgdldAqzz#,
+				#sdjgzr#,
+				#mbzrs#,
+				#bmid#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE sys_grid_system SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.sys.pojo.SysGridSystem" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			sys_grid_system.ZYFZR AS zyfzr,
+			sys_grid_system.ZYFZR_AQZZ AS zyfzrAqzz,
+			sys_grid_system.FGFZR AS fgfzr,
+			sys_grid_system.FGFZR_AQZZ AS fgfzrAqzz,
+			sys_grid_system.DZGDLD AS dzgdld,
+			sys_grid_system.DZGDLD_AQZZ AS dzgdldAqzz,
+			sys_grid_system.BMGDLD AS bmgdld,
+			sys_grid_system.BMGDLD_AQZZ AS bmgdldAqzz,
+			sys_grid_system.SDJGZR AS sdjgzr,
+			sys_grid_system.MBZRS AS mbzrs,
+			sys_grid_system.BMID AS bmid,
+			
+			sys_grid_system.ID AS id,
+			sys_grid_system.STATUS AS status,
+			sys_grid_system.CREATED AS created,
+			sys_grid_system.CREATE_TIME AS createTime,
+			sys_grid_system.UPDATED AS updated,
+			sys_grid_system.UPDATE_TIME as updateTime
+		from
+		sys_grid_system
+  		where 
+ 	 		sys_grid_system.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.sys.pojo.SysGridSystem">
+		UPDATE sys_grid_system 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="zyfzr"> ZYFZR=#zyfzr#</isNotEmpty>
+			<isNotEmpty prepend="," property="zyfzrAqzz"> ZYFZR_AQZZ=#zyfzrAqzz#</isNotEmpty>
+			<isNotEmpty prepend="," property="fgfzr"> FGFZR=#fgfzr#</isNotEmpty>
+			<isNotEmpty prepend="," property="fgfzrAqzz"> FGFZR_AQZZ=#fgfzrAqzz#</isNotEmpty>
+			<isNotEmpty prepend="," property="dzgdld"> DZGDLD=#dzgdld#</isNotEmpty>
+			<isNotEmpty prepend="," property="dzgdldAqzz"> DZGDLD_AQZZ=#dzgdldAqzz#</isNotEmpty>
+			<isNotEmpty prepend="," property="bmgdld"> BMGDLD=#bmgdld#</isNotEmpty>
+			<isNotEmpty prepend="," property="bmgdldAqzz"> BMGDLD_AQZZ=#bmgdldAqzz#</isNotEmpty>
+			<isNotEmpty prepend="," property="sdjgzr"> SDJGZR=#sdjgzr#</isNotEmpty>
+			<isNotEmpty prepend="," property="mbzrs"> MBZRS=#mbzrs#</isNotEmpty>
+			<isNotEmpty prepend="," property="bmid"> bmid=#bmid#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.sys.pojo.SysGridSystem" parameterClass="java.util.Map">
+ 		SELECT
+			
+			sys_grid_system.ZYFZR AS zyfzr,
+			sys_grid_system.ZYFZR_AQZZ AS zyfzrAqzz,
+			sys_grid_system.FGFZR AS fgfzr,
+			sys_grid_system.FGFZR_AQZZ AS fgfzrAqzz,
+			sys_grid_system.DZGDLD AS dzgdld,
+			sys_grid_system.DZGDLD_AQZZ AS dzgdldAqzz,
+			sys_grid_system.BMGDLD AS bmgdld,
+			sys_grid_system.BMGDLD_AQZZ AS bmgdldAqzz,
+			sys_grid_system.SDJGZR AS sdjgzr,
+			sys_grid_system.MBZRS AS mbzrs,
+			sys_grid_system.BMID AS bmid,
+			
+			sys_grid_system.ID AS id,
+			sys_grid_system.STATUS AS status,
+			sys_grid_system.CREATED AS created,
+			sys_grid_system.CREATE_TIME AS createTime,
+			sys_grid_system.UPDATED AS updated,
+			sys_grid_system.UPDATE_TIME AS updateTime
+		FROM
+			sys_grid_system
+		WHERE
+			sys_grid_system.STATUS = '1'
+		<include refid="SysGridSystem.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			sys_grid_system
+		WHERE
+			sys_grid_system.STATUS = '1' 
+		<include refid="SysGridSystem.mapWhereClause"/>
+	</select>
+</sqlMap>

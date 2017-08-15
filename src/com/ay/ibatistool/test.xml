@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<jdbc jdbc.driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		jdbc.url="jdbc:sqlserver://10.0.0.50:1435;DatabaseName=ayjava_jfds_pure"
+		jdbc.username="sa" jdbc.password="sasa" /><!-- 配置数据库地址以及用户名和密码 -->
+	<set>
+		<replace>true</replace>
+		<createSequence>false</createSequence>
+		<src>src/</src>
+		<package>com.ay.hazards.boiler</package>
+		<!-- 配置文件目录 -->
+		<strutsXmlFile>resource/struts/struts-hazards.xml</strutsXmlFile>
+		<sqlMapperXmlFile>resource/sqlMapConfig_mySQL.xml</sqlMapperXmlFile>
+		<springXmlFile>resource/spring/applicationContext-hazards.xml</springXmlFile>
+		<jspFile>jsp/hazards/boiler.jsp</jspFile>
+	</set>
+	<tables>
+		<table>TB_BOILER</table><!-- 配置表名 -->
+	</tables>
+</config>

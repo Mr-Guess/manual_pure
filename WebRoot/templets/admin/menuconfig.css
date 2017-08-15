@@ -1,0 +1,290 @@
+/*
+* Function:menuConfig.jsp
+* Date:2010/5/21
+* Create:yq
+* Notes:样式/结构的定义基于原样式（dhtml/style.css）
+*/
+body {
+	margin: 0;
+	padding: 0px;
+	background: #f1f6f9;
+	overflow: hidden;
+}
+
+.divMain {
+	width: 100%;
+	text-align: center;
+}
+
+/*必输项标记“*”*/
+.colorStar {
+	color: Red;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+/********************************** 顶部开始 ************************************/
+
+/*顶部标题显示*/
+#titleBar {
+	background: url(../menuconfig/bgBar.gif) repeat-x bottom right;
+	height: 33px;
+	margin-top: 30px;
+	margin-left: 2%;
+	margin-right: out;
+	width: 96%;
+	text-align: center;
+}
+
+/*顶部左侧*/
+#titleBar .barLeft {
+	background: url(../menuconfig/titleBar.gif) no-repeat;
+	float: left;
+	margin: 0px;
+	height: 33px;
+	width: 190px;
+	padding-left: 10px;
+	padding-top: 12px;
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+/********************************** 顶部结束 ************************************/
+
+/*列表框外壳容器层*/
+.con_list {
+	background-color: #f1f6f9;
+	border: 1px solid #0C63B2;
+	width: 96%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	padding-top: 10px;
+}
+
+/********************************** 左侧部分开始 ************************************/
+
+/* 左侧树型菜单区 */
+.tdLeftList {
+	border-collapse: collapse;
+	width: 96%;
+	background-color: #FFFFFF;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 1px solid #99BBE8;
+	background: #B4D0F5;
+	background-image: url("images/bg_searchlist.gif");
+}
+
+/* 左侧“展开/收缩”文字 */
+.divModeFunc {
+	height: 21px;
+	margin: 0px;
+	border: 0;
+	float: left;
+	text-decoration: none;
+	font-size: 12px;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+/*左侧*/
+.tdLeftFunc {
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-right: 2px;
+	padding-left: 2px;
+	border: 1px solid #99BBE8;
+	width: 200px;
+}
+
+/*左侧“展开/收缩”*/
+.tdModeFunc {
+	background-image: url("images/bg_listtitle.gif");
+	font-size: 13px;
+	height: 25px;
+	text-align: center;
+	border: 1px solid #99BBE8;
+}
+
+.tdModeFunc span {
+	font-size: 13px;
+	color: #15428B;
+	padding-top: 5px;
+	font-weight: bold;
+	text-align: center;
+}
+
+/*左侧树菜单*/
+#treeboxbox_tree {
+	width: 260px;
+	height: 100%;
+	border: 0px solid Silver;
+}
+
+/********************************** 左侧部分结束 ************************************/
+
+/********************************** 右侧部分开始 ************************************/
+
+/*右侧table*/
+.tableInfo {
+	border-collapse: collapse;
+	width: 96%;
+	background-color: #FFFFFF;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 12px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	border: 1px solid #99BBE8;
+}
+
+/*右侧table中的td（标签栏）*/
+.tdInfo1 {
+	font-family: "宋体";
+	font-size: 12px;
+	height: 30px;
+	padding-left: 8px;
+	border-right: 1px solid #D0D0D0;
+	border-bottom: 1px solid #D0D0D0;
+	width: 15%;
+	text-align: right;
+}
+
+/*右侧table中的td（输入栏）*/
+.tdInfo2 {
+	font-family: "宋体";
+	font-size: 12px;
+	height: 30px;
+	padding-left: 8px;
+	border-left: 1px solid #D0D0D0;
+	border-bottom: 1px solid #D0D0D0;
+	width: 60%;
+	text-align: left;
+}
+
+/*"保存/删除"按钮区域*/
+.tableFunc {
+	border-collapse: collapse;
+	width: 96%;
+	background-color: #FFFFFF;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 0px solid #99BBE8;
+	text-align: left;
+}
+
+/*右侧“保存/删除”*/
+.tableFunc td {
+	padding-left: 8px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+	white-space: nowrap;
+	font-size: 13px;
+}
+
+/*右侧*/
+.tdRightFunc {
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+	font-size: 12px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-left: 2px;
+	padding-right: 2px;
+	border: 1px solid #99BBE8;
+}
+
+/*右侧form*/
+.divRightForm {
+	padding-left: 8px;
+}
+
+/*页面按钮*/
+.btn {
+	background-image: url(../menuconfig/bgButton.gif);
+	background-repeat: repeat-x;
+	border: 1px solid #1272cd;
+	height: 22px !important;
+	height: 24px;
+	cursor: pointer;
+	color: #fff;
+	padding-top: 2px;
+}
+
+/********************************** 右侧部分结束 ************************************/
+
+/********************************** menuConfig.jsp<style></style>中的部分*******************/
+a:link {
+	color: #29098A;
+	text-decoration: none
+}
+
+a:active {
+	color: #29098A;
+	text-decoration: none
+}
+
+a:visited {
+	color: #29098A;
+	text-decoration: none
+}
+
+a:hover {
+	color: #29098A;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.showLoad {
+	font-size: 12px;
+	width: 97%;
+	height: 26px;
+	padding-left: 3px;
+	display: block;
+	background: #E5E5E5;
+	border: 1px solid Silver;
+}
+
+.showLoad img {
+	width: 20px;
+	height: 20px;
+}
+
+.bgColorSet {
+	height: 100%;
+	background-image: url(App_Themes/Blue/images/bg_welcome.gif);
+	background-repeat: repeat-x;
+	background-color: #DAF1FD;
+	overflow: auto;
+}
+
+.statebar {
+	background-image: url(App_Themes/Blue/images/bg_statebar.gif);
+	background-repeat: repeat-x;
+	height: 22px !important;
+	height: 25px;
+	text-align: left;
+	padding-top: 5px;
+	padding-left: 7px;
+	border-bottom: 1px solid #999;
+	font-size: 12px;
+}
+
+.btnBg {
+	border: 1px solid #14376A;
+	height: 22px !important;
+	height: 24px;
+	cursor: pointer;
+	background-color: Yellow;
+}
+/**********************************************************************/

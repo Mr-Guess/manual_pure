@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Reporting">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> tb_reporting.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> tb_reporting.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> tb_reporting.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> tb_reporting.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> tb_reporting.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="title"> tb_reporting.TITLE like CONCAT('%',#title#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="reporter"> tb_reporting.REPORTER like CONCAT('%',#reporter#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="reportTime"> tb_reporting.REPORT_TIME like CONCAT('%',#reportTime#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="reportType"> tb_reporting.REPORT_TYPE like CONCAT('%',#reportType#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="context"> tb_reporting.CONTEXT like CONCAT('%',#context#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="owner"> tb_reporting.CREATED=#owner#</isNotEmpty>
+			<isNotEmpty prepend="and" property="informre"> tb_reporting.INFORMRE like CONCAT('%',#informre#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="checkerinob"> (tb_reporting.CHECKER like CONCAT('%',#checker#,'%') or tb_reporting.STEPS like CONCAT('%',#steps#,'%'))</isNotEmpty>
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.report.reporting.pojo.Reporting">
+  		INSERT INTO tb_reporting(
+				
+				TITLE,
+				REPORTER,
+				REPORT_TIME,
+				REPORT_TYPE,
+				CONTEXT,
+				CHECKER,
+				OWNER,
+				STEPS,
+				INFORMRE,
+				DEPARTMENT,
+				autoTitle,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#title#,
+				#reporter#,
+				#reportTime#,
+				#reportType#,
+				#context#,
+				#checker#,
+				#owner#,
+				#steps#,
+				#informre#,
+				#department#,
+				#autoTitle#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE tb_reporting SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.report.reporting.pojo.Reporting" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_reporting.TITLE AS title,
+			tb_reporting.REPORTER AS reporter,
+			tb_reporting.REPORT_TIME AS reportTime,
+			tb_reporting.REPORT_TYPE AS reportType,
+			tb_reporting.CONTEXT AS context,
+			tb_reporting.CHECKER AS checker,
+			tb_reporting.OWNER AS owner,
+			tb_reporting.STEPS AS steps,
+			tb_reporting.INFORMRE AS informre,
+			tb_reporting.DEPARTMENT AS department,
+			deptIdToName(tb_reporting.DEPARTMENT) AS departmentName,
+			
+			tb_reporting.ID AS id,
+			tb_reporting.STATUS AS status,
+			tb_reporting.CREATED AS created,
+			tb_reporting.CREATE_TIME AS createTime,
+			tb_reporting.UPDATED AS updated,
+			tb_reporting.UPDATE_TIME as updateTime
+		from
+		tb_reporting
+  		where 
+ 	 		tb_reporting.ID=#id#
+	</select>
+	<!-- add method getById-->
+	<select id="reViewById" resultClass="com.ay.report.reporting.dto.ReportingDto" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_reporting.TITLE AS title,
+			tb_reporting.REPORTER AS reporter,
+			tb_reporting.REPORT_TIME AS reportTime,
+			tb_reporting.REPORT_TYPE AS reportType,
+			tb_reporting.CONTEXT AS context,
+			tb_reporting.CHECKER AS checker,
+			tb_reporting.OWNER AS owner,
+			tb_reporting.STEPS AS steps,
+			tb_reporting.INFORMRE AS informre,
+			tb_reporting.DEPARTMENT AS department,
+			deptIdToName(tb_reporting.DEPARTMENT) AS departmentName,
+			tb_reporting.ID AS id,
+			tb_reporting.autoTitle AS autoTitle,
+			
+			tb_reversion.RE_TYPE AS reType,
+			tb_reversion.CONVERT_ID AS convertId,
+			tb_reversion.REVER AS rever,
+			tb_reversion.CONTEXT AS recontext
+			
+		from
+		tb_reporting  INNER JOIN tb_reversion ON tb_reporting.ID = tb_reversion.CONVERT_ID
+  		where 
+ 	 		tb_reporting.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.report.reporting.pojo.Reporting">
+		UPDATE tb_reporting 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="title"> TITLE=#title#</isNotEmpty>
+			<isNotEmpty prepend="," property="reporter"> REPORTER=#reporter#</isNotEmpty>
+			<isNotEmpty prepend="," property="reportTime"> REPORT_TIME=#reportTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="reportType"> REPORT_TYPE=#reportType#</isNotEmpty>
+			<isNotEmpty prepend="," property="context"> CONTEXT=#context#</isNotEmpty>
+			<isNotEmpty prepend="," property="checker"> CHECKER=#checker#</isNotEmpty>
+			<isNotEmpty prepend="," property="owner"> OWNER=#owner#</isNotEmpty>
+			<isNotEmpty prepend="," property="steps"> STEPS=#steps#</isNotEmpty>
+			<isNotEmpty prepend="," property="informre"> INFORMRE=#informre#</isNotEmpty>
+			<isNotEmpty prepend="," property="department"> DEPARTMENT=#department#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.report.reporting.pojo.Reporting" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_reporting.TITLE AS title,
+			tb_reporting.REPORTER AS reporter,
+			tb_reporting.REPORT_TIME AS reportTime,
+			tb_reporting.REPORT_TYPE AS reportType,
+			tb_reporting.CONTEXT AS context,
+			tb_reporting.CHECKER AS checker,
+			tb_reporting.OWNER AS owner,
+			tb_reporting.STEPS AS steps,
+			tb_reporting.INFORMRE AS informre,
+			tb_reporting.DEPARTMENT AS department,
+			tb_reporting.autoTitle AS autoTitle,
+			deptIdToName(tb_reporting.DEPARTMENT) AS departmentName,
+			
+			tb_reporting.ID AS id,
+			tb_reporting.STATUS AS status,
+			tb_reporting.CREATED AS created,
+			tb_reporting.CREATE_TIME AS createTime,
+			tb_reporting.UPDATED AS updated,
+			tb_reporting.UPDATE_TIME AS updateTime
+		FROM
+			tb_reporting
+		WHERE
+			tb_reporting.STATUS = '1'
+		<include refid="Reporting.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_reporting
+		WHERE
+			tb_reporting.STATUS = '1' 
+		<include refid="Reporting.mapWhereClause"/>
+	</select>
+</sqlMap>

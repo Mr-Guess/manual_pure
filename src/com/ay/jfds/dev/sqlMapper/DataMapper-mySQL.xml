@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" " http://ibatis.apache.org/dtd/sql-map-2.dtd"><sqlMap namespace="data"><typeAlias alias="data" type="com.ay.jfds.dev.pojo.Data"/><typeAlias alias="dataType" type="com.ay.jfds.dev.pojo.DataType"/><typeAlias alias="dataDto" type="com.ay.jfds.dev.dto.DataDTO"/><sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="dataName">
+				data_name like
+				#dataName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="typeId">
+				type_id = #typeId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentId">
+				parent_id = #parentId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="dataCode">
+				data_code = #dataCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="id">
+				id = #id#
+			</isNotEmpty>
+		</isParameterPresent>
+	</sql><insert id="insert" parameterClass="data">
+		INSERT INTO dev_data
+		( id,
+		type_id,
+		parent_id,
+		data_name,
+		data_code,
+		data_order,
+		status,
+		created,
+		create_time,
+		updated,
+		update_time,
+		data_desc
+		)
+		VALUES
+		(
+		#id#, #typeId#, #parentId#, #dataName#, #dataCode#, #dataOrder#, #status#,
+		#created#, #createTime#, #updated#, #updateTime#,#dataDesc#
+		)
+	</insert><delete id="delete" parameterClass="java.lang.String">
+		UPDATE dev_data
+		SET status=0
+		WHERE
+		id = #id#
+	</delete><select id="getById" parameterClass="java.lang.String" resultClass="data">
+		SELECT
+		id AS id,
+		type_id AS typeId,
+		parent_id AS parentId,
+		data_code AS dataCode,
+		data_name AS dataName,
+		data_order AS dataOrder,
+		data_desc as dataDesc,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		dev_data
+		WHERE
+		id = #id#
+	</select>
+	
+	
+	<select id="findAllData" resultClass="data">
+		select PARENT_ID as parentId,
+		TYPE_ID as typeId,
+		DATA_CODE as dataCode,DATA_NAME as dataName
+		 from dev_data where status=1 order by TYPE_ID, data_order
+	</select>
+	
+	<update id="update" parameterClass="data">
+		UPDATE
+		dev_data
+		SET
+		id = #id#, parent_id = #parentId#, type_id = #typeId#, data_code =
+		#dataCode#, data_name= #dataName#,
+		data_desc=#dataDesc#,
+		data_order = #dataOrder#, status = #status#, created= #created#, create_time=
+		#createTime#, updated= #updated#, update_time= #updateTime#
+		WHERE
+		id = #id#
+	</update><select id="findAll" resultClass="data">
+		SELECT
+		id,
+		parent_id AS parentId,
+		type_id AS typeId,
+		data_code AS dataCode,
+		data_name AS dataName,
+		data_order AS dataOrder,
+		data_desc as dataDesc,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		dev_data
+	</select><select id="find" resultClass="data" parameterClass="java.util.Map">
+		SELECT
+		id,
+		parent_id AS parentId,
+		type_id as typeId,
+		data_code as dataCode,
+		data_name as dataName,
+		data_order as dataOrder,
+		data_desc as dataDesc,
+		status as status,
+		created as created,
+		create_time as createTime,
+		updated as updated,
+		update_time as updateTime
+		FROM
+		dev_data
+		WHERE
+		status = 1
+		<include refid="data.mapWhereClause"/>
+		order by data_order
+	</select><select id="getDataByType" resultClass="data" parameterClass="java.lang.String">
+		SELECT
+		id AS id,
+		parent_id AS parentId,
+		type_id AS typeId,
+		data_code AS dataCode,
+		data_name AS dataName,
+		data_order AS dataOrder,
+		data_name as name,
+		data_desc as dataDesc
+		FROM
+		dev_data
+		WHERE
+		type_id = #id#
+		AND
+		status = 1
+		order by data_order
+	</select><select id="findDataDto" resultClass="dataDto" parameterClass="java.util.Map">
+		SELECT
+		d.id AS id,
+		d.parent_id AS parentId,
+		d.type_id AS typeId,
+		t.type_name AS typeName,
+		d.data_code AS dataCode,
+		d.data_name AS dataName,
+		d.data_order AS dataOrder,
+		d.status AS status,
+		d.created AS created,
+		d.create_time AS createTime,
+		d.updated AS updated,
+		d.update_time AS updateTime,
+		data_desc as dataDesc
+		FROM
+		dev_data d,
+		dev_data_type t
+		WHERE
+		t.id = d.type_id
+		AND
+		t.status = 1
+		AND
+		d.status = 1
+		<include refid="data.mapWhereClause"/>
+		order by d.data_order
+	</select><select id="getDataDTOById" resultClass="dataDto" parameterClass="java.lang.String">
+		SELECT
+		d.id AS id,
+		d.parent_id AS parentId,
+		d.type_id AS typeId,
+		t.type_name AS typeName,
+		d.data_code AS dataCode,
+		d.data_name AS dataName,
+		d.data_order AS dataOrder,
+		d.status AS status,
+		d.created AS created,
+		d.create_time AS createTime,
+		d.updated AS updated,
+		d.update_time AS updateTime,
+		data_desc as dataDesc
+		FROM
+		dev_data d,
+		dev_data_type t
+		WHERE
+		t.id = d.type_id
+		AND
+		t.status = 1
+		AND
+		d.id=#id#
+		AND
+		d.status = 1
+		order by d.data_order
+	</select><select id="count" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(id)
+		from dev_data
+		where 1=1
+		and
+		status = 1
+		<include refid="data.mapWhereClause"/>
+	</select><select id="findChildData" resultClass="data" parameterClass="java.lang.String">
+		SELECT
+		id as id,
+		parent_id as parentId,
+		data_code AS dataCode,
+		data_name AS dataName,
+		data_order AS dataOrder,
+		data_desc as dataDesc
+		FROM
+		dev_data
+		WHERE
+		parent_id = #parentId#
+		AND
+		status = 1
+		order by data_order
+	</select><select id="checkWordsByWords" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT
+		COUNT (*)
+		FROM
+		dev_data
+		WHERE
+		parent_id = #parentId#
+		AND type_id = #typeId#
+		AND (
+		data_code = #dataCode#
+		OR data_name = #dataName#
+		)
+		AND status = 1
+	</select><select id="checkUpdateWords" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT
+		COUNT (*)
+		FROM
+		dev_data
+		WHERE
+		(
+		data_name = #dataName#
+		OR data_code = #dataCode#
+		)
+		AND id != #id#
+		AND status = 1
+	</select><select id="getSelectDataByTypeName" parameterClass="java.lang.String" resultClass="dataDto">
+		SELECT
+		data_code as dataCode,data_name as dataName
+		FROM
+		dev_data
+		WHERE
+		type_id = (select id from dev_data_type where type_name = #typeName#)
+		order by
+		data_order
+	</select><select id="findData" parameterClass="java.util.Map" resultClass="data">
+		SELECT
+		id,
+		parent_id AS parentId,
+		data_code as dataCode,
+		data_name as dataName,
+		data_desc as dataDesc
+		FROM
+		dev_data
+		WHERE
+		status = 1
+		<include refid="data.mapWhereClause"/>
+		order by data_order
+	</select><select id="findDataByTypeFirstLevel" parameterClass="java.lang.String" resultClass="data">
+		SELECT
+		id,
+		parent_id AS parentId,
+		data_code as dataCode,
+		data_name as dataName,
+		data_order as dataOrder,
+		data_desc as dataDesc
+		FROM
+		dev_data
+		WHERE
+		status=1
+		AND
+		parent_id = '-1'
+		AND
+		type_id = #typeId#
+		order by data_order
+	</select><select id="findDataByTypeNameFirstLevel" parameterClass="java.lang.String" resultClass="data">
+		SELECT
+		id,
+		parent_id AS parentId,
+		data_code as dataCode,
+		data_name as dataName
+		FROM
+		dev_data
+		WHERE
+		status=1
+		AND
+		parent_id = '-1'
+		AND
+		type_id = (select id from dev_data_type where type_name = #typeName#)
+		order by data_order
+	</select><select id="findParentById" parameterClass="java.lang.String" resultClass="data">
+		select
+		d.id,
+		d.data_name as dataName
+		from
+		dev_data d,
+		(select
+		m.parent_id
+		from
+		dev_data m
+		where
+		m.id = #id#
+		) t
+		where d.id=t.parent_id
+	</select><select id="findGridByLevel" parameterClass="java.lang.String" resultClass="data">
+		SELECT
+		id AS id,
+		parent_id AS parentId,
+		data_code AS dataCode,
+		data_name AS dataName
+		FROM
+		dev_data
+		WHERE
+		type_id = '384743f705fa4ad0b9ad824ce406ec05'
+		AND data_order &gt; #level#
+		ORDER BY
+		dataCode ASC
+	</select><!-- 通过type和parentID查询 --><select id="findByType" parameterClass="java.util.Map" resultClass="data">
+		SELECT
+		id AS id,
+		parent_id AS parentId,
+		data_code AS dataCode,
+		data_name AS dataName
+		FROM
+		dev_data
+		WHERE
+		type_id =#typeId#
+		AND parent_id=#parentId#
+		AND status='1'
+		order by data_order
+	</select><!-- 通过type和Code查询 -->
+	<select id="findCodeAndType" parameterClass="java.util.Map" resultClass="data">
+		SELECT ID AS ID,
+		PARENT_ID AS PARENTID,
+		DATA_CODE AS DATACODE,
+		DATA_NAME AS DATANAME
+		FROM DEV_DATA WHERE DEV_DATA.PARENT_ID=
+		(SELECT ID
+		FROM DEV_DATA
+		WHERE TYPE_ID =#typeId#
+		AND DEV_DATA.DATA_CODE=#dataCode#
+		AND DEV_DATA.STATUS='1' LIMIT 1)
+		AND DEV_DATA.STATUS='1'
+		order by data_order
+	</select>
+	
+	<select id="getByCode" parameterClass="java.util.Map" resultClass="data">
+		SELECT
+		id,
+		parent_id AS parentId,
+		data_code as dataCode,
+		data_name as dataName,
+		data_order as dataOrder,
+		data_desc as dataDesc
+		FROM
+		dev_data where data_code=#dataCode# 
+		<isNotEmpty prepend="and" property="typeId">
+			type_id=#typeId#
+		</isNotEmpty>
+		 limit 1
+	</select>
+	
+	</sqlMap>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Mobule">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+<!-- 			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty> -->
+
+<!-- 			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty> -->
+			<isNotEmpty prepend="and" property="id"> SYS_MOBULE.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> SYS_MOBULE.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> SYS_MOBULE.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> SYS_MOBULE.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> SYS_MOBULE.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> SYS_MOBULE.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="type"> SYS_MOBULE.TYPE like '%'+#type#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="mobuleId"> SYS_MOBULE.MOBULE_ID like '%'+#mobuleId#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="mobuleName"> SYS_MOBULE.MOBULE_NAME like '%'+#mobuleName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="mobuleDesc"> SYS_MOBULE.MOBULE_DESC like '%'+#mobuleDesc#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.create.pojo.Mobule">
+  		INSERT INTO SYS_MOBULE(
+				
+				TYPE,
+				MOBULE_ID,
+				MOBULE_NAME,
+				MOBULE_DESC,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#type#,
+				#mobuleId#,
+				#mobuleName#,
+				#mobuleDesc#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		delete SYS_MOBULE WHERE  ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.create.pojo.Mobule" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			SYS_MOBULE.TYPE AS type,
+			SYS_MOBULE.MOBULE_ID AS mobuleId,
+			SYS_MOBULE.MOBULE_NAME AS mobuleName,
+			SYS_MOBULE.MOBULE_DESC AS mobuleDesc,
+			
+			SYS_MOBULE.ID AS id,
+			SYS_MOBULE.STATUS AS status,
+			SYS_MOBULE.CREATED AS created,
+			SYS_MOBULE.CREATE_TIME AS createTime,
+			SYS_MOBULE.UPDATED AS updated,
+			SYS_MOBULE.UPDATE_TIME as updateTime
+		from
+		SYS_MOBULE
+  		where 
+ 	 		SYS_MOBULE.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.create.pojo.Mobule">
+		UPDATE SYS_MOBULE 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="type"> TYPE=#type#</isNotEmpty>
+			<isNotEmpty prepend="," property="mobuleId"> MOBULE_ID=#mobuleId#</isNotEmpty>
+			<isNotEmpty prepend="," property="mobuleName"> MOBULE_NAME=#mobuleName#</isNotEmpty>
+			<isNotEmpty prepend="," property="mobuleDesc"> MOBULE_DESC=#mobuleDesc#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.create.pojo.Mobule" parameterClass="java.util.Map">
+ 		SELECT
+			
+			SYS_MOBULE.TYPE AS type,
+			SYS_MOBULE.MOBULE_ID AS mobuleId,
+			SYS_MOBULE.MOBULE_NAME AS mobuleName,
+			SYS_MOBULE.MOBULE_DESC AS mobuleDesc,
+			
+			SYS_MOBULE.ID AS id,
+			SYS_MOBULE.STATUS AS status,
+			SYS_MOBULE.CREATED AS created,
+			SYS_MOBULE.CREATE_TIME AS createTime,
+			SYS_MOBULE.UPDATED AS updated,
+			SYS_MOBULE.UPDATE_TIME AS updateTime
+		FROM
+			SYS_MOBULE
+		WHERE
+			SYS_MOBULE.STATUS = '1'
+		<include refid="Mobule.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			SYS_MOBULE
+		WHERE
+			SYS_MOBULE.STATUS = '1' 
+		<include refid="Mobule.mapWhereClause"/>
+	</select>
+</sqlMap>

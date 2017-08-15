@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+  <!--员工模块-->
+  <package name="worker" extends="struts-default" namespace="/worker">
+    <action name="workerAction" class="com.ay.humanResource.worker.action.WorkerAction">
+      <result name="exp" type="chain">
+        <param name="nameSpace">/excel</param>
+        <param name="actionName">excel_exp</param>
+      </result>
+    </action>
+  </package>
+</struts>

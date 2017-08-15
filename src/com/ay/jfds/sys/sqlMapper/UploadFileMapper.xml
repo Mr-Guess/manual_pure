@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+                        " http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="uploadFile">
+
+	<typeAlias alias="file" type="com.ay.jfds.sys.pojo.UploadFile" />
+
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="fileName">
+				FILE_NAME like '%'+#fileName#+'%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="relationId">
+				RELATION_ID = #relationId#
+			</isNotEmpty>
+		</isParameterPresent>
+	</sql>
+
+	<insert id="insert" parameterClass="file">
+		INSERT INTO TB_UPLOAD_FILE (
+		id,
+		RELATION_ID,
+		REAL_PATH,
+		FILE_NAME,
+		REMARK,
+		status,
+		created,
+		create_time,
+		updated,
+		update_time
+		)
+		VALUES
+		(
+		#id#,
+		#relationId#,
+		#realPath#,
+		#fileName#,
+		#remark#,
+		#status#,
+		#created#,
+		#createTime#,
+		#updated#,
+		#updateTime#
+		)
+	</insert>
+
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_UPLOAD_FILE
+		SET
+		status=0
+		WHERE
+		id = #id#
+	</delete>
+
+	<select id="getById" parameterClass="java.lang.String"
+		resultClass="file">
+		SELECT
+		id AS id,
+		RELATION_ID AS relationId,
+		REAL_PATH AS realPath,
+		FILE_NAME AS fileName,
+		REMARK AS remark,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		TB_UPLOAD_FILE
+		WHERE
+		id = #id# and status=1
+	</select>
+
+	<update id="update" parameterClass="file">
+		UPDATE TB_UPLOAD_FILE
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id"> id=#id#</isNotNull>
+			<isNotNull prepend="," property="relationId"> RELATION_ID=#relationId#
+			</isNotNull>
+			<isNotNull prepend="," property="realPath"> REAL_PATH=#realPath#
+			</isNotNull>
+			<isNotNull prepend="," property="fileName"> FILE_NAME=#fileName#
+			</isNotNull>
+			<isNotNull prepend="," property="remark"> REMARK=#remark#
+			</isNotNull>
+			<isNotNull prepend="," property="status"> STATUS=#status#
+			</isNotNull>
+			<isNotNull prepend="," property="created"> CREATED=#created#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime"> CREATE_TIME=#createdTime#
+			</isNotNull>
+			<isNotNull prepend="," property="updated"> UPDATED=#updated#
+			</isNotNull>
+			<isNotNull prepend="," property="updateTime"> UPDATE_TIME=#updateTime#
+			</isNotNull>
+		</dynamic>
+		WHERE
+		id = #id#
+	</update>
+
+	<select id="findAll" resultClass="file">
+		SELECT
+		id AS id,
+		RELATION_ID AS relationId,
+		REAL_PATH AS realPath,
+		FILE_NAME AS fileName,
+		REMARK AS remark,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		TB_UPLOAD_FILE
+		WHERE
+		id = #id# and status=1
+		order by CREATE_TIME desc
+	</select>
+
+	<select id="find" resultClass="file" parameterClass="java.util.Map">
+		SELECT
+		id AS id,
+		RELATION_ID AS relationId,
+		REAL_PATH AS realPath,
+		FILE_NAME AS fileName,
+		REMARK AS remark,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		TB_UPLOAD_FILE
+		WHERE 1=1
+		AND
+		status=1
+		<include refid="uploadFile.mapWhereClause" />
+		ORDER BY CREATE_TIME desc
+	</select>
+
+	<select id="findByRelationId" resultClass="file" parameterClass="java.util.Map">
+		SELECT
+		id AS id,
+		RELATION_ID AS relationId,
+		REAL_PATH AS realPath,
+		FILE_NAME AS fileName,
+		REMARK AS remark,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		TB_UPLOAD_FILE
+		WHERE 1=1
+		AND
+		status=1
+		<include refid="uploadFile.mapWhereClause" />
+		ORDER BY CREATE_TIME desc
+	</select>
+
+</sqlMap>
+

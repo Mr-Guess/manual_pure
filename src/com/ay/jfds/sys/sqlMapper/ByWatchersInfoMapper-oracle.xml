@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="ByWatchersInfo">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_BY_WATCHERS_INFO.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_BY_WATCHERS_INFO.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_BY_WATCHERS_INFO.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_BY_WATCHERS_INFO.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_BY_WATCHERS_INFO.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_BY_WATCHERS_INFO.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="byWatchersName"> TB_BY_WATCHERS_INFO.BY_WATCHERS_NAME like '%'||#byWatchersName#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="byWatchersId"> TB_BY_WATCHERS_INFO.BY_WATCHERS_ID like '%'||#byWatchersId#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="watchId"> TB_BY_WATCHERS_INFO.WATCH_ID like '%'||#watchId#||'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.pojo.ByWatchersInfo">
+  		INSERT INTO TB_BY_WATCHERS_INFO(
+				
+				BY_WATCHERS_NAME,
+				BY_WATCHERS_ID,
+				WATCH_ID,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#byWatchersName#,
+				#byWatchersId#,
+				#watchId#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_BY_WATCHERS_INFO SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.sys.pojo.ByWatchersInfo" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_BY_WATCHERS_INFO.BY_WATCHERS_NAME AS byWatchersName,
+			TB_BY_WATCHERS_INFO.BY_WATCHERS_ID AS byWatchersId,
+			TB_BY_WATCHERS_INFO.WATCH_ID AS watchId,
+			
+			TB_BY_WATCHERS_INFO.ID AS id,
+			TB_BY_WATCHERS_INFO.STATUS AS status,
+			TB_BY_WATCHERS_INFO.CREATED AS created,
+			TB_BY_WATCHERS_INFO.CREATE_TIME AS createTime,
+			TB_BY_WATCHERS_INFO.UPDATED AS updated,
+			TB_BY_WATCHERS_INFO.UPDATE_TIME as updateTime
+		from
+		TB_BY_WATCHERS_INFO
+  		where 
+ 	 		TB_BY_WATCHERS_INFO.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.sys.pojo.ByWatchersInfo">
+		UPDATE TB_BY_WATCHERS_INFO 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="byWatchersName"> BY_WATCHERS_NAME=#byWatchersName#</isNotEmpty>
+			<isNotEmpty prepend="," property="byWatchersId"> BY_WATCHERS_ID=#byWatchersId#</isNotEmpty>
+			<isNotEmpty prepend="," property="watchId"> WATCH_ID=#watchId#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.sys.pojo.ByWatchersInfo" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_BY_WATCHERS_INFO.BY_WATCHERS_NAME AS byWatchersName,
+			TB_BY_WATCHERS_INFO.BY_WATCHERS_ID AS byWatchersId,
+			TB_BY_WATCHERS_INFO.WATCH_ID AS watchId,
+			
+			TB_BY_WATCHERS_INFO.ID AS id,
+			TB_BY_WATCHERS_INFO.STATUS AS status,
+			TB_BY_WATCHERS_INFO.CREATED AS created,
+			TB_BY_WATCHERS_INFO.CREATE_TIME AS createTime,
+			TB_BY_WATCHERS_INFO.UPDATED AS updated,
+			TB_BY_WATCHERS_INFO.UPDATE_TIME AS updateTime
+		FROM
+			TB_BY_WATCHERS_INFO
+		WHERE
+			TB_BY_WATCHERS_INFO.STATUS = '1'
+		<include refid="ByWatchersInfo.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			TB_BY_WATCHERS_INFO
+		WHERE
+			TB_BY_WATCHERS_INFO.STATUS = '1' 
+		<include refid="ByWatchersInfo.mapWhereClause"/>
+	</select>
+</sqlMap>

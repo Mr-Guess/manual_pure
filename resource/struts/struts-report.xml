@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+  <!--工作汇报模块-->
+  <package name="reporting" extends="struts-default" namespace="/reporting">
+    <action name="reportingAction" class="com.ay.report.reporting.action.ReportingAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--批阅意见模块-->
+  <package name="reversion" extends="struts-default" namespace="/reversion">
+    <action name="reversionAction" class="com.ay.report.reversion.action.ReversionAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--消息提醒模块-->
+  <package name="jobRemind" extends="struts-default" namespace="/jobRemind">
+    <action name="jobRemindAction" class="com.yk.businesses.jobRemind.action.JobRemindAction">
+      <result name="exp" type="chain">
+        <param name="nameSpace">/excel</param>
+        <param name="actionName">excel_exp</param>
+      </result>
+    </action>
+  </package>
+</struts>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--sqlMapper-->
+	<sqlMap namespace="SysIcon"><!-- 查询条件 -->
+		<sql id="mapWhereClause">
+		<isParameterPresent>
+
+			<isNotEmpty prepend="and" property="status"> sys_icon.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> sys_icon.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> sys_icon.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> sys_icon.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> sys_icon.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="iconNo"> sys_icon.ICON_NO like '%'||#iconNo#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="name"> sys_icon.NAME like '%'||#name#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="iconDesc"> sys_icon.ICON_DESC like '%'||#iconDesc#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="type"> sys_icon.TYPE like '%'||#type#||'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<resultMap class="com.ay.jfds.icon.pojo.SysIcon" id="sysIcon">
+		<result property="icon" column="ICON" typeHandler="org.springframework.orm.ibatis.support.BlobByteArrayTypeHandler"/>
+	</resultMap>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.icon.pojo.SysIcon">
+  		INSERT INTO sys_icon(
+  				ICON_NO,
+				NAME,
+				ICON,
+				ICON_DESC,
+				TYPE,
+				
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME
+				) values(
+				seq_sysicon.nextval,
+				#name#,
+				#icon#,
+				#iconDesc#,
+				#type#,
+				
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#)
+	</insert><insert id="myInsert" parameterClass="com.ay.jfds.icon.pojo.SysIcon">
+		INSERT INTO sys_icon(
+				NAME,
+				ICON,
+				ICON_DESC,
+				TYPE,
+				
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME
+				) values(
+				#name#,
+				#icon#,
+				#iconDesc#,
+				#type#,
+				
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#)
+				
+     	<selectKey resultClass="java.lang.String" keyProperty="iconNo">    
+          SELECT @@IDENTITY AS iconNo     
+       </selectKey>     
+	</insert><!-- add method delete--><delete id="delete" parameterClass="java.lang.String">
+		delete sys_icon 
+  		WHERE 
+ 	 		ICON_NO=#iconNo#</delete>
+ 	 		<!-- add method getById--><select id="getById" resultClass="com.ay.jfds.icon.pojo.SysIcon" parameterClass="java.lang.String">
+	 		SELECT 
+				
+				sys_icon.ICON_NO AS iconNo,
+				sys_icon.NAME AS name,
+				sys_icon.ICON AS icon,
+				sys_icon.ICON_DESC AS iconDesc,
+				sys_icon.TYPE AS type,
+				
+				sys_icon.STATUS AS status,
+				sys_icon.CREATED AS created,
+				sys_icon.CREATE_TIME AS createTime,
+				sys_icon.UPDATED AS updated,
+				sys_icon.UPDATE_TIME as updateTime
+			from
+			sys_icon
+	  		where 
+	 	 		sys_icon.ICON_NO=#iconNo#
+	</select>
+	<select id="findAll" resultClass="com.ay.jfds.icon.pojo.SysIcon" >
+ 		SELECT 
+			sys_icon.ICON_NO AS iconNo,
+			sys_icon.ICON AS icon
+		from
+		sys_icon
+	</select> 	
+	<select id="getByIconNo" resultClass="com.ay.jfds.icon.pojo.SysIcon" parameterClass="java.lang.String">
+			SELECT
+			sys_icon.ICON AS icon
+			FROM
+				sys_icon
+			WHERE
+				sys_icon.ICON_NO = #iconNo#
+	</select><!-- add method update--><update id="update" parameterClass="com.ay.jfds.icon.pojo.SysIcon">
+		UPDATE sys_icon 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="name"> NAME=#name#</isNotEmpty>
+			<isNotEmpty prepend="," property="icon"> ICON=#icon#</isNotEmpty>
+			<isNotEmpty prepend="," property="iconDesc"> ICON_DESC=#iconDesc#</isNotEmpty>
+			<isNotEmpty prepend="," property="type"> TYPE=#type#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ICON_NO=#iconNo#
+	</update><!-- add method find--><select id="find" resultClass="com.ay.jfds.icon.pojo.SysIcon" parameterClass="java.util.Map">
+ 		SELECT
+			
+			sys_icon.ICON_NO AS iconNo,
+			sys_icon.NAME AS name,
+			sys_icon.ICON_DESC AS iconDesc,
+			sys_icon.TYPE AS type,
+			
+			sys_icon.STATUS AS status,
+			sys_icon.CREATED AS created,
+			sys_icon.CREATE_TIME AS createTime,
+			sys_icon.UPDATED AS updated,
+			sys_icon.UPDATE_TIME AS updateTime
+		FROM
+			sys_icon
+		WHERE
+			sys_icon.STATUS = '1'
+		<include refid="SysIcon.mapWhereClause"/>
+			ORDER BY iconNo DESC
+	</select><!-- add method count--><select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			sys_icon
+		WHERE
+			sys_icon.STATUS = '1' 
+		<include refid="SysIcon.mapWhereClause"/>
+	</select></sqlMap>

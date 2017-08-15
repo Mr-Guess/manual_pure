@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" " http://ibatis.apache.org/dtd/sql-map-2.dtd"><sqlMap namespace="sysParameter"><typeAlias alias="sysParameter" type="com.ay.jfds.sys.pojo.SysParameter"/><sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="paraCode">
+				para_code like '%'||#paraCode#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="paraName">
+				para_name like '%'||#paraName#||'%'</isNotEmpty>
+		</isParameterPresent>
+	</sql><insert id="insert" parameterClass="sysParameter">
+		INSERT INTO sys_parameter (
+		id,
+		para_code,
+		para_name,
+		para_value,
+		status,
+		created,
+		create_time,
+		updated,
+		update_time
+		)
+		VALUES
+		(
+		#id#, #paraCode#, #paraName#, #paraValue#, #status#, #created#,
+		#createTime#, #updated#, #updateTime#
+		)
+	</insert><delete id="delete" parameterClass="java.lang.String">
+		UPDATE sys_parameter
+		SET
+		status=0
+		WHERE
+		id = #id#
+	</delete><select id="find" resultClass="sysParameter" parameterClass="java.util.Map">
+		SELECT
+		id AS id,
+		para_code AS paraCode,
+		para_name AS paraName,
+		para_value AS paraValue,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		sys_parameter
+		WHERE
+		1 = 1
+		AND status = 1
+		<include refid="sysParameter.mapWhereClause"/>
+	</select><select id="getValueByCode" parameterClass="java.lang.String" resultClass="sysParameter">
+		SELECT
+		id AS id,
+		para_value AS paraValue,
+		para_name AS paraName,
+		para_code AS paraCode
+		FROM
+		sys_parameter
+		WHERE
+		para_code = #paraCode#
+		AND
+		status = 1
+	</select><select id="getById" parameterClass="java.lang.String" resultClass="sysParameter">
+		SELECT
+		id AS id,
+		para_code AS paraCode,
+		para_name AS paraName,
+		para_value AS paraValue,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FORM
+		sys_parameter
+		WHERE
+		id = #id#
+		AND
+		status = 1
+	</select><update id="update" parameterClass="sysParameter">
+		UPDATE sys_parameter
+		SET
+		para_code = #paraCode#, para_name = #paraName#, para_value
+		=#paraValue#, status = #status#, updated = #updated#, update_time =
+		#updateTime#
+		WHERE
+		id = #id#
+	</update><select id="findAll" resultClass="sysParameter">
+		SELECT
+		id AS id,
+		para_code AS paraCode,
+		para_name AS paraName,
+		para_value AS paraValue,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		sys_parameter
+		WHERE
+		status = 1
+	</select><select id="count" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(id)
+		from sys_parameter
+		where 1=1
+		and
+		status=1
+		<include refid="sysParameter.mapWhereClause"/>
+	</select></sqlMap>

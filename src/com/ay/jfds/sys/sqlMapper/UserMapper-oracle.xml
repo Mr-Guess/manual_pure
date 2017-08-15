@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" " http://ibatis.apache.org/dtd/sql-map-2.dtd"><sqlMap namespace="user"><typeAlias alias="user" type="com.ay.jfds.sys.pojo.User"/><typeAlias alias="dept" type="com.ay.jfds.sys.pojo.Department"/><typeAlias alias="userdto" type="com.ay.jfds.sys.dto.UserDTO"/><typeAlias alias="roledto" type="com.ay.jfds.sys.dto.RoleDTO"/><sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="account">
+				account like '%'||#account#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="userName">
+				user_name like '%'||#userName#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="userType">
+				user_type = #userType#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="business">
+				business like '%'||#business#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="deptName">
+				sys_dept.dept_name like '%'||#deptName#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="status">
+				sys_user.status = #status#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sqlPart">
+				$sqlPart$
+			</isNotEmpty>
+		</isParameterPresent>
+		and account != 'administrator' AND sys_user.account!='admin'
+	</sql><insert id="insert" parameterClass="user">
+		INSERT INTO sys_user (
+		id,
+		account,
+		password,
+		user_name,
+		dept_id,
+		org_tree,
+		user_type,
+		login_time,
+		skin_type,
+		last_login_time,
+		status,
+		created,
+		create_time,
+		updated,
+		update_time,
+		salt,
+		lose_count,
+		business
+		)
+		VALUES
+		(
+		#id#, #account#, #password#, #userName#, #deptId#, #orgTree#, #userType#,
+		#loginTime#, #skinType#, #lastLoginTime#, #status#, #created#,
+		#createTime#, #updated#, #updateTime#, #salt#,#loseCount#
+		,#business#
+		)
+	</insert><delete id="delete" parameterClass="java.lang.String">
+		UPDATE sys_user
+		SET status=0
+		WHERE
+		id = #id# and sys_user.account != 'admin'
+	</delete><update id="initionUserPwd" parameterClass="user">
+		UPDATE sys_user
+		SET
+		password=#password#
+		WHERE
+		id = #id#
+	</update><statement id="deleteList" parameterClass="java.util.List">
+		UPDATE sys_user
+		SET status=0
+		<iterate prepend="WHERE" open="(" close=")" conjunction="OR">
+			id=#ids[]#
+		</iterate>
+	</statement><select id="getById" parameterClass="java.lang.String" resultClass="user">
+		SELECT
+		id AS id,
+		account AS account,
+		password AS password,
+		user_name AS userName,
+		dept_id AS deptId,
+		org_tree AS orgTree,
+		user_type AS userType,
+		skin_type AS skinType,
+		login_time AS loginTime,
+		last_login_time AS lastLoginTime,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime,
+		BUSINESS AS business
+		FROM
+		sys_user
+		WHERE
+		id = #id#
+		AND
+		status !=0
+	</select><update id="update" parameterClass="user">
+		UPDATE sys_user
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="account"> account=#account#
+			</isNotNull>
+			<isNotNull prepend="," property="password"> password=#password#
+			</isNotNull>
+			<isNotNull prepend="," property="userName"> user_name = #userName#
+			</isNotNull>
+			<isNotNull prepend="," property="deptId"> dept_id = #deptId#
+			</isNotNull>
+			<isNotNull prepend="," property="orgTree"> org_tree = #orgTree#
+			</isNotNull>
+			<isNotNull prepend="," property="status"> status=#status#
+			</isNotNull>
+			<isNotNull prepend="," property="skinType"> skin_type = #skinType#
+			</isNotNull>
+			<isNotNull prepend="," property="lastLoginTime"> last_login_time =
+				#lastLoginTime#</isNotNull>
+			<isNotNull prepend="," property="created"> created=#created#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime"> create_time=#createTime#
+			</isNotNull>
+			<isNotNull prepend="," property="updated"> updated=#updated#
+			</isNotNull>
+			<isNotNull prepend="," property="updateTime"> update_time=#updateTime#
+			</isNotNull>
+			<isNotNull prepend="," property="salt"> salt=#salt#</isNotNull>
+			<isNotNull prepend="," property="business"> business=#business#
+			</isNotNull>
+		</dynamic>
+		WHERE
+		id = #id#
+	</update><select id="findAll" resultClass="user">
+		SELECT
+		sys_user.id AS id,
+		sys_user.account AS account,
+		sys_user.password AS password,
+		sys_user.user_name AS userName,
+		sys_user.dept_id AS deptId,
+		sys_user.org_tree AS orgTree,
+		sys_user.user_type AS userType,
+		sys_user.skin_type AS skinType,
+		sys_user.login_time AS loginTime,
+		sys_user.last_login_time AS lastLoginTime,
+		sys_user.status AS status,
+		sys_user.created AS created,
+		sys_user.create_time AS createTime,
+		sys_user.updated AS updated,
+		sys_user.update_time AS updateTime,
+		sys_dept.dept_name as deptName
+		FROM
+		sys_user
+		left JOIN
+		sys_dept on sys_user.dept_id = sys_dept.id
+		WHERE
+		sys_user.status=1
+		AND
+		sys_dept.parentType=1
+	</select><select id="getAllentUser" resultClass="user">
+		SELECT
+		sys_user.id AS id,
+		sys_user.account AS account,
+		sys_user.password AS password,
+		sys_user.user_name AS userName,
+		sys_user.dept_id AS deptId,
+		sys_user.org_tree AS orgTree,
+		sys_user.user_type AS userType,
+		sys_user.skin_type AS skinType,
+		sys_user.login_time AS loginTime,
+		sys_user.last_login_time AS lastLoginTime,
+		sys_user.status AS status,
+		sys_user.created AS created,
+		sys_user.create_time AS createTime,
+		sys_user.updated AS updated,
+		sys_user.update_time AS updateTime,
+		sys_dept.dept_name as deptName
+		FROM
+		sys_user
+		left JOIN
+		sys_dept on sys_user.dept_id = sys_dept.id
+		WHERE
+		sys_user.status=1
+		AND
+		sys_dept.parentType=2
+	</select><select id="find" resultClass="user" parameterClass="java.util.Map">
+		SELECT
+		sys_user.id AS id,
+		sys_user.account AS account,
+		sys_user.password AS password,
+		sys_user.user_name AS userName,
+		sys_user.dept_id AS deptId,
+		sys_user.org_tree AS orgTree,
+		sys_user.user_type AS userType,
+		sys_user.skin_type AS skinType,
+		sys_user.login_time AS loginTime,
+		sys_user.last_login_time AS lastLoginTime,
+		sys_user.business as business,
+		sys_user.status AS status,
+		sys_user.created AS created,
+		sys_user.create_time AS createTime,
+		sys_user.updated AS updated,
+		sys_user.update_time AS updateTime,
+		sys_dept.dept_name as deptName
+		FROM
+		sys_user
+		INNER JOIN
+		sys_dept on sys_user.dept_id = sys_dept.id
+		WHERE 1=1
+		AND
+		sys_user.status !=0
+		<!-- 引用sql片段 -->
+		<include refid="user.mapWhereClause"/>
+	</select><select id="getUsersDept" resultClass="dept" parameterClass="user">
+		SELECT
+		id AS id,
+		parent_id AS parentId,
+		dept_name AS deptName,
+		dept_order AS deptOrder,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		sys_dept
+		WHERE
+		id = #id#
+		AND
+		status !=0
+	</select><select id="findUserDto" resultClass="userdto" parameterClass="java.util.Map">
+		SELECT
+		t.id AS id,
+		account AS account,
+		password AS password,
+		user_name AS userName,
+		dept_id AS deptId,
+		dept_name AS deptName,
+		org_tree AS orgTree,
+		user_type AS userType,
+		skin_type AS skinType,
+		login_time AS loginTime,
+		last_login_time AS lastLoginTime,
+		t.dept_id AS parentId,
+		t.status AS status,
+		t.created AS created,
+		t.create_time AS createTime,
+		t.updated AS updated,
+		t.update_time AS updateTime
+		FROM
+		sys_user t, sys_dept m
+		WHERE
+		t.dept_id = m.id
+		AND
+		t.status !=0
+		AND
+		m.status=1
+		<include refid="user.mapWhereClause"/>
+	</select><select id="findEntUserDto" resultClass="userdto" parameterClass="java.util.Map">
+		SELECT
+		t.id AS id,
+		account AS account,
+		password AS password,
+		user_name AS userName,
+		dept_id AS deptId,
+		dept_name AS deptName,
+		org_tree AS orgTree,
+		user_type AS userType,
+		skin_type AS skinType,
+		login_time AS loginTime,
+		last_login_time AS lastLoginTime,
+		t.dept_id AS parentId,
+		t.status AS status,
+		t.created AS created,
+		t.create_time AS createTime,
+		t.updated AS updated,
+		t.update_time AS updateTime
+		FROM
+		sys_user t, sys_dept m
+		WHERE
+		t.dept_id = m.id
+		AND
+		t.status !=0
+		AND
+		m.status=1
+		AND
+		t.user_type = 3
+		<include refid="user.mapWhereClause"/>
+	</select><select id="getUserDto" resultClass="userdto">
+		SELECT
+		u.id AS id,
+		u.account AS account,
+		u.dept_id AS deptId,
+		u.user_name AS name,
+		u.org_tree AS orgTree,
+		d.dept_name AS deptName,
+		u.dept_id AS parentId
+		FROM
+		sys_user u
+		left join
+		sys_dept d
+		on
+		u.dept_id = d.id
+		where
+		u.status != '0'
+		and u.user_type = 1
+	</select><select id="getChildrenUserDto" resultClass="userdto">
+		SELECT
+		u.id AS id,
+		u.account AS account,
+		u.dept_id AS deptId,
+		u.user_name AS name,
+		u.org_tree AS orgTree,
+		d.dept_name AS deptName,
+		u.dept_id AS parentId
+		FROM
+		sys_user u
+		left join
+		sys_dept d
+		on
+		u.dept_id = d.id
+		where
+		u.status != '0'
+		and u.dept_id = #id#
+	</select><select id="getUserDTOById" resultClass="userdto" parameterClass="java.lang.String">
+		SELECT
+		t.id AS id,
+		account AS account,
+		password AS password,
+		user_name AS userName,
+		dept_id AS deptId,
+		m.dept_name AS deptName,
+		org_tree AS orgTree,
+		user_type AS userType,
+		skin_type AS skinType,
+		login_time AS loginTime,
+		last_login_time AS lastLoginTime,
+		t.status AS status,
+		t.created AS created,
+		t.create_time AS createTime,
+		t.updated AS updated,
+		t.update_time AS updateTime,
+		t.BUSINESS AS business
+		FROM
+		sys_user t, sys_dept m
+		WHERE
+		t.dept_id = m.id
+		AND
+		t.id=#id#
+		AND
+		t.status != 0
+		AND
+		m.status=1
+	</select><select id="getQyUserDTOById" resultClass="userdto" parameterClass="java.lang.String">
+		SELECT
+		t.id AS id,
+		account AS account,
+		password AS password,
+		user_name AS userName,
+		dept_id AS deptId,
+		org_tree AS orgTree,
+		user_type AS userType,
+		skin_type AS skinType,
+		login_time AS loginTime,
+		last_login_time AS lastLoginTime,
+		t.status AS status,
+		t.created AS created,
+		t.create_time AS createTime,
+		t.updated AS updated,
+		t.update_time AS updateTime,
+		t.BUSINESS AS business
+		FROM
+		sys_user t
+		WHERE
+		t.id=#id#
+		AND
+		t.status != 0
+	</select><select id="findUserByName" resultClass="user" parameterClass="java.lang.String">
+		SELECT
+		id AS id,
+		account AS account,
+		password AS password,
+		user_name AS userName,
+		dept_id AS deptId,
+		org_tree AS orgTree,
+		user_type AS userType,
+		skin_type AS skinType,
+		login_time AS loginTime,
+		last_login_time AS lastLoginTime,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime,
+		salt AS salt
+		FROM
+		sys_user
+		WHERE
+		(
+		status=1
+		or
+		status=2
+		)
+		AND
+		account=#account#
+	</select><select id="findUserDTOByName" resultClass="userdto" parameterClass="java.lang.String">
+		SELECT
+		id AS id,
+		account AS account,
+		password AS password,
+		user_name AS userName,
+		dept_id AS deptId,
+		org_tree AS orgTree,
+		user_type AS userType,
+		skin_type AS skinType,
+		login_time AS loginTime,
+		last_login_time AS lastLoginTime,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime,
+		lose_count AS loseCount
+		FROM
+		sys_user
+		WHERE
+		(
+		status=1
+		or
+		status=2
+		)
+		AND
+		account=#account#
+	</select><update id="lockUser" parameterClass="java.lang.String">
+		UPDATE
+		SET
+		status = 2
+		WHERE
+		id = #id#
+	</update><select id="getUserRoleDTOById" resultClass="roledto" parameterClass="java.lang.String">
+		SELECT
+		
+		m.menu_sjbh AS sjbh,
+		m.menu_url AS menuUrl,
+		m.menu_id AS menuId,
+		mo.opt_code AS optCode
+		FROM
+		(
+		SELECT 
+		r.id AS role_id
+		FROM
+		sys_role r,
+		sys_group g,
+		sys_role_group rg,
+		sys_user u,
+		sys_user_group ug
+		WHERE
+		r.id = rg.role_id
+		AND g.id = rg.group_id
+		AND u.id = #id#
+		AND g.id = ug.group_id
+		AND u.id = ug.user_id
+		AND rg.status = 1
+		AND r.status=1
+		AND g.status=1
+		AND u.status=1
+		UNION
+		SELECT 
+		r.id AS role_id
+		FROM
+		sys_dept d,
+		sys_role_dept rd,
+		sys_role r,
+		sys_user u
+		WHERE
+		d.id = rd.dept_id
+		AND r.id = rd.role_id
+		AND u.id = #id#
+		AND u.dept_id = d.id
+		AND rd.status = 1
+		AND u.status=1
+		AND r.status=1
+		AND d.status=1
+		UNION
+		SELECT 
+		r.id AS role_id
+		FROM
+		sys_role r,
+		sys_user u,
+		sys_role_user ru
+		WHERE
+		u.id = ru.user_id
+		AND r.id = ru.role_id
+		AND u.id = #id#
+		AND ru.status = 1
+		AND r.status=1
+		AND u.status=1
+		) t,
+		dev_menu m,
+		dev_menu_opt mo,
+		sys_role_menu_opt rmo
+		WHERE
+		t.role_id = rmo.role_id
+		AND m.menu_id = mo.menu_id
+		AND rmo.menu_opt_id = mo.id
+		AND rmo.status = 1
+	</select><select id="getUserDataRoleById" resultClass="com.ay.jfds.sys.pojo.SysRoleData" parameterClass="java.lang.String">
+		SELECT
+		
+		d.table_name as tableName,
+		d.user_ids as userIds,
+		d.dept_ids as deptIds
+		FROM
+		(
+		SELECT 
+		r.id AS role_id
+		FROM
+		sys_role r,
+		sys_group g,
+		sys_role_group rg,
+		sys_user u,
+		sys_user_group ug
+		WHERE
+		r.id = rg.role_id
+		AND g.id = rg.group_id
+		AND u.id = #id#
+		AND g.id = ug.group_id
+		AND u.id = ug.user_id
+		AND rg.status = 1
+		AND u.status=1
+		AND r.status=1
+		AND g.status=1
+		UNION
+		SELECT 
+		r.id AS role_id
+		FROM
+		sys_dept d,
+		sys_role_dept rd,
+		sys_role r,
+		sys_user u
+		WHERE
+		d.id = rd.dept_id
+		AND r.id = rd.role_id
+		AND u.id = #id#
+		AND u.dept_id = d.id
+		AND rd.status = 1
+		AND u.status=1
+		AND r.status=1
+		AND d.status=1
+		UNION
+		SELECT 
+		r.id AS role_id
+		FROM
+		sys_role r,
+		sys_user u,
+		sys_role_user ru
+		WHERE
+		u.id = ru.user_id
+		AND r.id = ru.role_id
+		AND u.id = #id#
+		AND ru.status = 1
+		AND u.status=1
+		AND r.status=1
+		) t,
+		sys_role_data d
+		WHERE
+		t.role_id = d.role_id
+		AND d.status = 1
+	</select><update id="updateUserDTO" parameterClass="userdto">
+		update sys_user
+		set
+		account = #account#,
+		password = #password#,
+		user_name = #userName#,
+		dept_id = #deptId#,
+		user_type = #userType#,
+		skin_type = #skinType#,
+		login_time = #loginTime#,
+
+		last_login_time = #lastLoginTime#,
+		status = #status#,
+		created = #created#,
+		create_time = #createTime#,
+		updated = #updated#,
+		update_time = #updateTime#,
+		lose_count = #loseCount#
+		where
+		id=#id#
+	</update><select id="count" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT count(*)
+		FROM
+		sys_user
+		INNER JOIN
+		sys_dept on sys_user.dept_id = sys_dept.id
+		WHERE 1=1
+		AND
+		sys_user.status !=0
+		<include refid="user.mapWhereClause"/>
+	</select><!-- 判断登陆用户是否拥有基本权限 --><select id="hasRole" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM
+		(
+		(
+		SELECT
+		su.id
+		FROM
+		sys_role_user sru,
+		sys_user su,
+		sys_role sr
+		WHERE
+		sru.role_id = sr.id
+		AND su.id = sru.user_id
+		AND su.account = #account#
+		)
+		UNION
+		(
+		SELECT
+		su.id
+		FROM
+		sys_group sg,
+		sys_user_group sug,
+		sys_user su,
+		sys_role_group srg
+		WHERE
+		sg.id = sug.group_id
+		AND su.id = sug.user_id
+		AND srg.group_id = sg.id
+		AND su.account = #account#
+		)
+		UNION
+		(
+		SELECT
+		su.id
+		FROM
+		sys_dept sd,
+		sys_user su,
+		sys_role_dept srd
+		WHERE
+		sd.id = su.dept_id
+		AND srd.dept_id = sd.id
+		AND su.account = #account#
+		)
+		) t
+	</select><!-- 判断重复 --><select id="checkAccountExist" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM
+		sys_user
+		WHERE
+		status != 0
+		AND account = #account#
+		AND id != #id#
+	</select><!-- 查询部门下面的人 --><select id="findByDept" parameterClass="java.lang.String" resultClass="com.ay.jfds.sys.pojo.User">
+		select id as id,user_name as userName from sys_user  where dept_id=#dept# and status='1' AND user_type='3'
+	</select></sqlMap>

@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+                        " http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="dept">
+	<typeAlias alias="dept" type="com.ay.jfds.sys.pojo.Department" />
+	<typeAlias alias="user" type="com.ay.jfds.sys.pojo.User" />
+	<resultMap class="com.ay.jfds.sys.pojo.Department" id="department">
+		<result property="id" column="id" />
+		<result property="parentId" column="parentId" />
+		<result property="deptName" column="deptName" />
+		<result property="name" column="name" />
+		<result property="deptOrder" column="deptOrder" />
+		<result property="deptTree" column="deptTree" />
+		<result property="status" column="status" />
+		<result property="created" column="created" />
+		<result property="createTime" column="createTime" />
+		<result property="updated" column="updated" />
+		<result property="updateTime" column="updateTime" />
+		<result property="deptUrl" column="deptUrl" />
+		<result property="province" column="province" />
+		<result property="city" column="city" />
+		<result property="area" column="area" />
+		<result property="street" column="street" />
+		<result property="provinceTxt" column="provinceTxt" />
+		<result property="cityTxt" column="cityTxt" />
+		<result property="areaTxt" column="areaTxt" />
+		<result property="streetTxt" column="streetTxt" />
+	</resultMap>
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="deptName">
+				dept_name like '%$deptName$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentId">
+				parent_id = #parentId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="parentType">
+				parentType = #parentType#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="province">
+				province = #province#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="area">
+				area = #area#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="street">
+				street = #street#
+			</isNotEmpty>
+		</isParameterPresent>
+	</sql>
+
+	<insert id="insert" parameterClass="dept">
+		INSERT INTO sys_dept (
+		id,
+		parent_id,
+		dept_name,
+		dept_order,
+		dept_tree,
+		status,
+		created,
+		create_time,
+		updated,
+		update_time,
+		parentType,
+		deptUrl,
+		province,
+		city,
+		area,
+		street
+		)
+		VALUES
+		(
+		#id#, #parentId#, #deptName#, #deptOrder#, #deptTree#, #status#, #created#,
+		#createTime#, #updated#, #updateTime#,#parentType#,#deptUrl#,#province#,#city#,#area#,#street#
+		)
+	</insert>
+
+	<delete id="delete" parameterClass="java.lang.String">
+		delete from sys_dept
+		WHERE
+		id = #id#
+	</delete>
+
+	<select id="getByDeptName" parameterClass="java.lang.String"
+		resultMap="department">
+		SELECT
+		sys_dept.id AS id,
+		sys_dept.parent_id AS parentId,
+		sys_dept.dept_name AS deptName,
+		sys_dept.dept_name AS name,
+		sys_dept.dept_order AS deptOrder,
+		sys_dept.dept_tree AS deptTree,
+		sys_dept.status AS status,
+		sys_dept.created AS created,
+		sys_dept.create_time AS createTime,
+		sys_dept.updated AS updated,
+		sys_dept.update_time AS updateTime,
+		sys_dept.parentType AS parentType,
+		sys_dept.deptUrl,
+		sys_dept.province,
+		sys_dept.city,
+		sys_dept.area,
+		sys_dept.street,
+		[DBO].[FN_codeToText](sys_dept.province) as provinceTxt,
+		[DBO].[FN_codeToText](sys_dept.city) as cityTxt,
+		[DBO].[FN_codeToText](sys_dept.area) as areaTxt,
+		[DBO].[FN_codeToText](sys_dept.street) as streetTxt
+		FROM
+		sys_dept
+		WHERE
+		sys_dept.dept_name = #deptName#
+		and
+		sys_dept.status=1
+	</select>
+
+	<select id="getById" parameterClass="java.lang.String"
+		resultMap="department">
+		SELECT
+		sys_dept.id AS id,
+		sys_dept.parent_id AS parentId,
+		sys_dept.dept_name AS deptName,
+		sys_dept.dept_name AS name,
+		sys_dept.dept_order AS deptOrder,
+		sys_dept.dept_tree AS deptTree,
+		sys_dept.status AS status,
+		sys_dept.created AS created,
+		sys_dept.create_time AS createTime,
+		sys_dept.updated AS updated,
+		sys_dept.update_time AS updateTime,
+		sys_dept.parentType AS parentType,
+		sys_dept.deptUrl,
+		sys_dept.province,
+		sys_dept.city,
+		sys_dept.area,
+		sys_dept.street,
+		[DBO].[FN_codeToText](sys_dept.province) as provinceTxt,
+		[DBO].[FN_codeToText](sys_dept.city) as cityTxt,
+		[DBO].[FN_codeToText](sys_dept.area) as areaTxt,
+		[DBO].[FN_codeToText](sys_dept.street) as streetTxt
+		FROM
+		sys_dept
+		WHERE
+		sys_dept.id = #id#
+		and
+		sys_dept.status=1
+	</select>
+
+	<update id="update" parameterClass="dept">
+		UPDATE sys_dept
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id"> parent_id = #parentId#
+			</isNotNull>
+			<isNotNull prepend="," property="deptName">dept_name = #deptName#
+			</isNotNull>
+			<isNotNull prepend="," property="deptOrder">dept_order = #deptOrder#
+			</isNotNull>
+			<isNotNull prepend="," property="deptTree">dept_tree = #deptTree#
+			</isNotNull>
+			<isNotNull prepend="," property="status">status = #status#
+			</isNotNull>
+			<isNotNull prepend="," property="updated">updated = #updated#
+			</isNotNull>
+			<isNotNull prepend="," property="updateTime">update_time = #updateTime#
+			</isNotNull>
+			<isNotNull prepend="," property="deptUrl">deptUrl = #deptUrl#
+			</isNotNull>
+			<isNotNull prepend="," property="province">province = #province#
+			</isNotNull>
+			<isNotNull prepend="," property="city">city = #city#
+			</isNotNull>
+			<isNotNull prepend="," property="area">area = #area#
+			</isNotNull>
+			<isNotNull prepend="," property="street">street = #street#
+			</isNotNull>
+		</dynamic>
+		WHERE
+		id = #id#
+	</update>
+
+	<select id="findAll" resultMap="department">
+		SELECT
+		sys_dept.id AS id,
+		sys_dept.parent_id AS parentId,
+		sys_dept.dept_name AS deptName,
+		sys_dept.dept_name AS name,
+		sys_dept.dept_order AS deptOrder,
+		sys_dept.dept_tree AS deptTree,
+		sys_dept.status AS status,
+		sys_dept.created AS created,
+		sys_dept.create_time AS createTime,
+		sys_dept.updated AS updated,
+		sys_dept.update_time AS updateTime,
+		sys_dept.deptUrl AS deptUrl,
+		sys_dept.province AS province,
+		sys_dept.city AS city,
+		sys_dept.area AS area,
+		sys_dept.street AS street,
+		[DBO].[FN_codeToText](sys_dept.province) as provinceTxt,
+		[DBO].[FN_codeToText](sys_dept.city) as cityTxt,
+		[DBO].[FN_codeToText](sys_dept.area) as areaTxt,
+		[DBO].[FN_codeToText](sys_dept.street) as streetTxt
+		FROM
+		sys_dept
+		WHERE
+		sys_dept.status=1
+		AND
+		sys_dept.parentType = 1
+		order by sys_dept.dept_order asc
+	</select>
+	<!-- 查询企业管理部门 -->
+	<select id="findGovDept" resultClass="com.ay.jfds.sys.pojo.Department">
+		SELECT
+		sys_dept.id AS id,
+		sys_dept.parent_id AS parentId,
+		sys_dept.dept_name AS deptName,
+		sys_dept.dept_name AS name,
+		sys_dept.dept_order AS deptOrder,
+		sys_dept.dept_tree AS deptTree,
+		sys_dept.status AS status,
+		sys_dept.created AS created,
+		sys_dept.create_time AS createTime,
+		sys_dept.updated AS updated,
+		sys_dept.update_time AS updateTime,
+		sys_dept.deptUrl AS deptUrl,
+		sys_dept.province AS province,
+		sys_dept.city AS city,
+		sys_dept.area AS area,
+		sys_dept.street AS street,
+		[DBO].[FN_codeToText](sys_dept.province) as provinceTxt,
+		[DBO].[FN_codeToText](sys_dept.city) as cityTxt,
+		[DBO].[FN_codeToText](sys_dept.area) as areaTxt,
+		[DBO].[FN_codeToText](sys_dept.street) as streetTxt
+		FROM
+		sys_dept
+		WHERE
+		sys_dept.status=1
+		AND
+		sys_dept.parentType = 1 AND sys_dept.dept_name!='系统管理员'
+		order by sys_dept.dept_order asc
+	</select>
+	
+
+	<select id="findAllEntDept" resultMap="department">
+		SELECT
+		sys_dept.id AS id,
+		sys_dept.parent_id AS parentId,
+		dev_data.data_name AS deptName,
+		sys_dept.dept_name AS name,
+		sys_dept.dept_order AS deptOrder,
+		sys_dept.dept_tree AS deptTree,
+		sys_dept.status AS status,
+		sys_dept.created AS created,
+		sys_dept.create_time AS createTime,
+		sys_dept.updated AS updated,
+		sys_dept.update_time AS updateTime,
+		sys_dept.deptUrl AS deptUrl,
+		sys_dept.province AS province,
+		sys_dept.city AS city,
+		sys_dept.area AS area,
+		sys_dept.street AS street,
+		[DBO].[FN_codeToText](sys_dept.province) as provinceTxt,
+		[DBO].[FN_codeToText](sys_dept.city) as cityTxt,
+		[DBO].[FN_codeToText](sys_dept.area) as areaTxt,
+		[DBO].[FN_codeToText](sys_dept.street) as streetTxt
+
+		FROM
+		sys_dept
+		INNER JOIN
+		dev_data
+		ON
+		sys_dept.dept_name = dev_data.id
+		WHERE
+		sys_dept.status=1
+		AND
+		sys_dept.parentType = 2
+		order by sys_dept.dept_order asc
+	</select>
+
+	<select id="findAllDeptEntDept" resultMap="department">
+		SELECT
+		sys_dept.id AS id,
+		sys_dept.parent_id AS parentId,
+		dev_data.data_name AS name,
+		sys_dept.dept_name AS deptName,
+		sys_dept.dept_order AS deptOrder,
+		sys_dept.dept_tree AS deptTree,
+		sys_dept.status AS status,
+		sys_dept.created AS created,
+		sys_dept.create_time AS createTime,
+		sys_dept.updated AS updated,
+		sys_dept.update_time AS updateTime,
+		sys_dept.deptUrl AS deptUrl,
+		sys_dept.province AS province,
+		sys_dept.city AS city,
+		sys_dept.area AS area,
+		sys_dept.street AS street,
+		[DBO].[FN_codeToText](sys_dept.province) as provinceTxt,
+		[DBO].[FN_codeToText](sys_dept.city) as cityTxt,
+		[DBO].[FN_codeToText](sys_dept.area) as areaTxt,
+		[DBO].[FN_codeToText](sys_dept.street) as streetTxt
+
+		FROM
+		sys_dept
+		INNER JOIN
+		dev_data
+		ON
+		sys_dept.dept_name = dev_data.id
+		WHERE
+		sys_dept.status=1
+		AND
+		sys_dept.parentType = 2
+		order by sys_dept.dept_order asc
+	</select>
+
+	<select id="find" resultClass="dept" parameterClass="java.util.Map">
+		SELECT
+		id AS id,
+		parent_id AS parentId,
+		dept_name AS deptName,
+		sys_dept.dept_name AS name,
+		sys_dept.dept_order AS deptOrder,
+		sys_dept.dept_tree AS deptTree,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		sys_dept
+		WHERE 1=1
+		AND
+		status=1
+		<include refid="dept.mapWhereClause" />
+		ORDER BY dept_order
+	</select>
+
+	<select id="findAllChildDept" resultClass="dept" parameterClass="java.lang.String">
+		SELECT
+		id AS id,
+		parent_id AS parentId,
+		dept_name AS deptName,
+		dept_order AS deptOrder,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime,
+		deptUrl AS deptUrl,
+		province AS province
+		city AS city
+		area AS area
+		street AS street,
+		[DBO].[FN_codeToText](sys_dept.province) as provinceTxt,
+		[DBO].[FN_codeToText](sys_dept.city) as cityTxt,
+		[DBO].[FN_codeToText](sys_dept.area) as areaTxt,
+		[DBO].[FN_codeToText](sys_dept.street) as streetTxt
+		FROM
+		sys_dept
+		WHERE
+		parent_id=#id#
+		AND
+		status=1
+	</select>
+
+	<select id="findDeptsUser" resultClass="user" parameterClass="dept">
+		SELECT
+		id AS id,
+		account AS account,
+		password AS password,
+		user_name AS userName,
+		dept_id AS deptId,
+		user_type AS userType,
+		skin_type AS skinType,
+		login_time AS loginTime,
+		last_login_time AS lastLoginTime,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		sys_user
+		WHERE
+		id = #id#
+		AND
+		status=1
+	</select>
+
+	<select id="findDeptUserById" resultClass="user" parameterClass="java.lang.String">
+		SELECT
+		id AS id,
+		account AS account,
+		password AS password,
+		user_name AS userName,
+		dept_id AS deptId,
+		user_type AS userType,
+		skin_type AS skinType,
+		login_time AS loginTime,
+		last_login_time AS lastLoginTime,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		sys_user
+		WHERE
+		id = #id#
+		AND
+		status=1
+	</select>
+	
+	<select id="findByAddress" parameterClass="java.util.Map" resultClass="com.ay.jfds.sys.pojo.Department">
+		SELECT
+			sys_dept.id AS id,
+			sys_dept.parent_id AS parentId,
+			sys_dept.dept_name AS deptName,
+			sys_dept.dept_name AS name,
+			sys_dept.dept_order AS deptOrder,
+			sys_dept.dept_tree AS deptTree,
+			sys_dept.status AS status,
+			sys_dept.created AS created,
+			sys_dept.create_time AS createTime,
+			sys_dept.updated AS updated,
+			sys_dept.update_time AS updateTime,
+			sys_dept.deptUrl AS deptUrl,
+			sys_dept.province AS province,
+			sys_dept.city AS city,
+			sys_dept.area AS area,
+			sys_dept.street AS street
+			FROM
+			sys_dept
+			WHERE
+			sys_dept.status=1
+			AND
+			sys_dept.parentType = 1
+			AND sys_dept.area = #area#
+			order by sys_dept.dept_order asc
+	</select>
+	
+	<select id="findByParentId" parameterClass="java.lang.String" resultClass="com.ay.jfds.sys.pojo.Department">
+		SELECT
+			sys_dept.id AS id,
+			sys_dept.parent_id AS parentId,
+			sys_dept.dept_name AS deptName,
+			sys_dept.dept_name AS name,
+			sys_dept.dept_order AS deptOrder,
+			sys_dept.dept_tree AS deptTree,
+			sys_dept.status AS status,
+			sys_dept.created AS created,
+			sys_dept.create_time AS createTime,
+			sys_dept.updated AS updated,
+			sys_dept.update_time AS updateTime,
+			sys_dept.deptUrl AS deptUrl,
+			sys_dept.province AS province,
+			sys_dept.city AS city,
+			sys_dept.area AS area,
+			sys_dept.street AS street
+			FROM
+			sys_dept
+			WHERE
+			sys_dept.status=1
+			AND
+			sys_dept.parentType = 1
+			AND sys_dept.parent_id =#id# 
+			order by sys_dept.dept_order asc
+	</select>
+	
+	<select id="findByArea" parameterClass="java.util.Map" resultClass="com.ay.jfds.sys.pojo.Department">
+	SELECT
+			sys_dept.id AS id,
+			sys_dept.parent_id AS parentId,
+			sys_dept.dept_name AS deptName,
+			sys_dept.dept_name AS name,
+			sys_dept.dept_order AS deptOrder,
+			sys_dept.dept_tree AS deptTree,
+			sys_dept.status AS status,
+			sys_dept.created AS created,
+			sys_dept.create_time AS createTime,
+			sys_dept.updated AS updated,
+			sys_dept.update_time AS updateTime,
+			sys_dept.deptUrl AS deptUrl,
+			sys_dept.province AS province,
+			sys_dept.city AS city,
+			sys_dept.area AS area,
+			sys_dept.street AS street
+			FROM
+			sys_dept
+			WHERE
+			sys_dept.status=1
+			AND
+			sys_dept.parentType = 1
+			AND sys_dept.area != #area#
+			AND parent_id='-1'
+			order by sys_dept.dept_order asc
+	</select>
+	
+	
+	<select id="getAreaName" parameterClass="java.lang.String" resultClass="java.lang.String">
+		select top 1 data_name from dev_data  where data_code=#code# and 
+		type_id='0b8415e08bf3474686e643318c0a497c' and status='1'
+	</select>
+	
+	<delete id="deleteUserByDept" parameterClass="java.lang.String">
+		UPDATE sys_user
+		SET
+		status=0
+		WHERE
+		dept_id = #id#
+	</delete>
+	
+	<select id="getByUserTree" parameterClass="java.lang.String" resultClass="com.ay.jfds.sys.pojo.Department">
+		SELECT
+			sys_dept.id AS id,
+			sys_dept.parent_id AS parentId,
+			sys_dept.dept_name AS deptName,
+			sys_dept.dept_name AS name,
+			sys_dept.dept_order AS deptOrder,
+			sys_dept.dept_tree AS deptTree,
+			sys_dept.status AS status,
+			sys_dept.created AS created,
+			sys_dept.create_time AS createTime,
+			sys_dept.updated AS updated,
+			sys_dept.update_time AS updateTime,
+			sys_dept.deptUrl AS deptUrl,
+			sys_dept.province AS province,
+			sys_dept.city AS city,
+			sys_dept.area AS area,
+			sys_dept.street AS street
+			FROM
+			sys_dept
+			where sys_dept.status=1 	AND parent_id='-1'
+			and	sys_dept.id like
+					'%'+#userTrees#+'%'
+			order by sys_dept.dept_order asc
+	</select>
+</sqlMap>

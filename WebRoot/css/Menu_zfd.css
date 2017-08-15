@@ -1,0 +1,37 @@
+
+#leftFrame{ background:#a8bbcd}
+#nav {list-style-type:none; margin:0; padding:32px 0 0; width:200px; z-index:100;font-family:SimHei;border:none;height:85%;overflow-y:auto; float:left;position:absolute; background:#8abfce url(../images/bg_02.jpg) no-repeat; }
+#nav li {display:block; padding:0; margin:0; z-index:100; font-size:16px; background: url(../images/bg_13.jpg) repeat-y; cursor:pointer; }
+#nav li a {display:block; text-decoration:none;height:34px;line-height:36px ; padding:0;background:url(../images/bg_10.jpg) repeat-x; font-family:SimHei; font-weight:bold;font-size:15px;
+color:#2C3848 ;text-align:center; border-bottom: 1px dotted #555555;}
+#nav li.active>a{color:#000}/*一级点击以后的样式*/
+#nav li li.active>a{background:url(../images/li_hov_bg.png) no-repeat left center; color:#111f37;FILTER:none; font-size:15px}/*二级点击以后的样式*/
+#nav li:hover>a{ color:#000;font-weight:bold ; background: url(../images/lihov_03.jpg) repeat-x;}/*鼠标点击二级时一级的样式*/
+#nav li ul {/*display:none; */margin:0; padding:0}
+#nav li:hover ul, #nav li a:hover ul {/*display:block;*/}
+#nav li ul li {margin:0; padding:0; font-size:15px; text-align:center;border-bottom:1px solid #1372a9}
+#nav li ul li a{color:#000;text-decoration:none; display:block; padding:4px; background:url(../images/li_ico.png) no-repeat 16px center; height:30px;line-height:30px;FILTER:none;}
+
+#nav li ul li a:hover {background:url(../images/li_hov_bg.png) no-repeat left center; color:#111f37;FILTER:none; font-size:16px}
+/*#nav li ul li a:active{background:url(../images/lir_hover.png) no-repeat left center; color:#111f37;FILTER:none; font-size:16px}*/
+#nav li ul li a:focus {background:url(../images/li_hov_bg.png) no-repeat left center; color:#111f37;FILTER:none; font-size:16px;outline:none}
+/*#nav ul li a{ display:block}*/
+* html #nav li ul li a, * html #nav li ul li a {height:20px;}
+#nav li ul li a:hover {background:url(../images/li_hov_bg.png) no-repeat left center; color:#111f37;FILTER:none; font-size:16px}
+#nav li li:hover ul, #nav li li a:hover ul {/*display:block;*/}
+#nav li ul li{ background:none;FILTER:none;}
+#nav ul ul li{border:none}
+#nav li li:hover>a{font-weight:bold ; background:url(../images/li_hov_bg.png) no-repeat left center; color:#111f37;FILTER:none;}
+
+#nav li li li a{ display:block;  padding:3px 0 0 70px;height:30px;line-height:30px ;FILTER:none; background:none;border:none;font-size:14px;font-weight:normal;
+text-align:left}
+#nav li li li.active>a{background:url(../images/li_ico.png) no-repeat 40px center; color:#111f37;FILTER:none; font-size:16px;font-weight:normal;}/*二级点击以后的样式*/
+#nav li li li a:hover{color:#000; background:url(../images/li_ico.png) no-repeat 40px center;font-size:16px;font-weight:normal;}
+#nav li li li a:focus{color:#000; background:#069;background:url(../images/li_ico.png) no-repeat 40px center;outline:none;font-weight:normal; font-size:16px;}
+
+
+/*3*/
+/*#nav li:hover li ul{ display: none ; }
+#nav li li:hover ul{ display:bock}
+#nav ul li:hover ul li{ display:block}
+#nav ul li:hover ul{ display:block}*/

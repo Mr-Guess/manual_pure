@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" " http://ibatis.apache.org/dtd/sql-map-2.dtd"><sqlMap namespace="dataType"><typeAlias alias="dataType" type="com.ay.jfds.dev.pojo.DataType"/><typeAlias alias="data" type="com.ay.jfds.dev.pojo.Data"/><typeAlias alias="dataDto" type="com.ay.jfds.dev.dto.DataDTO"/><sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="typeName">
+				type_name like
+				concat('%',#typeName#,'%')
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="created">
+				id = #id#
+			</isNotEmpty>
+		</isParameterPresent>
+	</sql><insert id="insert" parameterClass="dataType">
+		INSERT INTO dev_data_type (
+		id,
+		type_name,
+		status,
+		created,
+		create_time,
+		updated,
+		update_time
+		)
+		VALUES
+		(
+		#id#, #typeName#, #status#, #created#, #createTime#, #updated#,
+		#updateTime#
+		)
+	</insert><delete id="delete" parameterClass="java.lang.String">
+		UPDATE dev_data_type
+		SET
+		status=0
+		WHERE
+		id = #id#
+	</delete><select id="getById" parameterClass="java.lang.String" resultClass="dataType">
+		SELECT
+		id AS id,
+		type_name AS typeName,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		dev_data_type
+		WHERE
+		id =#id#
+	</select><update id="update" parameterClass="dataType">
+		UPDATE dev_data_type
+		SET
+		id = #id#, type_name = #typeName#, status = #status#, created =
+		#created#,
+		create_time = #createTime#, updated = #updated#, update_time = #updateTime#
+		WHERE
+		id = #id#
+	</update><select id="findAll" resultClass="dataType">
+		SELECT
+		id,
+		type_name AS typeName,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+		FROM
+		dev_data_type
+	</select><select id="find" resultClass="dataType" parameterClass="java.util.Map">
+		SELECT
+		id,
+		type_name as typeName,
+		status as status,
+		created as created,
+		create_time as createTime,
+		updated as updated,
+		update_time as updateTime
+		FROM
+		dev_data_type
+		WHERE
+		status = 1
+		<include refid="dataType.mapWhereClause"/>
+	</select><select id="findAllDataInType" resultClass="data" parameterClass="java.lang.String">
+		SELECT
+		d.id AS id,
+		d.type_id AS typeId,
+		data_code as dataCode,
+		data_name as dataName,
+		data_order as dataOrder,
+		d.created AS created,
+		d.create_time AS createTime,
+		d.updated AS updated,
+		d.update_time AS updateTime,
+		d.status AS status
+		FROM
+		dev_data d,
+		dev_data_type t
+		WHERE
+		t.id = d.type_id
+		AND
+		t.status = 1
+		AND
+		t.id=#id#
+		AND
+		d.status = 1
+
+	</select>
+	
+	<select id="count" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(id)
+		from dev_data_type
+		where 1=1
+		and
+		status = 1
+		<include refid="dataType.mapWhereClause"/>
+	</select>
+	
+	<delete id="deleteDataByType" parameterClass="java.lang.String">
+		UPDATE dev_data
+		SET
+		status=0
+		WHERE
+		type_id = #id#
+	</delete>
+	
+	<select id="findAllDataTypes" resultClass="dataType">
+		select id,TYPE_NAME as typeName from dev_data_type where STATUS=1
+	</select>
+	<select id="findWordsByWords" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT
+		COUNT (*)
+		FROM
+		dev_data_type
+		WHERE
+		type_name = #typeName#
+		AND
+		status = 1
+	</select><select id="findWordsById" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT
+		COUNT (*)
+		FROM
+		dev_data_type
+		WHERE
+		id = #id#
+		AND
+		status = 1
+	</select><statement id="deleteList" parameterClass="java.util.List">
+		DELETE dev_data_type
+		<iterate prepend="WHERE" open="(" close=")" conjunction="OR">
+			id=#ids[]#
+		</iterate>
+	</statement></sqlMap>

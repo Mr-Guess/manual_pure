@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document for 网格体系监管*/
+.divModeFunc {
+	height: 30px;
+	background: #b4d0f5;
+	margin: 0px 0px 6px 0;
+	padding-left: 0px;
+}
+
+.func_a {
+	padding: 3px 8px;
+	background: #1B56AF;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	color: #fff;
+}
+
+.divModesearch {
+	height: 70px;
+	font-size: 14px;
+	border: 1px solid #a5bbd3;
+	border-bottom: none;
+}
+
+.divsearch {
+	width: 150px;
+	height: 25px;
+}
+
+.ztree {
+	height: 580px;
+	overflow-y: scroll;
+	border: 1px solid #a5bbd3;
+	border-top: none;
+}
+
+.linkbutton {
+	width: 45px;
+	height: 24px;
+	background: url(../images/search.png) no-repeat;
+	border: none;
+	margin-left: 3px;
+	cursor: pointer;
+}
+
+.tilter {
+	font-size: 26px;
+	font-weight: bold;
+	background: #b4d0f5;
+	height: 34px;
+	widyh: 100%;
+	margin: 0px 0px 6px 0
+}

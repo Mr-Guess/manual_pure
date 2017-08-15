@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"><!--sqlMapper--><sqlMap namespace="Columns"><!-- 查询条件 --><sql id="mapWhereClause">
+		<isParameterPresent>
+<!-- 			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty> -->
+
+<!-- 			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty> -->
+			<isNotEmpty prepend="and" property="id"> sys_columns.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> sys_columns.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> sys_columns.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> sys_columns.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> sys_columns.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> sys_columns.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="sheetId"> sys_columns.SHEET_ID like '%'||#sheetId#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="columnEN"> sys_columns.COLUMN_E_N like '%'||#columnEN#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="columnCH"> sys_columns.COLUMN_C_H like '%'||#columnCH#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="type"> sys_columns.TYPE like '%'||#type#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="length"> sys_columns.LENGTH like '%'||#length#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="enableData"> sys_columns.ENABLE_DATA like '%'||#enableData#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="devData"> sys_columns.DEV_DATA like '%'||#devData#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="adduction"> sys_columns.ADDUCTION like '%'||#adduction#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="enable"> sys_columns.ENABLE like '%'||#enable#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="order"> sys_columns.ORDER like '%'||#order#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="validate"> sys_columns.VALIDATE like '%'||#validate#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="prompt"> sys_columns.PROMPT like '%'||#prompt#||'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql><!-- add method insert--><insert id="insert" parameterClass="com.ay.jfds.create.pojo.Columns">
+  		INSERT INTO sys_columns(
+				
+				SHEET_ID,
+				COLUMN_E_N,
+				COLUMN_C_H,
+				TYPE,
+				LENGTH,
+				ENABLE_DATA,
+				DEV_DATA,
+				ADDUCTION,
+				ENABLE,
+				`ORDER`,
+				IS_NULL,
+				VALIDATE,
+				PROMPT,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME
+				) values(
+				
+				#sheetId#,
+				#columnEN#,
+				#columnCH#,
+				#type#,
+				#length#,
+				#enableData#,
+				#devData#,
+				#adduction#,
+				#enable#,
+				#order#,
+				#isNull#,
+				#validate#,
+				#prompt#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#
+				)
+	</insert><!-- add method delete--><delete id="delete" parameterClass="java.lang.String">
+		DELETE FROM sys_columns WHERE sys_columns.ID=#id#
+	</delete><!-- add method getById--><select id="getById" resultClass="com.ay.jfds.create.pojo.Columns" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			sys_columns.SHEET_ID AS sheetId,
+			(select name_en from sys_sheet where sys_sheet.id=sys_columns.SHEET_ID) as sheetName,
+			sys_columns.COLUMN_E_N AS columnEN,
+			sys_columns.COLUMN_C_H AS columnCH,
+			sys_columns.TYPE AS type,
+			FN_codeToText(sys_columns.TYPE) as typeName,
+			sys_columns.LENGTH AS length,
+			sys_columns.ENABLE_DATA AS enableData,
+			sys_columns.DEV_DATA AS devData,
+			(select dev_data_type.type_name from dev_data_type where dev_data_type.id=sys_columns.DEV_DATA) as devDataName,
+			sys_columns.ADDUCTION AS adduction,
+			sys_columns.ENABLE AS enable,
+			sys_columns.`ORDER` AS `order`,
+			sys_columns.IS_NULL AS isNull,
+			sys_columns.VALIDATE AS validate,
+			sys_columns.PROMPT AS prompt,
+			
+			sys_columns.ID AS id,
+			sys_columns.STATUS AS status,
+			sys_columns.CREATED AS created,
+			sys_columns.CREATE_TIME AS createTime,
+			sys_columns.UPDATED AS updated,
+			sys_columns.UPDATE_TIME as updateTime
+		from
+		sys_columns
+  		where 
+ 	 		sys_columns.ID=#id#
+	</select><select id="isExits" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) from
+		sys_columns where sys_columns.status='1' and sys_columns.COLUMN_E_N=#columnEN# and sys_columns.SHEET_ID=#sheetId#
+	</select><!-- add method update--><update id="update" parameterClass="com.ay.jfds.create.pojo.Columns">
+		UPDATE sys_columns 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="sheetId"> SHEET_ID=#sheetId#</isNotEmpty>
+			<isNotEmpty prepend="," property="columnEN"> COLUMN_E_N=#columnEN#</isNotEmpty>
+			<isNotEmpty prepend="," property="columnCH"> COLUMN_C_H=#columnCH#</isNotEmpty>
+			<isNotEmpty prepend="," property="type"> TYPE=#type#</isNotEmpty>
+			<isNotEmpty prepend="," property="length"> LENGTH=#length#</isNotEmpty>
+			<isNotEmpty prepend="," property="enableData"> ENABLE_DATA=#enableData#</isNotEmpty>
+			<isNotEmpty prepend="," property="devData"> DEV_DATA=#devData#</isNotEmpty>
+			<isNotEmpty prepend="," property="adduction"> ADDUCTION=#adduction#</isNotEmpty>
+			<isNotEmpty prepend="," property="enable"> ENABLE=#enable#</isNotEmpty>
+			<isNotEmpty prepend="," property="order"> `ORDER`=#order#</isNotEmpty>
+			<isNotEmpty prepend="," property="isNull"> IS_NULL=#isNull#</isNotEmpty>
+			<isNotEmpty prepend="," property="validate"> VALIDATE=#validate#</isNotEmpty>
+			<isNotEmpty prepend="," property="prompt"> PROMPT=#prompt#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update><!-- add method find--><select id="find" resultClass="com.ay.jfds.create.pojo.Columns" parameterClass="java.util.Map">
+			SELECT 
+			
+			sys_columns.SHEET_ID AS sheetId,
+			(select name_en from sys_sheet where sys_sheet.id=sys_columns.SHEET_ID) as sheetName,
+			sys_columns.COLUMN_E_N AS columnEN,
+			sys_columns.COLUMN_C_H AS columnCH,
+			sys_columns.TYPE AS type,
+			FN_codeToText(sys_columns.TYPE) as typeName,
+			sys_columns.LENGTH AS length,
+			sys_columns.ENABLE_DATA AS enableData,
+			sys_columns.DEV_DATA AS devData,
+		(select dev_data_type.type_name from dev_data_type where dev_data_type.id=sys_columns.DEV_DATA) as devDataName,
+			sys_columns.ADDUCTION AS adduction,
+			sys_columns.ENABLE AS enable,
+			sys_columns.`ORDER` AS `order`,
+			sys_columns.IS_NULL AS isNull,
+			sys_columns.VALIDATE AS validate,
+			sys_columns.PROMPT AS prompt,
+			
+			sys_columns.ID AS id,
+			sys_columns.STATUS AS status,
+			sys_columns.CREATED AS created,
+			sys_columns.CREATE_TIME AS createTime,
+			sys_columns.UPDATED AS updated,
+			sys_columns.UPDATE_TIME as updateTime
+		from
+		sys_columns
+		WHERE
+			sys_columns.STATUS = '1'
+		<include refid="Columns.mapWhereClause"/>
+	</select><!-- add method count--><select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			sys_columns
+		WHERE
+			sys_columns.STATUS = '1' 
+		<include refid="Columns.mapWhereClause"/>
+	</select><select id="queryForSheet" resultClass="com.ay.jfds.create.pojo.Columns" parameterClass="java.lang.String">
+		SELECT 
+			sys_columns.SHEET_ID AS sheetId,
+			(select name_en from sys_sheet where sys_sheet.id=sys_columns.SHEET_ID) as sheetName,
+			sys_columns.COLUMN_E_N AS columnEN,
+			sys_columns.COLUMN_C_H AS columnCH,
+			sys_columns.TYPE AS type,
+			FN_codeToText(sys_columns.TYPE) as typeName,
+			sys_columns.LENGTH AS length,
+			sys_columns.ENABLE_DATA AS enableData,
+			sys_columns.DEV_DATA AS devData,
+		(select dev_data_type.type_name from dev_data_type where dev_data_type.id=sys_columns.DEV_DATA) as devDataName,
+			sys_columns.ADDUCTION AS adduction,
+			sys_columns.ENABLE AS enable,
+			sys_columns.`ORDER` AS `order`,
+			sys_columns.IS_NULL AS isNull,
+			sys_columns.VALIDATE AS validate,
+			sys_columns.PROMPT AS prompt,
+			
+			sys_columns.ID AS id,
+			sys_columns.STATUS AS status,
+			sys_columns.CREATED AS created,
+			sys_columns.CREATE_TIME AS createTime,
+			sys_columns.UPDATED AS updated,
+			sys_columns.UPDATE_TIME as updateTime
+		from
+		sys_columns
+		WHERE
+			sys_columns.STATUS = '1'
+			and sys_columns.SHEET_ID=#sheetId#
+	</select></sqlMap>

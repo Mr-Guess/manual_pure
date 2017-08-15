@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="SystemConfigure">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_SYSTEM_CONFIGURE.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_SYSTEM_CONFIGURE.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_SYSTEM_CONFIGURE.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_SYSTEM_CONFIGURE.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_SYSTEM_CONFIGURE.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_SYSTEM_CONFIGURE.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="dataCode"> TB_SYSTEM_CONFIGURE.DATA_CODE like '%'+#dataCode#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="dataName"> TB_SYSTEM_CONFIGURE.DATA_NAME like '%'+#dataName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="dataValue"> TB_SYSTEM_CONFIGURE.DATA_VALUE like '%'+#dataValue#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="dataDescribe"> TB_SYSTEM_CONFIGURE.DATA_DESCRIBE like '%'+#dataDescribe#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="dataType"> TB_SYSTEM_CONFIGURE.DATA_TYPE like '%'+#dataType#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.ay.jfds.sys.pojo.SystemConfigure">
+  		INSERT INTO TB_SYSTEM_CONFIGURE(
+				
+				DATA_CODE,
+				DATA_NAME,
+				DATA_VALUE,
+				DATA_DESCRIBE,
+				DATA_TYPE,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#dataCode#,
+				#dataName#,
+				#dataValue#,
+				#dataDescribe#,
+				#dataType#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_SYSTEM_CONFIGURE SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.ay.jfds.sys.pojo.SystemConfigure" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_SYSTEM_CONFIGURE.DATA_CODE AS dataCode,
+			TB_SYSTEM_CONFIGURE.DATA_NAME AS dataName,
+			TB_SYSTEM_CONFIGURE.DATA_VALUE AS dataValue,
+			TB_SYSTEM_CONFIGURE.DATA_DESCRIBE AS dataDescribe,
+			TB_SYSTEM_CONFIGURE.DATA_TYPE AS dataType,
+			
+			TB_SYSTEM_CONFIGURE.ID AS id,
+			TB_SYSTEM_CONFIGURE.STATUS AS status,
+			TB_SYSTEM_CONFIGURE.CREATED AS created,
+			TB_SYSTEM_CONFIGURE.CREATE_TIME AS createTime,
+			TB_SYSTEM_CONFIGURE.UPDATED AS updated,
+			TB_SYSTEM_CONFIGURE.UPDATE_TIME as updateTime
+		from
+		TB_SYSTEM_CONFIGURE
+  		where 
+ 	 		TB_SYSTEM_CONFIGURE.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.ay.jfds.sys.pojo.SystemConfigure">
+		UPDATE TB_SYSTEM_CONFIGURE 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="dataCode"> DATA_CODE=#dataCode#</isNotEmpty>
+			<isNotEmpty prepend="," property="dataName"> DATA_NAME=#dataName#</isNotEmpty>
+			<isNotEmpty prepend="," property="dataValue"> DATA_VALUE=#dataValue#</isNotEmpty>
+			<isNotEmpty prepend="," property="dataDescribe"> DATA_DESCRIBE=#dataDescribe#</isNotEmpty>
+			<isNotEmpty prepend="," property="dataType"> DATA_TYPE=#dataType#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.ay.jfds.sys.pojo.SystemConfigure" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_SYSTEM_CONFIGURE.DATA_CODE AS dataCode,
+			TB_SYSTEM_CONFIGURE.DATA_NAME AS dataName,
+			TB_SYSTEM_CONFIGURE.DATA_VALUE AS dataValue,
+			TB_SYSTEM_CONFIGURE.DATA_DESCRIBE AS dataDescribe,
+			TB_SYSTEM_CONFIGURE.DATA_TYPE AS dataType,
+			
+			TB_SYSTEM_CONFIGURE.ID AS id,
+			TB_SYSTEM_CONFIGURE.STATUS AS status,
+			TB_SYSTEM_CONFIGURE.CREATED AS created,
+			TB_SYSTEM_CONFIGURE.CREATE_TIME AS createTime,
+			TB_SYSTEM_CONFIGURE.UPDATED AS updated,
+			TB_SYSTEM_CONFIGURE.UPDATE_TIME AS updateTime
+		FROM
+			TB_SYSTEM_CONFIGURE
+		WHERE
+			TB_SYSTEM_CONFIGURE.STATUS = '1'
+		<include refid="SystemConfigure.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_SYSTEM_CONFIGURE
+		WHERE
+			TB_SYSTEM_CONFIGURE.STATUS = '1' 
+		<include refid="SystemConfigure.mapWhereClause"/>
+	</select>
+</sqlMap>

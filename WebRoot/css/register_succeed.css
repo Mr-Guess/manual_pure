@@ -1,0 +1,69 @@
+@charset "utf-8";
+/* CSS Document */
+img {
+	border: 0
+}
+
+a {
+	text-decoration: none
+}
+
+li {
+	list-style: none
+}
+
+body {
+	background: url(../images/zc_back02.jpg) no-repeat top center;
+	font-family: "黑体"
+}
+
+#body {
+	width: 822px;
+	margin: auto;
+}
+
+#top {
+	width: 100%;
+	overflow: hidden
+}
+
+#top img {
+	float: left;
+}
+
+#top a {
+	display: block;
+	float: right;
+	font-size: 20px;
+	margin-top: 65px;
+	color: #2d92f0
+}
+
+#main {
+	overflow: hidden;
+	margin-left: 200px;
+	margin-top: 30px;
+}
+
+#main img,#hint {
+	float: left;
+}
+
+#hint {
+	color: #ff8a00;
+	font-size: 30px;
+	line-height: 128px;
+}
+
+#foot a {
+	display: block;
+	width: 183px;
+	height: 55px;
+	margin-left: 315px;
+	margin-top: 30px;
+	background: url(../images/zc_login01.png) no-repeat center center
+}
+
+#foot a:active {
+	background: url(../images/zc_login02.png) no-repeat bottom center
+}

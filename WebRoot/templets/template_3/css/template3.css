@@ -1,0 +1,381 @@
+body {
+	font-family: "宋体";
+	font-size: 12px;
+	scrollbar-face-color: #9EBFE8;
+	scrollbar-shadow-color: #FFFFFF;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-3dlight-color: #9EBFE8;
+	scrollbar-darkshadow-color: #9EBFE8;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-arrow-color: #FFFFFF
+}
+
+a {
+	font-family: "宋体";
+	font-size: 12px;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+	color: yellow;
+}
+
+.datewordspos { /*容器作用的层，用于放置日期文字和按钮组*/
+	float: left;
+	margin-top: 30px;
+	width: 1024px;
+	position: absolute;
+}
+
+.toptitle {
+	background: url("../top/top_banner.jpg");
+	background-repeat: no-repeat;
+	height: 111px;
+	vertical-align: top;
+}
+
+.datewords { /*日期文字*/
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体";
+	font-weight: bold;
+	font-size: 12px;
+	float: right;
+	margin-top: 73px;
+	padding-right: 10px;
+	color: #ffffff;
+}
+
+.rtopmenu { /*右上角菜单*/
+	z-index: -1;
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体";
+	background-image: url("../top/top_title.gif");
+	background-repeat: no-repeat;
+	float: right;
+	width: 220px;
+	height: 20px;
+	margin-top: 0px;
+	color: #FFFFFF;
+	padding-left: 20px;
+	font-size: 12px;
+	position: absolute;
+}
+
+.userinfo {
+	position: absolute;
+	top: 53px;
+	font-family: "宋体";
+	color: #fff;
+	font-size: 12px;
+	height: 26px;
+	padding-top: 6px;
+	text-align: right;
+	padding-right: 18px;
+	width: 204px;
+	/*background:url("../top/bgInfo.gif");*/
+}
+
+.mainmenu {
+	float: left;
+	height: 27px;
+	width: 900px;
+	margin-top: 53px;
+	margin-left: 203px;
+	position: absolute;
+}
+
+.mainleft { /*定义主界面左侧菜单栏*/
+	width: 204px;
+	background-image: url("../leftmenu/bg_left1.gif");
+	background-repeat: repeat-y;
+	background-color: #F1F6F9;
+	vertical-align: top;
+}
+
+.navpoint {
+	CURSOR: hand;
+	height: 100%;
+	width: 4px;
+	background: url("../leftmenu/bgHide.gif");
+	padding: 0;
+}
+
+.navpoint span {
+	CURSOR: hand;
+	height: 90px;
+	width: 4px;
+	background-image: url("../leftmenu/left_flex1.gif");
+	background-repeat: no-repeat;
+	margin: 0px;
+}
+
+#menudiv {
+	float: left;
+	white-space: nowrap;
+}
+
+.menu {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+.menu  li {
+	float: left;
+	margin-right: 0px;
+	border: 1px;
+	width: 117px; /*119*/
+	height: 27px;
+	border: 0px solid red;
+	text-align: center;
+}
+
+.menu  li div {
+	padding-top: 6px;
+	cursor: hand;
+	width: 117px;
+	height: 27px;
+	text-decoration: none;
+	text-align: center;
+	font-size: 13px;
+}
+
+.menu li#father div {
+	background: url("../top/top_menu1.gif") repeat-x;
+}
+/* 右侧1级菜单状态（chose：选中 nochose：未选中 mousemove：鼠标经过） */
+.menu li#father.chose div {
+	color: #FFF9A6;
+	font-weight: bold;
+	background-image: url("../top/top_menu2.gif");
+	text-decoration: none;
+	background-repeat: no-repeat;
+	width: 117px; /*125*/
+}
+
+.menu li#father.nochose div {
+	color: #fff;
+	font-weight: bold;
+	font-size: 13px;
+	background-image: url("../top/top_menu1.gif");
+	background-repeat: no-repeat;
+	width: 117px;
+}
+
+.menu li#father.mousemove div {
+	color: #1E72CA;
+	font-weight: bold;
+	font-size: 13px;
+	background-image: url("../top/top_menu3.gif");
+	background-repeat: no-repeat;
+	width: 117px;
+}
+
+.menu  li#child.chose  div {
+	color: white;
+	background-image: url("../top/top_menu1.gif");
+}
+
+.menu  li#child.nochose  div {
+	color: white;
+	background-image: url("../top/top_menu1.gif");
+}
+
+.menu  li a {
+	COLOR: yellow;
+	TEXT-DECORATION: none;
+	cursor: hand;
+}
+
+UL.tree {
+	text-indent: 0px;
+	margin-left: 0px;
+	margin-top: 0px;
+	list-style-position: inside;
+	font-size: 12px;
+	width: 204px;
+	color: #fff;
+}
+
+UL.tree li {
+	list-style: none;
+	COLOR: #2C65C4;
+	line-height: 20px;
+	background-color: #e3f9fd;
+	background-image: url("../leftmenu/folder_open.gif");
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	font-weight: normal;
+}
+
+.treeover {
+	list-style: none;
+	color: yellow;
+	line-height: 20px;
+	background-color: #86d9fb;
+	background-image: url("../leftmenu/folder_open.gif");
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	font-weight: normal;
+}
+
+.treeout {
+	list-style: none;
+	COLOR: #2C65C4;
+	line-height: 20px;
+	background-color: #e3f9fd;
+	background-image: url("../leftmenu/folder_open.gif");
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	font-weight: normal;
+}
+
+UL.tree div {
+	padding-left: 5px;
+}
+/*左侧树型菜单*/
+UL.tree Li.treeopen {
+	list-style: none;
+	COLOR: #FFF;
+	line-height: 28px;
+	background-image: url("../leftmenu/treeopen.gif");
+	background-repeat: no-repeat;
+	margin-right: 0px;
+	padding-left: 14px;
+	font-weight: bold;
+}
+
+UL.tree Li.treeclose {
+	list-style: none;
+	COLOR: #FFF;
+	line-height: 28px;
+	text-align: absmiddle;
+	background-image: url("../leftmenu/tree.gif");
+	background-repeat: no-repeat;
+	margin-right: 0px;
+	padding-left: 14px;
+	font-weight: bold;
+}
+
+UL.tree Li.treeopen UL {
+	margin-top: 2px;
+	margin-left: 22px;
+}
+
+UL.tree Li.treeclose UL {
+	display: none;
+	COLOR: #FFF;
+	background-image: url("../leftmenu/tree.gif");
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	padding-left: 14px;
+	line-height: 28px;
+	font-weight: bold;
+}
+
+UL.tree  li a {
+	TEXT-DECORATION: none;
+	cursor: hand;
+	font-size: 13px;
+}
+
+.treedivoutline {
+	overflow: auto;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	vertical-align: top;
+	background: url("../leftmenu/bg_left2.gif") no-repeat center bottom;
+	background-color: #F1F6F9; /*左侧背景色*/
+	height: 100%;
+}
+
+.treediv { /*左侧菜单位置*/
+	margin-top: 0px;
+	margin-left: 0px;
+}
+
+/*----------------以下定义界面按钮等元素---------------*/
+.menuteam { /*按钮组*/
+	float: left;
+	padding-left: 5px;
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体";
+	font-weight: bold;
+	color: #30758e;
+	font-size: 13px;
+	padding-top: 3px;
+	position: absolute;
+	top: 52px; /*37*/
+	left: -180px;
+	background: url("../top/bg_div.gif") no-repeat 0px 0px;
+	height: 26px;
+	width: 204px;
+}
+
+.menuteam img {
+	top: -1px;
+} /* 左侧滑动层箭头的位置 */
+.b1 {
+	background: url("../top/icon_b1.gif") repeat-x right top;
+	background-color: #3474AC;
+	padding-top: 2px;
+	color: #ffffff;
+	CURSOR: hand;
+	width: 47px;
+	height: 20px;
+	border-style: none;
+}
+
+/*一级导航菜单，表层*/
+.procro {
+	float: left;
+	height: 27px;
+	margin: 0px;
+	overflow: hidden;
+	width: 702px; /*菜单显示长度*/
+	display: inline;
+	vertical-align: bottom;
+}
+/*一级导航菜单，内层*/
+.procroin {
+	height: 27px;
+	width: 20000px; /*内层菜单区域长度*/
+}
+
+.lftbtn { /*右侧1级菜单向左滚动按钮*/
+	background: url('#') no-repeat center;
+	cursor: pointer;
+	float: left;
+	margin-left: 0px;
+	width: 36px;
+	height: 27px;
+	display: inline;
+}
+
+.rgtbtn { /*右侧1级菜单向右滚动按钮*/
+	background: url('#') no-repeat center;
+	float: left;
+	margin-left: 0px;
+	height: 27px;
+	width: 36px;
+	display: inline;
+}
+
+.hasMap { /*地图显示模式切换*/
+	background-image: url("../right/indent.gif");
+	background-repeat: no-repeat;
+	width: 24px;
+	height: 24px;
+	float: left;
+	margin-top: 5px;
+	margin-left: 3px;
+	position: absolute;
+	cursor: hand;
+	z-index: 2;
+}
+
+.right_div { /*右侧div*/
+	background-image: url("../top/right_top.gif");
+	background-repeat: repeat-x;
+	padding-top: 0px;
+}

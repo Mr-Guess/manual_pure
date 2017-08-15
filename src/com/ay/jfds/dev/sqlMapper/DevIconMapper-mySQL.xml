@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+                        " http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="icon">
+
+	<typeAlias alias="icon" type="com.ay.jfds.dev.pojo.Icon" />
+
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="icon_type">
+				icon_type = #icon_type#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="icon_leibie">
+				icon_leibie = #icon_leibie#
+			</isNotEmpty>
+		</isParameterPresent>
+	</sql>
+
+	<insert id="insert" parameterClass="icon">
+		insert into dev_icon
+		(icon_id, icon_name, icon_url, icon_remark, creation_date, icon_type,
+		icon_leibie)
+		values (#icon_id#, #icon_name#, #icon_url#, #icon_remark#, #creation_date#,
+		#icon_type#, #icon_leibie#)
+	</insert>
+
+	<delete id="delete" parameterClass="java.lang.String">
+		delete from dev_icon
+		where icon_id=#icon_id#
+	</delete>
+
+	<select id="getById" parameterClass="java.lang.String"
+		resultClass="icon">
+		select icon_id, icon_name, icon_url, icon_remark,
+		creation_date, icon_type, icon_leibie
+		from dev_icon
+		where icon_id = #icon_id#
+	</select>
+
+	<update id="update" parameterClass="icon">
+		update dev_icon
+		set icon_id = #icon_id# , icon_name = #icon_name#, icon_url = #icon_url#,
+		icon_remark = #icon_remark#, creation_date = #creation_date#,
+		icon_type = #icon_type#, icon_leibie = #icon_leibie#
+		where icon_id = #icon_id#
+	</update>
+
+	<select id="findAll" resultClass="icon">
+		select icon_id, icon_name,
+		icon_url, icon_remark, creation_date, icon_type, icon_leibie
+		from dev_icon
+	</select>
+
+	<select id="find" resultClass="icon" parameterClass="java.util.Map">
+		select icon_id, icon_name, icon_url, icon_remark, creation_date,
+		icon_type, icon_leibie
+		from dev_icon
+		where 1=1
+		<include refid="icon.mapWhereClause" />
+	</select>
+
+</sqlMap>
+

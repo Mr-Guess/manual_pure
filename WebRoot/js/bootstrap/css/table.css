@@ -1,0 +1,125 @@
+@charset "utf-8";
+
+/* CSS Document */
+*
+
+	 
+margin
+:
+0px;
+
+   
+	
+padding
+:
+0px;
+
+   
+	
+border
+:none
+;
+
+   
+	
+font-family
+:SimHe
+;
+
+   
+	
+overflow
+:hidden
+;
+
+
+}
+body {
+	background: #ced4d7
+}
+
+ul {
+	list-style: none;
+}
+
+.navbar_top {
+	width: 99.9%;
+	height: 75px;
+	overflow: hidden;
+	background: url(../img/yj_top.jpg) no-repeat
+}
+
+.nav_tip {
+	float: right;
+	width: 440px;
+	height: 75px;
+	margin-right: 5px
+}
+
+.ansc {
+	width: 440px;
+	height: 75px;
+	float: right;
+	list-style: none;
+}
+
+.ansc li {
+	float: left;
+}
+
+.nav_box {
+	list-style: none;
+	display: none;
+	position: absolute;
+	margin: 0px;
+	padding: 0
+}
+
+.nav_box li {
+	
+}
+
+.nav_box li a {
+	padding: 5px 10px;
+	background: #3d3e3e;
+	color: #ffffff;
+	display: block;
+}
+
+.nav_box li a:hover {
+	background: #99c1e0;
+	color: #000;
+}
+
+img {
+	vertical-align: middle
+}
+
+/*table left*/
+.aqsc {
+	width: 110px;
+	height: 75px;
+	display: block;
+	background: url(../img/aqsc.png) no-repeat;
+}
+
+.aqscbz {
+	width: 110px;
+	height: 75px;
+	display: block;
+	background: url(../img/aqscbz.png) no-repeat;
+}
+
+.sgdxal {
+	width: 110px;
+	height: 75px;
+	display: block;
+	background: url(../img/sgdxal.png) no-repeat;
+}
+
+.whptzk {
+	width: 110px;
+	height: 75px;
+	display: block;
+	background: url(../img/whptzk.png) no-repeat;
+}

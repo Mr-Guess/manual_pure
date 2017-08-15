@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+  <package name="watch" extends="struts-default" namespace="/watch">
+    <action name="watchAction" class="com.ay.jfds.sys.action.WatchAction"/>
+  </package>
+ <!--被监控者信息模块-->
+  <package name="byWatchersInfo" extends="struts-default" namespace="/byWatchersInfo">
+    <action name="byWatchersInfoAction" class="com.ay.jfds.sys.action.ByWatchersInfoAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+</struts>

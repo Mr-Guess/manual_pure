@@ -1,0 +1,224 @@
+#nav ul {
+	padding-right: 0px;
+	padding-left: 0px;
+	z-index: 100;
+	background: #999999;
+	padding-bottom: 0px;
+	margin: 0px;
+	font: 10px arial, verdana, sans-serif;
+	padding-top: 0px;
+	list-style-type: none;
+	position: relative;
+}
+
+* {
+	border: none;
+}
+
+a {
+	border: none;
+}
+
+a:hover {
+	border: none;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+#nav {
+	padding-right: 0px;
+	padding-left: 1px;
+	/*background :#97bfde;*/
+	padding-bottom: 1px;
+	width: 100%;
+	padding-top: 0px;
+	height: 26px;
+	margin-top: 0px;
+	position: relative;
+	font: 12px arial, verdana, sans-serif;
+	list-style-type: none;
+	border-top: 1px solid #b6cddc;
+	text-align: center;
+}
+
+.lee {
+	
+}
+
+.lee a {
+	color: #fff;
+	background: none;
+	padding: 0px 0px;
+	margin-right: 10px;
+}
+
+#nav table {
+	border-collapse: collapse
+}
+
+#nav li ul {
+	margin: 3px 0 0 0px;
+	border-top: none;
+}
+
+#nav li {
+	float: left;
+}
+
+#nav li li {
+	float: none
+}
+
+#nav li a li {
+	float: left
+}
+
+#nav li a {
+	padding-right: 1px;
+	display: block;
+	padding-left: 1px;
+	font-weight: bold;
+	float: left;
+	padding-bottom: 0px;
+	background: #97bfde url(../images/li_cur.gif) no-repeat right center;
+	/*border-left: #528e34 1px solid;*/
+	color: #000;
+	line-height: 30px;
+	white-space: nowrap;
+	width: 169px;
+	height: 26px;
+	text-decoration: none;
+	border: none;
+	font-size: 15px;
+}
+
+#nav li li a {
+	text-align: center;
+	float: none;
+	line-height: 45px;
+	height: 45px;
+	color: #005bb8;
+}
+
+#nav li:hover {
+	z-index: 100;
+	position: relative
+}
+
+#nav a:hover {
+	z-index: 100;
+	border-left: #779e25 1px solid;
+	color: #fff;
+	position: relative;
+}
+/*一级菜单的a:hover*/
+#nav li:hover>a {
+	color: #2b5374;
+	border: none;
+}
+
+#nav :hover ul {
+	z-index: 300;
+	left: 0px;
+	top: 23px;
+}
+
+#nav a:hover ul {
+	left: -1px
+}
+
+#nav ul {
+	position: absolute;
+	top: -9999px
+}
+/*bug===================================border*/
+#nav li:hover li:hover>ul {
+	left: 0px;
+	margin-left: 100%;
+	top: 0px;
+}
+
+#nav li:hover>ul ul {
+	left: 0px;
+	width: auto;
+	position: absolute;
+	top: -9999px;
+	margin: 0px;
+}
+/*2级a:hover*/
+#nav li:hover li>a {
+	height: 45px;
+	width: 169px;
+	/*border-top:1px solid #d8dbdc;
+background:url(../templets/template_2/top/erji_a.png) no-repeat;
+background:#fff;*/
+	color: #605e5e;
+	font-weight: normal;
+}
+
+#nav li:hover li:hover>a {
+	/*background:#83add1;*/
+	color: #fff;
+	font-weight: bold;
+}
+/*3级*/
+#nav li:hover li li>a {
+	height: 45px;
+	width: 169x;
+	color: #666464;
+	/*border-top:1px solid #d8dbdc;*/
+}
+
+#nav li:hover li:hover li:hover>a {
+	color: #fff
+}
+
+#nav li a:hover ul li a:hover {
+	background: #000;
+}
+
+#nav a:hover a:hover ul {
+	left: 100%;
+	top: 0px
+}
+
+#nav a:hover a:hover a:hover ul {
+	left: 100%;
+	top: 0px
+}
+
+#nav a:hover a:hover a:hover a:hover ul {
+	left: 100%;
+	top: 0px
+}
+
+#nav a:hover a:hover a:hover a:hover a:hover ul {
+	left: 100%;
+	top: 0px
+}
+
+#nav a:hover ul ul {
+	position: absolute;
+	top: -9999px
+}
+
+#nav a:hover a:hover ul ul {
+	position: absolute;
+	top: -9999px
+}
+
+#nav a:hover a:hover a:hover ul ul {
+	position: absolute;
+	top: -9999px
+}
+
+#nav a:hover a:hover a:hover a:hover ul ul {
+	position: absolute;
+	top: -9999px
+}

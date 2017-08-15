@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="JobRemind">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> tb_job_remind.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> tb_job_remind.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> tb_job_remind.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> tb_job_remind.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> tb_job_remind.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> tb_job_remind.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="model"> tb_job_remind.MODEL like CONCAT('%',#model#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="name"> tb_job_remind.NAME like CONCAT('%',#name#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="time"> tb_job_remind.TIME like CONCAT('%',#time#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="owner"> tb_job_remind.OWNER like CONCAT('%',#owner#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="creator"> tb_job_remind.CREATOR like CONCAT('%',#creator#,'%')</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.jobRemind.pojo.JobRemind">
+  		INSERT INTO tb_job_remind(
+				
+				MODEL,
+				NAME,
+				TIME,
+				OWNER,
+				CREATOR,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#model#,
+				#name#,
+				#time#,
+				#owner#,
+				#creator#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE tb_job_remind SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.jobRemind.pojo.JobRemind" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_job_remind.MODEL AS model,
+			tb_job_remind.NAME AS name,
+			tb_job_remind.TIME AS time,
+			tb_job_remind.OWNER AS owner,
+			tb_job_remind.CREATOR AS creator,
+			
+			tb_job_remind.ID AS id,
+			tb_job_remind.STATUS AS status,
+			tb_job_remind.CREATED AS created,
+			tb_job_remind.CREATE_TIME AS createTime,
+			tb_job_remind.UPDATED AS updated,
+			tb_job_remind.UPDATE_TIME as updateTime
+		from
+		tb_job_remind
+  		where 
+ 	 		tb_job_remind.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.jobRemind.pojo.JobRemind">
+		UPDATE tb_job_remind 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="model"> MODEL=#model#</isNotEmpty>
+			<isNotEmpty prepend="," property="name"> NAME=#name#</isNotEmpty>
+			<isNotEmpty prepend="," property="time"> TIME=#time#</isNotEmpty>
+			<isNotEmpty prepend="," property="owner"> OWNER=#owner#</isNotEmpty>
+			<isNotEmpty prepend="," property="creator"> CREATOR=#creator#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.jobRemind.pojo.JobRemind" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_job_remind.MODEL AS model,
+			tb_job_remind.NAME AS name,
+			tb_job_remind.TIME AS time,
+			tb_job_remind.OWNER AS owner,
+			tb_job_remind.CREATOR AS creator,
+			
+			tb_job_remind.ID AS id,
+			tb_job_remind.STATUS AS status,
+			tb_job_remind.CREATED AS created,
+			tb_job_remind.CREATE_TIME AS createTime,
+			tb_job_remind.UPDATED AS updated,
+			tb_job_remind.UPDATE_TIME AS updateTime
+		FROM
+			tb_job_remind
+		WHERE
+			tb_job_remind.STATUS = '1'
+		<include refid="JobRemind.mapWhereClause"/>
+	</select>
+	<select id="getRemind" resultClass="com.yk.businesses.jobRemind.pojo.JobRemind" parameterClass="java.util.Map">
+		SELECT
+			count(id) as num,
+			'计划汇报' as model
+		FROM
+			tb_reporting
+		WHERE
+			CHECKER = #id#
+		OR CHECKER = #deptId#
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_job_remind
+		WHERE
+			tb_job_remind.STATUS = '1' 
+		<include refid="JobRemind.mapWhereClause"/>
+	</select>
+</sqlMap>

@@ -1,0 +1,170 @@
+#tb {
+	line-height: 20px;
+	padding: 6px 10px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #2779aa;
+}
+
+.dialog-button {
+	text-align: center;
+}
+
+.table_nemu {
+	font-size: 13px;
+	border: 0px;
+	background: #EAF4FC;
+	line-height: 28px;
+	padding-left: 50px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.table_nemu_new {
+	font-size: 13px;
+	border: 0px;
+	background: #e9fbfe;
+	line-height: 28px;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.table_nemu_new_right {
+	font-size: 13px;
+	border: 0px;
+	background: #e9fbfe;
+	line-height: 28px;
+	text-align: right;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.table_con {
+	font-size: 13px;
+	border: 0px;
+	background: #fff;
+	line-height: 28px;
+	padding-left: 15px;
+}
+
+.btn1 {
+	BORDER: #65b5e4 1px solid;
+	PADDING-RIGHT: 6px;
+	PADDING-LEFT: 6px;
+	FONT-SIZE: 12px;
+	FILTER: progid: DXImageTransform.Microsoft.Gradient( GradientType= 0,
+		StartColorStr= #ffffff, EndColorStr= #d7ebf9);
+	CURSOR: hand;
+	COLOR: black;
+	PADDING-TOP: 3px;
+}
+
+.btn2 {
+	CURSOR: hand;
+}
+/*搜索样式*/
+.search_add {
+	margin: 2px 0;
+	vertical-align: middle
+}
+/* msdsview.jsp*/
+.msds_a1 {
+	padding: 3px 6px;
+	border: 1px dashed #d0dbe3;
+	-moz-border-radius: 6px 6px 6px 6px;
+	-webkit-border-radius: 6px 6px 6px 6px;
+	border-radius: 6px 6px 6px 6px;
+	font-size: 12px;
+	background: #e0eaf2
+}
+
+#searchForm{
+	margin:10px 10px;
+}
+
+.datagrid-toolbar{
+	background:#ffffff;
+}
+
+.data_list_div{
+	height: 78%;width:99.2%;
+	margin-left:0.3%;
+	border-right:1px solid #ddd;
+}
+
+.data_list_div .panel-header,.data_list_div .datagrid-wrap{
+	border-right-width:0px;
+}
+
+.toolbar_parent{
+	width:99.4%;
+	margin-left:0.2%;
+	margin-top:6px;
+	margin-right:0.3%;
+	margin-bottom:10px;
+}
+
+.toolbar_parent .datagrid-toolbar{
+	line-height: 20px;
+	padding: 20px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #2779aa;
+	background-color: #FEFEFE;
+}
+
+.jfdsSearchForm .l-btn-small{
+	padding:0px 10px 0px 2px;
+}
+
+.toolbar_parent legend{
+	font-size:13px;
+	color:#7AA7E2;
+}
+
+.toolbar_parent fieldset{
+	border:0.01ex solid #95B8E7;
+	border-collapse:collapse;
+	background-color: #FEFEFE;
+}
+.easyui-fluid .datagrid-wrap .datagrid-pager{
+	padding-bottom:3px;
+}
+
+
+.selectConditionTab{
+	background:url(../images/select/selectConditionMain.png) repeat;
+	line-height: 20px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #2779aa;
+}
+.selectConditionLeftTop{
+	background:url(../images/select/selectCondition1.png) no-repeat;
+}
+.selectConditionRightTopTd{
+	background:url(../images/select/selectCondition2.png) no-repeat;
+}
+
+.selectConditionLeftTd{
+	background:url(../images/select/selectCondition7.png) repeat-y;
+}
+
+.selectConditionRightTd{
+	background:url(../images/select/selectCondition8.png) repeat-y;
+}
+.selectConditionTopTd{
+background-image: url(../images/select/selectCondition5.png);
+background-repeat: repeat-x;
+}
+.selectConditionDownTd{
+	background:url(../images/select/selectCondition6.png) repeat-x;
+}
+.selectConditionLeftDownTd{
+	background:url(../images/select/selectCondition3.png) no-repeat;
+}
+.selectConditionRightDownTd{
+	background:url(../images/select/selectCondition4.png) no-repeat;
+}
+

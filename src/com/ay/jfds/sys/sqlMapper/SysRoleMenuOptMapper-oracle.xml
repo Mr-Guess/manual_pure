@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"><!--add by iBatisTool sys_role_menu_opt --><sqlMap namespace="SysRoleMenuOpt"><!-- add Condition sys_role_menu_opt --><sql id="mapWhereClause">
+		<isParameterPresent>
+			<isNotEmpty prepend="and" property="id"> id=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="roleId"> role_id=#roleId#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="menuOptId">
+				menu_opt_id=#menuOptId#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> status=#status#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> created=#created#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime">
+				create_time=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> updated=#updated#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime">
+				update_time=#updateTime#</isNotEmpty>
+		</isParameterPresent>
+	</sql><!-- add method insert --><insert id="insert" parameterClass="com.ay.jfds.sys.pojo.SysRoleMenuOpt">
+		insert into sys_role_menu_opt(
+		ID,
+		ROLE_ID,
+		MENU_OPT_ID,
+		STATUS,
+		CREATED,
+		CREATE_TIME,
+		UPDATED,
+		UPDATE_TIME) values(
+		#id#,
+		#roleId#,
+		#menuOptId#,
+		#status#,
+		#created#,
+		#createTime#,
+		#updated#,
+		#updateTime#)
+	</insert><!-- add method delete --><delete id="delete" parameterClass="java.lang.String">
+		update sys_role_menu_opt set
+		status='0'
+		where
+		id=#id#
+	</delete><!-- add method deleteByRoleId --><delete id="deleteByRoleId" parameterClass="java.lang.String">
+		update
+		sys_role_menu_opt set status='0'
+		where
+		role_id=#roleId#
+	</delete><!-- add method getById --><select id="getById" resultClass="com.ay.jfds.sys.pojo.SysRoleMenuOpt" parameterClass="java.lang.String">
+		select
+		id,
+		role_id as roleId,
+		menu_opt_id as menuOptId,
+		status,
+		created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime
+		from
+		sys_role_menu_opt
+		where
+		id=#id#
+	</select><!-- add method update --><update id="update" parameterClass="com.ay.jfds.sys.pojo.SysRoleMenuOpt">
+		update sys_role_menu_opt
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="id"> id=#id#</isNotNull>
+			<isNotNull prepend="," property="roleId"> role_id=#roleId#
+			</isNotNull>
+			<isNotNull prepend="," property="menuOptId"> menu_opt_id=#menuOptId#
+			</isNotNull>
+			<isNotNull prepend="," property="status"> status=#status#
+			</isNotNull>
+			<isNotNull prepend="," property="created"> created=#created#
+			</isNotNull>
+			<isNotNull prepend="," property="createTime"> create_time=#createTime#
+			</isNotNull>
+			<isNotNull prepend="," property="updated"> updated=#updated#
+			</isNotNull>
+			<isNotNull prepend="," property="updateTime"> update_time=#updateTime#
+			</isNotNull>
+		</dynamic>
+		where
+		id=#id#
+	</update><!-- add method findAll --><select id="findAll" resultClass="com.ay.jfds.sys.pojo.SysRoleMenuOpt" parameterClass="com.ay.jfds.sys.pojo.SysRoleMenuOpt">
+		select
+		id,
+		role_id as roleId,
+		menu_opt_id as menuOptId,
+		status,
+		created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime
+		from
+		sys_role_menu_opt
+		where
+		status='1'
+	</select><!-- add method find --><select id="find" resultClass="com.ay.jfds.sys.pojo.SysRoleMenuOpt" parameterClass="java.util.Map">
+		select
+		id,
+		role_id as roleId,
+		menu_opt_id as menuOptId,
+		status,
+		created,
+		create_time as createTime,
+		updated,
+		update_time as updateTime
+		from
+		sys_role_menu_opt
+		where
+		status='1'
+		<include refid="SysRoleMenuOpt.mapWhereClause"/>
+	</select><!-- add method count --><select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		select count(*)
+		from
+		sys_role_menu_opt
+		where
+		status='1'
+		<include refid="SysRoleMenuOpt.mapWhereClause"/>
+	</select></sqlMap>

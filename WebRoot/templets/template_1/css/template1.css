@@ -1,0 +1,364 @@
+body {
+	font-family: "宋体";
+	font-size: 12px;
+	scrollbar-face-color: #9EBFE8;
+	scrollbar-shadow-color: #FFFFFF;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-3dlight-color: #9EBFE8;
+	scrollbar-darkshadow-color: #9EBFE8;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-arrow-color: #FFFFFF;
+}
+
+a {
+	font-family: "宋体";
+	font-size: 12px;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+	color: yellow;
+}
+
+.datewordspos { /*容器作用的层，用于放置日期文字和按钮组*/
+	float: left;
+	margin-top: 65px;
+	width: 1024px;
+	position: absolute;
+}
+
+.toptitle {
+	background-image: url(../top/top_banner.jpg);
+	background-repeat: no-repeat;
+	height: 120px;
+	vertical-align: top;
+}
+
+.datewords { /*日期文字*/
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体";
+	font-weight: bold;
+	font-size: 12px;
+	float: right;
+	margin-top: 104px;
+	padding-right: 10px;
+	color: #ffffff;
+}
+
+.rtopmenu { /*右上角菜单*/
+	z-index: -1;
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体";
+	background-image: url(../top/top_title.gif);
+	background-repeat: no-repeat;
+	float: right;
+	width: 220px;
+	height: 20px;
+	margin-top: 0px;
+	color: #FFFFFF;
+	padding-left: 20px;
+	font-size: 12px;
+	position: absolute;
+}
+
+.userinfo {
+	position: absolute;
+	top: 35px;
+	left: 5px;
+	font-family: "黑体";
+	color: #fe0000;
+	font-size: 16px;
+}
+
+.mainmenu {
+	float: left;
+	height: 26px;
+	width: 900px;
+	margin-top: 29px;
+	margin-left: 248px;
+	position: absolute;
+}
+
+.mainleft { /*定义主界面左侧菜单栏*/
+	width: 244px;
+	background-image: url(../leftmenu/bg_left1.gif);
+	background-repeat: repeat-y;
+	background-color: #DADADA;
+	vertical-align: top;
+}
+
+.navpoint {
+	CURSOR: hand;
+	height: 100%;
+	width: 12px;
+	background-color: #3f76a7;
+	padding: 0;
+}
+
+.navpoint span {
+	CURSOR: hand;
+	height: 180px;
+	width: 12px;
+	background-image: url(../leftmenu/left_flex1.gif);
+	background-repeat: no-repeat;
+	margin: 0px;
+}
+
+#menudiv {
+	float: left;
+	white-space: nowrap;
+}
+
+.menu {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+.menu  li {
+	float: left;
+	margin-right: 0px;
+	border: 1px;
+	width: 119px;
+	height: 26px;
+	border: 0px solid red;
+	text-align: center;
+}
+
+.menu  li div {
+	padding-top: 6px;
+	cursor: hand;
+	width: 119px;
+	height: 26px;
+	text-decoration: none;
+	text-align: center;
+	font-size: 13px;
+}
+
+.menu li#father.chose div {
+	color: #30758e;
+	font-weight: bold;
+	background-image: url(../top/top_menu1.gif);
+	text-decoration: none;
+}
+
+.menu li#father.nochose div {
+	color: #30758e;
+	font-weight: bold;
+	font-size: 13px;
+	background-image: url(../top/top_menu1.gif);
+}
+
+.menu li#father.mousemove div {
+	color: #a55608;
+	font-weight: bold;
+	font-size: 13px;
+	background-image: url(../top/top_menu2.gif);
+}
+
+.menu  li#child.chose  div {
+	color: white;
+	background-image: url(../top/top_menu1.gif);
+}
+
+.menu  li#child.nochose  div {
+	color: white;
+	background-image: url(../top/top_menu1.gif);
+}
+
+.menu  li a {
+	COLOR: yellow;
+	TEXT-DECORATION: none;
+	cursor: hand;
+}
+
+UL.tree {
+	text-indent: 0px;
+	margin-left: 0px;
+	margin-top: 25px;
+	list-style-position: inside;
+	font-size: 12px;
+	width: 232px;
+}
+
+UL.tree li {
+	list-style: none;
+	COLOR: #2C65C4;
+	line-height: 20px;
+	background-color: #e3f9fd;
+	background-image: url(../leftmenu/folder_open.gif);
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	font-weight: normal;
+}
+
+.treeover {
+	list-style: none;
+	color: yellow;
+	line-height: 20px;
+	background-color: #86d9fb;
+	background-image: url(../leftmenu/folder_open.gif);
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	font-weight: normal;
+}
+
+.treeout {
+	list-style: none;
+	COLOR: #2C65C4;
+	line-height: 20px;
+	background-color: #e3f9fd;
+	background-image: url(../leftmenu/folder_open.gif);
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	font-weight: normal;
+}
+
+UL.tree div {
+	padding-left: 5px;
+}
+
+UL.tree Li.treeopen {
+	list-style: none;
+	COLOR: #2C65C4;
+	line-height: 32px;
+	background-image: url(../leftmenu/treeopen.gif);
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	padding-left: 14px;
+	font-weight: bold;
+}
+
+UL.tree Li.treeclose {
+	list-style: none;
+	COLOR: #2C65C4;
+	line-height: 32px;
+	text-align: absmiddle;
+	background-image: url(../leftmenu/tree.gif);
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	padding-left: 14px;
+	font-weight: bold;
+}
+
+UL.tree Li.treeopen UL {
+	margin-top: 2px;
+	margin-left: 22px;
+}
+
+UL.tree Li.treeclose UL {
+	display: none;
+	COLOR: #2C65C4;
+	background-image: url(../leftmenu/tree.gif);
+	background-repeat: no-repeat;
+	margin-right: 2px;
+	padding-left: 14px;
+	line-height: 32px;
+	font-weight: bold;
+}
+
+UL.tree  li a {
+	TEXT-DECORATION: none;
+	cursor: hand;
+	font-size: 13px;
+}
+
+.treedivoutline {
+	overflow: auto;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	vertical-align: top;
+	background: url(../leftmenu/bg_left2.gif) no-repeat center bottom;
+	height: 100%;
+}
+
+.treediv {
+	margin-top: 0px;
+	margin-left: 12px;
+}
+
+/*----------------以下定义界面按钮等元素---------------*/
+.menuteam { /*按钮组*/
+	float: left;
+	padding-left: 21px;
+	font-family: Verdana, Arial, Helvetica, sans-serif, "宋体";
+	font-weight: bold;
+	color: #30758e;
+	font-size: 14px;
+	padding-top: 1px;
+	position: absolute;
+	top: 32px;
+	left: -225px;
+	background: url("../top/bg_div.gif") no-repeat 25px 0px;
+}
+
+/*
+.menuteam img{top:-2px;}/* 左侧滑动层箭头的位置 */
+/*
+.b1 {
+	background: url("../top/icon_b1.gif")
+		repeat-x right top;
+	background-color: #3474AC;
+	padding-top: 2px;
+	color: #ffffff;
+	CURSOR: hand;
+	width: 47px;
+	height: 20px;
+	border-style: none;
+}
+*/
+
+/*以下用于控制滚动菜单*/
+.procro {
+	float: left;
+	height: 26px;
+	margin: 0px;
+	overflow: hidden;
+	width: 714px;
+	display: inline;
+	vertical-align: bottom;
+}
+
+.procroin {
+	height: 26px;
+	width: 20000px;
+}
+
+.lftbtn {
+	background: url('#') no-repeat center;
+	cursor: pointer;
+	float: left;
+	margin-left: 0px;
+	width: 36px;
+	height: 26px;
+	display: inline;
+}
+
+.rgtbtn {
+	background: url('#') no-repeat center;
+	float: left;
+	margin-left: 0px;
+	height: 26px;
+	width: 36px;
+	display: inline;
+}
+
+.hasMap {
+	background-image: url(../right/indent.gif);
+	background-repeat: no-repeat;
+	width: 24px;
+	height: 24px;
+	float: left;
+	margin-top: 3px;
+	margin-left: 3px;
+	position: absolute;
+	cursor: hand;
+	z-index: 2;
+}
+
+.right_div { /*右侧div*/
+	background-image: url(../top/right_top.gif);
+	background-repeat: repeat-x;
+	padding-top: 10px;
+}
