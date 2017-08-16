@@ -7,9 +7,9 @@
 <title></title>
 <script type="text/javascript">
 	if (window.top) {
-		window.top.location.href = "login.jsp";
+		window.top.location.href = "index.jsp";
 	} else {
-		window.location.href = "login.jsp";
+		window.location.href = "index.jsp";
 	}
 </script>
 </head>

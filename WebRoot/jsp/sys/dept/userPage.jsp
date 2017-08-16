@@ -483,11 +483,6 @@
 			<form id="searchForm" method="post" style="display: inline;">
 				&nbsp;&nbsp;登录名:&nbsp;&nbsp;<input class="easyui-validatebox" id="searchAccount" name="user.account" data-options="validType:'length[1,25]'" onkeyup="searchForm()" onblur="searchForm()">
 				&nbsp;&nbsp;姓名:&nbsp;&nbsp;<input class="easyui-validatebox" id="searchUserName" name="user.userName" data-options="validType:'length[1,25]'" onkeyup="searchForm()" onblur="searchForm()">
-<!-- 				&nbsp;&nbsp;职位:&nbsp;&nbsp;<input class="easyui-combobox postion" id="pstion" name="user.business" data-options="panelHeight:'auto',validType:'length[1,25]',editable:false" onkeyup="searchForm()" onblur="searchForm()"> -->
-<!-- 				&nbsp;&nbsp;单位:&nbsp;&nbsp;<input class="easyui-validatebox" id="searchDeptName" name="user.deptName" data-options="validType:'length[1,25]'" onkeyup="searchForm()" onblur="searchForm()"> -->
-<!-- 				&nbsp;&nbsp;状态:&nbsp;&nbsp;<input class="easyui-combobox" data-options="panelHeight:'auto',editable:false,valueField:'val',textField:'text', data:[{val:'1',text:'正常'},{val:'2',text:'锁定'}]" id="searchStatus" name="user.status" onkeyup="searchForm()" onblur="searchForm()" />  -->
-<!-- 				&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="searchForm();">查询</a>  -->
-<!-- 				&nbsp;&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton" iconCls="icon-clear" onclick="clearSearchForm();">清空</a> -->
 			</form>
 		</div>
 		<div class="search_add">
@@ -511,7 +506,6 @@
 				<tr>
 					<th field="account" width="30%" title="登录名" align="center">登录名</th>
 					<th field="userName" width="30%" title="姓名" align="center">姓名</th>
-					<!--  <th field="password" width="150" title="密码">密码</th>-->
 					<th field="id" width="40%" title="用户id" formatter="gridFormatter"
 						align="center">操作</th>
 				</tr>
@@ -558,15 +552,21 @@
 							missingMessage="请输入用户姓名" /></td>
 					</tr>
 					<tr>
-						<td class="table_nemu">单位：</td>
+						<td class="table_nemu">部门：</td>
 						<td class="table_con"><input class="easyui-vlidatebox"
 							id="addDeptName" readonly="readonly" onclick="showDeptTreeWin();" /></td>
 					</tr>
 					<tr>
-						<td class="table_nemu">职务：</td>
-						<td class="table_con"><input class="easyui-combobox"
-							id="addBusiness" name="user.business"
-							data-options="valueField: 'id',textField: 'value',data: [{id: '科员',value: '科员'},{id: '科长',value: '科长'},{id: '副局长',value: '副局长'},{id: '局长',value: '局长'}],panelHeight:'auto',width:'100',editable:false" /></td>
+						<td class="table_nemu">职位：</td>
+						<td class="table_con">
+						<select class="easyui-combobox" id="addBusiness" name="user.business" panelHeight="auto" editable="false">
+							<option value="员工">员工</option>	
+							<option value="中层">中层</option>	
+							<option value="高层">高层</option>	
+							<option value="副总经理">副总经理</option>	
+							<option value="总经理">总经理</option>	
+							<option value="董事长">董事长</option>	
+						</select>
 					</tr>
 				</table>
 				<br />
@@ -615,18 +615,23 @@
 							class="easyui-combobox" id="updateUserStatus" name="user.status"
 							data-options="panelHeight:'auto',valueField:'val',textField:'text', editable:false, data:[{val:'1',text:'正常'},{val:'2', text:'锁定'}]" /></td>
 					</tr>
-					<c:if test="${param.usertype!='3'}">
-						<tr>
-							<td class="table_nemu">单位：</td>
-							<td class="table_con"><input class="easyui-vlidatebox"
-								id="updateDeptName" readonly onclick="showDeptTreeWin();" /></td>
-						</tr>
-					</c:if>
 					<tr>
-						<td class="table_nemu">职务：</td>
-						<td class="table_con"><input class="easyui-combobox postion"
-							id="updateBusiness" name="user.business"
-							data-options="panelHeight:'auto',width:'100',editable:false" /></td>
+						<td class="table_nemu">部门：</td>
+						<td class="table_con"><input class="easyui-vlidatebox"
+							id="updateDeptName" readonly onclick="showDeptTreeWin();" /></td>
+					</tr>
+					<tr>
+						<td class="table_nemu">职位：</td>
+						<td class="table_con">
+							<select class="easyui-combobox" id="updateBusiness" name="user.business" panelHeight="auto" editable="false">
+								<option value="员工">员工</option>	
+								<option value="中层">中层</option>	
+								<option value="高层">高层</option>	
+								<option value="副总经理">副总经理</option>	
+								<option value="总经理">总经理</option>	
+								<option value="董事长">董事长</option>	
+							</select>
+						</td>
 					</tr>
 				</table>
 				<br />
@@ -661,13 +666,11 @@
 						<td class="table_con"><label class="easyui-validatebox"
 							id="viewUserStatus" name="user.status"></label></td>
 					</tr>
-					<c:if test="${param.usertype!='3'}">
-						<tr>
-							<td class="table_nemu">单位：${param.usertype}</td>
-							<td class="table_con"><label class="easyui-validatebox"
-								id="viewDeptName"></label></td>
-						</tr>
-					</c:if>
+					<tr>
+						<td class="table_nemu">部门：${param.usertype}</td>
+						<td class="table_con"><label class="easyui-validatebox"
+							id="viewDeptName"></label></td>
+					</tr>
 					<tr>
 						<td class="table_nemu">职务：</td>
 						<td class="table_con"><label class="easyui-validatebox"

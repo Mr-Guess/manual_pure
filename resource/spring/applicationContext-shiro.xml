@@ -26,6 +26,7 @@
 				/front.jsp = anon
 				/register.jsp = anon
 				/register_succeed.jsp=anon
+				/officialWebsite/** = anon
 				/index.jsp = anon
 				/dept/deptAction!getDeptByName = anon
 				/dept/deptAction!getById.action = anon

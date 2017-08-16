@@ -476,15 +476,10 @@ public class LoginAction extends ActionSupport {
 					map.put("status", "1");
 					map.put("userId", user.getAccount());
 					map.put("realName", user.getUserName());
-					map.put("avatar", "");
-					map.put("entId", "");
-					map.put("entName", "");
-					map.put("roleId", "");
-					map.put("roleName", "");
 					map.put("departmentId", user.getDeptId());
 					map.put("departmentName", user.getDeptName());
 					map.put("business", user.getBusiness());
-					map.put("isZf", "");
+					map.put("isZf", user.getBusiness());
 					map.put("password", user.getPassword());
 					map.put("sessionId", session.getId());
 					map.put("Id", user.getId());
