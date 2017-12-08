@@ -28,6 +28,7 @@ import com.ay.framework.util.EncodingHeaderUtil;
 import com.ay.framework.util.StringUtil;
 import com.ay.jfds.dev.pojo.Data;
 import com.ay.jfds.dev.service.DataService;
+import com.ay.jfds.sys.dto.TreeDTO;
 import com.ay.jfds.sys.dto.UserDTO;
 import com.ay.jfds.sys.pojo.Department;
 import com.ay.jfds.sys.pojo.DepartmentIndustry;
@@ -138,6 +139,7 @@ public class DepartmentAction extends BaseAction {
 		list.addAll(users);
 		Struts2Utils.renderText(new JsonMapper().toJson(list));
 	}
+	
 	
 	/**
 	 * 获取所有的部门&用户列表
@@ -343,6 +345,50 @@ public class DepartmentAction extends BaseAction {
 		List<Department> depts=deptService.findByParentId(id);
 		String json=new JsonMapper().toJson(depts);
 		Struts2Utils.renderText(json);
+	}
+	
+	/**
+	 * 获取手机端展示用户列表
+	 */
+	public void findDeptUser(){
+		List<Department> list = deptService.findAll();
+		List<UserDTO> users = userService.findUserDto();
+		TreeDTO treedto = new TreeDTO<>();
+		Department dpt = null;
+		for(Department d : list){
+			if(d.getParentId().equals("-1")){
+				dpt = d;
+				break;
+			}
+		}
+		
+		treedto.setObj(dpt);
+		treedto.setType("company");
+		treedto.setChildren(this.setChildrenIem(dpt, list,users));
+		Struts2Utils.renderText(new JsonMapper().toJson(treedto));
+	}
+	
+	public List<TreeDTO> setChildrenIem(Department department,List<Department> departmentList,List<UserDTO> userList){
+		List<TreeDTO> list = new ArrayList<>();
+		for(Department d : departmentList){
+			if(d.getParentId().equals(department.getId())){
+				TreeDTO td = new TreeDTO<>();
+				td.setObj(d);
+				td.setType("department");
+				td.setChildren(this.setChildrenIem(d, departmentList,userList));
+				list.add(td);
+			}
+		}
+		for(UserDTO u : userList){
+			if(u.getDeptId().equals(department.getId())){
+				TreeDTO td = new TreeDTO<>();
+				td.setObj(u);
+				td.setType("user");
+				td.setChildren(null);
+				list.add(td);
+			}
+		}
+		return list;
 	}
 	
 	public DepartmentService getDeptService() {

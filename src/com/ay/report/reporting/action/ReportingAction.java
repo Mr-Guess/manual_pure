@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.ay.framework.bean.DataStore;
 import com.ay.framework.bean.OperateInfo;
 import com.ay.framework.core.action.BaseAction;
@@ -13,6 +15,10 @@ import com.ay.framework.core.utils.mapper.JsonMapper;
 import com.ay.framework.core.utils.web.struts.Struts2Utils;
 import com.ay.framework.util.BeanUtil;
 import com.ay.framework.util.EncodingHeaderUtil;
+import com.ay.framework.util.StringUtil;
+import com.ay.netEasy.CommonFunction;
+import com.ay.netEasy.im.ConnectToApi;
+import com.ay.netEasy.push.AttachMsg;
 import com.ay.report.reporting.pojo.Reporting;
 import com.ay.report.reporting.service.ReportingService;
 import com.ay.report.reversion.pojo.Reversion;
@@ -44,14 +50,14 @@ public class ReportingAction extends BaseAction {
 		try {
 			reporting.setSteps("1");
 			if(reporting.getReportType().equals("日报")){
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String dt = sdf.format(new Date());
-				String autoTitle = dt+"日报";
+				String autoTitle = dt+"  日报";
 				reporting.setAutoTitle(autoTitle);
 			}else if(reporting.getReportType().equals("月报")){
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 				String dt = sdf.format(new Date());
-				String autoTitle = dt+"月报";
+				String autoTitle = dt+"  月报";
 				reporting.setAutoTitle(autoTitle);
 			}
 			reportingService.insert(reporting);
@@ -72,21 +78,24 @@ public class ReportingAction extends BaseAction {
 	public void addSubmit() {
 		OperateInfo operateInfo = new OperateInfo(true);
 		try {
+			reporting.setId(StringUtil.getUUID());
 			reporting.setSteps("2");
 			reporting.setChecker("0700b93b1c3c4c9d86a3f0d750c79202");
 			reporting.setInformre(nowUser);
 			if(reporting.getReportType().equals("日报")){
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  ");
 				String dt = sdf.format(new Date());
 				String autoTitle = dt+"日报";
 				reporting.setAutoTitle(autoTitle);
 			}else if(reporting.getReportType().equals("月报")){
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM  ");
 				String dt = sdf.format(new Date());
 				String autoTitle = dt+"月报";
 				reporting.setAutoTitle(autoTitle);
 			}
 			reportingService.insert(reporting);
+			JSONObject jo = new JSONObject(new AttachMsg("reporting", reporting.getId(), "广泰集团", "[工作汇报]您有1条来自"+reporting.getOwnerName()+"的"+reporting.getReportType()+"等待批阅",CommonFunction.getRandomInt()));
+			ConnectToApi.pushMessage("chengzehao", jo.toString());
 			operateInfo.setOperateMessage("添加成功");
 			operateInfo.setOperateSuccess(true);
 		} catch (Exception e) {

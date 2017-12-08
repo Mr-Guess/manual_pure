@@ -12,7 +12,7 @@
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>地市级基础版本V2.0</title>
+<title>南京永坤信息科技有限公司</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
 <script src="officialWebsite/js/jquery-latest.js"></script>
@@ -182,14 +182,52 @@
 		$(document).on("scroll",function(){
 			if($(document).scrollTop()>100){ 
 				$("header").removeClass("large").addClass("small");
-				}
-			else{
+			}else{
 				$("header").removeClass("small").addClass("large");
-				}
-			});
+			}
+		});
+		
+		$(document).ready(function(){
+			setIframeHeight("mainFrame");
+		});
 		
 		function gotoLog(){
+			$(document).unbind("scroll.unable");
+			document.body.style.overflow="scroll";
 			window.location.href="login.jsp";
+		}
+		
+		function getLunch(){
+			$("#mainFrame").attr("src","officialWebsite/whatForLunch.html");
+			var top = $(document).scrollTop();
+		    $(document).on('scroll.unable',function (e) {
+		        $(document).scrollTop(top);
+		    });
+		    document.body.style.overflow="hidden";
+		}
+		function backTohead(){
+			$(document).unbind("scroll.unable");
+			document.body.style.overflow="scroll";
+			$("#mainFrame").attr("src","officialWebsite/site.jsp");
+		}
+		
+		function setIframeHeight(id){
+		    try{
+		        var iframe = document.getElementById(id);
+		        if(iframe.attachEvent){
+		            iframe.attachEvent("onload", function(){
+		                iframe.height =  iframe.contentWindow.document.documentElement.scrollHeight;
+		            });
+		            return;
+		        }else{
+		            iframe.onload = function(){
+		                iframe.height = iframe.contentDocument.body.scrollHeight;
+		            };
+		            return;                 
+		        }     
+		    }catch(e){
+		        throw new Error('setIframeHeight Error');
+		    }
 		}
 		
 		function show(){
@@ -219,17 +257,19 @@
 		<nav>
 			<img class="logo" src="wdd.png"/>
 			<ul>
-				<li><a class="active" href="#">首页</a></li>
+				<li><a class="active" href="javascript:backTohead()">首页</a></li>
+				<li><a href="javascript:getLunch()">中午吃啥</a></li>
 				<li><a href="javascript:show()">移动端下载</a></li>
-				<li><a href="javascript:gotoLog()">内控平台</a></li>
+<!-- 				<li><a href="javascript:gotoLog()">内控平台</a></li> -->
 			</ul>
 		</nav>
 	</header>
 
-<section class="stretch">
-<p>使用右键滚动试一试！</p>
-<p class="bottom">End of the line.</p>
-</section>
+<iframe style="width: 99%;border: none;" src="officialWebsite/site.jsp" id="mainFrame"></iframe>
+<!-- <section class="stretch"> -->
+<!-- <p>使用右键滚动试一试！</p> -->
+<!-- <p class="bottom">End of the line.</p> -->
+<!-- </section> -->
 <div style="display: none;">
 	<div id="alert-blockquote">
 		<img src="officialWebsite/img/two-dimensionalCode/Android.png" alt="下你的安卓去把" style="height: 500px;width: 500px;"/>

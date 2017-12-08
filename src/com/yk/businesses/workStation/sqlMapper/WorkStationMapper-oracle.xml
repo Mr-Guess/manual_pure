@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="WorkStation">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_WORK_STATION.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_WORK_STATION.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_WORK_STATION.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_WORK_STATION.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_WORK_STATION.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_WORK_STATION.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="modle"> TB_WORK_STATION.MODLE like '%'||#modle#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="number"> TB_WORK_STATION.NUMBER like '%'||#number#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="showData"> TB_WORK_STATION.SHOW_DATA like '%'||#showData#||'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.workStation.pojo.WorkStation">
+  		INSERT INTO TB_WORK_STATION(
+				
+				MODLE,
+				NUMBER,
+				SHOW_DATA,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#modle#,
+				#number#,
+				#showData#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_WORK_STATION SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.workStation.pojo.WorkStation" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_WORK_STATION.MODLE AS modle,
+			TB_WORK_STATION.NUMBER AS number,
+			TB_WORK_STATION.SHOW_DATA AS showData,
+			
+			TB_WORK_STATION.ID AS id,
+			TB_WORK_STATION.STATUS AS status,
+			TB_WORK_STATION.CREATED AS created,
+			TB_WORK_STATION.CREATE_TIME AS createTime,
+			TB_WORK_STATION.UPDATED AS updated,
+			TB_WORK_STATION.UPDATE_TIME as updateTime
+		from
+		TB_WORK_STATION
+  		where 
+ 	 		TB_WORK_STATION.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.workStation.pojo.WorkStation">
+		UPDATE TB_WORK_STATION 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="modle"> MODLE=#modle#</isNotEmpty>
+			<isNotEmpty prepend="," property="number"> NUMBER=#number#</isNotEmpty>
+			<isNotEmpty prepend="," property="showData"> SHOW_DATA=#showData#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.workStation.pojo.WorkStation" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_WORK_STATION.MODLE AS modle,
+			TB_WORK_STATION.NUMBER AS number,
+			TB_WORK_STATION.SHOW_DATA AS showData,
+			
+			TB_WORK_STATION.ID AS id,
+			TB_WORK_STATION.STATUS AS status,
+			TB_WORK_STATION.CREATED AS created,
+			TB_WORK_STATION.CREATE_TIME AS createTime,
+			TB_WORK_STATION.UPDATED AS updated,
+			TB_WORK_STATION.UPDATE_TIME AS updateTime
+		FROM
+			TB_WORK_STATION
+		WHERE
+			TB_WORK_STATION.STATUS = '1'
+		<include refid="WorkStation.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			TB_WORK_STATION
+		WHERE
+			TB_WORK_STATION.STATUS = '1' 
+		<include refid="WorkStation.mapWhereClause"/>
+	</select>
+</sqlMap>

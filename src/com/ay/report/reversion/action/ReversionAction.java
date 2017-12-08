@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
+import org.json.JSONObject;
 
 import com.ay.framework.bean.DataStore;
 import com.ay.framework.bean.OperateInfo;
@@ -13,6 +14,11 @@ import com.ay.framework.core.utils.mapper.JsonMapper;
 import com.ay.framework.core.utils.web.struts.Struts2Utils;
 import com.ay.framework.util.BeanUtil;
 import com.ay.framework.util.EncodingHeaderUtil;
+import com.ay.jfds.sys.pojo.User;
+import com.ay.jfds.sys.service.UserService;
+import com.ay.netEasy.CommonFunction;
+import com.ay.netEasy.im.ConnectToApi;
+import com.ay.netEasy.push.AttachMsg;
 import com.ay.report.reversion.pojo.Reversion;
 import com.ay.report.reversion.service.ReversionService;
 import com.ay.framework.core.action.BaseAction;
@@ -20,6 +26,7 @@ import com.ay.framework.core.action.BaseAction;
 @SuppressWarnings("all")
 public class ReversionAction extends BaseAction {
 	private ReversionService reversionService;
+	private UserService userService;
 	private Reversion reversion;
 	private String page;
 	private String rows;
@@ -27,11 +34,16 @@ public class ReversionAction extends BaseAction {
 	private String order;
 	private String id;
 	private String ids;
+	private String owner;
+	private String reportingId;
 	
 	public void add() {
 		OperateInfo operateInfo = new OperateInfo(true);
 		try {
 			reversionService.insert(reversion);
+			User user = userService.getById(owner);
+			JSONObject jo = new JSONObject(new AttachMsg("reversion", reportingId, "广泰集团", "[工作汇报]您的工作汇报已有最新批复，快去查看吧。",CommonFunction.getRandomInt()));
+			ConnectToApi.pushMessage(user.getAccount(), jo.toString());
 			operateInfo.setOperateMessage("添加成功");
 			operateInfo.setOperateSuccess(true);
 		} catch (Exception e) {
@@ -98,26 +110,38 @@ public class ReversionAction extends BaseAction {
 		Struts2Utils.renderText(json);
 	}
 	
+	public void reportRevList(){
+		Map paramMap = BeanUtil.Bean2Map(reversion);
+		List<Reversion> list = reversionService.findRepRev(paramMap);
+		Struts2Utils.renderJson(list,
+				EncodingHeaderUtil.HEADERENCODING,
+				EncodingHeaderUtil.CACHEENCODING);
+	}
+	
 	public void getById() {
 		Struts2Utils.renderJson(reversionService.getById(id),
 				EncodingHeaderUtil.HEADERENCODING,
 				EncodingHeaderUtil.CACHEENCODING);		
 	}
-public String exp(){
-		String where = " where 1=1 ";
-		 Map map = BeanUtil.Bean2Map(reversion);
-		if (map != null){
-			for (Object o : map.keySet()){
-				where += " and " + o.toString() + " like '%" + map.get(o) + "%' ";
-			}
-		}
-excelQuerySql = "		select * from sys_user" + where;
-		System.out.println(excelQuerySql);
-		excelSheetName = "测试名称";
-		excelHeads = new String[]{ "名字1", "名字2", "名字3" };
-		return "exp";
-}	
-    public Reversion getReversion() {
+
+	
+    public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public String getOwner() {
+	return owner;
+	}
+	
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public Reversion getReversion() {
 		return reversion;
 	}
 
@@ -180,5 +204,14 @@ excelQuerySql = "		select * from sys_user" + where;
 	public void setIds(String ids) {
 		this.ids = ids;
 	}
+
+	public String getReportingId() {
+		return reportingId;
+	}
+
+	public void setReportingId(String reportingId) {
+		this.reportingId = reportingId;
+	}
+	
 	
 }

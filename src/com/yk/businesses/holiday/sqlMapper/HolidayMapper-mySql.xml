@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Holiday">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> tb_holiday.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> tb_holiday.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> tb_holiday.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> tb_holiday.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> tb_holiday.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> tb_holiday.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="prayEr"> tb_holiday.PRAY_ER like CONCAT('%',#prayEr#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="prayErId"> tb_holiday.PRAY_ER_ID like CONCAT('%',#prayErId#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="prayDays"> tb_holiday.PRAY_DAYS like CONCAT('%',#prayDays#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="reason"> tb_holiday.REASON like CONCAT('%',#reason#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="fromDays"> tb_holiday.FROM_DAYS like CONCAT('%',#fromDays#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="toDays"> tb_holiday.TO_DAYS like CONCAT('%',#toDays#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="type"> tb_holiday.TYPE like CONCAT('%',#type#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="doner"> tb_holiday.DONER like CONCAT('%',#doner#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="within"> tb_holiday.WITHIN like CONCAT('%',#within#,'%')</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.holiday.pojo.Holiday">
+  		INSERT INTO tb_holiday(
+				
+				PRAY_ER,
+				PRAY_ER_ID,
+				PRAY_DAYS,
+				REASON,
+				FROM_DAYS,
+				TO_DAYS,
+				TYPE,
+				DONER,
+				WITHIN,
+				STEP,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#prayEr#,
+				#prayErId#,
+				#prayDays#,
+				#reason#,
+				#fromDays#,
+				#toDays#,
+				#type#,
+				#doner#,
+				#within#,
+				#step#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE tb_holiday SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.holiday.pojo.Holiday" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_holiday.PRAY_ER AS prayEr,
+			tb_holiday.PRAY_ER_ID AS prayErId,
+			tb_holiday.PRAY_DAYS AS prayDays,
+			tb_holiday.REASON AS reason,
+			tb_holiday.FROM_DAYS AS fromDays,
+			tb_holiday.TO_DAYS AS toDays,
+			tb_holiday.TYPE AS type,
+			tb_holiday.DONER AS doner,
+			tb_holiday.WITHIN AS within,
+			tb_holiday.STEP AS step,
+			sys_user.account AS accid,
+			
+			tb_holiday.ID AS id,
+			tb_holiday.STATUS AS status,
+			tb_holiday.CREATED AS created,
+			tb_holiday.CREATE_TIME AS createTime,
+			tb_holiday.UPDATED AS updated,
+			tb_holiday.UPDATE_TIME as updateTime
+		from
+		tb_holiday
+		left join
+		sys_user
+		on
+		tb_holiday.PRAY_ER_ID = sys_user.id
+  		where 
+ 	 		tb_holiday.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.holiday.pojo.Holiday">
+		UPDATE tb_holiday 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="prayEr"> PRAY_ER=#prayEr#</isNotEmpty>
+			<isNotEmpty prepend="," property="prayErId"> PRAY_ER_ID=#prayErId#</isNotEmpty>
+			<isNotEmpty prepend="," property="prayDays"> PRAY_DAYS=#prayDays#</isNotEmpty>
+			<isNotEmpty prepend="," property="reason"> REASON=#reason#</isNotEmpty>
+			<isNotEmpty prepend="," property="fromDays"> FROM_DAYS=#fromDays#</isNotEmpty>
+			<isNotEmpty prepend="," property="toDays"> TO_DAYS=#toDays#</isNotEmpty>
+			<isNotEmpty prepend="," property="type"> TYPE=#type#</isNotEmpty>
+			<isNotEmpty prepend="," property="doner"> DONER=#doner#</isNotEmpty>
+			<isNotEmpty prepend="," property="within"> WITHIN=#within#</isNotEmpty>
+			<isNotEmpty prepend="," property="step"> STEP=#step#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.holiday.pojo.Holiday" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_holiday.PRAY_ER AS prayEr,
+			tb_holiday.PRAY_ER_ID AS prayErId,
+			tb_holiday.PRAY_DAYS AS prayDays,
+			tb_holiday.REASON AS reason,
+			tb_holiday.FROM_DAYS AS fromDays,
+			tb_holiday.TO_DAYS AS toDays,
+			tb_holiday.TYPE AS type,
+			tb_holiday.DONER AS doner,
+			tb_holiday.WITHIN AS within,
+			tb_holiday.STEP AS within,
+			tb_frame_control.NEXT_ID AS frameTyle,
+			
+			tb_holiday.ID AS id,
+			tb_holiday.STATUS AS status,
+			tb_holiday.CREATED AS created,
+			tb_holiday.CREATE_TIME AS createTime,
+			tb_holiday.UPDATED AS updated,
+			tb_holiday.UPDATE_TIME AS updateTime
+		FROM
+			tb_holiday
+		INNER JOIN
+			tb_frame_control
+		ON
+			tb_holiday.STEP = tb_frame_control.ID
+		WHERE
+			tb_holiday.STATUS = '1'
+		<include refid="Holiday.mapWhereClause"/>
+	</select>
+	
+	
+	<!-- add method find-->
+	<select id="getMyList" resultClass="com.yk.businesses.holiday.pojo.Holiday" parameterClass="java.lang.String">
+ 		SELECT
+			
+			tb_holiday.PRAY_ER AS prayEr,
+			tb_holiday.PRAY_ER_ID AS prayErId,
+			tb_holiday.PRAY_DAYS AS prayDays,
+			tb_holiday.REASON AS reason,
+			tb_holiday.FROM_DAYS AS fromDays,
+			tb_holiday.TO_DAYS AS toDays,
+			tb_holiday.TYPE AS type,
+			tb_holiday.DONER AS doner,
+			tb_holiday.WITHIN AS within,
+			tb_holiday.STEP AS within,
+			tb_frame_control.NEXT_ID AS frameTyle,
+			
+			tb_holiday.ID AS id,
+			tb_holiday.STATUS AS status,
+			tb_holiday.CREATED AS created,
+			tb_holiday.CREATE_TIME AS createTime,
+			tb_holiday.UPDATED AS updated,
+			tb_holiday.UPDATE_TIME AS updateTime
+		FROM
+			tb_holiday
+		INNER JOIN
+			tb_frame_control
+		ON
+			tb_holiday.STEP = tb_frame_control.ID
+		LEFT JOIN
+			sys_user
+		ON
+			tb_holiday.PRAY_ER_ID = sys_user.id
+		WHERE
+			tb_holiday.STATUS = '1'
+		AND
+			tb_holiday.DONER = #id#
+		LIMIT 2
+	</select>
+	
+	<!-- add method count-->
+	<select id="myListcount" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+ 		SELECT count(*) 
+		FROM
+			tb_holiday
+		INNER JOIN
+			tb_frame_control
+		ON
+			tb_holiday.STEP = tb_frame_control.ID
+		LEFT JOIN
+			sys_user
+		ON
+			tb_holiday.PRAY_ER_ID = sys_user.id
+		WHERE
+			tb_holiday.STATUS = '1'
+		AND
+			tb_holiday.DONER = #id#
+	</select>
+	
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_holiday
+		WHERE
+			tb_holiday.STATUS = '1' 
+		<include refid="Holiday.mapWhereClause"/>
+	</select>
+	
+	
+</sqlMap>

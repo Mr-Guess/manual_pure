@@ -52,6 +52,44 @@ public class UserService extends BaseService<User, UserDao> {
 	public User findUserByName(String account) {
 		return this.getDao().findUserByName(account);
 	}
+	
+	/*流程相关*/
+	public User getUperUser(String id){
+		return dao.getUperUser(id);
+	}
+	
+	
+	/**
+	 * 获取部门领导
+	 * @param id:部门ID
+	 * @return
+	 */
+	public User getDeptLeader(String id){
+		return dao.getDeptLeader(id);
+	}
+	
+	/**
+	 * 获取用户所在部门
+	 * @param id:用户ID
+	 * @return
+	 */
+	public Department getUperDept(String id) {
+		return dao.getUperDept(id);
+	}
+	
+	public Department getCrossUperDept(String id) {
+		return dao.getCrossUperDept(id);
+	}
+	
+	public Department getBelongDept(String id){
+		Department d = dao.getUperDept(id);
+		while(d != null && d.getProvince() == null){
+			d = dao.getUperDept(d.getId());
+		}
+		return d;
+	}
+	
+	/*流程相关结束*/
 
 	public UserDTO getUserDTOById(String id) {
 		return this.getDao().getUserDTOById(id);
@@ -152,6 +190,7 @@ public class UserService extends BaseService<User, UserDao> {
 				salt, HASH_INTERATIONS);
 		user.setPassword(Encodes.encodeHex(hashPassword));
 	}
+	
 
 	public static void main(String[] args) {
 		User user = new User();

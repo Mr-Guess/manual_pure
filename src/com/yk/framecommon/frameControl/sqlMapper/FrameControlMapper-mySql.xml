@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="FrameControl">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> tb_frame_control.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> tb_frame_control.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> tb_frame_control.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> tb_frame_control.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> tb_frame_control.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> tb_frame_control.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="relationId"> tb_frame_control.RELATION_ID like CONCAT('%',#relationId#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="lastId"> tb_frame_control.LAST_ID like CONCAT('%',#lastId#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="nextId"> tb_frame_control.NEXT_ID like CONCAT('%',#nextId#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="isLast"> tb_frame_control.IS_LAST like CONCAT('%',#isLast#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="desinerId"> tb_frame_control.DESINER_ID like CONCAT('%',#desinerId#,'%')</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.framecommon.frameControl.pojo.FrameControl">
+  		INSERT INTO tb_frame_control(
+				
+				RELATION_ID,
+				LAST_ID,
+				NEXT_ID,
+				IS_LAST,
+				DESINER_ID,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#relationId#,
+				#lastId#,
+				#nextId#,
+				#isLast#,
+				#desinerId#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE tb_frame_control SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.framecommon.frameControl.pojo.FrameControl" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_frame_control.RELATION_ID AS relationId,
+			tb_frame_control.LAST_ID AS lastId,
+			tb_frame_control.NEXT_ID AS nextId,
+			tb_frame_control.IS_LAST AS isLast,
+			tb_frame_control.DESINER_ID AS desinerId,
+			
+			tb_frame_control.ID AS id,
+			tb_frame_control.STATUS AS status,
+			tb_frame_control.CREATED AS created,
+			tb_frame_control.CREATE_TIME AS createTime,
+			tb_frame_control.UPDATED AS updated,
+			tb_frame_control.UPDATE_TIME as updateTime
+		from
+		tb_frame_control
+  		where 
+ 	 		tb_frame_control.ID=#id#
+	</select>
+	
+	<!-- add method getById-->
+	<select id="getNextFrame" resultClass="com.yk.framecommon.frameControl.pojo.FrameControl" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_frame_control.RELATION_ID AS relationId,
+			tb_frame_control.LAST_ID AS lastId,
+			tb_frame_control.NEXT_ID AS nextId,
+			tb_frame_control.IS_LAST AS isLast,
+			tb_frame_control.DESINER_ID AS desinerId,
+			sys_user.account AS desinerAccount,
+			sys_user.user_name AS desinerName,
+			sys_user.token AS desinerToken,
+			
+			tb_frame_control.ID AS id,
+			tb_frame_control.STATUS AS status,
+			tb_frame_control.CREATED AS created,
+			tb_frame_control.CREATE_TIME AS createTime,
+			tb_frame_control.UPDATED AS updated,
+			tb_frame_control.UPDATE_TIME as updateTime
+		from
+			tb_frame_control
+		left join
+			sys_user
+		on
+			tb_frame_control.DESINER_ID = sys_user.id
+  		where 
+ 	 		tb_frame_control.LAST_ID=#id#
+	</select>
+	
+	<!-- add method getById-->
+	<select id="getBackFrame" resultClass="com.yk.framecommon.frameControl.pojo.FrameControl" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_frame_control.RELATION_ID AS relationId,
+			tb_frame_control.LAST_ID AS lastId,
+			tb_frame_control.NEXT_ID AS nextId,
+			tb_frame_control.IS_LAST AS isLast,
+			tb_frame_control.DESINER_ID AS desinerId,
+			sys_user.account AS desinerAccount,
+			sys_user.user_name AS desinerName,
+			sys_user.token AS desinerToken,
+			
+			tb_frame_control.ID AS id,
+			tb_frame_control.STATUS AS status,
+			tb_frame_control.CREATED AS created,
+			tb_frame_control.CREATE_TIME AS createTime,
+			tb_frame_control.UPDATED AS updated,
+			tb_frame_control.UPDATE_TIME as updateTime
+		from
+			tb_frame_control
+		left join
+			sys_user
+		on
+			tb_frame_control.DESINER_ID = sys_user.id
+  		where 
+ 	 		tb_frame_control.ID=(
+				SELECT
+					tb_frame_control.LAST_ID AS lastId
+				FROM
+					tb_frame_control
+				WHERE
+					tb_frame_control.ID = '7c54bf26742846a8b207725583e36cfd'
+			)
+	</select>
+	
+	<!-- add method getById-->
+	<select id="getFirstFrame" resultClass="com.yk.framecommon.frameControl.pojo.FrameControl" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_frame_control.RELATION_ID AS relationId,
+			tb_frame_control.LAST_ID AS lastId,
+			tb_frame_control.NEXT_ID AS nextId,
+			tb_frame_control.IS_LAST AS isLast,
+			tb_frame_control.DESINER_ID AS desinerId,
+			sys_user.account AS desinerAccount,
+			sys_user.user_name AS desinerName,
+			sys_user.token AS desinerToken,
+			
+			tb_frame_control.ID AS id,
+			tb_frame_control.STATUS AS status,
+			tb_frame_control.CREATED AS created,
+			tb_frame_control.CREATE_TIME AS createTime,
+			tb_frame_control.UPDATED AS updated,
+			tb_frame_control.UPDATE_TIME as updateTime
+		from
+			tb_frame_control
+		left join 
+			sys_user
+		on
+			tb_frame_control.DESINER_ID = sys_user.id
+  		where 
+ 	 		tb_frame_control.RELATION_ID=#id#
+ 	 	and
+ 	 		tb_frame_control.LAST_ID=-1
+	</select>
+	
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.framecommon.frameControl.pojo.FrameControl">
+		UPDATE tb_frame_control 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="relationId"> RELATION_ID=#relationId#</isNotEmpty>
+			<isNotEmpty prepend="," property="lastId"> LAST_ID=#lastId#</isNotEmpty>
+			<isNotEmpty prepend="," property="nextId"> NEXT_ID=#nextId#</isNotEmpty>
+			<isNotEmpty prepend="," property="isLast"> IS_LAST=#isLast#</isNotEmpty>
+			<isNotEmpty prepend="," property="desinerId"> DESINER_ID=#desinerId#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.framecommon.frameControl.pojo.FrameControl" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_frame_control.RELATION_ID AS relationId,
+			tb_frame_control.LAST_ID AS lastId,
+			tb_frame_control.NEXT_ID AS nextId,
+			tb_frame_control.IS_LAST AS isLast,
+			tb_frame_control.DESINER_ID AS desinerId,
+			
+			tb_frame_control.ID AS id,
+			tb_frame_control.STATUS AS status,
+			tb_frame_control.CREATED AS created,
+			tb_frame_control.CREATE_TIME AS createTime,
+			tb_frame_control.UPDATED AS updated,
+			tb_frame_control.UPDATE_TIME AS updateTime
+		FROM
+			tb_frame_control
+		WHERE
+			tb_frame_control.STATUS = '1'
+		<include refid="FrameControl.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_frame_control
+		WHERE
+			tb_frame_control.STATUS = '1' 
+		<include refid="FrameControl.mapWhereClause"/>
+	</select>
+</sqlMap>

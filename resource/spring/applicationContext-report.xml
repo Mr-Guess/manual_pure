@@ -11,9 +11,14 @@
   <bean id="reversionService" class="com.ay.report.reversion.service.ReversionService"> 
     <property name="dao" ref="reversionDao"/> 
   </bean>  
-  <!--消息提醒模块-->
-  <bean id="jobRemindDao" class="com.yk.businesses.jobRemind.dao.JobRemindDao" parent="baseDao"/>
-  <bean id="jobRemindService" class="com.yk.businesses.jobRemind.service.JobRemindService">
-    <property name="dao" ref="jobRemindDao"/>
-  </bean>
+  <!--消息提醒模块-->  
+  <bean id="jobRemindDao" class="com.yk.businesses.jobRemind.dao.JobRemindDao" parent="baseDao"/>  
+  <bean id="jobRemindService" class="com.yk.businesses.jobRemind.service.JobRemindService"> 
+    <property name="dao" ref="jobRemindDao"/> 
+  </bean>  
+  <!--统计通用类模块-->  
+  <bean id="statisticsDao" class="com.yk.businesses.statistics.dao.StatisticsDao" parent="baseDao"/>  
+  <bean id="statisticsService" class="com.yk.businesses.statistics.service.StatisticsService"> 
+    <property name="dao" ref="statisticsDao"/> 
+  </bean>  
 </beans>

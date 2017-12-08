@@ -15,6 +15,7 @@ public class ConnectToApi {
 	public static final String APPKEY = "e052d8e53b356b1d2944e82ad68d12b2";
 	public static final String APPSECRIT = "f0340fc2e0d0";
 	public static final String NONCE = "337962";
+	public static final String FROMACCID = "xitongtongzhi";
 
 	public static void main(String[] args) throws Exception {
 		
@@ -154,4 +155,50 @@ public class ConnectToApi {
 		System.out.println(rtn);
 		return rtn;
 	}
+	
+	/**
+	 * 消息推送
+	 * @param fromAccid
+	 * @param toAccid
+	 * @param message
+	 * @return
+	 * @throws MalformedURLException 
+	 */
+	public static String pushMessage(String toAccid,String message) throws Exception{
+		String curTime = String.valueOf((new Date()).getTime() / 1000L);
+		String checkSum = CheckSumBuilder.getCheckSum(APPSECRIT, NONCE, curTime); 
+		String url = "https://api.netease.im/nimserver/msg/sendAttachMsg.action";
+		String rtn = null;
+		String s = "from="+FROMACCID+"&to="+toAccid+"&msgtype=0&attach="+message;
+		
+		URL urill = new URL(url);
+		
+		HttpURLConnection hulc = (HttpURLConnection)urill.openConnection();
+		
+		hulc.setRequestMethod("POST");
+		hulc.setDoOutput(true);
+		hulc.setDoInput(true);
+		hulc.setUseCaches(false);
+		
+		hulc.setConnectTimeout(6000);
+		hulc.setReadTimeout(6000);
+		
+		hulc.setRequestProperty("AppKey", APPKEY);
+		hulc.setRequestProperty("Nonce", NONCE);
+		hulc.setRequestProperty("CurTime", curTime);
+		hulc.setRequestProperty("CheckSum", checkSum);
+		hulc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		OutputStream os = hulc.getOutputStream();
+		os.write(s.getBytes("UTF-8"));
+		os.flush();
+		os.close();
+		int responseCode = hulc.getResponseCode();
+		if(responseCode == 200){
+			BufferedReader br = new BufferedReader(new InputStreamReader(hulc.getInputStream(), "UTF-8"));
+			rtn = br.readLine();
+		}
+		return rtn;
+	}
+	
 }

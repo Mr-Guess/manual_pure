@@ -2,6 +2,7 @@ package com.ay.netEasy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,15 +21,7 @@ public class CommonFunction {
 	}
 	
 	public static void main(String[] args) {
-		try {
-			String resoponseToken = ConnectToApi.friendShip("wangkai", "chengzehao", 1, "");
-			//String resoponseToken = ConnectToApi.insertNewChatUser("lisi", "李四");
-			//String resoponseToken = ConnectToApi.getNewToken("zhangsan");
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println(getRandomInt());
 	}
 	
 	/**
@@ -49,4 +42,12 @@ public class CommonFunction {
 		}
 		return rtn;
 	} 
+	
+	public static int getRandomInt(){
+		int max = 429496729;
+		int min = -429496729;
+		Random random = new Random();
+		int s = random.nextInt(max)%(max-min+1) + min;
+		return s;
+	}
 }

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Holiday">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_HOLIDAY.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_HOLIDAY.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_HOLIDAY.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_HOLIDAY.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_HOLIDAY.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_HOLIDAY.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="prayEr"> TB_HOLIDAY.PRAY_ER like '%'||#prayEr#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="prayErId"> TB_HOLIDAY.PRAY_ER_ID like '%'||#prayErId#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="prayDays"> TB_HOLIDAY.PRAY_DAYS like '%'||#prayDays#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="reason"> TB_HOLIDAY.REASON like '%'||#reason#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="fromDays"> TB_HOLIDAY.FROM_DAYS like '%'||#fromDays#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="toDays"> TB_HOLIDAY.TO_DAYS like '%'||#toDays#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="type"> TB_HOLIDAY.TYPE like '%'||#type#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="doner"> TB_HOLIDAY.DONER like '%'||#doner#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="within"> TB_HOLIDAY.WITHIN like '%'||#within#||'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.holiday.pojo.Holiday">
+  		INSERT INTO TB_HOLIDAY(
+				
+				PRAY_ER,
+				PRAY_ER_ID,
+				PRAY_DAYS,
+				REASON,
+				FROM_DAYS,
+				TO_DAYS,
+				TYPE,
+				DONER,
+				WITHIN,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#prayEr#,
+				#prayErId#,
+				#prayDays#,
+				#reason#,
+				#fromDays#,
+				#toDays#,
+				#type#,
+				#doner#,
+				#within#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_HOLIDAY SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.holiday.pojo.Holiday" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_HOLIDAY.PRAY_ER AS prayEr,
+			TB_HOLIDAY.PRAY_ER_ID AS prayErId,
+			TB_HOLIDAY.PRAY_DAYS AS prayDays,
+			TB_HOLIDAY.REASON AS reason,
+			TB_HOLIDAY.FROM_DAYS AS fromDays,
+			TB_HOLIDAY.TO_DAYS AS toDays,
+			TB_HOLIDAY.TYPE AS type,
+			TB_HOLIDAY.DONER AS doner,
+			TB_HOLIDAY.WITHIN AS within,
+			
+			TB_HOLIDAY.ID AS id,
+			TB_HOLIDAY.STATUS AS status,
+			TB_HOLIDAY.CREATED AS created,
+			TB_HOLIDAY.CREATE_TIME AS createTime,
+			TB_HOLIDAY.UPDATED AS updated,
+			TB_HOLIDAY.UPDATE_TIME as updateTime
+		from
+		TB_HOLIDAY
+  		where 
+ 	 		TB_HOLIDAY.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.holiday.pojo.Holiday">
+		UPDATE TB_HOLIDAY 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="prayEr"> PRAY_ER=#prayEr#</isNotEmpty>
+			<isNotEmpty prepend="," property="prayErId"> PRAY_ER_ID=#prayErId#</isNotEmpty>
+			<isNotEmpty prepend="," property="prayDays"> PRAY_DAYS=#prayDays#</isNotEmpty>
+			<isNotEmpty prepend="," property="reason"> REASON=#reason#</isNotEmpty>
+			<isNotEmpty prepend="," property="fromDays"> FROM_DAYS=#fromDays#</isNotEmpty>
+			<isNotEmpty prepend="," property="toDays"> TO_DAYS=#toDays#</isNotEmpty>
+			<isNotEmpty prepend="," property="type"> TYPE=#type#</isNotEmpty>
+			<isNotEmpty prepend="," property="doner"> DONER=#doner#</isNotEmpty>
+			<isNotEmpty prepend="," property="within"> WITHIN=#within#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.holiday.pojo.Holiday" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_HOLIDAY.PRAY_ER AS prayEr,
+			TB_HOLIDAY.PRAY_ER_ID AS prayErId,
+			TB_HOLIDAY.PRAY_DAYS AS prayDays,
+			TB_HOLIDAY.REASON AS reason,
+			TB_HOLIDAY.FROM_DAYS AS fromDays,
+			TB_HOLIDAY.TO_DAYS AS toDays,
+			TB_HOLIDAY.TYPE AS type,
+			TB_HOLIDAY.DONER AS doner,
+			TB_HOLIDAY.WITHIN AS within,
+			
+			TB_HOLIDAY.ID AS id,
+			TB_HOLIDAY.STATUS AS status,
+			TB_HOLIDAY.CREATED AS created,
+			TB_HOLIDAY.CREATE_TIME AS createTime,
+			TB_HOLIDAY.UPDATED AS updated,
+			TB_HOLIDAY.UPDATE_TIME AS updateTime
+		FROM
+			TB_HOLIDAY
+		WHERE
+			TB_HOLIDAY.STATUS = '1'
+		<include refid="Holiday.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			TB_HOLIDAY
+		WHERE
+			TB_HOLIDAY.STATUS = '1' 
+		<include refid="Holiday.mapWhereClause"/>
+	</select>
+</sqlMap>

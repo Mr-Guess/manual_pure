@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Reimburse">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_REIMBURSE.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_REIMBURSE.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_REIMBURSE.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_REIMBURSE.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_REIMBURSE.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_REIMBURSE.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="reimburseTitle"> TB_REIMBURSE.REIMBURSE_TITLE like '%'+#reimburseTitle#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="reimurseTime"> TB_REIMBURSE.REIMURSE_TIME like '%'+#reimurseTime#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="reimurser"> TB_REIMBURSE.REIMURSER like '%'+#reimurser#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="reimurserId"> TB_REIMBURSE.REIMURSER_ID like '%'+#reimurserId#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="remiurserJob"> TB_REIMBURSE.REMIURSER_JOB like '%'+#remiurserJob#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="remiurseHole"> TB_REIMBURSE.REMIURSE_HOLE like '%'+#remiurseHole#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="docs"> TB_REIMBURSE.DOCS like '%'+#docs#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="doner"> TB_REIMBURSE.DONER like '%'+#doner#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="within"> TB_REIMBURSE.WITHIN like '%'+#within#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="step"> TB_REIMBURSE.STEP like '%'+#step#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.reimburse.pojo.Reimburse">
+  		INSERT INTO TB_REIMBURSE(
+				
+				REIMBURSE_TITLE,
+				REIMURSE_TIME,
+				REIMURSER,
+				REIMURSER_ID,
+				REMIURSER_JOB,
+				REMIURSE_HOLE,
+				DOCS,
+				DONER,
+				WITHIN,
+				STEP,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#reimburseTitle#,
+				#reimurseTime#,
+				#reimurser#,
+				#reimurserId#,
+				#remiurserJob#,
+				#remiurseHole#,
+				#docs#,
+				#doner#,
+				#within#,
+				#step#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_REIMBURSE SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.reimburse.pojo.Reimburse" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_REIMBURSE.REIMBURSE_TITLE AS reimburseTitle,
+			TB_REIMBURSE.REIMURSE_TIME AS reimurseTime,
+			TB_REIMBURSE.REIMURSER AS reimurser,
+			TB_REIMBURSE.REIMURSER_ID AS reimurserId,
+			TB_REIMBURSE.REMIURSER_JOB AS remiurserJob,
+			TB_REIMBURSE.REMIURSE_HOLE AS remiurseHole,
+			TB_REIMBURSE.DOCS AS docs,
+			TB_REIMBURSE.DONER AS doner,
+			TB_REIMBURSE.WITHIN AS within,
+			TB_REIMBURSE.STEP AS step,
+			
+			TB_REIMBURSE.ID AS id,
+			TB_REIMBURSE.STATUS AS status,
+			TB_REIMBURSE.CREATED AS created,
+			TB_REIMBURSE.CREATE_TIME AS createTime,
+			TB_REIMBURSE.UPDATED AS updated,
+			TB_REIMBURSE.UPDATE_TIME as updateTime
+		from
+		TB_REIMBURSE
+  		where 
+ 	 		TB_REIMBURSE.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.reimburse.pojo.Reimburse">
+		UPDATE TB_REIMBURSE 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="reimburseTitle"> REIMBURSE_TITLE=#reimburseTitle#</isNotEmpty>
+			<isNotEmpty prepend="," property="reimurseTime"> REIMURSE_TIME=#reimurseTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="reimurser"> REIMURSER=#reimurser#</isNotEmpty>
+			<isNotEmpty prepend="," property="reimurserId"> REIMURSER_ID=#reimurserId#</isNotEmpty>
+			<isNotEmpty prepend="," property="remiurserJob"> REMIURSER_JOB=#remiurserJob#</isNotEmpty>
+			<isNotEmpty prepend="," property="remiurseHole"> REMIURSE_HOLE=#remiurseHole#</isNotEmpty>
+			<isNotEmpty prepend="," property="docs"> DOCS=#docs#</isNotEmpty>
+			<isNotEmpty prepend="," property="doner"> DONER=#doner#</isNotEmpty>
+			<isNotEmpty prepend="," property="within"> WITHIN=#within#</isNotEmpty>
+			<isNotEmpty prepend="," property="step"> STEP=#step#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.reimburse.pojo.Reimburse" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_REIMBURSE.REIMBURSE_TITLE AS reimburseTitle,
+			TB_REIMBURSE.REIMURSE_TIME AS reimurseTime,
+			TB_REIMBURSE.REIMURSER AS reimurser,
+			TB_REIMBURSE.REIMURSER_ID AS reimurserId,
+			TB_REIMBURSE.REMIURSER_JOB AS remiurserJob,
+			TB_REIMBURSE.REMIURSE_HOLE AS remiurseHole,
+			TB_REIMBURSE.DOCS AS docs,
+			TB_REIMBURSE.DONER AS doner,
+			TB_REIMBURSE.WITHIN AS within,
+			TB_REIMBURSE.STEP AS step,
+			
+			TB_REIMBURSE.ID AS id,
+			TB_REIMBURSE.STATUS AS status,
+			TB_REIMBURSE.CREATED AS created,
+			TB_REIMBURSE.CREATE_TIME AS createTime,
+			TB_REIMBURSE.UPDATED AS updated,
+			TB_REIMBURSE.UPDATE_TIME AS updateTime
+		FROM
+			TB_REIMBURSE
+		WHERE
+			TB_REIMBURSE.STATUS = '1'
+		<include refid="Reimburse.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_REIMBURSE
+		WHERE
+			TB_REIMBURSE.STATUS = '1' 
+		<include refid="Reimburse.mapWhereClause"/>
+	</select>
+</sqlMap>

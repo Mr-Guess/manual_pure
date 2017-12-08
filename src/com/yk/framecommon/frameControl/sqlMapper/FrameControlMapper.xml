@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="FrameControl">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_FRAME_CONTROL.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_FRAME_CONTROL.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_FRAME_CONTROL.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_FRAME_CONTROL.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_FRAME_CONTROL.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_FRAME_CONTROL.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="relationId"> TB_FRAME_CONTROL.RELATION_ID like '%'+#relationId#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="lastId"> TB_FRAME_CONTROL.LAST_ID like '%'+#lastId#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="nextId"> TB_FRAME_CONTROL.NEXT_ID like '%'+#nextId#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="isLast"> TB_FRAME_CONTROL.IS_LAST like '%'+#isLast#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="desinerId"> TB_FRAME_CONTROL.DESINER_ID like '%'+#desinerId#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.framecommon.frameControl.pojo.FrameControl">
+  		INSERT INTO TB_FRAME_CONTROL(
+				
+				RELATION_ID,
+				LAST_ID,
+				NEXT_ID,
+				IS_LAST,
+				DESINER_ID,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#relationId#,
+				#lastId#,
+				#nextId#,
+				#isLast#,
+				#desinerId#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_FRAME_CONTROL SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.framecommon.frameControl.pojo.FrameControl" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_FRAME_CONTROL.RELATION_ID AS relationId,
+			TB_FRAME_CONTROL.LAST_ID AS lastId,
+			TB_FRAME_CONTROL.NEXT_ID AS nextId,
+			TB_FRAME_CONTROL.IS_LAST AS isLast,
+			TB_FRAME_CONTROL.DESINER_ID AS desinerId,
+			
+			TB_FRAME_CONTROL.ID AS id,
+			TB_FRAME_CONTROL.STATUS AS status,
+			TB_FRAME_CONTROL.CREATED AS created,
+			TB_FRAME_CONTROL.CREATE_TIME AS createTime,
+			TB_FRAME_CONTROL.UPDATED AS updated,
+			TB_FRAME_CONTROL.UPDATE_TIME as updateTime
+		from
+		TB_FRAME_CONTROL
+  		where 
+ 	 		TB_FRAME_CONTROL.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.framecommon.frameControl.pojo.FrameControl">
+		UPDATE TB_FRAME_CONTROL 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="relationId"> RELATION_ID=#relationId#</isNotEmpty>
+			<isNotEmpty prepend="," property="lastId"> LAST_ID=#lastId#</isNotEmpty>
+			<isNotEmpty prepend="," property="nextId"> NEXT_ID=#nextId#</isNotEmpty>
+			<isNotEmpty prepend="," property="isLast"> IS_LAST=#isLast#</isNotEmpty>
+			<isNotEmpty prepend="," property="desinerId"> DESINER_ID=#desinerId#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.framecommon.frameControl.pojo.FrameControl" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_FRAME_CONTROL.RELATION_ID AS relationId,
+			TB_FRAME_CONTROL.LAST_ID AS lastId,
+			TB_FRAME_CONTROL.NEXT_ID AS nextId,
+			TB_FRAME_CONTROL.IS_LAST AS isLast,
+			TB_FRAME_CONTROL.DESINER_ID AS desinerId,
+			
+			TB_FRAME_CONTROL.ID AS id,
+			TB_FRAME_CONTROL.STATUS AS status,
+			TB_FRAME_CONTROL.CREATED AS created,
+			TB_FRAME_CONTROL.CREATE_TIME AS createTime,
+			TB_FRAME_CONTROL.UPDATED AS updated,
+			TB_FRAME_CONTROL.UPDATE_TIME AS updateTime
+		FROM
+			TB_FRAME_CONTROL
+		WHERE
+			TB_FRAME_CONTROL.STATUS = '1'
+		<include refid="FrameControl.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_FRAME_CONTROL
+		WHERE
+			TB_FRAME_CONTROL.STATUS = '1' 
+		<include refid="FrameControl.mapWhereClause"/>
+	</select>
+</sqlMap>

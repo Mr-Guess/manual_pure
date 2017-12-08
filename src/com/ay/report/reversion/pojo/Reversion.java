@@ -17,6 +17,25 @@ public class Reversion extends BasePojo{
 	
 	@ChineseName("关联ID")
 	private String convertId;
+	
+	private String reverName;
+	private String reverAccount;
+	
+	public String getReverName() {
+		return reverName;
+	}
+
+	public void setReverName(String reverName) {
+		this.reverName = reverName;
+	}
+
+	public String getReverAccount() {
+		return reverAccount;
+	}
+
+	public void setReverAccount(String reverAccount) {
+		this.reverAccount = reverAccount;
+	}
 
 	public String getReType() {
 		return reType;

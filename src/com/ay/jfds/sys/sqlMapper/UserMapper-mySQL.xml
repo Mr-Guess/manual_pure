@@ -83,6 +83,7 @@
 		login_time AS loginTime,
 		last_login_time AS lastLoginTime,
 		status AS status,
+		salt AS salt,
 		created AS created,
 		create_time AS createTime,
 		updated AS updated,
@@ -450,6 +451,7 @@
 		updated AS updated,
 		update_time AS updateTime,
 		token AS token,
+		business AS business,
 		lose_count AS loseCount
 		FROM
 		sys_user
@@ -683,4 +685,157 @@
 		AND id != #id#
 	</select><!-- 查询部门下面的人 --><select id="findByDept" parameterClass="java.lang.String" resultClass="com.ay.jfds.sys.pojo.User">
 		select id as id,user_name as userName from sys_user  where dept_id=#dept# and status='1' AND user_type='3'
-	</select></sqlMap>
+	</select>
+	
+	<!-- 流程内容 -->
+	
+	<select id="getUperUser" resultClass="user" parameterClass="java.lang.String">
+		SELECT
+		sys_user.id AS id,
+		sys_user.account AS account,
+		sys_user.password AS password,
+		sys_user.user_name AS userName,
+		sys_user.dept_id AS deptId,
+		sys_user.org_tree AS orgTree,
+		sys_user.user_type AS userType,
+		sys_user.skin_type AS skinType,
+		sys_user.login_time AS loginTime,
+		sys_user.last_login_time AS lastLoginTime,
+		sys_user.business as business,
+		sys_user.status AS status,
+		sys_user.created AS created,
+		sys_user.create_time AS createTime,
+		sys_user.updated AS updated,
+		sys_user.update_time AS updateTime,
+		sys_dept.dept_name as deptName
+		FROM
+		sys_user
+			WHERE
+		dept_id = (
+			SELECT
+				id
+			FROM
+				sys_dept
+			WHERE
+				parent_id = (
+					SELECT
+						parent_id
+					FROM
+						sys_dept
+					WHERE
+						id = (
+							SELECT
+								dept_id
+							FROM
+								sys_user
+							WHERE
+								id = #id#
+						)
+				)
+			AND dept_order = 1
+		)
+	</select>
+	
+	<select id="getDeptLeader" resultClass="user" parameterClass="java.lang.String">
+		SELECT
+		sys_user.id AS id,
+		sys_user.account AS account,
+		sys_user.password AS password,
+		sys_user.user_name AS userName,
+		sys_user.dept_id AS deptId,
+		sys_user.org_tree AS orgTree,
+		sys_user.user_type AS userType,
+		sys_user.skin_type AS skinType,
+		sys_user.login_time AS loginTime,
+		sys_user.last_login_time AS lastLoginTime,
+		sys_user.business as business,
+		sys_user.status AS status,
+		sys_user.created AS created,
+		sys_user.create_time AS createTime,
+		sys_user.updated AS updated,
+		sys_user.update_time AS updateTime
+		FROM
+		sys_user
+		WHERE
+			dept_id = (
+				SELECT
+					id
+				FROM
+					sys_dept
+				WHERE
+					parent_id = #id#
+				AND dept_order = 1
+			)
+		AND
+		sys_user.status !=0
+	</select>
+	
+	<select id="getUperDept" resultClass="dept" parameterClass="java.lang.String">
+	SELECT
+		id AS id,
+		parent_id AS parentId,
+		dept_name AS deptName,
+		dept_order AS deptOrder,
+		deptUrl AS deptUrl,
+		province AS province,
+		status AS status,
+		created AS created,
+		create_time AS createTime,
+		updated AS updated,
+		update_time AS updateTime
+	FROM
+		sys_dept
+	WHERE
+		id = (
+			SELECT
+				parent_id
+			FROM
+				sys_dept
+			WHERE
+				id = #id#
+			
+		)
+	AND 
+		status !=0
+	</select>
+	
+	<select id="getCrossUperDept" resultClass="dept" parameterClass="java.lang.String">
+		SELECT
+			id AS id,
+			parent_id AS parentId,
+			dept_name AS deptName,
+			dept_order AS deptOrder,
+			status AS status,
+			created AS created,
+			create_time AS createTime,
+			updated AS updated,
+			update_time AS updateTime
+		FROM
+			sys_dept
+		WHERE
+			id = (
+				SELECT
+					parent_id
+				FROM
+					sys_dept
+				WHERE
+					id = (
+						SELECT
+							parent_id
+						FROM
+							sys_dept
+						WHERE
+							id = (
+								SELECT
+									dept_id
+								FROM
+									sys_user
+								WHERE
+									id = #id#
+							)
+					)
+			)
+	</select>
+	
+	
+	</sqlMap>

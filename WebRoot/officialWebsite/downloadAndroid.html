@@ -1,12 +1,91 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
 <title>下载</title>
+<style type="text/css">
+    *{
+        margin:0; 
+        padding:0;
+    }
+    a{
+        text-decoration: none;
+    }
+    img{
+        max-width: 100%; 
+        height: auto;
+    }
+    .weixin-tip{
+    	display:none;
+        position: fixed; 
+        left:0; 
+        top:0; 
+        bottom:0; 
+        background: rgba(0,0,0,0.8); 
+        filter:alpha(opacity=80);  
+        height: 100%; 
+        width: 100%; 
+        z-index: 100;
+    }
+    .weixin-tip p{
+        text-align: center; 
+        margin-top: 10%; 
+        padding:0 5%;
+    }
+</style>
 <script type="text/javascript">
-	window.location.href = "apks/QQ_708.apk";
+	
+	 $(window).on("load",function(){
+		 var browser={  
+			        versions:function(){  
+			            var u = navigator.userAgent, app = navigator.appVersion;  
+			            return {  
+			                trident: u.indexOf('Trident') > -1, //IE内核  
+			                presto: u.indexOf('Presto') > -1, //opera内核  
+			                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核  
+			                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核  
+			                mobile: !!u.match(/AppleWebKit.*Mobile.*/)||!!u.match(/AppleWebKit/), //是否为移动终端  
+			                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端  
+			                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器  
+			                iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器  
+			                iPad: u.indexOf('iPad') > -1, //是否iPad  
+			                symbian: u.indexOf('Symbian') > -1, //是否Symbian  
+			                webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部  
+			            };  
+			        }()  
+			    }
+		 
+		 var isMobile = browser.versions.ios || browser.versions.android || browser.versions.symbian;
+		 if (isWeiXin()) {
+				document.getElementById("weixin").style.display = "block";
+	     }else if(browser.versions.iPad || browser.versions.iPhone){  
+				alert("这是台水果"); 
+		 }else if(browser.versions.android){  
+	           	 window.location.href = "apks/gt_beta.apk";
+		 }else if(browser.versions.symbian){  
+				alert("这是塞班") 
+		 }else{
+				alert("上电脑开这玩意干啥")
+		 }
+		 
+	 });
+function isWeiXin() {   // 就是这个东东
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+        } else {
+                return false;
+        }
+}
 </script>
 </head>
 <body>
+<div id="weixin" class="weixin-tip">
+	<p>
+        <img src="img/live_weixin.png" alt="微信打开"/>
+    </p>
+</div>
 </body>
 </html>

@@ -50,6 +50,32 @@ public class UserDao extends BaseDao<User> {
 		return (List<UserDTO>) getSqlMapClientTemplate().queryForList(getEntityName() + ".findUserDto", map, from, prePageNum);
 	}
 	
+	/**
+	 * 流程相关内容
+	 * @param id
+	 * @return
+	 */
+	public User getUperUser(String id){
+		return (User) getSqlMapClientTemplate().queryForObject(getEntityName() + ".getUperUser", id);
+	}
+	
+	public User getDeptLeader(String id){
+		return (User) getSqlMapClientTemplate().queryForObject(getEntityName() + ".getDeptLeader", id);
+	}
+	
+	public Department getUperDept(String id) {
+		Department department = null;
+		department = (Department) this.getSqlMapClientTemplate().queryForObject(getEntityName() + ".getUperDept", id);
+		return department;
+	}
+	
+	public Department getCrossUperDept(String id) {
+		Department department = null;
+		department = (Department) this.getSqlMapClientTemplate().queryForObject(getEntityName() + ".getCrossUperDept", id);
+		return department;
+	}
+	
+	/*流程相关内容结束*/
 	public List findUserDto () {
 		return getSqlMapClientTemplate().queryForList(getEntityName()+".getUserDto");
 	}

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="FrameRecord">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> tb_frame_record.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> tb_frame_record.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> tb_frame_record.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> tb_frame_record.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> tb_frame_record.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> tb_frame_record.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="concatFrame"> tb_frame_record.CONCAT_FRAME like CONCAT('%',#concatFrame#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="concatData"> tb_frame_record.CONCAT_DATA like CONCAT('%',#concatData#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="processor"> tb_frame_record.PROCESSOR like CONCAT('%',#processor#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="processorId"> tb_frame_record.PROCESSOR_ID like CONCAT('%',#processorId#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="context"> tb_frame_record.CONTEXT like CONCAT('%',#context#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="chosen"> tb_frame_record.CHOSEN like CONCAT('%',#chosen#,'%')</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.framecommon.frameRecord.pojo.FrameRecord">
+  		INSERT INTO tb_frame_record(
+				
+				CONCAT_FRAME,
+				CONCAT_DATA,
+				PROCESSOR,
+				PROCESSOR_ID,
+				CONTEXT,
+				CHOSEN,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#concatFrame#,
+				#concatData#,
+				#processor#,
+				#processorId#,
+				#context#,
+				#chosen#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE tb_frame_record SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.framecommon.frameRecord.pojo.FrameRecord" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_frame_record.CONCAT_FRAME AS concatFrame,
+			tb_frame_record.CONCAT_DATA AS concatData,
+			tb_frame_record.PROCESSOR AS processor,
+			tb_frame_record.PROCESSOR_ID AS processorId,
+			tb_frame_record.CONTEXT AS context,
+			tb_frame_record.CHOSEN AS chosen,
+			sys_user.account as processorAccount,
+			
+			tb_frame_record.ID AS id,
+			tb_frame_record.STATUS AS status,
+			tb_frame_record.CREATED AS created,
+			tb_frame_record.CREATE_TIME AS createTime,
+			tb_frame_record.UPDATED AS updated,
+			tb_frame_record.UPDATE_TIME AS updateTime
+		FROM
+			tb_frame_record
+		INNER JOIN
+			sys_user
+		ON
+			tb_frame_record.PROCESSOR_ID = sys_user.id
+  		where 
+ 	 		tb_frame_record.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.framecommon.frameRecord.pojo.FrameRecord">
+		UPDATE tb_frame_record 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="concatFrame"> CONCAT_FRAME=#concatFrame#</isNotEmpty>
+			<isNotEmpty prepend="," property="concatData"> CONCAT_DATA=#concatData#</isNotEmpty>
+			<isNotEmpty prepend="," property="processor"> PROCESSOR=#processor#</isNotEmpty>
+			<isNotEmpty prepend="," property="processorId"> PROCESSOR_ID=#processorId#</isNotEmpty>
+			<isNotEmpty prepend="," property="context"> CONTEXT=#context#</isNotEmpty>
+			<isNotEmpty prepend="," property="chosen"> CHOSEN=#chosen#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.framecommon.frameRecord.pojo.FrameRecord" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_frame_record.CONCAT_FRAME AS concatFrame,
+			tb_frame_record.CONCAT_DATA AS concatData,
+			tb_frame_record.PROCESSOR AS processor,
+			tb_frame_record.PROCESSOR_ID AS processorId,
+			tb_frame_record.CONTEXT AS context,
+			tb_frame_record.CHOSEN AS chosen,
+			sys_user.account as processorAccount,
+			
+			tb_frame_record.ID AS id,
+			tb_frame_record.STATUS AS status,
+			tb_frame_record.CREATED AS created,
+			tb_frame_record.CREATE_TIME AS createTime,
+			tb_frame_record.UPDATED AS updated,
+			tb_frame_record.UPDATE_TIME AS updateTime
+		FROM
+			tb_frame_record
+		INNER JOIN
+			sys_user
+		ON
+			tb_frame_record.PROCESSOR_ID = sys_user.id
+		WHERE
+			tb_frame_record.STATUS = '1'
+		<include refid="FrameRecord.mapWhereClause"/>
+	</select>
+	<!-- add method find-->
+	<select id="findAll" resultClass="com.yk.framecommon.frameRecord.pojo.FrameRecord" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_frame_record.CONCAT_FRAME AS concatFrame,
+			tb_frame_record.CONCAT_DATA AS concatData,
+			tb_frame_record.PROCESSOR AS processor,
+			tb_frame_record.PROCESSOR_ID AS processorId,
+			tb_frame_record.CONTEXT AS context,
+			tb_frame_record.CHOSEN AS chosen,
+			sys_user.account as processorAccount,
+			
+			tb_frame_record.ID AS id,
+			tb_frame_record.STATUS AS status,
+			tb_frame_record.CREATED AS created,
+			tb_frame_record.CREATE_TIME AS createTime,
+			tb_frame_record.UPDATED AS updated,
+			tb_frame_record.UPDATE_TIME AS updateTime
+		FROM
+			tb_frame_record
+		INNER JOIN
+			sys_user
+		ON
+			tb_frame_record.PROCESSOR_ID = sys_user.id
+		WHERE
+			tb_frame_record.STATUS = '1'
+		<include refid="FrameRecord.mapWhereClause"/>
+		ORDER BY
+			tb_frame_record.CREATE_TIME asc
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_frame_record
+		WHERE
+			tb_frame_record.STATUS = '1' 
+		<include refid="FrameRecord.mapWhereClause"/>
+	</select>
+</sqlMap>

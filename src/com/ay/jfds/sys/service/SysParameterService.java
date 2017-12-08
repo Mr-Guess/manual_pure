@@ -20,5 +20,14 @@ public class SysParameterService extends
 	public SysParameter findValueByCode( String code) {
 		return this.getDao().getValueByParaCode(code);
 	}
+	
+	public int warterNum() {
+		
+		return dao.warterNum();
+	}
+	
+	public boolean setwarterNum() {
+		return dao.setwarterNum();
+	}
 
 }

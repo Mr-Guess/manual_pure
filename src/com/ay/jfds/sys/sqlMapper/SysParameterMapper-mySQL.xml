@@ -100,11 +100,24 @@
 		sys_parameter
 		WHERE
 		status = 1
-	</select><select id="count" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+	</select>
+	<select id="count" parameterClass="java.util.Map" resultClass="java.lang.Integer">
 		select count(id)
 		from sys_parameter
 		where 1=1
 		and
 		status=1
 		<include refid="sysParameter.mapWhereClause"/>
-	</select></sqlMap>
+	</select>
+	
+	<select id="warterNum" resultClass="java.lang.Integer">
+		select waterNum
+		from sys_waternum
+	</select>
+	
+	<update id="setwarterNum">
+		update sys_waternum 
+		set waterNum = waterNum+1
+	</update>
+	
+	</sqlMap>

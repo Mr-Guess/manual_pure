@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="ReimburseList">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> tb_reimburse_list.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> tb_reimburse_list.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> tb_reimburse_list.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> tb_reimburse_list.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> tb_reimburse_list.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> tb_reimburse_list.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="projectName"> tb_reimburse_list.PROJECT_NAME like CONCAT('%',#projectName#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="bz"> tb_reimburse_list.BZ like CONCAT('%',#bz#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="amount"> tb_reimburse_list.AMOUNT like CONCAT('%',#amount#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="relateData"> tb_reimburse_list.RELATE_DATA like CONCAT('%',#relateData#,'%')</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.reimburseList.pojo.ReimburseList">
+  		INSERT INTO tb_reimburse_list(
+				
+				PROJECT_NAME,
+				BZ,
+				AMOUNT,
+				RELATE_DATA,
+				paydate,
+				stateType,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#projectName#,
+				#bz#,
+				#amount#,
+				#relateData#,
+				#paydate#,
+				#stateType#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE tb_reimburse_list SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.reimburseList.pojo.ReimburseList" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_reimburse_list.PROJECT_NAME AS projectName,
+			tb_reimburse_list.BZ AS bz,
+			tb_reimburse_list.AMOUNT AS amount,
+			tb_reimburse_list.RELATE_DATA AS relateData,
+			tb_reimburse_list.paydate AS paydate,
+			tb_reimburse_list.stateType AS stateType,
+			
+			tb_reimburse_list.ID AS id,
+			tb_reimburse_list.STATUS AS status,
+			tb_reimburse_list.CREATED AS created,
+			tb_reimburse_list.CREATE_TIME AS createTime,
+			tb_reimburse_list.UPDATED AS updated,
+			tb_reimburse_list.UPDATE_TIME as updateTime
+		from
+		tb_reimburse_list
+  		where 
+ 	 		tb_reimburse_list.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.reimburseList.pojo.ReimburseList">
+		UPDATE tb_reimburse_list 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="projectName"> PROJECT_NAME=#projectName#</isNotEmpty>
+			<isNotEmpty prepend="," property="bz"> BZ=#bz#</isNotEmpty>
+			<isNotEmpty prepend="," property="amount"> AMOUNT=#amount#</isNotEmpty>
+			<isNotEmpty prepend="," property="relateData"> RELATE_DATA=#relateData#</isNotEmpty>
+			<isNotEmpty prepend="," property="paydate"> paydate=#paydate#</isNotEmpty>
+			<isNotEmpty prepend="," property="stateType"> stateType=#stateType#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.reimburseList.pojo.ReimburseList" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_reimburse_list.PROJECT_NAME AS projectName,
+			tb_reimburse_list.BZ AS bz,
+			tb_reimburse_list.AMOUNT AS amount,
+			tb_reimburse_list.RELATE_DATA AS relateData,
+			tb_reimburse_list.paydate AS paydate,
+			tb_reimburse_list.stateType AS stateType,
+			
+			tb_reimburse_list.ID AS id,
+			tb_reimburse_list.STATUS AS status,
+			tb_reimburse_list.CREATED AS created,
+			tb_reimburse_list.CREATE_TIME AS createTime,
+			tb_reimburse_list.UPDATED AS updated,
+			tb_reimburse_list.UPDATE_TIME AS updateTime
+		FROM
+			tb_reimburse_list
+		WHERE
+			tb_reimburse_list.STATUS = '1'
+		<include refid="ReimburseList.mapWhereClause"/>
+	</select>
+	
+	<!-- add method find-->
+	<select id="findAll" resultClass="com.yk.businesses.reimburseList.pojo.ReimburseList" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_reimburse_list.PROJECT_NAME AS projectName,
+			tb_reimburse_list.BZ AS bz,
+			tb_reimburse_list.AMOUNT AS amount,
+			tb_reimburse_list.RELATE_DATA AS relateData,
+			tb_reimburse_list.paydate AS paydate,
+			tb_reimburse_list.stateType AS stateType,
+			
+			tb_reimburse_list.ID AS id,
+			tb_reimburse_list.STATUS AS status,
+			tb_reimburse_list.CREATED AS created,
+			tb_reimburse_list.CREATE_TIME AS createTime,
+			tb_reimburse_list.UPDATED AS updated,
+			tb_reimburse_list.UPDATE_TIME AS updateTime
+		FROM
+			tb_reimburse_list
+		WHERE
+			tb_reimburse_list.STATUS = '1'
+		<include refid="ReimburseList.mapWhereClause"/>
+	</select>
+	
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_reimburse_list
+		WHERE
+			tb_reimburse_list.STATUS = '1' 
+		<include refid="ReimburseList.mapWhereClause"/>
+	</select>
+</sqlMap>

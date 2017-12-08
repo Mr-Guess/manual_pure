@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="FrameRecord">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_FRAME_RECORD.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_FRAME_RECORD.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_FRAME_RECORD.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_FRAME_RECORD.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_FRAME_RECORD.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_FRAME_RECORD.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="concatFrame"> TB_FRAME_RECORD.CONCAT_FRAME like '%'+#concatFrame#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="concatData"> TB_FRAME_RECORD.CONCAT_DATA like '%'+#concatData#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="processor"> TB_FRAME_RECORD.PROCESSOR like '%'+#processor#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="processorId"> TB_FRAME_RECORD.PROCESSOR_ID like '%'+#processorId#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="context"> TB_FRAME_RECORD.CONTEXT like '%'+#context#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="chosen"> TB_FRAME_RECORD.CHOSEN like '%'+#chosen#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.framecommon.frameRecord.pojo.FrameRecord">
+  		INSERT INTO TB_FRAME_RECORD(
+				
+				CONCAT_FRAME,
+				CONCAT_DATA,
+				PROCESSOR,
+				PROCESSOR_ID,
+				CONTEXT,
+				CHOSEN,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#concatFrame#,
+				#concatData#,
+				#processor#,
+				#processorId#,
+				#context#,
+				#chosen#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_FRAME_RECORD SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.framecommon.frameRecord.pojo.FrameRecord" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_FRAME_RECORD.CONCAT_FRAME AS concatFrame,
+			TB_FRAME_RECORD.CONCAT_DATA AS concatData,
+			TB_FRAME_RECORD.PROCESSOR AS processor,
+			TB_FRAME_RECORD.PROCESSOR_ID AS processorId,
+			TB_FRAME_RECORD.CONTEXT AS context,
+			TB_FRAME_RECORD.CHOSEN AS chosen,
+			
+			TB_FRAME_RECORD.ID AS id,
+			TB_FRAME_RECORD.STATUS AS status,
+			TB_FRAME_RECORD.CREATED AS created,
+			TB_FRAME_RECORD.CREATE_TIME AS createTime,
+			TB_FRAME_RECORD.UPDATED AS updated,
+			TB_FRAME_RECORD.UPDATE_TIME as updateTime
+		from
+		TB_FRAME_RECORD
+  		where 
+ 	 		TB_FRAME_RECORD.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.framecommon.frameRecord.pojo.FrameRecord">
+		UPDATE TB_FRAME_RECORD 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="concatFrame"> CONCAT_FRAME=#concatFrame#</isNotEmpty>
+			<isNotEmpty prepend="," property="concatData"> CONCAT_DATA=#concatData#</isNotEmpty>
+			<isNotEmpty prepend="," property="processor"> PROCESSOR=#processor#</isNotEmpty>
+			<isNotEmpty prepend="," property="processorId"> PROCESSOR_ID=#processorId#</isNotEmpty>
+			<isNotEmpty prepend="," property="context"> CONTEXT=#context#</isNotEmpty>
+			<isNotEmpty prepend="," property="chosen"> CHOSEN=#chosen#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.framecommon.frameRecord.pojo.FrameRecord" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_FRAME_RECORD.CONCAT_FRAME AS concatFrame,
+			TB_FRAME_RECORD.CONCAT_DATA AS concatData,
+			TB_FRAME_RECORD.PROCESSOR AS processor,
+			TB_FRAME_RECORD.PROCESSOR_ID AS processorId,
+			TB_FRAME_RECORD.CONTEXT AS context,
+			TB_FRAME_RECORD.CHOSEN AS chosen,
+			
+			TB_FRAME_RECORD.ID AS id,
+			TB_FRAME_RECORD.STATUS AS status,
+			TB_FRAME_RECORD.CREATED AS created,
+			TB_FRAME_RECORD.CREATE_TIME AS createTime,
+			TB_FRAME_RECORD.UPDATED AS updated,
+			TB_FRAME_RECORD.UPDATE_TIME AS updateTime
+		FROM
+			TB_FRAME_RECORD
+		WHERE
+			TB_FRAME_RECORD.STATUS = '1'
+		<include refid="FrameRecord.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_FRAME_RECORD
+		WHERE
+			TB_FRAME_RECORD.STATUS = '1' 
+		<include refid="FrameRecord.mapWhereClause"/>
+	</select>
+</sqlMap>

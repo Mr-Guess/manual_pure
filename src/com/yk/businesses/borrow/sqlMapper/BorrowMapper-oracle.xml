@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Borrow">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_BORROW.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_BORROW.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_BORROW.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_BORROW.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_BORROW.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_BORROW.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="borrower"> TB_BORROW.BORROWER like '%'||#borrower#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="borrowerId"> TB_BORROW.BORROWER_ID like '%'||#borrowerId#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="reason"> TB_BORROW.REASON like '%'||#reason#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="amount"> TB_BORROW.AMOUNT like '%'||#amount#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="prayTime"> TB_BORROW.PRAY_TIME like '%'||#prayTime#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="doner"> TB_BORROW.DONER like '%'||#doner#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="within"> TB_BORROW.WITHIN like '%'||#within#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="step"> TB_BORROW.STEP like '%'||#step#||'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.borrow.pojo.Borrow">
+  		INSERT INTO TB_BORROW(
+				
+				BORROWER,
+				BORROWER_ID,
+				REASON,
+				AMOUNT,
+				PRAY_TIME,
+				DONER,
+				WITHIN,
+				STEP,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#borrower#,
+				#borrowerId#,
+				#reason#,
+				#amount#,
+				#prayTime#,
+				#doner#,
+				#within#,
+				#step#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_BORROW SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.borrow.pojo.Borrow" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_BORROW.BORROWER AS borrower,
+			TB_BORROW.BORROWER_ID AS borrowerId,
+			TB_BORROW.REASON AS reason,
+			TB_BORROW.AMOUNT AS amount,
+			TB_BORROW.PRAY_TIME AS prayTime,
+			TB_BORROW.DONER AS doner,
+			TB_BORROW.WITHIN AS within,
+			TB_BORROW.STEP AS step,
+			
+			TB_BORROW.ID AS id,
+			TB_BORROW.STATUS AS status,
+			TB_BORROW.CREATED AS created,
+			TB_BORROW.CREATE_TIME AS createTime,
+			TB_BORROW.UPDATED AS updated,
+			TB_BORROW.UPDATE_TIME as updateTime
+		from
+		TB_BORROW
+  		where 
+ 	 		TB_BORROW.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.borrow.pojo.Borrow">
+		UPDATE TB_BORROW 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="borrower"> BORROWER=#borrower#</isNotEmpty>
+			<isNotEmpty prepend="," property="borrowerId"> BORROWER_ID=#borrowerId#</isNotEmpty>
+			<isNotEmpty prepend="," property="reason"> REASON=#reason#</isNotEmpty>
+			<isNotEmpty prepend="," property="amount"> AMOUNT=#amount#</isNotEmpty>
+			<isNotEmpty prepend="," property="prayTime"> PRAY_TIME=#prayTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="doner"> DONER=#doner#</isNotEmpty>
+			<isNotEmpty prepend="," property="within"> WITHIN=#within#</isNotEmpty>
+			<isNotEmpty prepend="," property="step"> STEP=#step#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.borrow.pojo.Borrow" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_BORROW.BORROWER AS borrower,
+			TB_BORROW.BORROWER_ID AS borrowerId,
+			TB_BORROW.REASON AS reason,
+			TB_BORROW.AMOUNT AS amount,
+			TB_BORROW.PRAY_TIME AS prayTime,
+			TB_BORROW.DONER AS doner,
+			TB_BORROW.WITHIN AS within,
+			TB_BORROW.STEP AS step,
+			
+			TB_BORROW.ID AS id,
+			TB_BORROW.STATUS AS status,
+			TB_BORROW.CREATED AS created,
+			TB_BORROW.CREATE_TIME AS createTime,
+			TB_BORROW.UPDATED AS updated,
+			TB_BORROW.UPDATE_TIME AS updateTime
+		FROM
+			TB_BORROW
+		WHERE
+			TB_BORROW.STATUS = '1'
+		<include refid="Borrow.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			TB_BORROW
+		WHERE
+			TB_BORROW.STATUS = '1' 
+		<include refid="Borrow.mapWhereClause"/>
+	</select>
+</sqlMap>

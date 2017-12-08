@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Statistics">
+
+	<select id="getById" resultClass="com.yk.businesses.statistics.pojo.Statistics" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_statistics.SHOWN AS shown,
+			tb_statistics.VALUE AS value,
+			tb_statistics.NUM AS num,
+			
+			tb_statistics.ID AS id,
+			tb_statistics.STATUS AS status,
+			tb_statistics.CREATED AS created,
+			tb_statistics.CREATE_TIME AS createTime,
+			tb_statistics.UPDATED AS updated,
+			tb_statistics.UPDATE_TIME as updateTime
+		from
+		tb_statistics
+  		where 
+ 	 		tb_statistics.ID=#id#
+	</select>
+	
+	<select id="getNeedReporter" resultClass="java.lang.String">
+ 		SELECT
+			count(sys_user.id)
+		FROM
+			sys_user
+		WHERE
+			account != 'admin'
+		AND dept_id != '0700b93b1c3c4c9d86a3f0d750c79202'
+		AND account != 'administrator'
+	</select>
+	
+	<select id="getUsersDept" resultClass="com.yk.businesses.statistics.pojo.Statistics">
+ 		SELECT
+			'已上报人数' AS `value`,
+			count(DISTINCT tb_reporting.CREATED) AS num
+		FROM
+			tb_reporting
+		WHERE
+			CREATE_TIME >= CURDATE()
+		UNION
+			SELECT
+				'未上报人数' AS `value`,
+				count(sys_user.id) AS num
+			FROM
+				sys_user
+			WHERE
+				sys_user.id NOT IN (
+					SELECT
+						tb_reporting.CREATED
+					FROM
+						tb_reporting
+					WHERE
+						tb_reporting.CREATE_TIME >= CURDATE()
+				)
+			AND account != 'admin'
+			AND dept_id != '0700b93b1c3c4c9d86a3f0d750c79202'
+			AND account != 'administrator'
+	</select>
+	
+	
+	
+	<select id="statisticReporter" resultClass="com.yk.businesses.statistics.pojo.Statistics">
+ 		SELECT
+			'未提交人名单' AS `value`,
+			sys_user.user_name AS num
+		FROM
+			sys_user
+		WHERE
+			sys_user.id NOT IN (
+				SELECT
+					CREATED
+				FROM
+					tb_reporting
+				WHERE
+					CREATE_TIME >= CURDATE()
+			)
+		AND account != 'admin'
+		AND dept_id != '0700b93b1c3c4c9d86a3f0d750c79202'
+		AND account != 'administrator'
+		UNION
+		SELECT
+			'已提交人名单' AS `value`,
+			sys_user.user_name AS num
+		FROM
+			sys_user
+		WHERE
+			sys_user.id IN (
+				SELECT
+					CREATED
+				FROM
+					tb_reporting
+				WHERE
+					CREATE_TIME >= CURDATE()
+			)
+		AND account != 'admin'
+		AND dept_id != '0700b93b1c3c4c9d86a3f0d750c79202'
+		AND account != 'administrator'
+	</select>
+	
+</sqlMap>

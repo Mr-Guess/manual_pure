@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="WaitDone">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> tb_wait_done.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> tb_wait_done.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> tb_wait_done.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> tb_wait_done.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> tb_wait_done.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> tb_wait_done.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="ssid"> tb_wait_done.SSID like CONCAT('%',#ssid#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="deviceSn"> tb_wait_done.DEVICE_SN like CONCAT('%',#deviceSn#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="doneStatus"> tb_wait_done.DONE_STATUS like CONCAT('%',#doneStatus#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="cmdCode"> tb_wait_done.CMD_CODE like CONCAT('%',#cmdCode#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="subCmd"> tb_wait_done.SUB_CMD like CONCAT('%',#subCmd#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="cmdReturn"> tb_wait_done.CMD_RETURN like CONCAT('%',#cmdReturn#,'%')</isNotEmpty>
+			<isNotEmpty prepend="and" property="sendTime"> tb_wait_done.SEND_TIME like CONCAT('%',#sendTime#,'%')</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.signIn.backStage.waitDone.WaitDone">
+  		INSERT INTO tb_wait_done(
+				
+				SSID,
+				DEVICE_SN,
+				DONE_STATUS,
+				CMD_CODE,
+				SUB_CMD,
+				CMD_RETURN,
+				SEND_TIME,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#ssid#,
+				#deviceSn#,
+				#doneStatus#,
+				#cmdCode#,
+				#subCmd#,
+				#cmdReturn#,
+				#sendTime#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE tb_wait_done SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.signIn.backStage.waitDone.WaitDone" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			tb_wait_done.SSID AS ssid,
+			tb_wait_done.DEVICE_SN AS deviceSn,
+			tb_wait_done.DONE_STATUS AS doneStatus,
+			tb_wait_done.CMD_CODE AS cmdCode,
+			tb_wait_done.SUB_CMD AS subCmd,
+			tb_wait_done.CMD_RETURN AS cmdReturn,
+			tb_wait_done.SEND_TIME AS sendTime,
+			
+			tb_wait_done.ID AS id,
+			tb_wait_done.STATUS AS status,
+			tb_wait_done.CREATED AS created,
+			tb_wait_done.CREATE_TIME AS createTime,
+			tb_wait_done.UPDATED AS updated,
+			tb_wait_done.UPDATE_TIME as updateTime
+		from
+		tb_wait_done
+  		where 
+ 	 		tb_wait_done.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.signIn.backStage.waitDone.WaitDone">
+		UPDATE tb_wait_done 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="ssid"> SSID=#ssid#</isNotEmpty>
+			<isNotEmpty prepend="," property="deviceSn"> DEVICE_SN=#deviceSn#</isNotEmpty>
+			<isNotEmpty prepend="," property="doneStatus"> DONE_STATUS=#doneStatus#</isNotEmpty>
+			<isNotEmpty prepend="," property="cmdCode"> CMD_CODE=#cmdCode#</isNotEmpty>
+			<isNotEmpty prepend="," property="subCmd"> SUB_CMD=#subCmd#</isNotEmpty>
+			<isNotEmpty prepend="," property="cmdReturn"> CMD_RETURN=#cmdReturn#</isNotEmpty>
+			<isNotEmpty prepend="," property="sendTime"> SEND_TIME=#sendTime#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.signIn.backStage.waitDone.WaitDone" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_wait_done.SSID AS ssid,
+			tb_wait_done.DEVICE_SN AS deviceSn,
+			tb_wait_done.DONE_STATUS AS doneStatus,
+			tb_wait_done.CMD_CODE AS cmdCode,
+			tb_wait_done.SUB_CMD AS subCmd,
+			tb_wait_done.CMD_RETURN AS cmdReturn,
+			tb_wait_done.SEND_TIME AS sendTime,
+			
+			tb_wait_done.ID AS id,
+			tb_wait_done.STATUS AS status,
+			tb_wait_done.CREATED AS created,
+			tb_wait_done.CREATE_TIME AS createTime,
+			tb_wait_done.UPDATED AS updated,
+			tb_wait_done.UPDATE_TIME AS updateTime
+		FROM
+			tb_wait_done
+		WHERE
+			tb_wait_done.STATUS = '1'
+		<include refid="WaitDone.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_wait_done
+		WHERE
+			tb_wait_done.STATUS = '1' 
+		<include refid="WaitDone.mapWhereClause"/>
+	</select>
+</sqlMap>

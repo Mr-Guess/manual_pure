@@ -23,9 +23,18 @@
   <!--消息提醒模块-->
   <package name="jobRemind" extends="struts-default" namespace="/jobRemind">
     <action name="jobRemindAction" class="com.yk.businesses.jobRemind.action.JobRemindAction">
-      <result name="exp" type="chain">
-        <param name="nameSpace">/excel</param>
-        <param name="actionName">excel_exp</param>
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--统计通用类模块-->
+  <package name="autoStatistics" extends="struts-default" namespace="/autoStatistics">
+    <action name="autoStatisticsAction" class="com.yk.businesses.statistics.action.StatisticsAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
       </result>
     </action>
   </package>

@@ -12,7 +12,7 @@
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>地市级基础版本V2.0</title>
+<title>南京永坤信息科技有限公司</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" type="text/css"
 		href="<%=jquery_basePath%>resources/js/jquery/easyui-1.3/themes/cupertino/easyui.css">

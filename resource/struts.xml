@@ -15,4 +15,6 @@
 	<include file="struts/struts-emergencyplan.xml"></include>
 	<include file="struts/struts-humanResource.xml"></include>
 	<include file="struts/struts-report.xml"></include>
+	<include file="struts/struts-business.xml"></include>
+	<include file="struts/struts-signIn.xml"></include>
 </struts>

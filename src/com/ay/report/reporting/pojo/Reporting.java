@@ -36,13 +36,40 @@ public class Reporting extends BasePojo{
 	
 	@ChineseName("经办人")
 	private String informre;
+	private String ownerName;
 
 	// 检查人标记
 	private String checkerinob;
+	private String checkerAnd;
+	private String reportinf;
 	
 	// 自动生成标题
 	private String autoTitle;
 	
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public String getReportinf() {
+		return reportinf;
+	}
+
+	public void setReportinf(String reportinf) {
+		this.reportinf = reportinf;
+	}
+
+	public String getCheckerAnd() {
+		return checkerAnd;
+	}
+
+	public void setCheckerAnd(String checkerAnd) {
+		this.checkerAnd = checkerAnd;
+	}
+
 	public String getAutoTitle() {
 		return autoTitle;
 	}

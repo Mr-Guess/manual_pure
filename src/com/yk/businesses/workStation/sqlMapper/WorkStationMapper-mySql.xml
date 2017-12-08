@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="WorkStation">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+	</sql>
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.workStation.pojo.WorkStation" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_work_station.MODLE AS modle,
+			tb_work_station.NUMBER AS number,
+			tb_work_station.SHOW_DATA AS showData,
+			
+			tb_work_station.ID AS id,
+			tb_work_station.STATUS AS status,
+			tb_work_station.CREATED AS created,
+			tb_work_station.CREATE_TIME AS createTime,
+			tb_work_station.UPDATED AS updated,
+			tb_work_station.UPDATE_TIME AS updateTime
+		FROM
+			tb_work_station
+		WHERE
+			tb_work_station.STATUS = '1'
+		<include refid="WorkStation.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			tb_work_station
+		WHERE
+			tb_work_station.STATUS = '1' 
+		<include refid="WorkStation.mapWhereClause"/>
+	</select>
+</sqlMap>

@@ -6,7 +6,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
 <html style="height:100%; text-algin:center;">
 <head>
 
-<title>地市级基础版本v2.0</title>
+<title>南京永坤信息科技有限公司</title>
 <link rel="stylesheet" type="text/css"
 	href="resources/js/jquery/easyui-1.3/themes/cupertino/easyui.css" />
 <link rel="stylesheet" type="text/css"

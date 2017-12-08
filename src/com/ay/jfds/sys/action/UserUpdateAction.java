@@ -14,6 +14,8 @@ import com.ay.framework.core.action.BaseAction;
 import com.ay.framework.core.utils.mapper.JsonMapper;
 import com.ay.framework.core.utils.web.struts.Struts2Utils;
 import com.ay.framework.shiro.ApplicationSessionSchema;
+import com.ay.framework.util.Digests;
+import com.ay.framework.util.Encodes;
 import com.ay.framework.util.EncodingHeaderUtil;
 import com.ay.jfds.dev.action.DataAction;
 import com.ay.jfds.sys.dto.UserDTO;
@@ -36,11 +38,20 @@ public class UserUpdateAction extends BaseAction {
 		OperateInfo operateInfo = new OperateInfo();
 		String userId = (String) SecurityUtils.getSubject().getSession()
 				.getAttribute("user_id");// 获得当前用户id
+		if(userId == null && user!= null){
+			userId = user.getId();
+		}
 		User currentUser = userService.getById(userId);
 		// 取得SESSION中的用户密码
-		String UserPassword = ((UserInfo) session
-				.get(ApplicationSessionSchema.SESSION_ONLINE_INFO))
-				.getPassword();
+		String UserPassword = null;
+		if(session.size()>0){
+			UserPassword = ((UserInfo) session
+					.get(ApplicationSessionSchema.SESSION_ONLINE_INFO))
+					.getPassword();
+		}else{
+			UserPassword = currentUser.getPassword();
+			oldPassword = entryptPassword(oldPassword, Encodes.decodeHex(currentUser.getSalt()));
+		}
 		if (!UserPassword.equals(oldPassword)) {
 			operateInfo.setOperateMessage("原始密码错误");
 			operateInfo.setOperateSuccess(false);
@@ -53,10 +64,10 @@ public class UserUpdateAction extends BaseAction {
 			try {
 				boolean flag = userService.update(currentUser);
 				if (flag) {
-					operateInfo.setOperateMessage("更新用户成功");
+					operateInfo.setOperateMessage("修改密码成功");
 					operateInfo.setOperateSuccess(true);
 				} else {
-					operateInfo.setOperateMessage("更新用户失败");
+					operateInfo.setOperateMessage("修改密码失败");
 					operateInfo.setOperateSuccess(false);
 				}
 			} catch (Exception e) {
@@ -65,6 +76,11 @@ public class UserUpdateAction extends BaseAction {
 		}
 		String json = new JsonMapper().toJson(operateInfo);
 		Struts2Utils.renderText(json);
+	}
+	
+	public String entryptPassword(String pwd,byte[] salt) {
+		byte[] hashPassword = Digests.sha1(pwd.getBytes(),salt, 1024);
+		return Encodes.encodeHex(hashPassword);
 	}
 
 	// 获得当前用户

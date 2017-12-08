@@ -16,6 +16,7 @@
 				/login!loginApps.action = anon
 				/logout!logout.action = anon
 				/templets/login_images/** = anon
+				/user/** = anon
 				/css/** =anon
 				/resources/** = anon
 				/NewFile.jsp = anon
@@ -39,7 +40,20 @@
 				/dept/deptAction!findByParentId.action = anon
 				/dept/deptAction!reloadGovDept.action = anon
 				/menu/menuAction!getMenuByUser.action = anon
+				/autoStatistics/** = anon
+				/borrow/** = anon
+				/holiday/** = anon
+				/worker/** = anon
+				/mobileCommon/** = anon
+				/reporting/** = anon
+				/reversion/** = anon
+				/reimburse/** = anon
+				/workStation/** = anon
+				/reimburseList/** = anon
+				/dept/** = anon
+				/frameSet/** = anon
 				/logout = logout
+				/api/** = anon
 				/** = authc
 			</value>
 		</property>

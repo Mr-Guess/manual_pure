@@ -123,6 +123,36 @@
 			tb_reversion.STATUS = '1'
 		<include refid="Reversion.mapWhereClause"/>
 	</select>
+	
+	<!-- add method find-->
+	<select id="findRepRev" resultClass="com.ay.report.reversion.pojo.Reversion" parameterClass="java.util.Map">
+ 		SELECT
+			
+			tb_reversion.RE_TYPE AS reType,
+			tb_reversion.CONTEXT AS context,
+			tb_reversion.REVER AS rever,
+			tb_reversion.CONVERT_ID AS convertId,
+			sys_user.user_name AS reverName,
+			sys_user.account AS reverAccount,
+			
+			tb_reversion.ID AS id,
+			tb_reversion.STATUS AS status,
+			tb_reversion.CREATED AS created,
+			tb_reversion.CREATE_TIME AS createTime,
+			tb_reversion.UPDATED AS updated,
+			tb_reversion.UPDATE_TIME AS updateTime
+		FROM
+			tb_reversion
+		INNER JOIN
+			sys_user
+		ON
+			tb_reversion.rever = sys_user.id
+		WHERE
+			tb_reversion.STATUS = '1'
+		<include refid="Reversion.mapWhereClause"/>
+		ORDER BY
+			tb_reversion.CREATE_TIME DESC
+	</select>
 	<!-- add method count-->
 	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
  		SELECT count(*) 

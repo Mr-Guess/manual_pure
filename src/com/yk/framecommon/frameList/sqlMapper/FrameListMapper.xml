@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="FrameList">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_FRAME_LIST.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_FRAME_LIST.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_FRAME_LIST.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_FRAME_LIST.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_FRAME_LIST.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_FRAME_LIST.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="frameName"> TB_FRAME_LIST.FRAME_NAME like '%'+#frameName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="frameCode"> TB_FRAME_LIST.FRAME_CODE like '%'+#frameCode#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.framecommon.frameList.pojo.FrameList">
+  		INSERT INTO TB_FRAME_LIST(
+				
+				FRAME_NAME,
+				FRAME_CODE,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#frameName#,
+				#frameCode#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_FRAME_LIST SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.framecommon.frameList.pojo.FrameList" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_FRAME_LIST.FRAME_NAME AS frameName,
+			TB_FRAME_LIST.FRAME_CODE AS frameCode,
+			
+			TB_FRAME_LIST.ID AS id,
+			TB_FRAME_LIST.STATUS AS status,
+			TB_FRAME_LIST.CREATED AS created,
+			TB_FRAME_LIST.CREATE_TIME AS createTime,
+			TB_FRAME_LIST.UPDATED AS updated,
+			TB_FRAME_LIST.UPDATE_TIME as updateTime
+		from
+		TB_FRAME_LIST
+  		where 
+ 	 		TB_FRAME_LIST.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.framecommon.frameList.pojo.FrameList">
+		UPDATE TB_FRAME_LIST 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="frameName"> FRAME_NAME=#frameName#</isNotEmpty>
+			<isNotEmpty prepend="," property="frameCode"> FRAME_CODE=#frameCode#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.framecommon.frameList.pojo.FrameList" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_FRAME_LIST.FRAME_NAME AS frameName,
+			TB_FRAME_LIST.FRAME_CODE AS frameCode,
+			
+			TB_FRAME_LIST.ID AS id,
+			TB_FRAME_LIST.STATUS AS status,
+			TB_FRAME_LIST.CREATED AS created,
+			TB_FRAME_LIST.CREATE_TIME AS createTime,
+			TB_FRAME_LIST.UPDATED AS updated,
+			TB_FRAME_LIST.UPDATE_TIME AS updateTime
+		FROM
+			TB_FRAME_LIST
+		WHERE
+			TB_FRAME_LIST.STATUS = '1'
+		<include refid="FrameList.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_FRAME_LIST
+		WHERE
+			TB_FRAME_LIST.STATUS = '1' 
+		<include refid="FrameList.mapWhereClause"/>
+	</select>
+</sqlMap>

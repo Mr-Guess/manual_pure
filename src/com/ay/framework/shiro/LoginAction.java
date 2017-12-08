@@ -472,13 +472,32 @@ public class LoginAction extends ActionSupport {
 					}
 					Map map = new LinkedHashMap();
 					
-					
+					String business = null;
+					if(user.getBusiness()== null){
+						business = "1";
+					}else{
+						if(user.getBusiness().equals("")||user.getBusiness().equals("员工")){
+							business = "1";
+						}else if(user.getBusiness().equals("中层")){
+							business = "2";
+						}else if(user.getBusiness().equals("高层")){
+							business = "3";
+						}else if(user.getBusiness().equals("副总经理")){
+							business = "4";
+						}else if(user.getBusiness().equals("总经理")){
+							business = "5";
+						}else if(user.getBusiness().equals("董事长")){
+							business = "6";
+						}else{
+							business = "1";
+						}
+					}
 					map.put("status", "1");
 					map.put("userId", user.getAccount());
 					map.put("realName", user.getUserName());
 					map.put("departmentId", user.getDeptId());
 					map.put("departmentName", user.getDeptName());
-					map.put("business", user.getBusiness());
+					map.put("business", business);
 					map.put("isZf", user.getBusiness());
 					map.put("password", user.getPassword());
 					map.put("sessionId", session.getId());

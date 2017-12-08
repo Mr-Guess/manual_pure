@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="Statistics">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_STATISTICS.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_STATISTICS.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_STATISTICS.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_STATISTICS.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_STATISTICS.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_STATISTICS.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="shown"> TB_STATISTICS.SHOWN like '%'||#shown#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="value"> TB_STATISTICS.VALUE like '%'||#value#||'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="num"> TB_STATISTICS.NUM like '%'||#num#||'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.statistics.pojo.Statistics">
+  		INSERT INTO TB_STATISTICS(
+				
+				SHOWN,
+				VALUE,
+				NUM,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#shown#,
+				#value#,
+				#num#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_STATISTICS SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.statistics.pojo.Statistics" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_STATISTICS.SHOWN AS shown,
+			TB_STATISTICS.VALUE AS value,
+			TB_STATISTICS.NUM AS num,
+			
+			TB_STATISTICS.ID AS id,
+			TB_STATISTICS.STATUS AS status,
+			TB_STATISTICS.CREATED AS created,
+			TB_STATISTICS.CREATE_TIME AS createTime,
+			TB_STATISTICS.UPDATED AS updated,
+			TB_STATISTICS.UPDATE_TIME as updateTime
+		from
+		TB_STATISTICS
+  		where 
+ 	 		TB_STATISTICS.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.statistics.pojo.Statistics">
+		UPDATE TB_STATISTICS 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="shown"> SHOWN=#shown#</isNotEmpty>
+			<isNotEmpty prepend="," property="value"> VALUE=#value#</isNotEmpty>
+			<isNotEmpty prepend="," property="num"> NUM=#num#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.statistics.pojo.Statistics" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_STATISTICS.SHOWN AS shown,
+			TB_STATISTICS.VALUE AS value,
+			TB_STATISTICS.NUM AS num,
+			
+			TB_STATISTICS.ID AS id,
+			TB_STATISTICS.STATUS AS status,
+			TB_STATISTICS.CREATED AS created,
+			TB_STATISTICS.CREATE_TIME AS createTime,
+			TB_STATISTICS.UPDATED AS updated,
+			TB_STATISTICS.UPDATE_TIME AS updateTime
+		FROM
+			TB_STATISTICS
+		WHERE
+			TB_STATISTICS.STATUS = '1'
+		<include refid="Statistics.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT count(*) 
+		FROM
+			TB_STATISTICS
+		WHERE
+			TB_STATISTICS.STATUS = '1' 
+		<include refid="Statistics.mapWhereClause"/>
+	</select>
+</sqlMap>

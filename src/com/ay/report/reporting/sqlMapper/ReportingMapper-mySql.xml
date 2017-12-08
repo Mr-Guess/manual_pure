@@ -23,6 +23,7 @@
 			<isNotEmpty prepend="and" property="owner"> tb_reporting.CREATED=#owner#</isNotEmpty>
 			<isNotEmpty prepend="and" property="informre"> tb_reporting.INFORMRE like CONCAT('%',#informre#,'%')</isNotEmpty>
 			<isNotEmpty prepend="and" property="checkerinob"> (tb_reporting.CHECKER like CONCAT('%',#checker#,'%') or tb_reporting.STEPS like CONCAT('%',#steps#,'%'))</isNotEmpty>
+			<isNotEmpty prepend="and" property="checkerAnd"> (tb_reporting.CHECKER like CONCAT('%',#checker#,'%') or tb_reporting.INFORMRE like CONCAT('%',#reportinf#,'%') or tb_reporting.STEPS like '1')</isNotEmpty>
 		</isParameterPresent>
 	</sql>
 	<!-- add method insert-->
@@ -90,6 +91,7 @@
 			tb_reporting.STEPS AS steps,
 			tb_reporting.INFORMRE AS informre,
 			tb_reporting.DEPARTMENT AS department,
+			tb_reporting.autoTitle AS autoTitle,
 			deptIdToName(tb_reporting.DEPARTMENT) AS departmentName,
 			
 			tb_reporting.ID AS id,
@@ -186,7 +188,56 @@
 		WHERE
 			tb_reporting.STATUS = '1'
 		<include refid="Reporting.mapWhereClause"/>
+		
+		ORDER BY
+			tb_reporting.CREATE_TIME DESC
 	</select>
+	
+	<select id="getMyList" resultClass="com.ay.report.reporting.pojo.Reporting" parameterClass="java.lang.String">
+ 		SELECT
+			
+			tb_reporting.TITLE AS title,
+			tb_reporting.REPORTER AS reporter,
+			tb_reporting.REPORT_TIME AS reportTime,
+			tb_reporting.REPORT_TYPE AS reportType,
+			tb_reporting.CONTEXT AS context,
+			tb_reporting.CHECKER AS checker,
+			tb_reporting.OWNER AS owner,
+			tb_reporting.STEPS AS steps,
+			tb_reporting.INFORMRE AS informre,
+			tb_reporting.DEPARTMENT AS department,
+			tb_reporting.autoTitle AS autoTitle,
+			deptIdToName(tb_reporting.DEPARTMENT) AS departmentName,
+			
+			tb_reporting.ID AS id,
+			tb_reporting.STATUS AS status,
+			tb_reporting.CREATED AS created,
+			tb_reporting.CREATE_TIME AS createTime,
+			tb_reporting.UPDATED AS updated,
+			tb_reporting.UPDATE_TIME AS updateTime
+		FROM
+			tb_reporting
+		WHERE
+			tb_reporting.STATUS = '1'
+		AND
+			tb_reporting.CHECKER = #id#		
+		
+		ORDER BY
+			tb_reporting.CREATE_TIME DESC
+		LIMIT 
+			2
+	</select>
+	
+	<select id="myListcount" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+ 		SELECT count(*) 
+		FROM
+			tb_reporting
+		WHERE
+			tb_reporting.STATUS = '1'
+		AND
+			tb_reporting.CHECKER = #id#		 
+	</select>
+	
 	<!-- add method count-->
 	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
  		SELECT count(*) 

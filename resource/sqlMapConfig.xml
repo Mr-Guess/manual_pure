@@ -37,4 +37,22 @@
   <sqlMap resource="com/ay/report/reversion/sqlMapper/ReversionMapper.xml"/>
   <!--消息提醒模块-->
   <sqlMap resource="com/yk/businesses/jobRemind/sqlMapper/JobRemindMapper.xml"/>
+  <!--统计通用类模块-->
+  <sqlMap resource="com/yk/businesses/statistics/sqlMapper/StatisticsMapper.xml"/>
+  <!--流程控制器模块-->
+  <sqlMap resource="com/yk/framecommon/frameControl/sqlMapper/FrameControlMapper.xml"/>
+  <!--流程列表模块-->
+  <sqlMap resource="com/yk/framecommon/frameList/sqlMapper/FrameListMapper.xml"/>
+  <!--流程审批记录模块-->
+  <sqlMap resource="com/yk/framecommon/frameRecord/sqlMapper/FrameRecordMapper.xml"/>
+  <!--请假申请模块-->
+  <sqlMap resource="com/yk/businesses/holiday/sqlMapper/HolidayMapper.xml"/>
+  <!--借款申请模块-->
+  <sqlMap resource="com/yk/businesses/borrow/sqlMapper/BorrowMapper.xml"/>
+  <!--报销模块-->
+  <sqlMap resource="com/yk/businesses/reimburse/sqlMapper/ReimburseMapper.xml"/>
+  <!--报销单模块-->
+  <sqlMap resource="com/yk/businesses/reimburseList/sqlMapper/ReimburseListMapper.xml"/>
+  <!--打卡机待处理事务模块-->
+  <sqlMap resource="com/yk/signIn/backStage/waitDone/WaitDoneMapper.xml"/>
 </sqlMapConfig>

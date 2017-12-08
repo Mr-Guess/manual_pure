@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
+  <!--流程控制器模块-->  
+  <bean id="frameControlDao" class="com.yk.framecommon.frameControl.dao.FrameControlDao" parent="baseDao"/>  
+  <bean id="frameControlService" class="com.yk.framecommon.frameControl.service.FrameControlService"> 
+    <property name="dao" ref="frameControlDao"/> 
+  </bean>  
+  <!--流程列表模块-->  
+  <bean id="frameListDao" class="com.yk.framecommon.frameList.dao.FrameListDao" parent="baseDao"/>  
+  <bean id="frameListService" class="com.yk.framecommon.frameList.service.FrameListService"> 
+    <property name="dao" ref="frameListDao"/> 
+  </bean>  
+  <!--流程审批记录模块-->  
+  <bean id="frameRecordDao" class="com.yk.framecommon.frameRecord.dao.FrameRecordDao" parent="baseDao"/>  
+  <bean id="frameRecordService" class="com.yk.framecommon.frameRecord.service.FrameRecordService"> 
+    <property name="dao" ref="frameRecordDao"/> 
+  </bean>  
+  <!--请假申请模块-->  
+  <bean id="holidayDao" class="com.yk.businesses.holiday.dao.HolidayDao" parent="baseDao"/>  
+  <bean id="holidayService" class="com.yk.businesses.holiday.service.HolidayService"> 
+    <property name="dao" ref="holidayDao"/> 
+  </bean>  
+  <!--借款申请模块-->  
+  <bean id="borrowDao" class="com.yk.businesses.borrow.dao.BorrowDao" parent="baseDao"/>  
+  <bean id="borrowService" class="com.yk.businesses.borrow.service.BorrowService"> 
+    <property name="dao" ref="borrowDao"/> 
+  </bean>  
+  <!--报销模块-->  
+  <bean id="reimburseDao" class="com.yk.businesses.reimburse.dao.ReimburseDao" parent="baseDao"/>  
+  <bean id="reimburseService" class="com.yk.businesses.reimburse.service.ReimburseService"> 
+    <property name="dao" ref="reimburseDao"/> 
+  </bean>  
+  <!--报销单模块-->  
+  <bean id="reimburseListDao" class="com.yk.businesses.reimburseList.dao.ReimburseListDao" parent="baseDao"/>  
+  <bean id="reimburseListService" class="com.yk.businesses.reimburseList.service.ReimburseListService"> 
+    <property name="dao" ref="reimburseListDao"/> 
+  </bean>  
+  <!--工作台模块-->  
+  <bean id="workStationService" class="com.yk.businesses.workStation.service.WorkStationService"/>  
+  <!--打卡机待处理事务模块-->
+  <bean id="waitDoneDao" class="com.yk.signIn.backStage.waitDone.WaitDoneDao" parent="baseDao"/>
+  <bean id="waitDoneService" class="com.yk.signIn.backStage.waitDone.WaitDoneService">
+    <property name="dao" ref="waitDoneDao"/>
+  </bean>
+</beans>

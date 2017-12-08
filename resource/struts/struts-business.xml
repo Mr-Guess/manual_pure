@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+  <!--流程控制器模块-->
+  <package name="frameControl" extends="struts-default" namespace="/frameControl">
+    <action name="frameControlAction" class="com.yk.framecommon.frameControl.action.FrameControlAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--流程列表模块-->
+  <package name="frameList" extends="struts-default" namespace="/frameList">
+    <action name="frameListAction" class="com.yk.framecommon.frameList.action.FrameListAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--流程列表模块-->
+  <package name="frameSet" extends="struts-default" namespace="/frameSet">
+    <action name="frameSetAction" class="com.yk.framecommon.CommonFrameSet">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--流程审批记录模块-->
+  <package name="frameRecord" extends="struts-default" namespace="/frameRecord">
+    <action name="frameRecordAction" class="com.yk.framecommon.frameRecord.action.FrameRecordAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--请假申请模块-->
+  <package name="holiday" extends="struts-default" namespace="/holiday">
+    <action name="holidayAction" class="com.yk.businesses.holiday.action.HolidayAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--借款申请模块-->
+  <package name="borrow" extends="struts-default" namespace="/borrow">
+    <action name="borrowAction" class="com.yk.businesses.borrow.action.BorrowAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--报销模块-->
+  <package name="reimburse" extends="struts-default" namespace="/reimburse">
+    <action name="reimburseAction" class="com.yk.businesses.reimburse.action.ReimburseAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--报销单模块-->
+  <package name="reimburseList" extends="struts-default" namespace="/reimburseList">
+    <action name="reimburseListAction" class="com.yk.businesses.reimburseList.action.ReimburseListAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--工作台模块-->
+  <package name="workStation" extends="struts-default" namespace="/workStation">
+    <action name="workStationAction" class="com.yk.businesses.workStation.action.WorkStationAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--打卡机待处理事务模块-->
+  <package name="waitDone" extends="struts-default" namespace="/waitDone">
+    <action name="waitDoneAction" class="com.yk.signIn.backStage.waitDone.WaitDoneAction">
+      <result name="exp" type="chain">
+        <param name="nameSpace">/excel</param>
+        <param name="actionName">excel_exp</param>
+      </result>
+    </action>
+  </package>
+</struts>

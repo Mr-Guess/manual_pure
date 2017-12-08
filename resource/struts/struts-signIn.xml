@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+  <!--打卡签到-->
+  <package name="SignInApi" extends="struts-default" namespace="/api/data">
+    <action name="post" class="com.yk.signIn.SignInApi" method="post" />
+    <action name="get" class="com.yk.signIn.SignInApi" method="get" />
+  </package>
+</struts>
