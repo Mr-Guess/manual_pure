@@ -167,6 +167,8 @@
 		WHERE
 			tb_holiday.STATUS = '1'
 		<include refid="Holiday.mapWhereClause"/>
+		ORDER BY
+			tb_holiday.CREATE_TIME DESC
 	</select>
 	
 	
@@ -206,6 +208,8 @@
 			tb_holiday.STATUS = '1'
 		AND
 			tb_holiday.DONER = #id#
+		ORDER BY
+			tb_holiday.CREATE_TIME DESC
 		LIMIT 2
 	</select>
 	

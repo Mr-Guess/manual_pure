@@ -1,10 +1,10 @@
-/applicationContext.xml
 /com/
+/applicationContext.xml
 /ehcache/
-/generate/
 /init.properties
 /log4j.properties
 /spring/
+/generate/
 /sqlMapConfig-mySQL.xml
 /sqlMapConfig-oracle.xml
 /sqlMapConfig.xml
