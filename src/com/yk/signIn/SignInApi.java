@@ -27,26 +27,29 @@ public class SignInApi extends BaseAction{
 	public void get(){
 		String s = "get";
 		System.out.println("走了get");
-//		WaitDoneService waitDoneService = SpringContextHolder.getBean("waitDoneService");
-//		List<WaitDone> list = waitDoneService.getSequenceJob();
-//		
-//		//改造待办列表
-//		for(WaitDone wd : list){
-//			Map<String,String> map = new HashMap<String,String>();
-//			
-//		}
-//		
-//		Map<String, Object> sendData = new HashMap<String, Object>();
-//		sendData.put("status", "1");
-//		sendData.put("info", "ok");
-//		
-//		
-//		
-//		List<List<Map<String, String>>> sendDataList = new ArrayList<List<Map<String, String>>>();
-//		List<Map<String, String>> dataMapList = new ArrayList<Map<String, String>>();
-//		
-//		
-//		
-//		Struts2Utils.renderText(s);
+		WaitDoneService waitDoneService = SpringContextHolder.getBean("waitDoneService");
+		List<WaitDone> list = waitDoneService.getSequenceJob();
+		
+		//改造待办列表
+		
+		List<Map<String, String>> dataMapList = new ArrayList<Map<String, String>>();
+		for(WaitDone wd : list){
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("id", wd.getSsid());
+			map.put("do", wd.getCmdCode());
+			map.put("data", wd.getSubCmd());
+		}
+		
+		Map<String, Object> sendData = new HashMap<String, Object>();
+		sendData.put("status", "1");
+		sendData.put("info", "ok");
+		
+		
+		
+		List<List<Map<String, String>>> sendDataList = new ArrayList<List<Map<String, String>>>();
+		
+		
+		
+		Struts2Utils.renderText(s);
 	}
 }

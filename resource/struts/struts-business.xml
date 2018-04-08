@@ -86,6 +86,15 @@
   <!--打卡机待处理事务模块-->
   <package name="waitDone" extends="struts-default" namespace="/waitDone">
     <action name="waitDoneAction" class="com.yk.signIn.backStage.waitDone.WaitDoneAction">
+      <result name="exp" type="chain"> 
+        <param name="nameSpace">/excel</param>  
+        <param name="actionName">excel_exp</param> 
+      </result>
+    </action>
+  </package>
+  <!--在线打卡模块-->
+  <package name="onlinCheckin" extends="struts-default" namespace="/onlinCheckin">
+    <action name="onlinCheckinAction" class="com.yk.businesses.onlinCheckin.action.OnlinCheckinAction">
       <result name="exp" type="chain">
         <param name="nameSpace">/excel</param>
         <param name="actionName">excel_exp</param>

@@ -19,6 +19,16 @@ public class WaitDone extends BasePojo{
 	private String cmdReturn;
 	
 	private String sendTime;
+	
+	private Object withinObj;
+	
+	public Object getWithinObj() {
+		return withinObj;
+	}
+
+	public void setWithinObj(Object withinObj) {
+		this.withinObj = withinObj;
+	}
 
 	public String getSsid() {
 		return ssid;

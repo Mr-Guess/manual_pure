@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!--sqlMapper-->
+<sqlMap namespace="OnlinCheckin">
+	<!-- 查询条件 -->
+	<sql id="mapWhereClause">
+		<isParameterPresent>
+			 <isNotEmpty prepend="and" property="condition"> $condition$ </isNotEmpty>
+
+			 <isNotEmpty prepend="and" property="endDataProg"> $endDataProg$ </isNotEmpty>
+			<isNotEmpty prepend="and" property="id"> TB_ONLIN_CHECKIN.ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="and" property="status"> TB_ONLIN_CHECKIN.STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="and" property="created"> TB_ONLIN_CHECKIN.CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="and" property="createTime"> TB_ONLIN_CHECKIN.CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updated"> TB_ONLIN_CHECKIN.UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateTime"> TB_ONLIN_CHECKIN.UPDATE_TIME=#updateTime#</isNotEmpty>
+			
+			
+			<isNotEmpty prepend="and" property="checkinUser"> TB_ONLIN_CHECKIN.CHECKIN_USER like '%'+#checkinUser#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="checkeinTime"> TB_ONLIN_CHECKIN.CHECKEIN_TIME like '%'+#checkeinTime#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="checkinAddress"> TB_ONLIN_CHECKIN.CHECKIN_ADDRESS like '%'+#checkinAddress#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="picUrl"> TB_ONLIN_CHECKIN.PIC_URL like '%'+#picUrl#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="checkinType"> TB_ONLIN_CHECKIN.CHECKIN_TYPE like '%'+#checkinType#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="fileName"> TB_ONLIN_CHECKIN.FILE_NAME like '%'+#fileName#+'%'</isNotEmpty>
+			<isNotEmpty prepend="and" property="contentType"> TB_ONLIN_CHECKIN.CONTENT_TYPE like '%'+#contentType#+'%'</isNotEmpty>
+			
+		</isParameterPresent>
+	</sql>
+	<!-- add method insert-->
+	<insert id="insert" parameterClass="com.yk.businesses.onlinCheckin.pojo.OnlinCheckin">
+  		INSERT INTO TB_ONLIN_CHECKIN(
+				
+				CHECKIN_USER,
+				CHECKEIN_TIME,
+				CHECKIN_ADDRESS,
+				PIC_URL,
+				CHECKIN_TYPE,
+				FILE_NAME,
+				CONTENT_TYPE,
+				
+				ID,
+				STATUS,
+				CREATED,
+				CREATE_TIME,
+				UPDATED,
+				UPDATE_TIME,
+				ORG,
+				ORG_TREE) values(
+				
+				#checkinUser#,
+				#checkeinTime#,
+				#checkinAddress#,
+				#picUrl#,
+				#checkinType#,
+				#fileName#,
+				#contentType#,
+				
+				#id#,
+				#status#,
+				#created#,
+				#createTime#,
+				#updated#,
+				#updateTime#,
+				#org#,
+				#orgTree#)
+	</insert>
+	<!-- add method delete-->
+	<delete id="delete" parameterClass="java.lang.String">
+		UPDATE TB_ONLIN_CHECKIN SET STATUS='0' 
+  		WHERE 
+ 	 		ID=#id#</delete>
+	<!-- add method getById-->
+	<select id="getById" resultClass="com.yk.businesses.onlinCheckin.pojo.OnlinCheckin" parameterClass="java.lang.String">
+ 		SELECT 
+			
+			TB_ONLIN_CHECKIN.CHECKIN_USER AS checkinUser,
+			TB_ONLIN_CHECKIN.CHECKEIN_TIME AS checkeinTime,
+			TB_ONLIN_CHECKIN.CHECKIN_ADDRESS AS checkinAddress,
+			TB_ONLIN_CHECKIN.PIC_URL AS picUrl,
+			TB_ONLIN_CHECKIN.CHECKIN_TYPE AS checkinType,
+			TB_ONLIN_CHECKIN.FILE_NAME AS fileName,
+			TB_ONLIN_CHECKIN.CONTENT_TYPE AS contentType,
+			
+			TB_ONLIN_CHECKIN.ID AS id,
+			TB_ONLIN_CHECKIN.STATUS AS status,
+			TB_ONLIN_CHECKIN.CREATED AS created,
+			TB_ONLIN_CHECKIN.CREATE_TIME AS createTime,
+			TB_ONLIN_CHECKIN.UPDATED AS updated,
+			TB_ONLIN_CHECKIN.UPDATE_TIME as updateTime
+		from
+		TB_ONLIN_CHECKIN
+  		where 
+ 	 		TB_ONLIN_CHECKIN.ID=#id#
+	</select>
+	<!-- add method update-->
+	<update id="update" parameterClass="com.yk.businesses.onlinCheckin.pojo.OnlinCheckin">
+		UPDATE TB_ONLIN_CHECKIN 
+		<dynamic prepend="set">
+			
+			<isNotEmpty prepend="," property="checkinUser"> CHECKIN_USER=#checkinUser#</isNotEmpty>
+			<isNotEmpty prepend="," property="checkeinTime"> CHECKEIN_TIME=#checkeinTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="checkinAddress"> CHECKIN_ADDRESS=#checkinAddress#</isNotEmpty>
+			<isNotEmpty prepend="," property="picUrl"> PIC_URL=#picUrl#</isNotEmpty>
+			<isNotEmpty prepend="," property="checkinType"> CHECKIN_TYPE=#checkinType#</isNotEmpty>
+			<isNotEmpty prepend="," property="fileName"> FILE_NAME=#fileName#</isNotEmpty>
+			<isNotEmpty prepend="," property="contentType"> CONTENT_TYPE=#contentType#</isNotEmpty>
+			
+			<isNotEmpty prepend="," property="id"> ID=#id#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> STATUS=#status#</isNotEmpty>
+			<isNotEmpty prepend="," property="created"> CREATED=#created#</isNotEmpty>
+			<isNotEmpty prepend="," property="createTime"> CREATE_TIME=#createTime#</isNotEmpty>
+			<isNotEmpty prepend="," property="updated"> UPDATED=#updated#</isNotEmpty>
+			<isNotEmpty prepend="," property="updateTime"> UPDATE_TIME=#updateTime#</isNotEmpty>
+		</dynamic>
+  		WHERE 
+ 	 		ID=#id#
+	</update>
+	
+	<!-- add method find-->
+	<select id="find" resultClass="com.yk.businesses.onlinCheckin.pojo.OnlinCheckin" parameterClass="java.util.Map">
+ 		SELECT
+			
+			TB_ONLIN_CHECKIN.CHECKIN_USER AS checkinUser,
+			TB_ONLIN_CHECKIN.CHECKEIN_TIME AS checkeinTime,
+			TB_ONLIN_CHECKIN.CHECKIN_ADDRESS AS checkinAddress,
+			TB_ONLIN_CHECKIN.PIC_URL AS picUrl,
+			TB_ONLIN_CHECKIN.CHECKIN_TYPE AS checkinType,
+			TB_ONLIN_CHECKIN.FILE_NAME AS fileName,
+			TB_ONLIN_CHECKIN.CONTENT_TYPE AS contentType,
+			
+			TB_ONLIN_CHECKIN.ID AS id,
+			TB_ONLIN_CHECKIN.STATUS AS status,
+			TB_ONLIN_CHECKIN.CREATED AS created,
+			TB_ONLIN_CHECKIN.CREATE_TIME AS createTime,
+			TB_ONLIN_CHECKIN.UPDATED AS updated,
+			TB_ONLIN_CHECKIN.UPDATE_TIME AS updateTime
+		FROM
+			TB_ONLIN_CHECKIN
+		WHERE
+			TB_ONLIN_CHECKIN.STATUS = '1'
+		<include refid="OnlinCheckin.mapWhereClause"/>
+	</select>
+	<!-- add method count-->
+	<select id="count" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+ 		SELECT COUNT(*) 
+		FROM
+			TB_ONLIN_CHECKIN
+		WHERE
+			TB_ONLIN_CHECKIN.STATUS = '1' 
+		<include refid="OnlinCheckin.mapWhereClause"/>
+	</select>
+</sqlMap>

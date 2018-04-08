@@ -1159,7 +1159,7 @@ body{
 		  </tr>
 		</table>
 		</div>
-		<div style="position: absolute;bottom:2px;left: 50%;color: white;font-weight: bold;margin:auto -95px;">技术支持:&nbsp;&nbsp;&nbsp;南京市安元科技有限公司</div>
+		<div style="position: absolute;bottom:2px;left: 50%;color: white;font-weight: bold;margin:auto -95px;">技术支持:&nbsp;&nbsp;&nbsp;南京永坤信息科技有限公司</div>
 	</div>
 </body>
 </html>

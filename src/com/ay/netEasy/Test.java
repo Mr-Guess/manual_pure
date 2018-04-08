@@ -35,10 +35,19 @@ public class Test {
 //			e.printStackTrace();
 //		}
 		
-		long s = 1508741189000l;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		long s = 1508741189000l;
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		
+//		System.out.println(sdf.format(s).toString());
 		
-		System.out.println(sdf.format(s).toString());
+		System.out.println(1000 == 1000);
+		System.out.println(100 == 100);
+		System.out.println("----------------");
+		Integer a = 1000,b = 1000;
+		Integer c = 100, d = 100;
+		System.out.println(a == b);
+		System.out.println(c == d);
+		
 	}
 	
 	

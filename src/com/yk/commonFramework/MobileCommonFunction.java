@@ -2,13 +2,17 @@ package com.yk.commonFramework;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +20,11 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts2.ServletActionContext;
+
+import com.ay.framework.bean.OperateInfo;
 import com.ay.framework.core.action.BaseAction;
+import com.ay.framework.core.utils.mapper.JsonMapper;
 import com.ay.framework.core.utils.spring.SpringContextHolder;
 import com.ay.framework.core.utils.web.struts.Struts2Utils;
 import com.ay.framework.util.BeanUtil;
@@ -33,6 +41,8 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.DefaultFontMapper.BaseFontParameters;
+import com.yk.businesses.onlinCheckin.pojo.OnlinCheckin;
+import com.yk.businesses.onlinCheckin.service.OnlinCheckinService;
 import com.yk.businesses.reimburse.pojo.Reimburse;
 import com.yk.businesses.reimburse.service.ReimburseService;
 import com.yk.businesses.reimburseList.pojo.ReimburseList;
@@ -50,7 +60,13 @@ import com.yk.framecommon.frameRecord.pojo.FrameRecord;
 public class MobileCommonFunction extends BaseAction{
 	
 	private FriendShip friendShip;
+	private OnlinCheckin onlinCheckin;
 	private String id;
+	private File file;
+	private String fileName;
+	private String contentType;
+	private String onTime;//上班打卡时间
+	private String outTime;//下班打卡时间
 	protected String path = this.getClass().getResource("").toString();
 	protected String fileDir = path+"/pdfs/";
 	
@@ -66,6 +82,54 @@ public class MobileCommonFunction extends BaseAction{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 在线打卡
+	 */
+	public void onlineCheckin() throws Exception{
+		String ct  =  ServletActionContext.getRequest().getHeader("Content-Type");
+		String realPath = ServletActionContext.getServletContext().getRealPath("/upload");
+		OperateInfo operateInfo = new OperateInfo();
+		FileOutputStream outputStream = null;
+		FileInputStream inputStream = null;
+		try {
+			PrintWriter out = ServletActionContext.getResponse().getWriter();
+			outputStream = new FileOutputStream(realPath);
+			inputStream = new FileInputStream(file);
+			byte[] buffer = new byte[1024];
+			int len = 0;
+			while((len = inputStream.read(buffer)) > 0){
+				outputStream.write(buffer,0,len);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			operateInfo.setOperateMessage("照片上传失败");
+			operateInfo.setOperateSuccess(true);
+		} finally {
+			outputStream.close();
+			inputStream.close();
+		}
+		
+		OnlinCheckinService ocs = SpringContextHolder.getBean("onlinCheckinService");
+		onlinCheckin.setFileName(fileName);
+		onlinCheckin.setPicUrl(realPath);
+		onlinCheckin.setContentType(ct);
+		try {
+			ocs.insert(onlinCheckin);
+			operateInfo.setOperateMessage("打卡成功");
+			operateInfo.setOperateSuccess(true);
+		} catch (Exception e) {
+			operateInfo.setOperateMessage("打卡失败");
+			operateInfo.setOperateSuccess(false);
+		}
+		
+		String json = new JsonMapper().toJson(operateInfo);
+		Struts2Utils.renderText(json);
+	}
+	
+	
+	
 
 	/**
 	 * 获取当前服务端安卓版本
@@ -88,6 +152,59 @@ public class MobileCommonFunction extends BaseAction{
 			e.printStackTrace();
 		}finally{
 			Struts2Utils.renderJson(dc);
+		}
+	}
+	
+	/**
+	 * 获取打卡设置
+	 */
+	public void getSigninSetting(){
+		Map<String, String> outMap = new HashMap<String ,String>();
+		try {
+			InputStream inputStream = new BufferedInputStream(new FileInputStream(path.substring(5, path.length())+"mobileParameter.properties"));
+			Map<String, String> propMap = CommonBackstage.getProperties(inputStream);
+			String onWorkTime = propMap.get("onWorkTime");
+			String outWorkTime = propMap.get("outWorkTime");
+			inputStream.close();
+			outMap.put("onWorkTime", onWorkTime);
+			outMap.put("outWorkTime", outWorkTime);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			Struts2Utils.renderJson(outMap);
+		}
+	}
+	
+	/**
+	 * 设置系统参数
+	 */
+	public void setSinginSetting(){
+		OperateInfo operateInfo = new OperateInfo();
+		try {
+			Properties propreties = new Properties();
+			InputStream inputStream = new BufferedInputStream(new FileInputStream(path.substring(5, path.length())+"mobileParameter.properties"));
+			propreties.load(inputStream);
+			inputStream.close();
+			//开始设置属性
+			if(onTime != null && !onTime.equals("")){
+				propreties.setProperty("onWorkTime", onTime);
+			}
+			if(outTime != null && !outTime.equals("")){
+				propreties.setProperty("outWorkTime", outTime);
+			}
+			FileOutputStream fileOutputStream = new FileOutputStream(path.substring(5, path.length())+"mobileParameter.properties");
+			propreties.store(fileOutputStream, "");
+			operateInfo.setOperateMessage("修改成功");
+			operateInfo.setOperateSuccess(true);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			operateInfo.setOperateMessage("修改失败");
+			operateInfo.setOperateSuccess(false);
+		} finally {
+			String json = new JsonMapper().toJson(operateInfo);
+			Struts2Utils.renderText(json);
 		}
 	}
 	
@@ -326,5 +443,55 @@ public class MobileCommonFunction extends BaseAction{
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public OnlinCheckin getOnlinCheckin() {
+		return onlinCheckin;
+	}
+
+	public void setOnlinCheckin(OnlinCheckin onlinCheckin) {
+		this.onlinCheckin = onlinCheckin;
+	}
+
+	public String getOnTime() {
+		return onTime;
+	}
+
+	public void setOnTime(String onTime) {
+		this.onTime = onTime;
+	}
+
+	public String getOutTime() {
+		return outTime;
+	}
+
+	public void setOutTime(String outTime) {
+		this.outTime = outTime;
+	}
+	
+	
 	
 }

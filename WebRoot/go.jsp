@@ -7,9 +7,9 @@
 <title></title>
 <script type="text/javascript">
 	if (window.top) {
-		window.top.location.href = "index.jsp";
+		window.top.location.href = "jewelady/index.html";
 	} else {
-		window.location.href = "index.jsp";
+		window.location.href = "jewelady/index.html";
 	}
 </script>
 </head>

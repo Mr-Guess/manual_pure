@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>珠宝太太</title>
+
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.simplesidebar.js"></script>
+
+</head>
+<body>
+
+<div class="toolbar">
+	<div id="open-sb" class="menu-button menu-left"></div>
+</div>
+
+<section class="sidebar">
+	<div class="subNav"><h5>菜单</h5></div>
+	<hr />
+	<div class="subNav" ><h6> <a href="javascript:void(0)" onclick="goFunction('main')">首页</a></h6></div>
+	<div class="subNav"><h6>产品展示</h6></div>
+	<ul class="navContent">
+		<li><a href="javascript:void(0)" onclick="goFunction('production')">当季新品</a></li>
+	</ul>
+	<div class="subNav"><h6> <a href="javascript:void(0)" onclick="goFunction('personal')">私人定制</a></h6></div>
+	<div class="subNav"><h6> <a href="javascript:void(0)" onclick="goFunction('about')">关于我们</a></h6></div>
+</section>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+	$( '.sidebar' ).simpleSidebar({
+		settings: {
+			opener: '#open-sb',
+			wrapper: '.wrapper',
+			animation: {
+				duration: 500,
+				easing: 'easeOutQuint'
+			}
+		},
+		sidebar: {
+			align: 'left',
+			width: 200,
+			closingLinks: 'a',
+		}
+	});
+	$("body").on("touchmove",function(event){
+		event.preventDefault;
+		}, false)
+});
+
+function goFunction(value){
+	if(value == 'main'){
+		$("#shownFrame").attr('src','innerPages/main.html')
+	}
+	if(value == 'about'){
+		$("#shownFrame").attr('src','innerPages/about.html')
+	}
+	if(value == 'personal'){
+		$("#shownFrame").attr('src','innerPages/personal.html')
+	}
+	if(value == 'production'){
+		$("#shownFrame").attr('src','innerPages/production.html')
+	}
+}
+</script>
+
+<script type="text/javascript">
+$(function(){
+$(".subNav").click(function(){
+			// 修改数字控制速度， slideUp(500)控制卷起速度
+			$(this).next(".navContent").slideToggle(500);
+	})	
+})
+</script>
+<div style="text-align: center; margin: 10px auto;">
+	<p>
+		<img src="img/logo_top.png" alt="珠宝太大" />
+	</p>
+<iframe id="shownFrame" style="border: none;height: 600px;" src="innerPages/main.html"></iframe>
+</div>
+<!-- <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"> -->
+<!-- <p>适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。</p> -->
+<!-- <p>Copyright &copy; 2015<a target="_blank" href="http://www.moke8.com/">魔客吧</a></p> -->
+<!-- </div> -->
+</body>
+</html>

@@ -54,6 +54,7 @@
 				/frameSet/** = anon
 				/logout = logout
 				/api/** = anon
+				/jewelady/** = anon
 				/** = authc
 			</value>
 		</property>

@@ -55,4 +55,6 @@
   <sqlMap resource="com/yk/businesses/reimburseList/sqlMapper/ReimburseListMapper-mySql.xml"/>
   <!--打卡机待处理事务模块-->
   <sqlMap resource="com/yk/signIn/backStage/waitDone/WaitDoneMapper-mySql.xml"/>
+  <!--在线打卡模块-->
+  <sqlMap resource="com/yk/businesses/onlinCheckin/sqlMapper/OnlinCheckinMapper-mySql.xml"/>
 </sqlMapConfig>

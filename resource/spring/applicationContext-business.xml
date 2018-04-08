@@ -38,9 +38,14 @@
   </bean>  
   <!--工作台模块-->  
   <bean id="workStationService" class="com.yk.businesses.workStation.service.WorkStationService"/>  
-  <!--打卡机待处理事务模块-->
-  <bean id="waitDoneDao" class="com.yk.signIn.backStage.waitDone.WaitDoneDao" parent="baseDao"/>
-  <bean id="waitDoneService" class="com.yk.signIn.backStage.waitDone.WaitDoneService">
-    <property name="dao" ref="waitDoneDao"/>
+  <!--打卡机待处理事务模块-->  
+  <bean id="waitDoneDao" class="com.yk.signIn.backStage.waitDone.WaitDoneDao" parent="baseDao"/>  
+  <bean id="waitDoneService" class="com.yk.signIn.backStage.waitDone.WaitDoneService"> 
+    <property name="dao" ref="waitDoneDao"/> 
+  </bean>  
+  <!--在线打卡模块-->
+  <bean id="onlinCheckinDao" class="com.yk.businesses.onlinCheckin.dao.OnlinCheckinDao" parent="baseDao"/>
+  <bean id="onlinCheckinService" class="com.yk.businesses.onlinCheckin.service.OnlinCheckinService">
+    <property name="dao" ref="onlinCheckinDao"/>
   </bean>
 </beans>
